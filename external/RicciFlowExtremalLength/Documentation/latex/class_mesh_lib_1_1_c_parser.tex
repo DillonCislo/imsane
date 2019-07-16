@@ -1,0 +1,116 @@
+\hypertarget{class_mesh_lib_1_1_c_parser}{}\section{Mesh\+Lib\+:\+:C\+Parser Class Reference}
+\label{class_mesh_lib_1_1_c_parser}\index{Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_parser}{C\+Parser} class.  
+
+
+
+
+{\ttfamily \#include $<$parser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_parser_ad83706c9123828e75b8e9605046e7252}{C\+Parser} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_mesh_lib_1_1_c_parser}{C\+Parser} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_mesh_lib_1_1_c_parser_a58b7b8d1592a340c6600d3ff7b436def}{$\sim$\+C\+Parser} ()
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_token}{C\+Token} $\ast$ $>$ \& \hyperlink{class_mesh_lib_1_1_c_parser_a259f2cc89bc304aa3478c2a9fe937ea5}{tokens} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_parser_a6cbed1102a9f9c201f66d0e7ec3b2f7c}{\+\_\+to\+String} (std\+::string \&str)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_parser_aa506e5dedd06443169d9d4f0d466c378}{\+\_\+remove\+Token} (const std\+::string \&key)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_mesh_lib_1_1_c_parser}{C\+Parser} class. 
+
+Definition at line 37 of file parser.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}!C\+Parser@{C\+Parser}}
+\index{C\+Parser@{C\+Parser}!Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}}
+\subsubsection[{\texorpdfstring{C\+Parser(const std\+::string \&str)}{CParser(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Parser\+::\+C\+Parser (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_parser_ad83706c9123828e75b8e9605046e7252}{}\label{class_mesh_lib_1_1_c_parser_ad83706c9123828e75b8e9605046e7252}
+
+
+\hyperlink{class_mesh_lib_1_1_c_parser}{C\+Parser} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & input string \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file parser.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}!````~C\+Parser@{$\sim$\+C\+Parser}}
+\index{````~C\+Parser@{$\sim$\+C\+Parser}!Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Parser()}{~CParser()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Parser\+::$\sim$\+C\+Parser (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_parser_a58b7b8d1592a340c6600d3ff7b436def}{}\label{class_mesh_lib_1_1_c_parser_a58b7b8d1592a340c6600d3ff7b436def}
+\hyperlink{class_mesh_lib_1_1_c_parser}{C\+Parser} Destructor 
+
+Definition at line 122 of file parser.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}!\+\_\+remove\+Token@{\+\_\+remove\+Token}}
+\index{\+\_\+remove\+Token@{\+\_\+remove\+Token}!Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}}
+\subsubsection[{\texorpdfstring{\+\_\+remove\+Token(const std\+::string \&key)}{_removeToken(const std::string &key)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Parser\+::\+\_\+remove\+Token (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_parser_aa506e5dedd06443169d9d4f0d466c378}{}\label{class_mesh_lib_1_1_c_parser_aa506e5dedd06443169d9d4f0d466c378}
+Remove the token key=(...) from the current string 
+\begin{DoxyParams}{Parameters}
+{\em key} & the key to the token to be removed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 167 of file parser.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}!\+\_\+to\+String@{\+\_\+to\+String}}
+\index{\+\_\+to\+String@{\+\_\+to\+String}!Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}}
+\subsubsection[{\texorpdfstring{\+\_\+to\+String(std\+::string \&str)}{_toString(std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Parser\+::\+\_\+to\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_parser_a6cbed1102a9f9c201f66d0e7ec3b2f7c}{}\label{class_mesh_lib_1_1_c_parser_a6cbed1102a9f9c201f66d0e7ec3b2f7c}
+Convert the list of tokens to a string 
+\begin{DoxyParams}{Parameters}
+{\em str} & the output string \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 143 of file parser.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}!tokens@{tokens}}
+\index{tokens@{tokens}!Mesh\+Lib\+::\+C\+Parser@{Mesh\+Lib\+::\+C\+Parser}}
+\subsubsection[{\texorpdfstring{tokens()}{tokens()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<${\bf C\+Token}$\ast$$>$\& Mesh\+Lib\+::\+C\+Parser\+::tokens (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_parser_a259f2cc89bc304aa3478c2a9fe937ea5}{}\label{class_mesh_lib_1_1_c_parser_a259f2cc89bc304aa3478c2a9fe937ea5}
+List of tokens extracted from the string 
+
+Definition at line 137 of file parser.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Parser/\hyperlink{parser_8h}{parser.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,325 @@
+\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow}{}\section{Mesh\+Lib\+:\+:C\+Base\+Ricci\+Flow$<$ V, E, F, H $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_c_base_ricci_flow}\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow$<$ V, E, F, H $>$@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow$<$ V, E, F, H $>$}}
+
+
+Base\+Class \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow}.  
+
+
+
+
+{\ttfamily \#include $<$Base\+Ricci\+Flow.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+Lib\+:\+:C\+Base\+Ricci\+Flow$<$ V, E, F, H $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{class_mesh_lib_1_1_c_base_ricci_flow__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Base\+Ricci\+Flow$<$ V, E, F, H $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{class_mesh_lib_1_1_c_base_ricci_flow__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a878d8e94d5d4b83db4ee2a98021588b8}{C\+Base\+Ricci\+Flow} (C\+Ricci\+Flow\+Mesh$<$ V, E, F, H $>$ $\ast$p\+Mesh)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a1b714014282163959204adfdec041eae}{$\sim$\+C\+Base\+Ricci\+Flow} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} destructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a5e43b277b368f38f12c77e6daa9c5cd9}{\+\_\+calculate\+\_\+metric} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a58804aa74a20e99405feaf6f03f0286f}{\+\_\+length} (double u1, double u2, E $\ast$e)=0
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a689bcf5fa1c50880d9073423de566228}{\+\_\+calculate\+\_\+edge\+\_\+length} ()
+\item 
+virtual double \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a56a24ad8c35c165acfdd1adfac92bf25}{\+\_\+cosine\+\_\+law} (double a, double b, double c)=0
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a9e8eee26f716ff1eb365abbb8091c61e}{\+\_\+calculate\+\_\+corner\+\_\+angle} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_aff0772727106e45bc2854ffb51a4902f}{\+\_\+calculate\+\_\+vertex\+\_\+curvature} ()
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_adad5006c071e951e3f32f4fa6db0db83}{\+\_\+calculate\+\_\+curvature\+\_\+error} ()
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_abf7685f1b3692a870aea756c4fdfea5c}{\+\_\+calculate\+\_\+edge\+\_\+weight} ()=0
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a0c8e62c086e434c38820ceec5592884e}{\+\_\+set\+\_\+target\+\_\+curvature} ()=0
+\item 
+virtual bool \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a760254c91a9b18a7075ace49e6f85ba0}{\+\_\+flow} (double)
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_ad2ecc7d640197c1ee7d4000f79ce63f8}{\+\_\+\+Newton} (double threshold, double step\+\_\+length)
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a65f2670e9693a0afc64d8edd5b1fd90a}{\+\_\+normalization} (Eigen\+::\+Vector\+Xd \&du, int n)=0
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_af3f5db69f38d5085ccae21929365dda1}{\+\_\+calculate\+\_\+\+Hessain} (Eigen\+::\+Sparse\+Matrix$<$ double $>$ \&p\+Matrix)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+C\+Ricci\+Flow\+Mesh$<$ V, E, F, H $>$ $\ast$ \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_aad696c079fc6378167052229fcfc2d5c}{m\+\_\+p\+Mesh}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_boundary}{C\+Boundary}$<$ V, E, F, H $>$ \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow_a97277c8174b4dd7ab5dfa0f369aaea42}{m\+\_\+boundary}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class V, class E, class F, class H$>$\\*
+class Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow$<$ V, E, F, H $>$}
+
+Base\+Class \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow}. 
+
+Algorithm for computing general Ricci flow 
+
+Definition at line 38 of file Base\+Ricci\+Flow.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!C\+Base\+Ricci\+Flow@{C\+Base\+Ricci\+Flow}}
+\index{C\+Base\+Ricci\+Flow@{C\+Base\+Ricci\+Flow}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{C\+Base\+Ricci\+Flow(\+C\+Ricci\+Flow\+Mesh$<$ V, E, F, H $>$ $\ast$p\+Mesh)}{CBaseRicciFlow(CRicciFlowMesh< V, E, F, H > *pMesh)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::{\bf C\+Base\+Ricci\+Flow} (
+\begin{DoxyParamCaption}
+\item[{C\+Ricci\+Flow\+Mesh$<$ V, E, F, H $>$ $\ast$}]{p\+Mesh}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a878d8e94d5d4b83db4ee2a98021588b8}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a878d8e94d5d4b83db4ee2a98021588b8}
+
+
+\hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Mesh} & the input mesh \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!````~C\+Base\+Ricci\+Flow@{$\sim$\+C\+Base\+Ricci\+Flow}}
+\index{````~C\+Base\+Ricci\+Flow@{$\sim$\+C\+Base\+Ricci\+Flow}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Base\+Ricci\+Flow()}{~CBaseRicciFlow()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::$\sim${\bf C\+Base\+Ricci\+Flow} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a1b714014282163959204adfdec041eae}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a1b714014282163959204adfdec041eae}
+
+
+\hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} destructor. 
+
+
+
+Definition at line 139 of file Base\+Ricci\+Flow.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+corner\+\_\+angle@{\+\_\+calculate\+\_\+corner\+\_\+angle}}
+\index{\+\_\+calculate\+\_\+corner\+\_\+angle@{\+\_\+calculate\+\_\+corner\+\_\+angle}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+corner\+\_\+angle()}{_calculate_corner_angle()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+corner\+\_\+angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a9e8eee26f716ff1eb365abbb8091c61e}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a9e8eee26f716ff1eb365abbb8091c61e}
+Calculate corner angle 
+
+Definition at line 168 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+curvature\+\_\+error@{\+\_\+calculate\+\_\+curvature\+\_\+error}}
+\index{\+\_\+calculate\+\_\+curvature\+\_\+error@{\+\_\+calculate\+\_\+curvature\+\_\+error}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+curvature\+\_\+error()}{_calculate_curvature_error()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ double {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+curvature\+\_\+error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_adad5006c071e951e3f32f4fa6db0db83}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_adad5006c071e951e3f32f4fa6db0db83}
+Calculate vertex curvature error 
+
+Definition at line 226 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+edge\+\_\+length@{\+\_\+calculate\+\_\+edge\+\_\+length}}
+\index{\+\_\+calculate\+\_\+edge\+\_\+length@{\+\_\+calculate\+\_\+edge\+\_\+length}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+edge\+\_\+length()}{_calculate_edge_length()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+edge\+\_\+length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a689bcf5fa1c50880d9073423de566228}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a689bcf5fa1c50880d9073423de566228}
+Calculate each edge length 
+
+Definition at line 146 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+edge\+\_\+weight@{\+\_\+calculate\+\_\+edge\+\_\+weight}}
+\index{\+\_\+calculate\+\_\+edge\+\_\+weight@{\+\_\+calculate\+\_\+edge\+\_\+weight}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+edge\+\_\+weight()=0}{_calculate_edge_weight()=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ virtual void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+edge\+\_\+weight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_abf7685f1b3692a870aea756c4fdfea5c}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_abf7685f1b3692a870aea756c4fdfea5c}
+Calculate the edge weight 
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_a94dde69c540846106ee0daa7d840e9cb}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+\+Hessain@{\+\_\+calculate\+\_\+\+Hessain}}
+\index{\+\_\+calculate\+\_\+\+Hessain@{\+\_\+calculate\+\_\+\+Hessain}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+\+Hessain(\+Eigen\+::\+Sparse\+Matrix$<$ double $>$ \&p\+Matrix)}{_calculate_Hessain(Eigen::SparseMatrix< double > &pMatrix)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+\+Hessain (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Sparse\+Matrix$<$ double $>$ \&}]{p\+Matrix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_af3f5db69f38d5085ccae21929365dda1}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_af3f5db69f38d5085ccae21929365dda1}
+calculate hessian matrix Hessain 
+\begin{DoxyParams}{Parameters}
+{\em Sparse\+Matrix} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 369 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+metric@{\+\_\+calculate\+\_\+metric}}
+\index{\+\_\+calculate\+\_\+metric@{\+\_\+calculate\+\_\+metric}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+metric()}{_calculate_metric()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+metric (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a5e43b277b368f38f12c77e6daa9c5cd9}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a5e43b277b368f38f12c77e6daa9c5cd9}
+Computing the metric 
+
+Reimplemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_a14983a8b8819f1b37a88bed0db5d1e4a}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}.
+
+
+
+Definition at line 250 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+calculate\+\_\+vertex\+\_\+curvature@{\+\_\+calculate\+\_\+vertex\+\_\+curvature}}
+\index{\+\_\+calculate\+\_\+vertex\+\_\+curvature@{\+\_\+calculate\+\_\+vertex\+\_\+curvature}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+calculate\+\_\+vertex\+\_\+curvature()}{_calculate_vertex_curvature()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+calculate\+\_\+vertex\+\_\+curvature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_aff0772727106e45bc2854ffb51a4902f}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_aff0772727106e45bc2854ffb51a4902f}
+Calculate vertex curvature 
+
+Definition at line 204 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+cosine\+\_\+law@{\+\_\+cosine\+\_\+law}}
+\index{\+\_\+cosine\+\_\+law@{\+\_\+cosine\+\_\+law}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+cosine\+\_\+law(double a, double b, double c)=0}{_cosine_law(double a, double b, double c)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ virtual double {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+cosine\+\_\+law (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{double}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a56a24ad8c35c165acfdd1adfac92bf25}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a56a24ad8c35c165acfdd1adfac92bf25}
+Cosine law, has to be defined in the derivated classes 
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_a5e066ca345120f963a6b859fbb0ac5d8}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+flow@{\+\_\+flow}}
+\index{\+\_\+flow@{\+\_\+flow}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+flow(double)}{_flow(double)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ bool {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+flow (
+\begin{DoxyParamCaption}
+\item[{double}]{error\+\_\+threshold}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a760254c91a9b18a7075ace49e6f85ba0}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a760254c91a9b18a7075ace49e6f85ba0}
+Curvature flow 
+
+Reimplemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_a5ab0113d3d85597f6a782d8ca972bad7}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}.
+
+
+
+Definition at line 265 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+length@{\+\_\+length}}
+\index{\+\_\+length@{\+\_\+length}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+length(double u1, double u2, E $\ast$e)=0}{_length(double u1, double u2, E *e)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ virtual void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+length (
+\begin{DoxyParamCaption}
+\item[{double}]{u1, }
+\item[{double}]{u2, }
+\item[{E $\ast$}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a58804aa74a20e99405feaf6f03f0286f}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a58804aa74a20e99405feaf6f03f0286f}
+Calculate each edge length, has to be defined in the derivated classes 
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_a902998c914ca63c77985daeda0a1cddd}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+\+Newton@{\+\_\+\+Newton}}
+\index{\+\_\+\+Newton@{\+\_\+\+Newton}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+\+Newton(double threshold, double step\+\_\+length)}{_Newton(double threshold, double step_length)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+\+Newton (
+\begin{DoxyParamCaption}
+\item[{double}]{threshold, }
+\item[{double}]{step\+\_\+length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_ad2ecc7d640197c1ee7d4000f79ce63f8}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_ad2ecc7d640197c1ee7d4000f79ce63f8}
+Newton\textquotesingle{}s method to optimize the entropy energy 
+\begin{DoxyParams}{Parameters}
+{\em threshold} & err bound \\
+\hline
+{\em step\+\_\+length} & step length \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 299 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+normalization@{\+\_\+normalization}}
+\index{\+\_\+normalization@{\+\_\+normalization}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+normalization(\+Eigen\+::\+Vector\+Xd \&du, int n)=0}{_normalization(Eigen::VectorXd &du, int n)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ virtual void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+normalization (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector\+Xd \&}]{du, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a65f2670e9693a0afc64d8edd5b1fd90a}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a65f2670e9693a0afc64d8edd5b1fd90a}
+Normalization 
+\begin{DoxyParams}{Parameters}
+{\em du} & the du vector \\
+\hline
+{\em n} & dimension of the du vector \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_a99223f86b1f13d3974c54ce319c212fe}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!\+\_\+set\+\_\+target\+\_\+curvature@{\+\_\+set\+\_\+target\+\_\+curvature}}
+\index{\+\_\+set\+\_\+target\+\_\+curvature@{\+\_\+set\+\_\+target\+\_\+curvature}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{\+\_\+set\+\_\+target\+\_\+curvature()=0}{_set_target_curvature()=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ virtual void {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::\+\_\+set\+\_\+target\+\_\+curvature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a0c8e62c086e434c38820ceec5592884e}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a0c8e62c086e434c38820ceec5592884e}
+Set the target curvature on each vertex 
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_ab7cbb76f7ca0de62311bc9c0cfc281e5}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow$<$ V, E, F, H $>$}, and \hyperlink{class_mesh_lib_1_1_c_tangential_ricci_flow_extremal_length_a2a1ba73cdc13bd1778ecbf89d632f691}{Mesh\+Lib\+::\+C\+Tangential\+Ricci\+Flow\+Extremal\+Length$<$ V, E, F, H $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!m\+\_\+boundary@{m\+\_\+boundary}}
+\index{m\+\_\+boundary@{m\+\_\+boundary}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{m\+\_\+boundary}{m_boundary}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf C\+Boundary}$<$V,E,F,H$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::m\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_a97277c8174b4dd7ab5dfa0f369aaea42}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_a97277c8174b4dd7ab5dfa0f369aaea42}
+boundary of the input mesh 
+
+Definition at line 61 of file Base\+Ricci\+Flow.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}!m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}}
+\index{m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}!Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow@{Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Mesh}{m_pMesh}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ C\+Ricci\+Flow\+Mesh$<$V,E,F,H$>$$\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Ricci\+Flow}$<$ V, E, F, H $>$\+::m\+\_\+p\+Mesh\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_ricci_flow_aad696c079fc6378167052229fcfc2d5c}{}\label{class_mesh_lib_1_1_c_base_ricci_flow_aad696c079fc6378167052229fcfc2d5c}
+the input mesh 
+
+Definition at line 57 of file Base\+Ricci\+Flow.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/algorithm/\+Riemannian/\+Ricci\+Flow/\hyperlink{_base_ricci_flow_8h}{Base\+Ricci\+Flow.\+h}\end{DoxyCompactItemize}

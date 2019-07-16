@@ -1,0 +1,155 @@
+\hypertarget{classstrutil_1_1_tokenizer}{}\section{strutil\+:\+:Tokenizer Class Reference}
+\label{classstrutil_1_1_tokenizer}\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+
+
+String \hyperlink{classstrutil_1_1_tokenizer}{Tokenizer}.  
+
+
+
+
+{\ttfamily \#include $<$strutil.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstrutil_1_1_tokenizer_a06d65cfd0ab81dce63d6c4cb4ca5fe06}{Tokenizer} (const std\+::string \&str)
+\item 
+\hyperlink{classstrutil_1_1_tokenizer_adb3ce4fc54a837a6b28f6f5b082a8629}{Tokenizer} (const std\+::string \&str, const std\+::string \&delimiters)
+\item 
+bool \hyperlink{classstrutil_1_1_tokenizer_ab595c59adf60b6fda91f966923adf1e4}{next\+Token} ()
+\item 
+bool \hyperlink{classstrutil_1_1_tokenizer_a10ea31405b946f0b93f21769859f5168}{next\+Token} (const std\+::string \&delimiters)
+\item 
+const std\+::string \hyperlink{classstrutil_1_1_tokenizer_a46304b56abf0a2c6a1e763cd84256e4a}{get\+Token} () const 
+\item 
+void \hyperlink{classstrutil_1_1_tokenizer_aa01a3210ecc1b9bf7e5dce7f0ae1b3a0}{reset} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \hyperlink{classstrutil_1_1_tokenizer_a50ae0ffae10c83504ffbaafd60bb1447}{m\+\_\+\+Offset}
+\item 
+const std\+::string \hyperlink{classstrutil_1_1_tokenizer_a61e86d8e56aeec3fd927423501a03e8b}{m\+\_\+\+String}
+\item 
+std\+::string \hyperlink{classstrutil_1_1_tokenizer_a51b24fd77541f9731a8599f61d92bf43}{m\+\_\+\+Token}
+\item 
+std\+::string \hyperlink{classstrutil_1_1_tokenizer_a9cc01d443fc4eafe269a00551769098d}{m\+\_\+\+Delimiters}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+String \hyperlink{classstrutil_1_1_tokenizer}{Tokenizer}. 
+
+String tokenizer, which separate the whole string to tokens. 
+
+Definition at line 137 of file strutil.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!Tokenizer@{Tokenizer}}
+\index{Tokenizer@{Tokenizer}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{Tokenizer(const std\+::string \&str)}{Tokenizer(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}strutil\+::\+Tokenizer\+::\+Tokenizer (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classstrutil_1_1_tokenizer_a06d65cfd0ab81dce63d6c4cb4ca5fe06}{}\label{classstrutil_1_1_tokenizer_a06d65cfd0ab81dce63d6c4cb4ca5fe06}
+
+
+Definition at line 140 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!Tokenizer@{Tokenizer}}
+\index{Tokenizer@{Tokenizer}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{Tokenizer(const std\+::string \&str, const std\+::string \&delimiters)}{Tokenizer(const std::string &str, const std::string &delimiters)}}]{\setlength{\rightskip}{0pt plus 5cm}strutil\+::\+Tokenizer\+::\+Tokenizer (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{delimiters}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classstrutil_1_1_tokenizer_adb3ce4fc54a837a6b28f6f5b082a8629}{}\label{classstrutil_1_1_tokenizer_adb3ce4fc54a837a6b28f6f5b082a8629}
+
+
+Definition at line 143 of file strutil.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!get\+Token@{get\+Token}}
+\index{get\+Token@{get\+Token}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{get\+Token() const }{getToken() const }}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string strutil\+::\+Tokenizer\+::get\+Token (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classstrutil_1_1_tokenizer_a46304b56abf0a2c6a1e763cd84256e4a}{}\label{classstrutil_1_1_tokenizer_a46304b56abf0a2c6a1e763cd84256e4a}
+
+
+Definition at line 173 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!next\+Token@{next\+Token}}
+\index{next\+Token@{next\+Token}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{next\+Token()}{nextToken()}}]{\setlength{\rightskip}{0pt plus 5cm}bool strutil\+::\+Tokenizer\+::next\+Token (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classstrutil_1_1_tokenizer_ab595c59adf60b6fda91f966923adf1e4}{}\label{classstrutil_1_1_tokenizer_ab595c59adf60b6fda91f966923adf1e4}
+
+
+Definition at line 146 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!next\+Token@{next\+Token}}
+\index{next\+Token@{next\+Token}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{next\+Token(const std\+::string \&delimiters)}{nextToken(const std::string &delimiters)}}]{\setlength{\rightskip}{0pt plus 5cm}bool strutil\+::\+Tokenizer\+::next\+Token (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{delimiters}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classstrutil_1_1_tokenizer_a10ea31405b946f0b93f21769859f5168}{}\label{classstrutil_1_1_tokenizer_a10ea31405b946f0b93f21769859f5168}
+
+
+Definition at line 149 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!reset@{reset}}
+\index{reset@{reset}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{reset()}{reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void strutil\+::\+Tokenizer\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classstrutil_1_1_tokenizer_aa01a3210ecc1b9bf7e5dce7f0ae1b3a0}{}\label{classstrutil_1_1_tokenizer_aa01a3210ecc1b9bf7e5dce7f0ae1b3a0}
+to reset the tokenizer. After reset it, the tokenizer can get the tokens from the first token. 
+
+Definition at line 179 of file strutil.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!m\+\_\+\+Delimiters@{m\+\_\+\+Delimiters}}
+\index{m\+\_\+\+Delimiters@{m\+\_\+\+Delimiters}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{m\+\_\+\+Delimiters}{m_Delimiters}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::\+Tokenizer\+::m\+\_\+\+Delimiters\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classstrutil_1_1_tokenizer_a9cc01d443fc4eafe269a00551769098d}{}\label{classstrutil_1_1_tokenizer_a9cc01d443fc4eafe269a00551769098d}
+
+
+Definition at line 185 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!m\+\_\+\+Offset@{m\+\_\+\+Offset}}
+\index{m\+\_\+\+Offset@{m\+\_\+\+Offset}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{m\+\_\+\+Offset}{m_Offset}}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t strutil\+::\+Tokenizer\+::m\+\_\+\+Offset\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classstrutil_1_1_tokenizer_a50ae0ffae10c83504ffbaafd60bb1447}{}\label{classstrutil_1_1_tokenizer_a50ae0ffae10c83504ffbaafd60bb1447}
+
+
+Definition at line 179 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!m\+\_\+\+String@{m\+\_\+\+String}}
+\index{m\+\_\+\+String@{m\+\_\+\+String}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{m\+\_\+\+String}{m_String}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string strutil\+::\+Tokenizer\+::m\+\_\+\+String\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classstrutil_1_1_tokenizer_a61e86d8e56aeec3fd927423501a03e8b}{}\label{classstrutil_1_1_tokenizer_a61e86d8e56aeec3fd927423501a03e8b}
+
+
+Definition at line 183 of file strutil.\+h.
+
+\index{strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}!m\+\_\+\+Token@{m\+\_\+\+Token}}
+\index{m\+\_\+\+Token@{m\+\_\+\+Token}!strutil\+::\+Tokenizer@{strutil\+::\+Tokenizer}}
+\subsubsection[{\texorpdfstring{m\+\_\+\+Token}{m_Token}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::\+Tokenizer\+::m\+\_\+\+Token\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classstrutil_1_1_tokenizer_a51b24fd77541f9731a8599f61d92bf43}{}\label{classstrutil_1_1_tokenizer_a51b24fd77541f9731a8599f61d92bf43}
+
+
+Definition at line 184 of file strutil.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Parser/\hyperlink{strutil_8h}{strutil.\+h}\end{DoxyCompactItemize}

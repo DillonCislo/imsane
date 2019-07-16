@@ -1,0 +1,347 @@
+\hypertarget{class_mesh_lib_1_1_c_vertex}{}\section{Mesh\+Lib\+:\+:C\+Vertex Class Reference}
+\label{class_mesh_lib_1_1_c_vertex}\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} class, which is the base class of all kinds of vertex classes.  
+
+
+
+
+{\ttfamily \#include $<$Vertex.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+Lib\+:\+:C\+Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{class_mesh_lib_1_1_c_vertex__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{class_mesh_lib_1_1_c_vertex__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_vertex_ac97920fc9fe1786a2199b02e0bdcea27}{C\+Vertex} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_vertex_a7e93bbcd7e264d336f1e935b466118d5}{$\sim$\+C\+Vertex} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \& \hyperlink{class_mesh_lib_1_1_c_vertex_aee899036f88e50121d455b37e4345fad}{point} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \& \hyperlink{class_mesh_lib_1_1_c_vertex_ad969307c4a9e91e8a7a19d2f16bbdd03}{normal} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point2}{C\+Point2} \& \hyperlink{class_mesh_lib_1_1_c_vertex_aebb4e0369c2d1c21f2f46287a0c9e4d5}{uv} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_vertex_a2de79af92df8f39c851e811c2ee20b09}{most\+\_\+ccw\+\_\+out\+\_\+halfedge} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_vertex_af5fd1d56b98c3e6b1e6c29b2a40067f7}{most\+\_\+clw\+\_\+out\+\_\+halfedge} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_vertex_ae25573c3fc9a3a1ff08f95ed637879d1}{most\+\_\+ccw\+\_\+in\+\_\+halfedge} ()
+\begin{DoxyCompactList}\small\item\em The most counter clockwise incoming halfedge of the vertex. \end{DoxyCompactList}\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_vertex_a88f960be654aa5d907bca82846baf83f}{most\+\_\+clw\+\_\+in\+\_\+halfedge} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$\& \hyperlink{class_mesh_lib_1_1_c_vertex_a9329743f6b46a232759cfc41263d89cf}{halfedge} ()
+\item 
+std\+::string \& \hyperlink{class_mesh_lib_1_1_c_vertex_a6f5a20dd30404c47f118364c60fd1867}{string} ()
+\item 
+int \& \hyperlink{class_mesh_lib_1_1_c_vertex_a90179a85f86617e62fa57d0157e38c77}{id} ()
+\item 
+bool \& \hyperlink{class_mesh_lib_1_1_c_vertex_a1bfd813474ce6f0347c442412c3bb650}{boundary} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_vertex_a16b808933a970ac84776d404d21ecaee}{\+\_\+to\+\_\+string} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_vertex_a89670e5392950fcbeb467fa5f7a8c88a}{\+\_\+from\+\_\+string} ()
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} $\ast$ $>$ \& \hyperlink{class_mesh_lib_1_1_c_vertex_a03ec8f7820f2f3f6cd0a97f1958197c8}{edges} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_vertex_a686d33c96343be3d7b9c46b628061bd9}{m\+\_\+id}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_vertex_a0611ed63a1451d3077bcb2dbaf5f1e89}{m\+\_\+point}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_vertex_aa313fb31475b4951f50e50f141cec0fc}{m\+\_\+normal}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point2}{C\+Point2} \hyperlink{class_mesh_lib_1_1_c_vertex_a8509cd466e9db87b76b2571783d111a2}{m\+\_\+uv}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_vertex_a322a95750dc442c4559ef180d35a6074}{m\+\_\+halfedge}
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_vertex_a82467ff3e1f8bf16972a1b63326441c3}{m\+\_\+boundary}
+\item 
+std\+::string \hyperlink{class_mesh_lib_1_1_c_vertex_a0ad694c0749eb9b71c0faaafde732d3e}{m\+\_\+string}
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} $\ast$ $>$ \hyperlink{class_mesh_lib_1_1_c_vertex_ac6914ef1d52a245340b8bd07e671c87d}{m\+\_\+edges}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} class, which is the base class of all kinds of vertex classes. 
+
+Definition at line 27 of file Vertex.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!C\+Vertex@{C\+Vertex}}
+\index{C\+Vertex@{C\+Vertex}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{C\+Vertex()}{CVertex()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Vertex\+::\+C\+Vertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_ac97920fc9fe1786a2199b02e0bdcea27}{}\label{class_mesh_lib_1_1_c_vertex_ac97920fc9fe1786a2199b02e0bdcea27}
+\hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} constructor 
+
+Definition at line 33 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!````~C\+Vertex@{$\sim$\+C\+Vertex}}
+\index{````~C\+Vertex@{$\sim$\+C\+Vertex}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Vertex()}{~CVertex()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Vertex\+::$\sim$\+C\+Vertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a7e93bbcd7e264d336f1e935b466118d5}{}\label{class_mesh_lib_1_1_c_vertex_a7e93bbcd7e264d336f1e935b466118d5}
+\hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} destructor 
+
+Definition at line 37 of file Vertex.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}}
+\index{\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{\+\_\+from\+\_\+string()}{_from_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Vertex\+::\+\_\+from\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a89670e5392950fcbeb467fa5f7a8c88a}{}\label{class_mesh_lib_1_1_c_vertex_a89670e5392950fcbeb467fa5f7a8c88a}
+Read traits from the string. 
+
+Definition at line 79 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}}
+\index{\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{\+\_\+to\+\_\+string()}{_to_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Vertex\+::\+\_\+to\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a16b808933a970ac84776d404d21ecaee}{}\label{class_mesh_lib_1_1_c_vertex_a16b808933a970ac84776d404d21ecaee}
+Convert vertex traits to string. 
+
+Definition at line 76 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!boundary@{boundary}}
+\index{boundary@{boundary}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{boundary()}{boundary()}}]{\setlength{\rightskip}{0pt plus 5cm}bool\& Mesh\+Lib\+::\+C\+Vertex\+::boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a1bfd813474ce6f0347c442412c3bb650}{}\label{class_mesh_lib_1_1_c_vertex_a1bfd813474ce6f0347c442412c3bb650}
+Whether the vertex is on the boundary. 
+
+Definition at line 73 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!edges@{edges}}
+\index{edges@{edges}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{edges()}{edges()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<${\bf C\+Edge}$\ast$$>$\& Mesh\+Lib\+::\+C\+Vertex\+::edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a03ec8f7820f2f3f6cd0a97f1958197c8}{}\label{class_mesh_lib_1_1_c_vertex_a03ec8f7820f2f3f6cd0a97f1958197c8}
+Adjacent edges, temporarily used for loading the mesh 
+
+Definition at line 83 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!halfedge@{halfedge}}
+\index{halfedge@{halfedge}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{halfedge()}{halfedge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ \& Mesh\+Lib\+::\+C\+Vertex\+::halfedge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a9329743f6b46a232759cfc41263d89cf}{}\label{class_mesh_lib_1_1_c_vertex_a9329743f6b46a232759cfc41263d89cf}
+One incoming halfedge of the vertex . 
+
+Definition at line 64 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!id@{id}}
+\index{id@{id}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{id()}{id()}}]{\setlength{\rightskip}{0pt plus 5cm}int\& Mesh\+Lib\+::\+C\+Vertex\+::id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a90179a85f86617e62fa57d0157e38c77}{}\label{class_mesh_lib_1_1_c_vertex_a90179a85f86617e62fa57d0157e38c77}
+Vertex id. 
+
+Definition at line 70 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!most\+\_\+ccw\+\_\+in\+\_\+halfedge@{most\+\_\+ccw\+\_\+in\+\_\+halfedge}}
+\index{most\+\_\+ccw\+\_\+in\+\_\+halfedge@{most\+\_\+ccw\+\_\+in\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{most\+\_\+ccw\+\_\+in\+\_\+halfedge()}{most_ccw_in_halfedge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge} $\ast$ Mesh\+Lib\+::\+C\+Vertex\+::most\+\_\+ccw\+\_\+in\+\_\+halfedge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_ae25573c3fc9a3a1ff08f95ed637879d1}{}\label{class_mesh_lib_1_1_c_vertex_ae25573c3fc9a3a1ff08f95ed637879d1}
+
+
+The most counter clockwise incoming halfedge of the vertex. 
+
+The most counter clockwise incoming halfedge of the vertex.
+
+\begin{DoxyReturn}{Returns}
+the most C\+CW in halfedge 
+\end{DoxyReturn}
+
+
+Definition at line 118 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!most\+\_\+ccw\+\_\+out\+\_\+halfedge@{most\+\_\+ccw\+\_\+out\+\_\+halfedge}}
+\index{most\+\_\+ccw\+\_\+out\+\_\+halfedge@{most\+\_\+ccw\+\_\+out\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{most\+\_\+ccw\+\_\+out\+\_\+halfedge()}{most_ccw_out_halfedge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge} $\ast$ Mesh\+Lib\+::\+C\+Vertex\+::most\+\_\+ccw\+\_\+out\+\_\+halfedge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a2de79af92df8f39c851e811c2ee20b09}{}\label{class_mesh_lib_1_1_c_vertex_a2de79af92df8f39c851e811c2ee20b09}
+The most counter clockwise outgoing halfedge of the vertex . 
+
+Definition at line 161 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!most\+\_\+clw\+\_\+in\+\_\+halfedge@{most\+\_\+clw\+\_\+in\+\_\+halfedge}}
+\index{most\+\_\+clw\+\_\+in\+\_\+halfedge@{most\+\_\+clw\+\_\+in\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{most\+\_\+clw\+\_\+in\+\_\+halfedge()}{most_clw_in_halfedge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge} $\ast$ Mesh\+Lib\+::\+C\+Vertex\+::most\+\_\+clw\+\_\+in\+\_\+halfedge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a88f960be654aa5d907bca82846baf83f}{}\label{class_mesh_lib_1_1_c_vertex_a88f960be654aa5d907bca82846baf83f}
+The most clockwise incoming halfedge of the vertex. 
+
+Definition at line 140 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!most\+\_\+clw\+\_\+out\+\_\+halfedge@{most\+\_\+clw\+\_\+out\+\_\+halfedge}}
+\index{most\+\_\+clw\+\_\+out\+\_\+halfedge@{most\+\_\+clw\+\_\+out\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{most\+\_\+clw\+\_\+out\+\_\+halfedge()}{most_clw_out_halfedge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge} $\ast$ Mesh\+Lib\+::\+C\+Vertex\+::most\+\_\+clw\+\_\+out\+\_\+halfedge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_af5fd1d56b98c3e6b1e6c29b2a40067f7}{}\label{class_mesh_lib_1_1_c_vertex_af5fd1d56b98c3e6b1e6c29b2a40067f7}
+The most clockwise outgoing halfedge of the vertex . 
+
+Definition at line 185 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!normal@{normal}}
+\index{normal@{normal}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{normal()}{normal()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point}\& Mesh\+Lib\+::\+C\+Vertex\+::normal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_ad969307c4a9e91e8a7a19d2f16bbdd03}{}\label{class_mesh_lib_1_1_c_vertex_ad969307c4a9e91e8a7a19d2f16bbdd03}
+The normal of the vertex 
+
+Definition at line 44 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!point@{point}}
+\index{point@{point}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{point()}{point()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point}\& Mesh\+Lib\+::\+C\+Vertex\+::point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_aee899036f88e50121d455b37e4345fad}{}\label{class_mesh_lib_1_1_c_vertex_aee899036f88e50121d455b37e4345fad}
+The point of the vertex 
+
+Definition at line 41 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!string@{string}}
+\index{string@{string}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{string()}{string()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string\& Mesh\+Lib\+::\+C\+Vertex\+::string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a6f5a20dd30404c47f118364c60fd1867}{}\label{class_mesh_lib_1_1_c_vertex_a6f5a20dd30404c47f118364c60fd1867}
+the string of the vertex. 
+
+Definition at line 67 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!uv@{uv}}
+\index{uv@{uv}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{uv()}{uv()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point2}\& Mesh\+Lib\+::\+C\+Vertex\+::uv (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_vertex_aebb4e0369c2d1c21f2f46287a0c9e4d5}{}\label{class_mesh_lib_1_1_c_vertex_aebb4e0369c2d1c21f2f46287a0c9e4d5}
+The texutre coordinates of the vertex 
+
+Definition at line 47 of file Vertex.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+boundary@{m\+\_\+boundary}}
+\index{m\+\_\+boundary@{m\+\_\+boundary}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+boundary}{m_boundary}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a82467ff3e1f8bf16972a1b63326441c3}{}\label{class_mesh_lib_1_1_c_vertex_a82467ff3e1f8bf16972a1b63326441c3}
+Indicating if the vertex is on the boundary. 
+
+Definition at line 103 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+edges@{m\+\_\+edges}}
+\index{m\+\_\+edges@{m\+\_\+edges}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+edges}{m_edges}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<${\bf C\+Edge}$\ast$$>$ Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+edges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_ac6914ef1d52a245340b8bd07e671c87d}{}\label{class_mesh_lib_1_1_c_vertex_ac6914ef1d52a245340b8bd07e671c87d}
+List of adjacent edges, such that current vertex is the end vertex of the edge with smaller id 
+
+Definition at line 110 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+halfedge@{m\+\_\+halfedge}}
+\index{m\+\_\+halfedge@{m\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+halfedge}{m_halfedge}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+halfedge\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a322a95750dc442c4559ef180d35a6074}{}\label{class_mesh_lib_1_1_c_vertex_a322a95750dc442c4559ef180d35a6074}
+The most C\+CW incoming halfedge of the vertex. 
+
+Definition at line 100 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+id@{m\+\_\+id}}
+\index{m\+\_\+id@{m\+\_\+id}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+id}{m_id}}]{\setlength{\rightskip}{0pt plus 5cm}int Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+id\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a686d33c96343be3d7b9c46b628061bd9}{}\label{class_mesh_lib_1_1_c_vertex_a686d33c96343be3d7b9c46b628061bd9}
+Vertex ID. 
+
+Definition at line 83 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+normal@{m\+\_\+normal}}
+\index{m\+\_\+normal@{m\+\_\+normal}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+normal}{m_normal}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+normal\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_aa313fb31475b4951f50e50f141cec0fc}{}\label{class_mesh_lib_1_1_c_vertex_aa313fb31475b4951f50e50f141cec0fc}
+Normal at the vertex. 
+
+Definition at line 94 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+point@{m\+\_\+point}}
+\index{m\+\_\+point@{m\+\_\+point}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+point}{m_point}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+point\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a0611ed63a1451d3077bcb2dbaf5f1e89}{}\label{class_mesh_lib_1_1_c_vertex_a0611ed63a1451d3077bcb2dbaf5f1e89}
+Vertex position point. 
+
+Definition at line 91 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+string@{m\+\_\+string}}
+\index{m\+\_\+string@{m\+\_\+string}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+string}{m_string}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+string\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a0ad694c0749eb9b71c0faaafde732d3e}{}\label{class_mesh_lib_1_1_c_vertex_a0ad694c0749eb9b71c0faaafde732d3e}
+The string of the vertex, which stores the traits information. 
+
+Definition at line 106 of file Vertex.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}!m\+\_\+uv@{m\+\_\+uv}}
+\index{m\+\_\+uv@{m\+\_\+uv}!Mesh\+Lib\+::\+C\+Vertex@{Mesh\+Lib\+::\+C\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+uv}{m_uv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point2} Mesh\+Lib\+::\+C\+Vertex\+::m\+\_\+uv\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_vertex_a8509cd466e9db87b76b2571783d111a2}{}\label{class_mesh_lib_1_1_c_vertex_a8509cd466e9db87b76b2571783d111a2}
+Texture coordinates of the vertex. 
+
+Definition at line 97 of file Vertex.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{_vertex_8h}{Vertex.\+h}\end{DoxyCompactItemize}

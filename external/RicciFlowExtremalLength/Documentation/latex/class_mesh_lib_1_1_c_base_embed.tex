@@ -1,0 +1,165 @@
+\hypertarget{class_mesh_lib_1_1_c_base_embed}{}\section{Mesh\+Lib\+:\+:C\+Base\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_c_base_embed}\index{Mesh\+Lib\+::\+C\+Base\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$@{Mesh\+Lib\+::\+C\+Base\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_base_embed}{C\+Base\+Embed} class.  
+
+
+
+
+{\ttfamily \#include $<$Base\+Embed.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+Lib\+:\+:C\+Base\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_mesh_lib_1_1_c_base_embed__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_embed_ac6cfdbea469712b1d86d814e9bfae1a0}{C\+Base\+Embed} (C\+Ricci\+Flow\+Mesh$<$ \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}, \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}, \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $>$ $\ast$p\+Mesh)
+\begin{DoxyCompactList}\small\item\em C\+Embed constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_mesh_lib_1_1_c_base_embed_a97493bfd00df5af9048599c35f7722ef}{$\sim$\+C\+Base\+Embed} ()
+\begin{DoxyCompactList}\small\item\em C\+Embed destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_embed_a5128819dbda9081bcaf0e4e75f82fa91}{\+\_\+embed} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_embed_a1a05d4cad7181da5a1ccc66265609f89}{\+\_\+embed\+\_\+first\+\_\+face} (\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} $\ast$head)=0
+\item 
+virtual void \hyperlink{class_mesh_lib_1_1_c_base_embed_a41a602699326b590a718570141923258}{\+\_\+embed\+\_\+face} (\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} $\ast$head)=0
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_embed_ab064a0d24575758805edc7829b5e2d6e}{\+\_\+initialize} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+C\+Ricci\+Flow\+Mesh$<$ \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}, \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}, \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $>$ $\ast$ \hyperlink{class_mesh_lib_1_1_c_base_embed_a78bc5d476b39b3b3cb0d627de477d2f4}{m\+\_\+p\+Mesh}
+\item 
+std\+::queue$<$ \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} $\ast$ $>$ \hyperlink{class_mesh_lib_1_1_c_base_embed_a3ab9dc6044ded5990cd90643b99d8298}{m\+\_\+queue}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$\\*
+class Mesh\+Lib\+::\+C\+Base\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}
+
+\hyperlink{class_mesh_lib_1_1_c_base_embed}{C\+Base\+Embed} class. 
+
+embed a mesh with canonical metric onto the canonical domain 
+
+Definition at line 24 of file Base\+Embed.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!C\+Base\+Embed@{C\+Base\+Embed}}
+\index{C\+Base\+Embed@{C\+Base\+Embed}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{C\+Base\+Embed(\+C\+Ricci\+Flow\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ $\ast$p\+Mesh)}{CBaseEmbed(CRicciFlowMesh< CVertex, CEdge, CFace, CHalfEdge > *pMesh)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf C\+Base\+Embed} (
+\begin{DoxyParamCaption}
+\item[{C\+Ricci\+Flow\+Mesh$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$ $\ast$}]{p\+Mesh}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_embed_ac6cfdbea469712b1d86d814e9bfae1a0}{}\label{class_mesh_lib_1_1_c_base_embed_ac6cfdbea469712b1d86d814e9bfae1a0}
+
+
+C\+Embed constructor. 
+
+
+
+Definition at line 61 of file Base\+Embed.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!````~C\+Base\+Embed@{$\sim$\+C\+Base\+Embed}}
+\index{````~C\+Base\+Embed@{$\sim$\+C\+Base\+Embed}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Base\+Embed()}{~CBaseEmbed()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::$\sim${\bf C\+Base\+Embed} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_embed_a97493bfd00df5af9048599c35f7722ef}{}\label{class_mesh_lib_1_1_c_base_embed_a97493bfd00df5af9048599c35f7722ef}
+
+
+C\+Embed destructor. 
+
+
+
+Definition at line 30 of file Base\+Embed.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!\+\_\+embed@{\+\_\+embed}}
+\index{\+\_\+embed@{\+\_\+embed}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{\+\_\+embed()}{_embed()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::\+\_\+embed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_embed_a5128819dbda9081bcaf0e4e75f82fa91}{}\label{class_mesh_lib_1_1_c_base_embed_a5128819dbda9081bcaf0e4e75f82fa91}
+\+\_\+embed the mesh 
+
+Definition at line 109 of file Base\+Embed.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!\+\_\+embed\+\_\+face@{\+\_\+embed\+\_\+face}}
+\index{\+\_\+embed\+\_\+face@{\+\_\+embed\+\_\+face}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{\+\_\+embed\+\_\+face(\+C\+Face $\ast$head)=0}{_embed_face(CFace *head)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ virtual void {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::\+\_\+embed\+\_\+face (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Face} $\ast$}]{head}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_embed_a41a602699326b590a718570141923258}{}\label{class_mesh_lib_1_1_c_base_embed_a41a602699326b590a718570141923258}
+
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_euclidean_embed_aa77b6c218a33dbb01bc1eb5aad444c32}{Mesh\+Lib\+::\+C\+Euclidean\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!\+\_\+embed\+\_\+first\+\_\+face@{\+\_\+embed\+\_\+first\+\_\+face}}
+\index{\+\_\+embed\+\_\+first\+\_\+face@{\+\_\+embed\+\_\+first\+\_\+face}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{\+\_\+embed\+\_\+first\+\_\+face(\+C\+Face $\ast$head)=0}{_embed_first_face(CFace *head)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ virtual void {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::\+\_\+embed\+\_\+first\+\_\+face (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Face} $\ast$}]{head}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_mesh_lib_1_1_c_base_embed_a1a05d4cad7181da5a1ccc66265609f89}{}\label{class_mesh_lib_1_1_c_base_embed_a1a05d4cad7181da5a1ccc66265609f89}
+embed the first face 
+\begin{DoxyParams}{Parameters}
+{\em head} & the first face \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_mesh_lib_1_1_c_euclidean_embed_a6910ac47a9c2b101b8dca4049a533141}{Mesh\+Lib\+::\+C\+Euclidean\+Embed$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!\+\_\+initialize@{\+\_\+initialize}}
+\index{\+\_\+initialize@{\+\_\+initialize}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{\+\_\+initialize()}{_initialize()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::\+\_\+initialize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_embed_ab064a0d24575758805edc7829b5e2d6e}{}\label{class_mesh_lib_1_1_c_base_embed_ab064a0d24575758805edc7829b5e2d6e}
+initialization 
+
+Definition at line 71 of file Base\+Embed.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}}
+\index{m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Mesh}{m_pMesh}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ C\+Ricci\+Flow\+Mesh$<${\bf C\+Vertex},{\bf C\+Edge},{\bf C\+Face},{\bf C\+Half\+Edge}$>$$\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+p\+Mesh\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_embed_a78bc5d476b39b3b3cb0d627de477d2f4}{}\label{class_mesh_lib_1_1_c_base_embed_a78bc5d476b39b3b3cb0d627de477d2f4}
+the mesh to be embedded 
+
+Definition at line 51 of file Base\+Embed.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}!m\+\_\+queue@{m\+\_\+queue}}
+\index{m\+\_\+queue@{m\+\_\+queue}!Mesh\+Lib\+::\+C\+Base\+Embed@{Mesh\+Lib\+::\+C\+Base\+Embed}}
+\subsubsection[{\texorpdfstring{m\+\_\+queue}{m_queue}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ std\+::queue$<${\bf C\+Face}$\ast$$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Embed}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+queue\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_embed_a3ab9dc6044ded5990cd90643b99d8298}{}\label{class_mesh_lib_1_1_c_base_embed_a3ab9dc6044ded5990cd90643b99d8298}
+queue of faces 
+
+Definition at line 54 of file Base\+Embed.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/algorithm/\+Riemannian/\+Ricci\+Flow/\hyperlink{_base_embed_8h}{Base\+Embed.\+h}\end{DoxyCompactItemize}

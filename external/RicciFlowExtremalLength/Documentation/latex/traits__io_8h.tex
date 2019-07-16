@@ -1,0 +1,203 @@
+\hypertarget{traits__io_8h}{}\section{Mesh\+Lib/core/\+Parser/traits\+\_\+io.h File Reference}
+\label{traits__io_8h}\index{Mesh\+Lib/core/\+Parser/traits\+\_\+io.\+h@{Mesh\+Lib/core/\+Parser/traits\+\_\+io.\+h}}
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$complex$>$}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/\+Base\+Mesh.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/\+Vertex.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/\+Half\+Edge.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/\+Edge.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/\+Face.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/iterators.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Mesh/boundary.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}./parser.\+h\char`\"{}}\\*
+Include dependency graph for traits\+\_\+io.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traits__io_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traits__io_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace_mesh_lib}{Mesh\+Lib}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{traits__io_8h_a183c1181dfc37522d163b26bb9402d5d}{V\+E\+R\+T\+E\+X\+\_\+\+R\+GB}~(0x01$<$$<$0)
+\item 
+\#define \hyperlink{traits__io_8h_ae6080b7459488c1d92b431844323a73b}{V\+E\+R\+T\+E\+X\+\_\+\+UV}~(0x01$<$$<$1)
+\item 
+\#define \hyperlink{traits__io_8h_adc16f7bc772323ad6b78b831d9e699e9}{V\+E\+R\+T\+E\+X\+\_\+Z}~(0x01$<$$<$2)
+\item 
+\#define \hyperlink{traits__io_8h_a208e4a865187e8b203b17047065a88c6}{V\+E\+R\+T\+E\+X\+\_\+\+MU}~(0x01$<$$<$3)
+\item 
+\#define \hyperlink{traits__io_8h_a033cb228ec9541d36a1e74c758225823}{V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER}~(0x01$<$$<$4)
+\item 
+\#define \hyperlink{traits__io_8h_a6ce9e03f5697d5379eea1229ba4a1829}{V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA}~(0x01$<$$<$5)
+\item 
+\#define \hyperlink{traits__io_8h_a5c3a6d59814fce60cac28e5528d2e42a}{V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL}~(0x01$<$$<$6)
+\item 
+\#define \hyperlink{traits__io_8h_a11ed1c0b992e3ed0f708f32733c8b12d}{V\+E\+R\+T\+E\+X\+\_\+U}~(0x01$<$$<$7)
+\item 
+\#define \hyperlink{traits__io_8h_a362ba25ae42976c0e70ae98a503a12a0}{E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH}~(0x01$<$$<$8)
+\item 
+\#define \hyperlink{traits__io_8h_a3f9edd4dedb7e62a37854d748d9bfb7d}{E\+D\+G\+E\+\_\+\+S\+H\+A\+RP}~(0x01$<$$<$9)
+\item 
+\#define \hyperlink{traits__io_8h_a9deff46e2667040f0106a1c62e86c616}{E\+D\+G\+E\+\_\+\+DU}~(0x01$<$$<$10)
+\item 
+\#define \hyperlink{traits__io_8h_a7b145590a6b5cf95dbbbedf0125d6f16}{E\+D\+G\+E\+\_\+\+D\+UV}~(0x01$<$$<$11)
+\item 
+\#define \hyperlink{traits__io_8h_a38afbd932de159e051d935a8da3eb9b0}{F\+A\+C\+E\+\_\+\+R\+GB}~(0x01$<$$<$16)
+\item 
+\#define \hyperlink{traits__io_8h_a32d747cbfb5a604d57728c53110e64cc}{F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL}~(0x01$<$$<$17)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a92dbd8987379bb2330d0e1dd88541cef}{Mesh\+Lib\+::\+\_\+write\+\_\+vertex\+\_\+uv} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a56e0c746d2f0831f190276f351973eed}{Mesh\+Lib\+::\+\_\+read\+\_\+vertex\+\_\+uv} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a4f1406eba0ac53ede756bca8efacd788}{Mesh\+Lib\+::\+\_\+read\+\_\+vertex\+\_\+z} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a92f633b4ea7e30c040b81dc8895f71e7}{Mesh\+Lib\+::\+\_\+read\+\_\+vertex\+\_\+father} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a7ed997bd5b6fa91b0c9de6129f8b3f5e}{Mesh\+Lib\+::\+\_\+read\+\_\+vertex\+\_\+mu} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a9b33c0e7e2116a58961c6d004cf6799d}{Mesh\+Lib\+::\+\_\+read\+\_\+vertex\+\_\+normal} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_aac275eedfecdadd5de1801c33904274f}{Mesh\+Lib\+::\+\_\+read\+\_\+vertex\+\_\+rgb} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a7ce9ef901694368ab52b10d899d4f0a2}{Mesh\+Lib\+::\+\_\+read\+\_\+edge\+\_\+length} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_aaf7a33dcbd7f629d69de2d7afb5fcf26}{Mesh\+Lib\+::\+\_\+read\+\_\+edge\+\_\+sharp} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a06158718dbbcbd1ee2b29abe2e606d9c}{Mesh\+Lib\+::\+\_\+write\+\_\+vertex\+\_\+z} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a4bfb121963ba879caaa7c306f33b193f}{Mesh\+Lib\+::\+\_\+write\+\_\+vertex\+\_\+mu} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_ae6730ffd9542087c760392db42735aec}{Mesh\+Lib\+::\+\_\+write\+\_\+vertex\+\_\+u} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a2a9154a87dcd05710107028de17b77fd}{Mesh\+Lib\+::\+\_\+write\+\_\+vertex\+\_\+rgb} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_aa18d5be66ec31c430180096e99b2c04c}{Mesh\+Lib\+::\+\_\+write\+\_\+edge\+\_\+sharp} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a0420a9c8c7e4fa00c4e43824dcb9a666}{Mesh\+Lib\+::\+\_\+write\+\_\+edge\+\_\+du} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a1ca033523a32826241d6aa0c028d6f3a}{Mesh\+Lib\+::\+\_\+input\+\_\+traits} (M $\ast$p\+Mesh)
+\item 
+{\footnotesize template$<$typename M , typename V , typename E , typename F , typename H $>$ }\\void \hyperlink{namespace_mesh_lib_a9a2cf62d8e8109d49ebdb83497cf6f91}{Mesh\+Lib\+::\+\_\+output\+\_\+traits} (M $\ast$p\+Mesh)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!E\+D\+G\+E\+\_\+\+DU@{E\+D\+G\+E\+\_\+\+DU}}
+\index{E\+D\+G\+E\+\_\+\+DU@{E\+D\+G\+E\+\_\+\+DU}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{E\+D\+G\+E\+\_\+\+DU}{EDGE_DU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+D\+G\+E\+\_\+\+DU~(0x01$<$$<$10)}\hypertarget{traits__io_8h_a9deff46e2667040f0106a1c62e86c616}{}\label{traits__io_8h_a9deff46e2667040f0106a1c62e86c616}
+
+
+Definition at line 34 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!E\+D\+G\+E\+\_\+\+D\+UV@{E\+D\+G\+E\+\_\+\+D\+UV}}
+\index{E\+D\+G\+E\+\_\+\+D\+UV@{E\+D\+G\+E\+\_\+\+D\+UV}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{E\+D\+G\+E\+\_\+\+D\+UV}{EDGE_DUV}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+D\+G\+E\+\_\+\+D\+UV~(0x01$<$$<$11)}\hypertarget{traits__io_8h_a7b145590a6b5cf95dbbbedf0125d6f16}{}\label{traits__io_8h_a7b145590a6b5cf95dbbbedf0125d6f16}
+
+
+Definition at line 35 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH@{E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH}}
+\index{E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH@{E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH}{EDGE_LENGTH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+D\+G\+E\+\_\+\+L\+E\+N\+G\+TH~(0x01$<$$<$8)}\hypertarget{traits__io_8h_a362ba25ae42976c0e70ae98a503a12a0}{}\label{traits__io_8h_a362ba25ae42976c0e70ae98a503a12a0}
+
+
+Definition at line 32 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!E\+D\+G\+E\+\_\+\+S\+H\+A\+RP@{E\+D\+G\+E\+\_\+\+S\+H\+A\+RP}}
+\index{E\+D\+G\+E\+\_\+\+S\+H\+A\+RP@{E\+D\+G\+E\+\_\+\+S\+H\+A\+RP}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{E\+D\+G\+E\+\_\+\+S\+H\+A\+RP}{EDGE_SHARP}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+D\+G\+E\+\_\+\+S\+H\+A\+RP~(0x01$<$$<$9)}\hypertarget{traits__io_8h_a3f9edd4dedb7e62a37854d748d9bfb7d}{}\label{traits__io_8h_a3f9edd4dedb7e62a37854d748d9bfb7d}
+
+
+Definition at line 33 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL@{F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL}}
+\index{F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL@{F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL}{FACE_NORMAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+A\+C\+E\+\_\+\+N\+O\+R\+M\+AL~(0x01$<$$<$17)}\hypertarget{traits__io_8h_a32d747cbfb5a604d57728c53110e64cc}{}\label{traits__io_8h_a32d747cbfb5a604d57728c53110e64cc}
+
+
+Definition at line 38 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!F\+A\+C\+E\+\_\+\+R\+GB@{F\+A\+C\+E\+\_\+\+R\+GB}}
+\index{F\+A\+C\+E\+\_\+\+R\+GB@{F\+A\+C\+E\+\_\+\+R\+GB}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{F\+A\+C\+E\+\_\+\+R\+GB}{FACE_RGB}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+A\+C\+E\+\_\+\+R\+GB~(0x01$<$$<$16)}\hypertarget{traits__io_8h_a38afbd932de159e051d935a8da3eb9b0}{}\label{traits__io_8h_a38afbd932de159e051d935a8da3eb9b0}
+
+
+Definition at line 37 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER@{V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER}}
+\index{V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER@{V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER}{VERTEX_FATHER}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+\+F\+A\+T\+H\+ER~(0x01$<$$<$4)}\hypertarget{traits__io_8h_a033cb228ec9541d36a1e74c758225823}{}\label{traits__io_8h_a033cb228ec9541d36a1e74c758225823}
+
+
+Definition at line 28 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA@{V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA}}
+\index{V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA@{V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA}{VERTEX_LAMBDA}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+\+L\+A\+M\+B\+DA~(0x01$<$$<$5)}\hypertarget{traits__io_8h_a6ce9e03f5697d5379eea1229ba4a1829}{}\label{traits__io_8h_a6ce9e03f5697d5379eea1229ba4a1829}
+
+
+Definition at line 29 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+\+MU@{V\+E\+R\+T\+E\+X\+\_\+\+MU}}
+\index{V\+E\+R\+T\+E\+X\+\_\+\+MU@{V\+E\+R\+T\+E\+X\+\_\+\+MU}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+\+MU}{VERTEX_MU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+\+MU~(0x01$<$$<$3)}\hypertarget{traits__io_8h_a208e4a865187e8b203b17047065a88c6}{}\label{traits__io_8h_a208e4a865187e8b203b17047065a88c6}
+
+
+Definition at line 27 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL@{V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL}}
+\index{V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL@{V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL}{VERTEX_NORMAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+\+N\+O\+R\+M\+AL~(0x01$<$$<$6)}\hypertarget{traits__io_8h_a5c3a6d59814fce60cac28e5528d2e42a}{}\label{traits__io_8h_a5c3a6d59814fce60cac28e5528d2e42a}
+
+
+Definition at line 30 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+\+R\+GB@{V\+E\+R\+T\+E\+X\+\_\+\+R\+GB}}
+\index{V\+E\+R\+T\+E\+X\+\_\+\+R\+GB@{V\+E\+R\+T\+E\+X\+\_\+\+R\+GB}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+\+R\+GB}{VERTEX_RGB}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+\+R\+GB~(0x01$<$$<$0)}\hypertarget{traits__io_8h_a183c1181dfc37522d163b26bb9402d5d}{}\label{traits__io_8h_a183c1181dfc37522d163b26bb9402d5d}
+
+
+Definition at line 24 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+U@{V\+E\+R\+T\+E\+X\+\_\+U}}
+\index{V\+E\+R\+T\+E\+X\+\_\+U@{V\+E\+R\+T\+E\+X\+\_\+U}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+U}{VERTEX_U}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+U~(0x01$<$$<$7)}\hypertarget{traits__io_8h_a11ed1c0b992e3ed0f708f32733c8b12d}{}\label{traits__io_8h_a11ed1c0b992e3ed0f708f32733c8b12d}
+
+
+Definition at line 31 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+\+UV@{V\+E\+R\+T\+E\+X\+\_\+\+UV}}
+\index{V\+E\+R\+T\+E\+X\+\_\+\+UV@{V\+E\+R\+T\+E\+X\+\_\+\+UV}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+\+UV}{VERTEX_UV}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+\+UV~(0x01$<$$<$1)}\hypertarget{traits__io_8h_ae6080b7459488c1d92b431844323a73b}{}\label{traits__io_8h_ae6080b7459488c1d92b431844323a73b}
+
+
+Definition at line 25 of file traits\+\_\+io.\+h.
+
+\index{traits\+\_\+io.\+h@{traits\+\_\+io.\+h}!V\+E\+R\+T\+E\+X\+\_\+Z@{V\+E\+R\+T\+E\+X\+\_\+Z}}
+\index{V\+E\+R\+T\+E\+X\+\_\+Z@{V\+E\+R\+T\+E\+X\+\_\+Z}!traits\+\_\+io.\+h@{traits\+\_\+io.\+h}}
+\subsubsection[{\texorpdfstring{V\+E\+R\+T\+E\+X\+\_\+Z}{VERTEX_Z}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+T\+E\+X\+\_\+Z~(0x01$<$$<$2)}\hypertarget{traits__io_8h_adc16f7bc772323ad6b78b831d9e699e9}{}\label{traits__io_8h_adc16f7bc772323ad6b78b831d9e699e9}
+
+
+Definition at line 26 of file traits\+\_\+io.\+h.
+

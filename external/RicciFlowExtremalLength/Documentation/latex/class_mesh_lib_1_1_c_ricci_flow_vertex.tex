@@ -1,0 +1,302 @@
+\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex}{}\section{Mesh\+Lib\+:\+:C\+Ricci\+Flow\+Vertex Class Reference}
+\label{class_mesh_lib_1_1_c_ricci_flow_vertex}\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex}{C\+Ricci\+Flow\+Vertex} class.  
+
+
+
+
+{\ttfamily \#include $<$Ricci\+Flow\+Mesh.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+Lib\+:\+:C\+Ricci\+Flow\+Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{class_mesh_lib_1_1_c_ricci_flow_vertex__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Ricci\+Flow\+Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_lib_1_1_c_ricci_flow_vertex__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a5b32338308bba490c199901032b2bf4d}{C\+Ricci\+Flow\+Vertex} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a42c6854f6acd34b70d14e588f5317f2a}{$\sim$\+C\+Ricci\+Flow\+Vertex} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point2}{C\+Point2} \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_aab160a0b027baa770beabe94a40158a1}{huv} ()
+\item 
+int \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a6dc51d4254e173e2b98ebc4eee42a66c}{idx} ()
+\item 
+int \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a03ba58a37f894d33544b5f5d1f37ba98}{father} ()
+\item 
+double \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_aa82637ce2940925c7dfdf26bb0e6c187}{u} ()
+\item 
+double \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a3b5fff5cd648cd21846947857656ea7f}{k} ()
+\item 
+double \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_ab2edd249e38187bf0f12951077d088af}{target\+\_\+k} ()
+\item 
+bool \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a2fa1403822fd623c1aafb33fbd8e3bac}{touched} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a769e46b30986e7942a2575f924013595}{\+\_\+from\+\_\+string} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a1d4ea035d20566e859dea5ae399f6b3a}{\+\_\+to\+\_\+string} ()
+\item 
+int \& \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a21b0cb5288ee5b2b12d5a47c12b16d95}{valence} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a3af1d7b46bd87f486a1e6dbea027c91d}{traits}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point2}{C\+Point2} \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a674116f5178c06d98b5ef26deabdeec6}{m\+\_\+huv}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a7ab6932d891ddbb10c14f0ab984d3b36}{m\+\_\+index}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a6ed5050df5a2f6284a98bb37c553a57e}{m\+\_\+father}
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_ac9f92366ddb0d823a6dfc6a526db9295}{m\+\_\+log\+\_\+radius}
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a4b6a000486252eb17ece2e2ba4bc60a8}{m\+\_\+curvature}
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_abdfb30ac08fc9aff4c7052bfb4986de3}{m\+\_\+target\+\_\+curvature}
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_ac66ef1157c3442bb632cdf89d509370e}{m\+\_\+touched}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_a5a1d0671376b738ad92c860eeb24eb09}{m\+\_\+valence}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex}{C\+Ricci\+Flow\+Vertex} class. 
+
+Vertex class for Ricci flow Traits\+: index father log\+\_\+radius curvature vertex uv target\+\_\+curvature touched 
+
+Definition at line 47 of file Ricci\+Flow\+Mesh.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!C\+Ricci\+Flow\+Vertex@{C\+Ricci\+Flow\+Vertex}}
+\index{C\+Ricci\+Flow\+Vertex@{C\+Ricci\+Flow\+Vertex}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{C\+Ricci\+Flow\+Vertex()}{CRicciFlowVertex()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::\+C\+Ricci\+Flow\+Vertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a5b32338308bba490c199901032b2bf4d}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a5b32338308bba490c199901032b2bf4d}
+\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex}{C\+Ricci\+Flow\+Vertex} constructor 
+
+Definition at line 61 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!````~C\+Ricci\+Flow\+Vertex@{$\sim$\+C\+Ricci\+Flow\+Vertex}}
+\index{````~C\+Ricci\+Flow\+Vertex@{$\sim$\+C\+Ricci\+Flow\+Vertex}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Ricci\+Flow\+Vertex()}{~CRicciFlowVertex()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::$\sim$\+C\+Ricci\+Flow\+Vertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a42c6854f6acd34b70d14e588f5317f2a}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a42c6854f6acd34b70d14e588f5317f2a}
+\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex}{C\+Ricci\+Flow\+Vertex} destructor 
+
+Definition at line 65 of file Ricci\+Flow\+Mesh.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}}
+\index{\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{\+\_\+from\+\_\+string()}{_from_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::\+\_\+from\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a769e46b30986e7942a2575f924013595}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a769e46b30986e7942a2575f924013595}
+Read vertex uv from vertex string 
+
+Definition at line 135 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}}
+\index{\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{\+\_\+to\+\_\+string()}{_to_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::\+\_\+to\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a1d4ea035d20566e859dea5ae399f6b3a}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a1d4ea035d20566e859dea5ae399f6b3a}
+Write vertex uv to vertex string 
+
+Definition at line 170 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!father@{father}}
+\index{father@{father}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{father()}{father()}}]{\setlength{\rightskip}{0pt plus 5cm}int\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::father (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a03ba58a37f894d33544b5f5d1f37ba98}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a03ba58a37f894d33544b5f5d1f37ba98}
+Vertex father trait 
+
+Definition at line 78 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!huv@{huv}}
+\index{huv@{huv}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{huv()}{huv()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point2}\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::huv (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_aab160a0b027baa770beabe94a40158a1}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_aab160a0b027baa770beabe94a40158a1}
+Vertex uv trait 
+
+Definition at line 70 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!idx@{idx}}
+\index{idx@{idx}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{idx()}{idx()}}]{\setlength{\rightskip}{0pt plus 5cm}int\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::idx (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a6dc51d4254e173e2b98ebc4eee42a66c}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a6dc51d4254e173e2b98ebc4eee42a66c}
+Vertex index trait 
+
+Definition at line 74 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!k@{k}}
+\index{k@{k}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{k()}{k()}}]{\setlength{\rightskip}{0pt plus 5cm}double\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::k (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a3b5fff5cd648cd21846947857656ea7f}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a3b5fff5cd648cd21846947857656ea7f}
+Vertex curvature trait 
+
+Definition at line 86 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!target\+\_\+k@{target\+\_\+k}}
+\index{target\+\_\+k@{target\+\_\+k}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{target\+\_\+k()}{target_k()}}]{\setlength{\rightskip}{0pt plus 5cm}double\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::target\+\_\+k (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_ab2edd249e38187bf0f12951077d088af}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_ab2edd249e38187bf0f12951077d088af}
+Vertex target curvature 
+
+Definition at line 90 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!touched@{touched}}
+\index{touched@{touched}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{touched()}{touched()}}]{\setlength{\rightskip}{0pt plus 5cm}bool\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::touched (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a2fa1403822fd623c1aafb33fbd8e3bac}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a2fa1403822fd623c1aafb33fbd8e3bac}
+whether the vertex has been touched 
+
+Definition at line 94 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!u@{u}}
+\index{u@{u}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{u()}{u()}}]{\setlength{\rightskip}{0pt plus 5cm}double\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::u (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_aa82637ce2940925c7dfdf26bb0e6c187}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_aa82637ce2940925c7dfdf26bb0e6c187}
+Vertex log radius 
+
+Definition at line 82 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!valence@{valence}}
+\index{valence@{valence}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{valence()}{valence()}}]{\setlength{\rightskip}{0pt plus 5cm}int\& Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::valence (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a21b0cb5288ee5b2b12d5a47c12b16d95}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a21b0cb5288ee5b2b12d5a47c12b16d95}
+Topological valence of the vertex 
+
+Definition at line 107 of file Ricci\+Flow\+Mesh.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+curvature@{m\+\_\+curvature}}
+\index{m\+\_\+curvature@{m\+\_\+curvature}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+curvature}{m_curvature}}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+curvature\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a4b6a000486252eb17ece2e2ba4bc60a8}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a4b6a000486252eb17ece2e2ba4bc60a8}
+
+
+Definition at line 123 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+father@{m\+\_\+father}}
+\index{m\+\_\+father@{m\+\_\+father}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+father}{m_father}}]{\setlength{\rightskip}{0pt plus 5cm}int Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+father\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a6ed5050df5a2f6284a98bb37c553a57e}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a6ed5050df5a2f6284a98bb37c553a57e}
+
+
+Definition at line 119 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+huv@{m\+\_\+huv}}
+\index{m\+\_\+huv@{m\+\_\+huv}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+huv}{m_huv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point2} Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+huv\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a674116f5178c06d98b5ef26deabdeec6}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a674116f5178c06d98b5ef26deabdeec6}
+Vertex color
+
+Vertex uv 
+
+Definition at line 107 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+index@{m\+\_\+index}}
+\index{m\+\_\+index@{m\+\_\+index}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+index}{m_index}}]{\setlength{\rightskip}{0pt plus 5cm}int Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a7ab6932d891ddbb10c14f0ab984d3b36}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a7ab6932d891ddbb10c14f0ab984d3b36}
+Vertex index 
+
+Definition at line 117 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+log\+\_\+radius@{m\+\_\+log\+\_\+radius}}
+\index{m\+\_\+log\+\_\+radius@{m\+\_\+log\+\_\+radius}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+log\+\_\+radius}{m_log_radius}}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+log\+\_\+radius\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_ac9f92366ddb0d823a6dfc6a526db9295}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_ac9f92366ddb0d823a6dfc6a526db9295}
+
+
+Definition at line 121 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+target\+\_\+curvature@{m\+\_\+target\+\_\+curvature}}
+\index{m\+\_\+target\+\_\+curvature@{m\+\_\+target\+\_\+curvature}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+target\+\_\+curvature}{m_target_curvature}}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+target\+\_\+curvature\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_abdfb30ac08fc9aff4c7052bfb4986de3}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_abdfb30ac08fc9aff4c7052bfb4986de3}
+
+
+Definition at line 125 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+touched@{m\+\_\+touched}}
+\index{m\+\_\+touched@{m\+\_\+touched}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+touched}{m_touched}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+touched\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_ac66ef1157c3442bb632cdf89d509370e}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_ac66ef1157c3442bb632cdf89d509370e}
+
+
+Definition at line 127 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!m\+\_\+valence@{m\+\_\+valence}}
+\index{m\+\_\+valence@{m\+\_\+valence}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{m\+\_\+valence}{m_valence}}]{\setlength{\rightskip}{0pt plus 5cm}int Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::m\+\_\+valence\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a5a1d0671376b738ad92c860eeb24eb09}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a5a1d0671376b738ad92c860eeb24eb09}
+
+
+Definition at line 129 of file Ricci\+Flow\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}!traits@{traits}}
+\index{traits@{traits}!Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex@{Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex}}
+\subsubsection[{\texorpdfstring{traits}{traits}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Mesh\+Lib\+::\+C\+Ricci\+Flow\+Vertex\+::traits\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_mesh_lib_1_1_c_ricci_flow_vertex_a3af1d7b46bd87f486a1e6dbea027c91d}{}\label{class_mesh_lib_1_1_c_ricci_flow_vertex_a3af1d7b46bd87f486a1e6dbea027c91d}
+Each bit in the traits indicates whether the vertex class has the correpsonding trait. e.\+g. if ( traits \& T\+R\+A\+I\+T\+\_\+\+UV ), then vertex-\/$>$\hyperlink{class_mesh_lib_1_1_c_ricci_flow_vertex_aab160a0b027baa770beabe94a40158a1}{huv()} needs to be stored int the vertex string. 
+
+Definition at line 56 of file Ricci\+Flow\+Mesh.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/algorithm/\+Riemannian/\+Ricci\+Flow/\hyperlink{_ricci_flow_mesh_8h}{Ricci\+Flow\+Mesh.\+h}\end{DoxyCompactItemize}

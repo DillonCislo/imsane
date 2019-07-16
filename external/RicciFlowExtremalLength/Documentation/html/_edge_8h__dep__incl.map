@@ -1,0 +1,12 @@
+<map id="MeshLib/core/Mesh/Edge.h" name="MeshLib/core/Mesh/Edge.h">
+<area shape="rect" id="node2" href="$_half_edge_8h.html" title="Base class of HalfEdge. " alt="" coords="419,80,625,107"/>
+<area shape="rect" id="node4" href="$_ricci_flow_mesh_8h.html" title="Mesh for Ricci Flow. " alt="" coords="163,319,364,360"/>
+<area shape="rect" id="node7" href="$_base_ricci_flow_8h.html" title="Base class for Ricci flow algorithm. " alt="" coords="333,408,535,449"/>
+<area shape="rect" id="node8" href="$_tangential_ricci_flow_8h.html" title="General Euclidean Ricci flow algorithm. " alt="" coords="464,497,681,539"/>
+<area shape="rect" id="node10" href="$traits__io_8h.html" title="MeshLib/core/Parser\l/traits_io.h" alt="" coords="240,229,383,271"/>
+<area shape="rect" id="node11" href="$_structure_8h.html" title="algorithms for converting one structure to another " alt="" coords="661,229,847,271"/>
+<area shape="rect" id="node3" href="$_vertex_8h.html" title="Base class of vertex. " alt="" coords="427,155,617,181"/>
+<area shape="rect" id="node5" href="$_base_embed_8h.html" title="Isometrically embed a mesh with canonical metric onto the canonical domain. " alt="" coords="5,408,207,449"/>
+<area shape="rect" id="node6" href="$_euclidean_embed_8h.html" title="Isometrically embed a mesh with flat metric onto the plane. " alt="" coords="75,497,276,539"/>
+<area shape="rect" id="node9" href="$_tangential_ricci_extremal_length_8h.html" title="Euclidean Tangential Ricci flow for Extremal Length. " alt="" coords="457,587,688,643"/>
+</map>

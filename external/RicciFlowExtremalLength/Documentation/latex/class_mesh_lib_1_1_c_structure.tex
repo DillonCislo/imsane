@@ -1,0 +1,317 @@
+\hypertarget{class_mesh_lib_1_1_c_structure}{}\section{Mesh\+Lib\+:\+:C\+Structure$<$ Mesh, V, E, F, H $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_c_structure}\index{Mesh\+Lib\+::\+C\+Structure$<$ Mesh, V, E, F, H $>$@{Mesh\+Lib\+::\+C\+Structure$<$ Mesh, V, E, F, H $>$}}
+
+
+Conversion class.  
+
+
+
+
+{\ttfamily \#include $<$Structure.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_structure_a368f9061a7c92f3b85b9f59348b7f651}{C\+Structure} (Mesh $\ast$p\+Mesh)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_mesh_lib_1_1_c_structure_aef09abc61c919cf9c010497b6bad37cd}{$\sim$\+C\+Structure} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a9d4f67774556baf84aed076aab390ede}{\+\_\+metric\+\_\+2\+\_\+angle} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a10e9ac6f3e546003459d310df209bdd4}{\+\_\+embedding\+\_\+2\+\_\+metric} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_aab9a90ee8e1f2a7b5bea24c0b070d239}{\+\_\+angle\+\_\+2\+\_\+curvature} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a1583325c9a7640865d6fe55556c070f3}{\+\_\+angle\+\_\+2\+\_\+\+Laplace} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a4855cc5a0ce8770288a38badca7c6b9d}{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_aba95682430a57dab163cf54424ab05da}{\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a5b329be24b5f12cc420fe9dd70270efc}{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_structure_a3cf9efb8667b631cdea313524d1f2517}{\+\_\+cosine\+\_\+law} (double a, double b, double c)
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_structure_a7b6c7c5319e26dc4e418554e379fc973}{\+\_\+circle\+\_\+circle\+\_\+intersection} (double x0, double y0, double r0, double x1, double y1, double r1, double $\ast$xi, double $\ast$yi, double $\ast$xi\+\_\+prime, double $\ast$yi\+\_\+prime)
+\item 
+std\+::complex$<$ double $>$ \hyperlink{class_mesh_lib_1_1_c_structure_a0863a582fe471af9e19682e558c801be}{\+\_\+diagonal\+\_\+ratio} (Mesh $\ast$pM, E $\ast$pE)
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_structure_a04089c436e17ece0a1caba3aa167a111}{\+\_\+embed\+\_\+third\+\_\+vertex} (Mesh $\ast$pM, V $\ast$A, V $\ast$B, V $\ast$C)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a04bb3255b61df168864a13d952fbf65d}{\+\_\+embed\+\_\+two\+\_\+faces} (Mesh $\ast$PM, E $\ast$pE)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_structure_a2852dfc5fbd04e032b0a1542db48dad2}{\+\_\+embed\+\_\+one\+\_\+face} (Mesh $\ast$PM, E $\ast$pE)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Mesh $\ast$ \hyperlink{class_mesh_lib_1_1_c_structure_a9241359e43cc23ef2a70c9ada3bc73a7}{m\+\_\+p\+Mesh}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Mesh, class V, class E, class F, class H$>$\\*
+class Mesh\+Lib\+::\+C\+Structure$<$ Mesh, V, E, F, H $>$}
+
+Conversion class. 
+
+Algorithm for converting from one structure to another 
+
+Definition at line 37 of file Structure.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!C\+Structure@{C\+Structure}}
+\index{C\+Structure@{C\+Structure}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{C\+Structure(\+Mesh $\ast$p\+Mesh)}{CStructure(Mesh *pMesh)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ {\bf Mesh\+Lib\+::\+C\+Structure}$<$ Mesh, V, E, F, H $>$\+::{\bf C\+Structure} (
+\begin{DoxyParamCaption}
+\item[{Mesh $\ast$}]{p\+Mesh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_structure_a368f9061a7c92f3b85b9f59348b7f651}{}\label{class_mesh_lib_1_1_c_structure_a368f9061a7c92f3b85b9f59348b7f651}
+
+
+\hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Mesh} & the input mesh \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!````~C\+Structure@{$\sim$\+C\+Structure}}
+\index{````~C\+Structure@{$\sim$\+C\+Structure}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Structure()}{~CStructure()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ {\bf Mesh\+Lib\+::\+C\+Structure}$<$ Mesh, V, E, F, H $>$\+::$\sim${\bf C\+Structure} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_structure_aef09abc61c919cf9c010497b6bad37cd}{}\label{class_mesh_lib_1_1_c_structure_aef09abc61c919cf9c010497b6bad37cd}
+
+
+\hyperlink{class_mesh_lib_1_1_c_base_ricci_flow}{C\+Base\+Ricci\+Flow} destructor. 
+
+
+
+Definition at line 47 of file Structure.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+angle\+\_\+2\+\_\+curvature@{\+\_\+angle\+\_\+2\+\_\+curvature}}
+\index{\+\_\+angle\+\_\+2\+\_\+curvature@{\+\_\+angle\+\_\+2\+\_\+curvature}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+angle\+\_\+2\+\_\+curvature()}{_angle_2_curvature()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+angle\+\_\+2\+\_\+curvature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_aab9a90ee8e1f2a7b5bea24c0b070d239}{}\label{class_mesh_lib_1_1_c_structure_aab9a90ee8e1f2a7b5bea24c0b070d239}
+Convert angle structure to vertex curvature function 
+
+Definition at line 208 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+angle\+\_\+2\+\_\+\+Laplace@{\+\_\+angle\+\_\+2\+\_\+\+Laplace}}
+\index{\+\_\+angle\+\_\+2\+\_\+\+Laplace@{\+\_\+angle\+\_\+2\+\_\+\+Laplace}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+angle\+\_\+2\+\_\+\+Laplace()}{_angle_2_Laplace()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+angle\+\_\+2\+\_\+\+Laplace (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_a1583325c9a7640865d6fe55556c070f3}{}\label{class_mesh_lib_1_1_c_structure_a1583325c9a7640865d6fe55556c070f3}
+Compute Laplace-\/\+Beltrami operator from angle structure
+
+Compute the edge weight $ w(e) = \cot \alpha + \cot \beta $ where $\alpha,\beta$ are the two corner angles against edge $e$. $ w(e) = \cot \alpha $ If the edge is on the boundary, then 
+
+Definition at line 229 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+circle\+\_\+circle\+\_\+intersection@{\+\_\+circle\+\_\+circle\+\_\+intersection}}
+\index{\+\_\+circle\+\_\+circle\+\_\+intersection@{\+\_\+circle\+\_\+circle\+\_\+intersection}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+circle\+\_\+circle\+\_\+intersection(double x0, double y0, double r0, double x1, double y1, double r1, double $\ast$xi, double $\ast$yi, double $\ast$xi\+\_\+prime, double $\ast$yi\+\_\+prime)}{_circle_circle_intersection(double x0, double y0, double r0, double x1, double y1, double r1, double *xi, double *yi, double *xi_prime, double *yi_prime)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ int {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+circle\+\_\+circle\+\_\+intersection (
+\begin{DoxyParamCaption}
+\item[{double}]{x0, }
+\item[{double}]{y0, }
+\item[{double}]{r0, }
+\item[{double}]{x1, }
+\item[{double}]{y1, }
+\item[{double}]{r1, }
+\item[{double $\ast$}]{xi, }
+\item[{double $\ast$}]{yi, }
+\item[{double $\ast$}]{xi\+\_\+prime, }
+\item[{double $\ast$}]{yi\+\_\+prime}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a7b6c7c5319e26dc4e418554e379fc973}{}\label{class_mesh_lib_1_1_c_structure_a7b6c7c5319e26dc4e418554e379fc973}
+Compute the intersections of two circles 
+\begin{DoxyParams}{Parameters}
+{\em x0,y0,r1,x1,y1,r1} & are circles ( (x0,y0), r0 ) and ( (x1,y1), r1 ) \\
+\hline
+{\em xi,yi,xi\+\_\+prime,yi\+\_\+prime} & are the two intersection points \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 305 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+cosine\+\_\+law@{\+\_\+cosine\+\_\+law}}
+\index{\+\_\+cosine\+\_\+law@{\+\_\+cosine\+\_\+law}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+cosine\+\_\+law(double a, double b, double c)}{_cosine_law(double a, double b, double c)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ double {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+cosine\+\_\+law (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{double}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a3cf9efb8667b631cdea313524d1f2517}{}\label{class_mesh_lib_1_1_c_structure_a3cf9efb8667b631cdea313524d1f2517}
+Euclidean Cosine law
+
+
+\begin{DoxyParams}{Parameters}
+{\em a,b,c} & edge lengths return angle C \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 148 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+diagonal\+\_\+ratio@{\+\_\+diagonal\+\_\+ratio}}
+\index{\+\_\+diagonal\+\_\+ratio@{\+\_\+diagonal\+\_\+ratio}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+diagonal\+\_\+ratio(\+Mesh $\ast$p\+M, E $\ast$p\+E)}{_diagonal_ratio(Mesh *pM, E *pE)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ std\+::complex$<$ double $>$ {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+diagonal\+\_\+ratio (
+\begin{DoxyParamCaption}
+\item[{Mesh $\ast$}]{pM, }
+\item[{E $\ast$}]{pE}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a0863a582fe471af9e19682e558c801be}{}\label{class_mesh_lib_1_1_c_structure_a0863a582fe471af9e19682e558c801be}
+Compute the diagonal ratio on edge pE of mesh pM 
+\begin{DoxyParams}{Parameters}
+{\em pM} & input mesh, pE input edge  the diagonal ratio of the edge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 452 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+embed\+\_\+one\+\_\+face@{\+\_\+embed\+\_\+one\+\_\+face}}
+\index{\+\_\+embed\+\_\+one\+\_\+face@{\+\_\+embed\+\_\+one\+\_\+face}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+embed\+\_\+one\+\_\+face(\+Mesh $\ast$\+P\+M, E $\ast$p\+E)}{_embed_one_face(Mesh *PM, E *pE)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+embed\+\_\+one\+\_\+face (
+\begin{DoxyParamCaption}
+\item[{Mesh $\ast$}]{PM, }
+\item[{E $\ast$}]{pE}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a2852dfc5fbd04e032b0a1542db48dad2}{}\label{class_mesh_lib_1_1_c_structure_a2852dfc5fbd04e032b0a1542db48dad2}
+Isometrically embed the face adjacent to a boundary edge pE 
+\begin{DoxyParams}{Parameters}
+{\em pM} & input mesh, \\
+\hline
+{\em pE} & input edge, \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 435 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+embed\+\_\+third\+\_\+vertex@{\+\_\+embed\+\_\+third\+\_\+vertex}}
+\index{\+\_\+embed\+\_\+third\+\_\+vertex@{\+\_\+embed\+\_\+third\+\_\+vertex}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+embed\+\_\+third\+\_\+vertex(\+Mesh $\ast$p\+M, V $\ast$\+A, V $\ast$\+B, V $\ast$\+C)}{_embed_third_vertex(Mesh *pM, V *A, V *B, V *C)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ bool {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+embed\+\_\+third\+\_\+vertex (
+\begin{DoxyParamCaption}
+\item[{Mesh $\ast$}]{pM, }
+\item[{V $\ast$}]{A, }
+\item[{V $\ast$}]{B, }
+\item[{V $\ast$}]{C}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a04089c436e17ece0a1caba3aa167a111}{}\label{class_mesh_lib_1_1_c_structure_a04089c436e17ece0a1caba3aa167a111}
+Vertex A, B, C are three vertices of a triangle, sorted C\+C\+Wly A and B have been embedded on the plane, isometrically embed vertex C 
+
+Definition at line 371 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+embed\+\_\+two\+\_\+faces@{\+\_\+embed\+\_\+two\+\_\+faces}}
+\index{\+\_\+embed\+\_\+two\+\_\+faces@{\+\_\+embed\+\_\+two\+\_\+faces}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+embed\+\_\+two\+\_\+faces(\+Mesh $\ast$\+P\+M, E $\ast$p\+E)}{_embed_two_faces(Mesh *PM, E *pE)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+embed\+\_\+two\+\_\+faces (
+\begin{DoxyParamCaption}
+\item[{Mesh $\ast$}]{PM, }
+\item[{E $\ast$}]{pE}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a04bb3255b61df168864a13d952fbf65d}{}\label{class_mesh_lib_1_1_c_structure_a04bb3255b61df168864a13d952fbf65d}
+Isometrically embed two faces adjacent to an edge pE 
+\begin{DoxyParams}{Parameters}
+{\em pM} & input mesh, \\
+\hline
+{\em pE} & input edge, \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 415 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+embedding\+\_\+2\+\_\+metric@{\+\_\+embedding\+\_\+2\+\_\+metric}}
+\index{\+\_\+embedding\+\_\+2\+\_\+metric@{\+\_\+embedding\+\_\+2\+\_\+metric}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+embedding\+\_\+2\+\_\+metric()}{_embedding_2_metric()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+embedding\+\_\+2\+\_\+metric (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_a10e9ac6f3e546003459d310df209bdd4}{}\label{class_mesh_lib_1_1_c_structure_a10e9ac6f3e546003459d310df209bdd4}
+Convert the embedding structure in R3 to metric structure 
+
+Definition at line 191 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+metric\+\_\+2\+\_\+angle@{\+\_\+metric\+\_\+2\+\_\+angle}}
+\index{\+\_\+metric\+\_\+2\+\_\+angle@{\+\_\+metric\+\_\+2\+\_\+angle}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+metric\+\_\+2\+\_\+angle()}{_metric_2_angle()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+metric\+\_\+2\+\_\+angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_a9d4f67774556baf84aed076aab390ede}{}\label{class_mesh_lib_1_1_c_structure_a9d4f67774556baf84aed076aab390ede}
+Convert the metric structure to angle structure 
+
+Definition at line 159 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio@{\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio}}
+\index{\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio@{\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio()}{_metric_2_diagonal_ratio()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+metric\+\_\+2\+\_\+diagonal\+\_\+ratio (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_aba95682430a57dab163cf54424ab05da}{}\label{class_mesh_lib_1_1_c_structure_aba95682430a57dab163cf54424ab05da}
+From Riemannian metric to compute the edge diagonal ratio Edge diagonal ratio is another way of representing conformal structure 
+
+Definition at line 503 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle@{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle}}
+\index{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle@{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle()}{_parameter_mu_2_angle()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_a5b329be24b5f12cc420fe9dd70270efc}{}\label{class_mesh_lib_1_1_c_structure_a5b329be24b5f12cc420fe9dd70270efc}
+Conformal parameteriztion is set (vertex-\/$>$z()), Face Beltrami coefficient is set (face-\/$>$mu()), Compute the deformed angle structure 
+
+Definition at line 517 of file Structure.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric@{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric}}
+\index{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric@{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric()}{_parameter_mu_2_metric()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class M , class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Structure}$<$ M, V, E, F, H $>$\+::\+\_\+parameter\+\_\+mu\+\_\+2\+\_\+metric (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_structure_a4855cc5a0ce8770288a38badca7c6b9d}{}\label{class_mesh_lib_1_1_c_structure_a4855cc5a0ce8770288a38badca7c6b9d}
+Deform the angle structure by Beltrami coefficient
+
+Conformal parameteriztion is set (vertex-\/$>$uv()), Vertex Beltrami coefficient is set (vertex-\/$>$mu()), Compute the deformed metric 
+
+Definition at line 254 of file Structure.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}!m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}}
+\index{m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}!Mesh\+Lib\+::\+C\+Structure@{Mesh\+Lib\+::\+C\+Structure}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Mesh}{m_pMesh}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Mesh , class V , class E , class F , class H $>$ Mesh$\ast$ {\bf Mesh\+Lib\+::\+C\+Structure}$<$ Mesh, V, E, F, H $>$\+::m\+\_\+p\+Mesh\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_structure_a9241359e43cc23ef2a70c9ada3bc73a7}{}\label{class_mesh_lib_1_1_c_structure_a9241359e43cc23ef2a70c9ada3bc73a7}
+the input mesh 
+
+Definition at line 99 of file Structure.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/algorithm/\+Structure/\hyperlink{_structure_8h}{Structure.\+h}\end{DoxyCompactItemize}

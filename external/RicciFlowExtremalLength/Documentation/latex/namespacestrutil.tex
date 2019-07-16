@@ -1,0 +1,227 @@
+\hypertarget{namespacestrutil}{}\section{strutil Namespace Reference}
+\label{namespacestrutil}\index{strutil@{strutil}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classstrutil_1_1_tokenizer}{Tokenizer}
+\begin{DoxyCompactList}\small\item\em String \hyperlink{classstrutil_1_1_tokenizer}{Tokenizer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{namespacestrutil_ab231c71e590e3a864bcc33b9533a3282}{trim\+Left} (const std\+::string \&str)
+\item 
+std\+::string \hyperlink{namespacestrutil_af7e41abccf3798fcfc8146dacd6a0e6e}{trim\+Right} (const std\+::string \&str)
+\item 
+std\+::string \hyperlink{namespacestrutil_ae97dd8d01282a53dff197b2640aaf6a2}{trim} (const std\+::string \&str)
+\item 
+std\+::string \hyperlink{namespacestrutil_a30dcaa35899109b36dede8d7b65bacb4}{trim} (const std\+::string \&str, const std\+::string \&delimitor)
+\item 
+std\+::string \hyperlink{namespacestrutil_a33217c775cf7388f4c4e1af1e1fb45a8}{to\+Lower} (const std\+::string \&str)
+\item 
+std\+::string \hyperlink{namespacestrutil_aa77b45238488b49ad55d2b73294c88ae}{to\+Upper} (const std\+::string \&str)
+\item 
+bool \hyperlink{namespacestrutil_a5526a6beb76b21d3961809b8ff9d629d}{starts\+With} (const std\+::string \&str, const std\+::string \&substr)
+\item 
+bool \hyperlink{namespacestrutil_af34e7273311c772c2c0d7b804aa5fb49}{ends\+With} (const std\+::string \&str, const std\+::string \&substr)
+\item 
+bool \hyperlink{namespacestrutil_a4038560d84d6462679bcd4aaf7499d0e}{equals\+Ignore\+Case} (const std\+::string \&str1, const std\+::string \&str2)
+\item 
+std\+::string \hyperlink{namespacestrutil_a60b48671666d33f31761ca4fc121c1c4}{to\+String} (const bool \&value)
+\item 
+{\footnotesize template$<$bool $>$ }\\bool \hyperlink{namespacestrutil_a0776455dafd1a05a3dafc302001d8520}{parse\+String} (const std\+::string \&str)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \hyperlink{namespacestrutil_ad4e6e4f5f146b8e4c08638557a3d0c3f}{parse\+String} (const std\+::string \&str)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \hyperlink{namespacestrutil_a28042779b9abcbc8d7b34885b03182d4}{parse\+Hex\+String} (const std\+::string \&str)
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::string \hyperlink{namespacestrutil_aea824deca39d542003d5a6b81323f421}{to\+String} (const T \&value)
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::string \hyperlink{namespacestrutil_afb6f8558583be9e708aea845d79b4f0e}{to\+Hex\+String} (const T \&value, int width)
+\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{namespacestrutil_aa1f64676ef9cc60bfdc94d7ddb86fa5b}{split} (const std\+::string \&str, const std\+::string \&delimiters)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{strutil@{strutil}!ends\+With@{ends\+With}}
+\index{ends\+With@{ends\+With}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{ends\+With(const std\+::string \&str, const std\+::string \&substr)}{endsWith(const std::string &str, const std::string &substr)}}]{\setlength{\rightskip}{0pt plus 5cm}bool strutil\+::ends\+With (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{substr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_af34e7273311c772c2c0d7b804aa5fb49}{}\label{namespacestrutil_af34e7273311c772c2c0d7b804aa5fb49}
+
+
+Definition at line 70 of file strutil.\+h.
+
+\index{strutil@{strutil}!equals\+Ignore\+Case@{equals\+Ignore\+Case}}
+\index{equals\+Ignore\+Case@{equals\+Ignore\+Case}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{equals\+Ignore\+Case(const std\+::string \&str1, const std\+::string \&str2)}{equalsIgnoreCase(const std::string &str1, const std::string &str2)}}]{\setlength{\rightskip}{0pt plus 5cm}bool strutil\+::equals\+Ignore\+Case (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str1, }
+\item[{const std\+::string \&}]{str2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_a4038560d84d6462679bcd4aaf7499d0e}{}\label{namespacestrutil_a4038560d84d6462679bcd4aaf7499d0e}
+
+
+Definition at line 75 of file strutil.\+h.
+
+\index{strutil@{strutil}!parse\+Hex\+String@{parse\+Hex\+String}}
+\index{parse\+Hex\+String@{parse\+Hex\+String}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{parse\+Hex\+String(const std\+::string \&str)}{parseHexString(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T strutil\+::parse\+Hex\+String (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestrutil_a28042779b9abcbc8d7b34885b03182d4}{}\label{namespacestrutil_a28042779b9abcbc8d7b34885b03182d4}
+
+
+Definition at line 104 of file strutil.\+h.
+
+\index{strutil@{strutil}!parse\+String@{parse\+String}}
+\index{parse\+String@{parse\+String}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{parse\+String(const std\+::string \&str)}{parseString(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool $>$ bool strutil\+::parse\+String (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestrutil_a0776455dafd1a05a3dafc302001d8520}{}\label{namespacestrutil_a0776455dafd1a05a3dafc302001d8520}
+
+
+Definition at line 88 of file strutil.\+h.
+
+\index{strutil@{strutil}!parse\+String@{parse\+String}}
+\index{parse\+String@{parse\+String}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{parse\+String(const std\+::string \&str)}{parseString(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T strutil\+::parse\+String (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestrutil_ad4e6e4f5f146b8e4c08638557a3d0c3f}{}\label{namespacestrutil_ad4e6e4f5f146b8e4c08638557a3d0c3f}
+
+
+Definition at line 97 of file strutil.\+h.
+
+\index{strutil@{strutil}!split@{split}}
+\index{split@{split}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{split(const std\+::string \&str, const std\+::string \&delimiters)}{split(const std::string &str, const std::string &delimiters)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::string$>$ strutil\+::split (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{delimiters}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_aa1f64676ef9cc60bfdc94d7ddb86fa5b}{}\label{namespacestrutil_aa1f64676ef9cc60bfdc94d7ddb86fa5b}
+
+
+Definition at line 192 of file strutil.\+h.
+
+\index{strutil@{strutil}!starts\+With@{starts\+With}}
+\index{starts\+With@{starts\+With}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{starts\+With(const std\+::string \&str, const std\+::string \&substr)}{startsWith(const std::string &str, const std::string &substr)}}]{\setlength{\rightskip}{0pt plus 5cm}bool strutil\+::starts\+With (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{substr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_a5526a6beb76b21d3961809b8ff9d629d}{}\label{namespacestrutil_a5526a6beb76b21d3961809b8ff9d629d}
+
+
+Definition at line 65 of file strutil.\+h.
+
+\index{strutil@{strutil}!to\+Hex\+String@{to\+Hex\+String}}
+\index{to\+Hex\+String@{to\+Hex\+String}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{to\+Hex\+String(const T \&value, int width)}{toHexString(const T &value, int width)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ std\+::string strutil\+::to\+Hex\+String (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{value, }
+\item[{int}]{width}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestrutil_afb6f8558583be9e708aea845d79b4f0e}{}\label{namespacestrutil_afb6f8558583be9e708aea845d79b4f0e}
+
+
+Definition at line 117 of file strutil.\+h.
+
+\index{strutil@{strutil}!to\+Lower@{to\+Lower}}
+\index{to\+Lower@{to\+Lower}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{to\+Lower(const std\+::string \&str)}{toLower(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::to\+Lower (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_a33217c775cf7388f4c4e1af1e1fb45a8}{}\label{namespacestrutil_a33217c775cf7388f4c4e1af1e1fb45a8}
+
+
+Definition at line 51 of file strutil.\+h.
+
+\index{strutil@{strutil}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{to\+String(const bool \&value)}{toString(const bool &value)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::to\+String (
+\begin{DoxyParamCaption}
+\item[{const bool \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_a60b48671666d33f31761ca4fc121c1c4}{}\label{namespacestrutil_a60b48671666d33f31761ca4fc121c1c4}
+
+
+Definition at line 81 of file strutil.\+h.
+
+\index{strutil@{strutil}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{to\+String(const T \&value)}{toString(const T &value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ std\+::string strutil\+::to\+String (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestrutil_aea824deca39d542003d5a6b81323f421}{}\label{namespacestrutil_aea824deca39d542003d5a6b81323f421}
+
+
+Definition at line 111 of file strutil.\+h.
+
+\index{strutil@{strutil}!to\+Upper@{to\+Upper}}
+\index{to\+Upper@{to\+Upper}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{to\+Upper(const std\+::string \&str)}{toUpper(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::to\+Upper (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_aa77b45238488b49ad55d2b73294c88ae}{}\label{namespacestrutil_aa77b45238488b49ad55d2b73294c88ae}
+
+
+Definition at line 58 of file strutil.\+h.
+
+\index{strutil@{strutil}!trim@{trim}}
+\index{trim@{trim}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{trim(const std\+::string \&str)}{trim(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::trim (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_ae97dd8d01282a53dff197b2640aaf6a2}{}\label{namespacestrutil_ae97dd8d01282a53dff197b2640aaf6a2}
+
+
+Definition at line 35 of file strutil.\+h.
+
+\index{strutil@{strutil}!trim@{trim}}
+\index{trim@{trim}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{trim(const std\+::string \&str, const std\+::string \&delimitor)}{trim(const std::string &str, const std::string &delimitor)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::trim (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{delimitor}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_a30dcaa35899109b36dede8d7b65bacb4}{}\label{namespacestrutil_a30dcaa35899109b36dede8d7b65bacb4}
+
+
+Definition at line 43 of file strutil.\+h.
+
+\index{strutil@{strutil}!trim\+Left@{trim\+Left}}
+\index{trim\+Left@{trim\+Left}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{trim\+Left(const std\+::string \&str)}{trimLeft(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::trim\+Left (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_ab231c71e590e3a864bcc33b9533a3282}{}\label{namespacestrutil_ab231c71e590e3a864bcc33b9533a3282}
+
+
+Definition at line 21 of file strutil.\+h.
+
+\index{strutil@{strutil}!trim\+Right@{trim\+Right}}
+\index{trim\+Right@{trim\+Right}!strutil@{strutil}}
+\subsubsection[{\texorpdfstring{trim\+Right(const std\+::string \&str)}{trimRight(const std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string strutil\+::trim\+Right (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespacestrutil_af7e41abccf3798fcfc8146dacd6a0e6e}{}\label{namespacestrutil_af7e41abccf3798fcfc8146dacd6a0e6e}
+
+
+Definition at line 28 of file strutil.\+h.
+

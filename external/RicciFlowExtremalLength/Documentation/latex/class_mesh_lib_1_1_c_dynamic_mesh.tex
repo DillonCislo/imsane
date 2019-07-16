@@ -1,0 +1,187 @@
+\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh}{}\section{Mesh\+Lib\+:\+:C\+Dynamic\+Mesh$<$ V, E, F, H $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_c_dynamic_mesh}\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh$<$ V, E, F, H $>$@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh$<$ V, E, F, H $>$}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_dynamic_mesh}{C\+Dynamic\+Mesh} class \+: Dynamic mesh.  
+
+
+
+
+{\ttfamily \#include $<$Dynamic\+Mesh.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+Lib\+:\+:C\+Dynamic\+Mesh$<$ V, E, F, H $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{class_mesh_lib_1_1_c_dynamic_mesh__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Dynamic\+Mesh$<$ V, E, F, H $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{class_mesh_lib_1_1_c_dynamic_mesh__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_a18dd6f395ba9e07c4d8372fd0a97e6ed}{C\+Dynamic\+Mesh} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_a69bc3754b47de04cbaf986b2544593a3}{$\sim$\+C\+Dynamic\+Mesh} ()
+\item 
+V $\ast$ \hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_a9ddf90db68fb55fe7848e881b9ecef23}{split\+Face} (F $\ast$p\+Face)
+\item 
+V $\ast$ \hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_aa793d46c1ee19c3e40fe5c4f9b31b2e8}{split\+Edge} (E $\ast$p\+Edge)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_a6a24a61f7b4bb4a48427a4149a24d630}{swap\+Edge} (E $\ast$edge)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_ae069e367095757cc53bf9218aad6ef06}{\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge} (H $\ast$he0, H $\ast$he1, E $\ast$e)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_aeb1cf2cd71ab4f8845c3d5204a0ca93d}{m\+\_\+vertex\+\_\+id}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_dynamic_mesh_af59ef3c93fa120fba2165f43f04c80ad}{m\+\_\+face\+\_\+id}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class V, class E, class F, class H$>$\\*
+class Mesh\+Lib\+::\+C\+Dynamic\+Mesh$<$ V, E, F, H $>$}
+
+\hyperlink{class_mesh_lib_1_1_c_dynamic_mesh}{C\+Dynamic\+Mesh} class \+: Dynamic mesh. 
+
+Mesh supports Face\+Slit, Edge\+Slit, Edge\+Swap operations 
+
+Definition at line 37 of file Dynamic\+Mesh.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!C\+Dynamic\+Mesh@{C\+Dynamic\+Mesh}}
+\index{C\+Dynamic\+Mesh@{C\+Dynamic\+Mesh}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{C\+Dynamic\+Mesh()}{CDynamicMesh()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ V, E, F, H $>$\+::{\bf C\+Dynamic\+Mesh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_a18dd6f395ba9e07c4d8372fd0a97e6ed}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_a18dd6f395ba9e07c4d8372fd0a97e6ed}
+\hyperlink{class_mesh_lib_1_1_c_dynamic_mesh}{C\+Dynamic\+Mesh} constructor 
+
+Definition at line 41 of file Dynamic\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!````~C\+Dynamic\+Mesh@{$\sim$\+C\+Dynamic\+Mesh}}
+\index{````~C\+Dynamic\+Mesh@{$\sim$\+C\+Dynamic\+Mesh}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Dynamic\+Mesh()}{~CDynamicMesh()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ V, E, F, H $>$\+::$\sim${\bf C\+Dynamic\+Mesh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_a69bc3754b47de04cbaf986b2544593a3}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_a69bc3754b47de04cbaf986b2544593a3}
+\hyperlink{class_mesh_lib_1_1_c_dynamic_mesh}{C\+Dynamic\+Mesh} destructor 
+
+Definition at line 75 of file Dynamic\+Mesh.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge@{\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge}}
+\index{\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge@{\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge(\+H $\ast$he0, H $\ast$he1, E $\ast$e)}{__attach_halfedge_to_edge(H *he0, H *he1, E *e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::\+\_\+\+\_\+attach\+\_\+halfedge\+\_\+to\+\_\+edge (
+\begin{DoxyParamCaption}
+\item[{H $\ast$}]{he0, }
+\item[{H $\ast$}]{he1, }
+\item[{E $\ast$}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_ae069e367095757cc53bf9218aad6ef06}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_ae069e367095757cc53bf9218aad6ef06}
+attach halfeges to an edge 
+\begin{DoxyParams}{Parameters}
+{\em he0,he1} & the halfedges \\
+\hline
+{\em e} & edge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 473 of file Dynamic\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!split\+Edge@{split\+Edge}}
+\index{split\+Edge@{split\+Edge}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{split\+Edge(\+E $\ast$p\+Edge)}{splitEdge(E *pEdge)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::split\+Edge (
+\begin{DoxyParamCaption}
+\item[{E $\ast$}]{p\+Edge}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_aa793d46c1ee19c3e40fe5c4f9b31b2e8}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_aa793d46c1ee19c3e40fe5c4f9b31b2e8}
+Split one edge to two edges 
+\begin{DoxyParams}{Parameters}
+{\em p\+Edge} & the edge to be split \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 330 of file Dynamic\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!split\+Face@{split\+Face}}
+\index{split\+Face@{split\+Face}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{split\+Face(\+F $\ast$p\+Face)}{splitFace(F *pFace)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::split\+Face (
+\begin{DoxyParamCaption}
+\item[{F $\ast$}]{p\+Face}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_a9ddf90db68fb55fe7848e881b9ecef23}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_a9ddf90db68fb55fe7848e881b9ecef23}
+Split a Face to three small faces 
+\begin{DoxyParams}{Parameters}
+{\em p\+Face} & the face to be split \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 86 of file Dynamic\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!swap\+Edge@{swap\+Edge}}
+\index{swap\+Edge@{swap\+Edge}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{swap\+Edge(\+E $\ast$edge)}{swapEdge(E *edge)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ void {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::swap\+Edge (
+\begin{DoxyParamCaption}
+\item[{E $\ast$}]{edge}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_a6a24a61f7b4bb4a48427a4149a24d630}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_a6a24a61f7b4bb4a48427a4149a24d630}
+Swap an edge 
+\begin{DoxyParams}{Parameters}
+{\em edge} & the edge to be swapped \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 209 of file Dynamic\+Mesh.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!m\+\_\+face\+\_\+id@{m\+\_\+face\+\_\+id}}
+\index{m\+\_\+face\+\_\+id@{m\+\_\+face\+\_\+id}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+face\+\_\+id}{m_face_id}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ int {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ V, E, F, H $>$\+::m\+\_\+face\+\_\+id\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_af59ef3c93fa120fba2165f43f04c80ad}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_af59ef3c93fa120fba2165f43f04c80ad}
+next face id 
+
+Definition at line 68 of file Dynamic\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}!m\+\_\+vertex\+\_\+id@{m\+\_\+vertex\+\_\+id}}
+\index{m\+\_\+vertex\+\_\+id@{m\+\_\+vertex\+\_\+id}!Mesh\+Lib\+::\+C\+Dynamic\+Mesh@{Mesh\+Lib\+::\+C\+Dynamic\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+vertex\+\_\+id}{m_vertex_id}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V , class E , class F , class H $>$ int {\bf Mesh\+Lib\+::\+C\+Dynamic\+Mesh}$<$ V, E, F, H $>$\+::m\+\_\+vertex\+\_\+id\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_dynamic_mesh_aeb1cf2cd71ab4f8845c3d5204a0ca93d}{}\label{class_mesh_lib_1_1_c_dynamic_mesh_aeb1cf2cd71ab4f8845c3d5204a0ca93d}
+next vertex id 
+
+Definition at line 66 of file Dynamic\+Mesh.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{_dynamic_mesh_8h}{Dynamic\+Mesh.\+h}\end{DoxyCompactItemize}

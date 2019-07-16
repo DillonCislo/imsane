@@ -1,0 +1,13 @@
+<map id="MeshLib/algorithm/Structure/Structure.h" name="MeshLib/algorithm/Structure/Structure.h">
+<area shape="rect" id="node5" href="$_base_mesh_8h.html" title="Base Mesh Class for all types of Mesh Classes. " alt="" coords="979,244,1163,271"/>
+<area shape="rect" id="node18" href="$_vertex_8h.html" title="Base class of vertex. " alt="" coords="328,169,488,196"/>
+<area shape="rect" id="node20" href="$_half_edge_8h.html" title="Base class of HalfEdge. " alt="" coords="51,244,146,271"/>
+<area shape="rect" id="node21" href="$_edge_8h.html" title="Base class of edge. " alt="" coords="63,319,134,345"/>
+<area shape="rect" id="node22" href="$_face_8h.html" title="Base class of face. " alt="" coords="446,244,597,271"/>
+<area shape="rect" id="node23" href="$iterators_8h.html" title="../../core/Mesh/iterators.h" alt="" coords="1014,169,1183,196"/>
+<area shape="rect" id="node24" href="$boundary_8h.html" title="../../core/Mesh/boundary.h" alt="" coords="1198,95,1373,121"/>
+<area shape="rect" id="node26" href="$parser_8h.html" title="Parse the trait strings of vertex, edge, halfedge , face etc. " alt="" coords="673,244,837,271"/>
+<area shape="rect" id="node11" href="$_point_8h.html" title="Three dimensional point class. " alt="" coords="412,319,548,345"/>
+<area shape="rect" id="node14" href="$_point2_8h.html" title="Two dimensional point class. " alt="" coords="674,319,817,345"/>
+<area shape="rect" id="node15" href="$strutil_8h.html" title="std::string utilities " alt="" coords="1109,319,1227,345"/>
+</map>

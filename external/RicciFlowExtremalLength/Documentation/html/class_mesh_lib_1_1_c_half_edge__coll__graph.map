@@ -1,0 +1,7 @@
+<map id="MeshLib::CHalfEdge" name="MeshLib::CHalfEdge">
+<area shape="rect" id="node2" href="$class_mesh_lib_1_1_c_edge.html" title="CEdge class, which is the base class of all kinds of edge classes. " alt="" coords="644,112,763,139"/>
+<area shape="rect" id="node3" href="$class_mesh_lib_1_1_c_vertex.html" title="CVertex class, which is the base class of all kinds of vertex classes. " alt="" coords="181,112,308,139"/>
+<area shape="rect" id="node6" href="$class_mesh_lib_1_1_c_face.html" title="CFace base class of all kinds of face classes. " alt="" coords="456,112,575,139"/>
+<area shape="rect" id="node4" href="$class_mesh_lib_1_1_c_point.html" title="CPoint class, three dimensional point. " alt="" coords="5,7,124,33"/>
+<area shape="rect" id="node5" href="$class_mesh_lib_1_1_c_point2.html" title="CPoint2 class, two dimensional point. " alt="" coords="148,7,275,33"/>
+</map>

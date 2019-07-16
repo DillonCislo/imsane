@@ -1,0 +1,179 @@
+\hypertarget{class_mesh_lib_1_1_c_face}{}\section{Mesh\+Lib\+:\+:C\+Face Class Reference}
+\label{class_mesh_lib_1_1_c_face}\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} base class of all kinds of face classes.  
+
+
+
+
+{\ttfamily \#include $<$Face.\+h$>$}
+
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Face\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_lib_1_1_c_face__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_face_a3425979e07f04a516148a3e113ac7eab}{C\+Face} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_face_a4146152b7902dad419181da0d23e74cb}{$\sim$\+C\+Face} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$\& \hyperlink{class_mesh_lib_1_1_c_face_a6142ef04a531c8d364452db5ac3c7ba2}{halfedge} ()
+\item 
+int \& \hyperlink{class_mesh_lib_1_1_c_face_ae4eb0aaf069c3b17b324acfac47a66f0}{id} ()
+\item 
+const int \hyperlink{class_mesh_lib_1_1_c_face_a93c2cba1e9d3b986613b15e0e333909a}{id} () const 
+\item 
+std\+::string \& \hyperlink{class_mesh_lib_1_1_c_face_a2bedc65d146d2600d2c47d0aeb4233bb}{string} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_face_aa367b3ce68f1df45aa7dfdbd8e4ad1cb}{\+\_\+to\+\_\+string} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_face_a1470ee81803c0ca6a4cd29fcb4bc4925}{\+\_\+from\+\_\+string} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_face_ac8e8d0453e5e9882dc1ccbffea98734b}{m\+\_\+id}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_face_a583616821868cfcafc5cdfd1c5320f20}{m\+\_\+halfedge}
+\item 
+std\+::string \hyperlink{class_mesh_lib_1_1_c_face_afeb880ed9fa65f4e73f8f62c96ce347c}{m\+\_\+string}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} base class of all kinds of face classes. 
+
+Definition at line 24 of file Face.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!C\+Face@{C\+Face}}
+\index{C\+Face@{C\+Face}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{C\+Face()}{CFace()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Face\+::\+C\+Face (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_a3425979e07f04a516148a3e113ac7eab}{}\label{class_mesh_lib_1_1_c_face_a3425979e07f04a516148a3e113ac7eab}
+\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} constructor 
+
+Definition at line 30 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!````~C\+Face@{$\sim$\+C\+Face}}
+\index{````~C\+Face@{$\sim$\+C\+Face}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Face()}{~CFace()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Face\+::$\sim$\+C\+Face (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_a4146152b7902dad419181da0d23e74cb}{}\label{class_mesh_lib_1_1_c_face_a4146152b7902dad419181da0d23e74cb}
+\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} destructor 
+
+Definition at line 34 of file Face.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}}
+\index{\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{\+\_\+from\+\_\+string()}{_from_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Face\+::\+\_\+from\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_a1470ee81803c0ca6a4cd29fcb4bc4925}{}\label{class_mesh_lib_1_1_c_face_a1470ee81803c0ca6a4cd29fcb4bc4925}
+read face traits from the string. 
+
+Definition at line 58 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}}
+\index{\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{\+\_\+to\+\_\+string()}{_to_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Face\+::\+\_\+to\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_aa367b3ce68f1df45aa7dfdbd8e4ad1cb}{}\label{class_mesh_lib_1_1_c_face_aa367b3ce68f1df45aa7dfdbd8e4ad1cb}
+Convert face traits to the string. 
+
+Definition at line 54 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!halfedge@{halfedge}}
+\index{halfedge@{halfedge}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{halfedge()}{halfedge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ \& Mesh\+Lib\+::\+C\+Face\+::halfedge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_a6142ef04a531c8d364452db5ac3c7ba2}{}\label{class_mesh_lib_1_1_c_face_a6142ef04a531c8d364452db5ac3c7ba2}
+One of the halfedges attaching to the current face. 
+
+Definition at line 38 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!id@{id}}
+\index{id@{id}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{id()}{id()}}]{\setlength{\rightskip}{0pt plus 5cm}int\& Mesh\+Lib\+::\+C\+Face\+::id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_ae4eb0aaf069c3b17b324acfac47a66f0}{}\label{class_mesh_lib_1_1_c_face_ae4eb0aaf069c3b17b324acfac47a66f0}
+The reference to the current face id 
+
+Definition at line 42 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!id@{id}}
+\index{id@{id}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{id() const }{id() const }}]{\setlength{\rightskip}{0pt plus 5cm}const int Mesh\+Lib\+::\+C\+Face\+::id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_a93c2cba1e9d3b986613b15e0e333909a}{}\label{class_mesh_lib_1_1_c_face_a93c2cba1e9d3b986613b15e0e333909a}
+The value of the current face id. 
+
+Definition at line 46 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!string@{string}}
+\index{string@{string}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{string()}{string()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string\& Mesh\+Lib\+::\+C\+Face\+::string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_face_a2bedc65d146d2600d2c47d0aeb4233bb}{}\label{class_mesh_lib_1_1_c_face_a2bedc65d146d2600d2c47d0aeb4233bb}
+The string of the current face. 
+
+Definition at line 50 of file Face.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!m\+\_\+halfedge@{m\+\_\+halfedge}}
+\index{m\+\_\+halfedge@{m\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{m\+\_\+halfedge}{m_halfedge}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ Mesh\+Lib\+::\+C\+Face\+::m\+\_\+halfedge\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_face_a583616821868cfcafc5cdfd1c5320f20}{}\label{class_mesh_lib_1_1_c_face_a583616821868cfcafc5cdfd1c5320f20}
+One halfedge attaching to the current face. 
+
+Definition at line 67 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!m\+\_\+id@{m\+\_\+id}}
+\index{m\+\_\+id@{m\+\_\+id}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{m\+\_\+id}{m_id}}]{\setlength{\rightskip}{0pt plus 5cm}int Mesh\+Lib\+::\+C\+Face\+::m\+\_\+id\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_face_ac8e8d0453e5e9882dc1ccbffea98734b}{}\label{class_mesh_lib_1_1_c_face_ac8e8d0453e5e9882dc1ccbffea98734b}
+id of the current face 
+
+Definition at line 58 of file Face.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}!m\+\_\+string@{m\+\_\+string}}
+\index{m\+\_\+string@{m\+\_\+string}!Mesh\+Lib\+::\+C\+Face@{Mesh\+Lib\+::\+C\+Face}}
+\subsubsection[{\texorpdfstring{m\+\_\+string}{m_string}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Mesh\+Lib\+::\+C\+Face\+::m\+\_\+string\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_face_afeb880ed9fa65f4e73f8f62c96ce347c}{}\label{class_mesh_lib_1_1_c_face_afeb880ed9fa65f4e73f8f62c96ce347c}
+String of the current face. 
+
+Definition at line 71 of file Face.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{_face_8h}{Face.\+h}\end{DoxyCompactItemize}

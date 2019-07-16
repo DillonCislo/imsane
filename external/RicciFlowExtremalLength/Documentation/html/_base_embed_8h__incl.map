@@ -1,0 +1,15 @@
+<map id="MeshLib/algorithm/Riemannian/RicciFlow/BaseEmbed.h" name="MeshLib/algorithm/Riemannian/RicciFlow/BaseEmbed.h">
+<area shape="rect" id="node4" href="$_ricci_flow_mesh_8h.html" title="Mesh for Ricci Flow. " alt="" coords="864,95,995,121"/>
+<area shape="rect" id="node6" href="$_base_mesh_8h.html" title="Base Mesh Class for all types of Mesh Classes. " alt="" coords="599,437,718,479"/>
+<area shape="rect" id="node19" href="$_vertex_8h.html" title="Base class of vertex. " alt="" coords="1119,348,1238,389"/>
+<area shape="rect" id="node21" href="$_half_edge_8h.html" title="Base class of HalfEdge. " alt="" coords="1402,445,1497,471"/>
+<area shape="rect" id="node22" href="$_edge_8h.html" title="Base class of edge. " alt="" coords="1691,527,1762,553"/>
+<area shape="rect" id="node23" href="$_face_8h.html" title="Base class of face. " alt="" coords="1521,437,1639,479"/>
+<area shape="rect" id="node24" href="$iterators_8h.html" title="../../../core/Mesh\l/iterators.h" alt="" coords="626,348,745,389"/>
+<area shape="rect" id="node25" href="$boundary_8h.html" title="../../../core/Mesh\l/boundary.h" alt="" coords="447,259,566,300"/>
+<area shape="rect" id="node27" href="$parser_8h.html" title="Parse the trait strings of vertex, edge, halfedge , face etc. " alt="" coords="1016,437,1141,479"/>
+<area shape="rect" id="node28" href="$traits__io_8h.html" title="../../../core/Parser\l/traits_io.h" alt="" coords="805,169,931,211"/>
+<area shape="rect" id="node12" href="$_point_8h.html" title="Three dimensional point class. " alt="" coords="1075,527,1211,553"/>
+<area shape="rect" id="node15" href="$_point2_8h.html" title="Two dimensional point class. " alt="" coords="794,527,937,553"/>
+<area shape="rect" id="node16" href="$strutil_8h.html" title="std::string utilities " alt="" coords="599,527,718,553"/>
+</map>

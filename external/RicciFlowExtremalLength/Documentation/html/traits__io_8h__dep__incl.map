@@ -1,0 +1,8 @@
+<map id="MeshLib/core/Parser/traits_io.h" name="MeshLib/core/Parser/traits_io.h">
+<area shape="rect" id="node2" href="$_ricci_flow_mesh_8h.html" title="Mesh for Ricci Flow. " alt="" coords="213,95,415,136"/>
+<area shape="rect" id="node3" href="$_base_embed_8h.html" title="Isometrically embed a mesh with canonical metric onto the canonical domain. " alt="" coords="5,184,207,225"/>
+<area shape="rect" id="node4" href="$_euclidean_embed_8h.html" title="Isometrically embed a mesh with flat metric onto the plane. " alt="" coords="27,273,228,315"/>
+<area shape="rect" id="node5" href="$_base_ricci_flow_8h.html" title="Base class for Ricci flow algorithm. " alt="" coords="283,184,484,225"/>
+<area shape="rect" id="node6" href="$_tangential_ricci_flow_8h.html" title="General Euclidean Ricci flow algorithm. " alt="" coords="344,273,561,315"/>
+<area shape="rect" id="node7" href="$_tangential_ricci_extremal_length_8h.html" title="Euclidean Tangential Ricci flow for Extremal Length. " alt="" coords="337,363,568,419"/>
+</map>

@@ -1,0 +1,14 @@
+\form#0:$ edge inversive distance $
+\form#1:$, intersection angle is $
+\form#2:$ w(e) = \cot \alpha + \cot \beta $
+\form#3:$\alpha,\beta$
+\form#4:$e$
+\form#5:$ w(e) = \cot \alpha $
+\form#6:$(x,y,z)$
+\form#7:$\sqrt{x^2+y^2+z^2}$
+\form#8:\[ \left| \begin{array}{ccc} x_1& y_1 & z_1\\ x_2 &y_2 & z_2\\ \mathbf{e}_1 & \mathbf{e}_2 & \mathbf{e}_3\\ \end{array} \right| \]
+\form#9:$(x,y)$
+\form#10:$x^2+y^2$
+\form#11:$ \sqrt{x^2+y^2}$
+\form#12:\[ \left| \begin{array}{cc} x_1 & y_1\\ x_2 & y_2 \\ \end{array} \right| \]
+\form#13:$\sqrt{x^2+y^2}$

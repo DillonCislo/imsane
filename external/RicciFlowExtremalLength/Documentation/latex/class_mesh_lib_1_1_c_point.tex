@@ -1,0 +1,392 @@
+\hypertarget{class_mesh_lib_1_1_c_point}{}\section{Mesh\+Lib\+:\+:C\+Point Class Reference}
+\label{class_mesh_lib_1_1_c_point}\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} class, three dimensional point.  
+
+
+
+
+{\ttfamily \#include $<$Point.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point_afd9d24bcd526be02f303638615d92eaa}{C\+Point} (double x, double y, double z)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point_a58050a0f928a050c55b217b140cae020}{C\+Point} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point_acdee60ddbc7720703decda2852fd5bce}{$\sim$\+C\+Point} ()
+\item 
+double \& \hyperlink{class_mesh_lib_1_1_c_point_a6b35e4485ee7e7692a51bc4dc4b6d08b}{operator\mbox{[}$\,$\mbox{]}} (int i)
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_point_a2f0ab3ed8c912a0d7fc54838437bdf1d}{operator()} (int i) const 
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_point_aa47b93aa40b7b0877663cfbd21e3cd12}{operator\mbox{[}$\,$\mbox{]}} (int i) const 
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_point_a90426ea8915a681f6aee9deae533b386}{norm} () const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \& \hyperlink{class_mesh_lib_1_1_c_point_aecb85b42cf883a67ee82f4477c45f410}{operator+=} (const \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \&p)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \& \hyperlink{class_mesh_lib_1_1_c_point_a5cf5a4600a7304fdc421d92b3b314aa0}{operator-\/=} (const \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \&p)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \& \hyperlink{class_mesh_lib_1_1_c_point_a6ca5c0227cabeb0ee008695ae4f3afec}{operator$\ast$=} (const double s)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \& \hyperlink{class_mesh_lib_1_1_c_point_a17cc24c674f62fa9c9e2ff521229e64b}{operator/=} (const double s)
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_point_a83d9eefdfa825918e34e473aade76165}{operator$\ast$} (const \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \&p) const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_point_a407873256e1bb467de5086e534f1bb72}{operator+} (const \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \&p) const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_point_ab035c15771d3a659a58ff34a79300587}{operator-\/} (const \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \&p) const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_point_a515a0754db8513a1a64ff278f540406d}{operator$\ast$} (const double s) const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_point_a9a9d7522d2dcd89a0bfdc5a0d6ddd5f2}{operator/} (const double s) const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_point_adf596ee4ed723ce49729acf4fb9e8ee0}{operator$^\wedge$} (const \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \&p2) const 
+\item 
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} \hyperlink{class_mesh_lib_1_1_c_point_aa96a54b74045e251e06e068ac734534f}{operator-\/} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_point_aabfccf1912d5b44eab72f6f2e5bf3b12}{v} \mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} class, three dimensional point. 
+
+Three dimensional point or vector $(x,y,z)$, inner product, cross product, scale multiplication etc. 
+
+Definition at line 25 of file Point.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!C\+Point@{C\+Point}}
+\index{C\+Point@{C\+Point}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{C\+Point(double x, double y, double z)}{CPoint(double x, double y, double z)}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Point\+::\+C\+Point (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_afd9d24bcd526be02f303638615d92eaa}{}\label{class_mesh_lib_1_1_c_point_afd9d24bcd526be02f303638615d92eaa}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} constructor, specifying $(x,y,z)$ 
+
+Definition at line 31 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!C\+Point@{C\+Point}}
+\index{C\+Point@{C\+Point}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{C\+Point()}{CPoint()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Point\+::\+C\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a58050a0f928a050c55b217b140cae020}{}\label{class_mesh_lib_1_1_c_point_a58050a0f928a050c55b217b140cae020}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} default constructor, initialized as (0,0,0) 
+
+Definition at line 35 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!````~C\+Point@{$\sim$\+C\+Point}}
+\index{````~C\+Point@{$\sim$\+C\+Point}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Point()}{~CPoint()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Point\+::$\sim$\+C\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_acdee60ddbc7720703decda2852fd5bce}{}\label{class_mesh_lib_1_1_c_point_acdee60ddbc7720703decda2852fd5bce}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} destructor 
+
+Definition at line 39 of file Point.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!norm@{norm}}
+\index{norm@{norm}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{norm() const }{norm() const }}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Point\+::norm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a90426ea8915a681f6aee9deae533b386}{}\label{class_mesh_lib_1_1_c_point_a90426ea8915a681f6aee9deae533b386}
+norm of the \hyperlink{class_mesh_lib_1_1_c_point}{C\+Point} $\sqrt{x^2+y^2+z^2}$ 
+
+Definition at line 64 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator()@{operator()}}
+\index{operator()@{operator()}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator()(int i) const }{operator()(int i) const }}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Point\+::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a2f0ab3ed8c912a0d7fc54838437bdf1d}{}\label{class_mesh_lib_1_1_c_point_a2f0ab3ed8c912a0d7fc54838437bdf1d}
+constant (x,y,z) value 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point}\mbox{[}i\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator$\ast$(const C\+Point \&p) const }{operator*(const CPoint &p) const }}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Point\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\+Point} \&}]{p}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a83d9eefdfa825918e34e473aade76165}{}\label{class_mesh_lib_1_1_c_point_a83d9eefdfa825918e34e473aade76165}
+dot product 
+\begin{DoxyParams}{Parameters}
+{\em p} & another point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+dot product of current point with p. 
+\end{DoxyReturn}
+
+
+Definition at line 98 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator$\ast$(const double s) const }{operator*(const double s) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Point\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const double}]{s}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a515a0754db8513a1a64ff278f540406d}{}\label{class_mesh_lib_1_1_c_point_a515a0754db8513a1a64ff278f540406d}
+Multiply by a scalar 
+\begin{DoxyParams}{Parameters}
+{\em s} & scalar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current point is multipolied by s. 
+\end{DoxyReturn}
+
+
+Definition at line 128 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator$\ast$=(const double s)}{operator*=(const double s)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point}\& Mesh\+Lib\+::\+C\+Point\+::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{const double}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a6ca5c0227cabeb0ee008695ae4f3afec}{}\label{class_mesh_lib_1_1_c_point_a6ca5c0227cabeb0ee008695ae4f3afec}
+Multiply by a scalar 
+\begin{DoxyParams}{Parameters}
+{\em s} & scalar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current point is multipolied by s. 
+\end{DoxyReturn}
+
+
+Definition at line 84 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator+@{operator+}}
+\index{operator+@{operator+}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator+(const C\+Point \&p) const }{operator+(const CPoint &p) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Point\+::operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\+Point} \&}]{p}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a407873256e1bb467de5086e534f1bb72}{}\label{class_mesh_lib_1_1_c_point_a407873256e1bb467de5086e534f1bb72}
+Add another point to the current point 
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cuccrent point is added by p. 
+\end{DoxyReturn}
+
+
+Definition at line 108 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator+=(const C\+Point \&p)}{operator+=(const CPoint &p)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point}\& Mesh\+Lib\+::\+C\+Point\+::operator+= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\+Point} \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_aecb85b42cf883a67ee82f4477c45f410}{}\label{class_mesh_lib_1_1_c_point_aecb85b42cf883a67ee82f4477c45f410}
+Add another point to the current point 
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cuccrent point is added by p. 
+\end{DoxyReturn}
+
+
+Definition at line 71 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator-\/(const C\+Point \&p) const }{operator-(const CPoint &p) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Point\+::operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\+Point} \&}]{p}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_ab035c15771d3a659a58ff34a79300587}{}\label{class_mesh_lib_1_1_c_point_ab035c15771d3a659a58ff34a79300587}
+Substract another point to the current point 
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cuccrent point is substracted by p. 
+\end{DoxyReturn}
+
+
+Definition at line 118 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator-\/() const }{operator-() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Point\+::operator-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_aa96a54b74045e251e06e068ac734534f}{}\label{class_mesh_lib_1_1_c_point_aa96a54b74045e251e06e068ac734534f}
+negate the point \begin{DoxyReturn}{Returns}
+the negative of the current point 
+\end{DoxyReturn}
+
+
+Definition at line 170 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator-\/=(const C\+Point \&p)}{operator-=(const CPoint &p)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point}\& Mesh\+Lib\+::\+C\+Point\+::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\+Point} \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a5cf5a4600a7304fdc421d92b3b314aa0}{}\label{class_mesh_lib_1_1_c_point_a5cf5a4600a7304fdc421d92b3b314aa0}
+Substract another point to the current point 
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cuccrent point is substracted by p. 
+\end{DoxyReturn}
+
+
+Definition at line 77 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator/@{operator/}}
+\index{operator/@{operator/}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator/(const double s) const }{operator/(const double s) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Point\+::operator/ (
+\begin{DoxyParamCaption}
+\item[{const double}]{s}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a9a9d7522d2dcd89a0bfdc5a0d6ddd5f2}{}\label{class_mesh_lib_1_1_c_point_a9a9d7522d2dcd89a0bfdc5a0d6ddd5f2}
+Divide by a scalar 
+\begin{DoxyParams}{Parameters}
+{\em s} & scalar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current point is divided by s. 
+\end{DoxyReturn}
+
+
+Definition at line 138 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator/=(const double s)}{operator/=(const double s)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point}\& Mesh\+Lib\+::\+C\+Point\+::operator/= (
+\begin{DoxyParamCaption}
+\item[{const double}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a17cc24c674f62fa9c9e2ff521229e64b}{}\label{class_mesh_lib_1_1_c_point_a17cc24c674f62fa9c9e2ff521229e64b}
+Divide by a scalar 
+\begin{DoxyParams}{Parameters}
+{\em s} & scalar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current point is divided by s. 
+\end{DoxyReturn}
+
+
+Definition at line 90 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator[](int i)}{operator[](int i)}}]{\setlength{\rightskip}{0pt plus 5cm}double\& Mesh\+Lib\+::\+C\+Point\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_a6b35e4485ee7e7692a51bc4dc4b6d08b}{}\label{class_mesh_lib_1_1_c_point_a6b35e4485ee7e7692a51bc4dc4b6d08b}
+reference to $(x,y,z)$ value 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point}\mbox{[}i\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 46 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator[](int i) const }{operator[](int i) const }}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Point\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_aa47b93aa40b7b0877663cfbd21e3cd12}{}\label{class_mesh_lib_1_1_c_point_aa47b93aa40b7b0877663cfbd21e3cd12}
+constant $(x,y,z)$ value 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_mesh_lib_1_1_c_point}{C\+Point}\mbox{[}i\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file Point.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!operator$^\wedge$@{operator$^\wedge$}}
+\index{operator$^\wedge$@{operator$^\wedge$}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{operator$^\wedge$(const C\+Point \&p2) const }{operator^(const CPoint &p2) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Point} Mesh\+Lib\+::\+C\+Point\+::operator$^\wedge$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\+Point} \&}]{p2}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_point_adf596ee4ed723ce49729acf4fb9e8ee0}{}\label{class_mesh_lib_1_1_c_point_adf596ee4ed723ce49729acf4fb9e8ee0}
+Cross product 
+\begin{DoxyParams}{Parameters}
+{\em p2} & another point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cross product of the current point with p2. \[ \left| \begin{array}{ccc} x_1& y_1 & z_1\\ x_2 &y_2 & z_2\\ \mathbf{e}_1 & \mathbf{e}_2 & \mathbf{e}_3\\ \end{array} \right| \] 
+\end{DoxyReturn}
+
+
+Definition at line 158 of file Point.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}!v@{v}}
+\index{v@{v}!Mesh\+Lib\+::\+C\+Point@{Mesh\+Lib\+::\+C\+Point}}
+\subsubsection[{\texorpdfstring{v}{v}}]{\setlength{\rightskip}{0pt plus 5cm}double Mesh\+Lib\+::\+C\+Point\+::v\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_point_aabfccf1912d5b44eab72f6f2e5bf3b12}{}\label{class_mesh_lib_1_1_c_point_aabfccf1912d5b44eab72f6f2e5bf3b12}
+$(x,y,z)$ value 
+
+Definition at line 174 of file Point.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Geometry/\hyperlink{_point_8h}{Point.\+h}\end{DoxyCompactItemize}

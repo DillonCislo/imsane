@@ -1,0 +1,1415 @@
+\hypertarget{class_mesh_lib_1_1_c_base_mesh}{}\section{Mesh\+Lib\+:\+:C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_c_base_mesh}\index{Mesh\+Lib\+::\+C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$@{Mesh\+Lib\+::\+C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh}, base class for all types of mesh classes.  
+
+
+
+
+{\ttfamily \#include $<$Base\+Mesh.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} $\ast$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex}
+\item 
+typedef \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge}
+\item 
+typedef \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge}
+\item 
+typedef \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} $\ast$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ac0fb8b8bec22dcfc33d694bae1905e9e}{C\+Base\+Mesh} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a875ca1255924a0ce68566150d4c55e76}{$\sim$\+C\+Base\+Mesh} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_a65338968dc92c9d326956a9a60d08f35}{copy} (\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh} \&mesh)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad711e992ab1cd7371690eba2b6292b35}{read\+\_\+obj} (const char $\ast$filename)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_af885e691fce7e793d5d4185ea286d1cc}{write\+\_\+obj} (const char $\ast$output)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_ace7e07c6b5f0d07cdfda11d3f73139f4}{read\+\_\+m} (const char $\ast$input)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_aac9e4fdd74de34f44e8ac7afad00c322}{write\+\_\+m} (const char $\ast$output)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_a15db6845a5ce5460a92a6afb0fcd1a31}{read\+\_\+off} (const char $\ast$input)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_a1ec12eff25a713eb43d2cdef1b452743}{write\+\_\+off} (const char $\ast$output)
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_base_mesh_a180ba1fbde1e68a4a2201928e6573dc7}{num\+Vertices} ()
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_base_mesh_a59246eb0edbe1ad11f0e6ecb41444135}{num\+Edges} ()
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_base_mesh_ac750e49625e3ebbc50a135f77cbbdf87}{num\+Faces} ()
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_base_mesh_a74e917019ff789ac7e4e402de81cbe94}{is\+Boundary} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_base_mesh_a9cd94b0e1dd28c2aecce5c15975e0bd8}{is\+Boundary} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e)
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_base_mesh_a8d60d481e391e80b3ef710811fe83352}{is\+Boundary} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_af03a301faaed2e2ea23ddca3b96a8b23}{id\+Vertex} (int id)
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_base_mesh_a5f2f3d6715095a364f390321868aaa8a}{vertex\+Id} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} \hyperlink{class_mesh_lib_1_1_c_base_mesh_aad0fd30815bc0a4b414e9ad7b9d6c81f}{id\+Face} (int id)
+\item 
+int \hyperlink{class_mesh_lib_1_1_c_base_mesh_a721b0f334a34d5e6e23b99ba186f0606}{face\+Id} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} f)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ae8a58acc899cab99f651b0845250d311}{vertex\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v0, \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v1)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad43e40c6eef135e91d792ed9f4dfbccf}{vertex\+Halfedge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v0, \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v1)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a94ac4a6222c7ec036d586b1beb5c81d6}{corner} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v, \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} f)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad244041d5d03f443128eec0c589e6a5c}{halfedge\+Face} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ab306584de9fde74de2038c0b0113d0a0}{halfedge\+Vertex} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a019148ba8fcdc951366bb297f7cf706d}{halfedge\+Target} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_aa3e98fc14c2dae20fd4fada65c5d13a2}{halfedge\+Source} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a172ab9124d1c0236a66e104fe1cce404}{halfedge\+Next} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a9d89bff17b86a5d8f0dc13f4eb7f5b6f}{halfedge\+Prev} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a4905fc3ff11c836e07395dd424d37ece}{halfedge\+Sym} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ada3fa889304e08af51bc8734512ab38e}{halfedge\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a46a10c439e6a7c13f0dec5bd62ce1565}{vertex\+Halfedge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} $>$ \& \hyperlink{class_mesh_lib_1_1_c_base_mesh_a73ddf93eff3bcb04f5657bb858403cc1}{vertex\+Edges} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ae5e25339a32fa919bb4c3600b03435f9}{edge\+Vertex1} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a348d1cc713885bf04be5684727dcbf21}{edge\+Vertex2} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} \hyperlink{class_mesh_lib_1_1_c_base_mesh_aa00d7192146f94c4853fb1b660a449c6}{edge\+Face1} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ab52850e9a6bb778f3372b925d01e2783}{edge\+Face2} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ab1bc4850fcc8e74cfdf16560ecb9558a}{edge\+Halfedge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e, int id)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a24655b5a0c6cba60c236c84def777e9a}{face\+Halfedge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} f)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a170cd5aafa0925c710c0d770789b2f6d}{vertex\+Most\+Clw\+Out\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ac0a1fd4394382d87004048cff63e2efe}{vertex\+Next\+Ccw\+Out\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a90c1bfc4bc7d1467c1d36dbc792d5481}{vertex\+Most\+Ccw\+Out\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_af2f1696c5e66668c8b1f3fe98b4c5d92}{vertex\+Next\+Clw\+Out\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a3966eec3d8d8a301bfaac27e380210fc}{vertex\+Most\+Clw\+In\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a721933757b5348b4c251d519e95a9a96}{vertex\+Next\+Ccw\+In\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a201002431101172f57da7ec748a2770e}{vertex\+Most\+Ccw\+In\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a29d3d0c0a41b3e54e777b9546cbd88f6}{vertex\+Next\+Clw\+In\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a093a262a9ac1648f4a9071b46858634f}{face\+Most\+Clw\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} face)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_ae935733ecd2d03ea094f93e5e174c775}{face\+Most\+Ccw\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} face)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a1ab17a733e28d417106f6e32be8a80cf}{face\+Next\+Ccw\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_af9fef8808ee51bfa9c3d043bde7b3db4}{face\+Next\+Clw\+Half\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{t\+Half\+Edge} he)
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_base_mesh_a2f1e00892d9f3c970937a2c20196d225}{edge\+Length} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} e)
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} $>$ \& \hyperlink{class_mesh_lib_1_1_c_base_mesh_ac4b7febcad1cc9a1539d517fb3d3c97a}{edges} ()
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} $>$ \& \hyperlink{class_mesh_lib_1_1_c_base_mesh_a8eb590668265fbcfe64f60567580c80f}{faces} ()
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} $>$ \& \hyperlink{class_mesh_lib_1_1_c_base_mesh_a28d9bd75c518e0e5f4c9fab50008b8aa}{vertices} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a04ee0f997dd274fdcf5ba6bc7b979569}{create\+Vertex} (int id=0)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a24b4f0bd948452d506631015deb704df}{create\+Edge} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v1, \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v2)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a5c1a9a5b45a58d766a664595f8c799b1}{create\+Face} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} v\mbox{[}$\,$\mbox{]}, int id)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} \hyperlink{class_mesh_lib_1_1_c_base_mesh_a2ae791035daa07ac116913aa6866e990}{create\+Face} (std\+::vector$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} $>$ \&v, int id)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_a1a037d32457d70216d0885c31a2d889a}{delete\+Face} (\hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} p\+Face)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_base_mesh_a7f7c5053e7254f0b3a9ed4869848885f}{label\+Boundary} (void)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_base_mesh_a36ba9fb8f3b289de348f1133ee6ab4bb}{m\+\_\+with\+\_\+texture}
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_base_mesh_a105ddccad80953028cc54cd317dee8a4}{m\+\_\+with\+\_\+normal}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned long long \hyperlink{class_mesh_lib_1_1_c_base_mesh_a09dbf8905e5b0dbe3c8353070f83ae81}{m\+\_\+input\+\_\+traits}
+\item 
+static unsigned long long \hyperlink{class_mesh_lib_1_1_c_base_mesh_af1a7720a0b51675ac91cc8c00d1959a3}{m\+\_\+output\+\_\+traits}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{t\+Edge} $>$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a5986476cf61a1ea5b5932f33302b6c10}{m\+\_\+edges}
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} $>$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a5738a63ce99209aa5085982ecc9ba50a}{m\+\_\+verts}
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} $>$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_a4699846e3f577e064c3b871183d8ba0a}{m\+\_\+faces}
+\item 
+std\+::map$<$ int, \hyperlink{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{t\+Vertex} $>$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad92d530f9eacd1eb2adef1770fd0ff80}{m\+\_\+map\+\_\+vert}
+\item 
+std\+::map$<$ int, \hyperlink{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{t\+Face} $>$ \hyperlink{class_mesh_lib_1_1_c_base_mesh_afdcd24f68c0ab83a6b172a64753b7482}{m\+\_\+map\+\_\+face}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$\\*
+class Mesh\+Lib\+::\+C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}
+
+\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh}, base class for all types of mesh classes. 
+
+This is the fundamental class for meshes. It includes a list of vertices, a list of edges, a list of faces. All the geometric objects are connected by pointers, vertex, edge, face are connected by halfedges. The mesh class has file IO functionalities, supporting .obj, .m and .off file formats. It offers Euler operators, each geometric primative can access its neighbors freely.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}} & vertex class, derived from \hyperlink{class_mesh_lib_1_1_c_vertex}{Mesh\+Lib\+::\+C\+Vertex} class \\
+\hline
+{\em \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}} & edge class, derived from \hyperlink{class_mesh_lib_1_1_c_edge}{Mesh\+Lib\+::\+C\+Edge} class \\
+\hline
+{\em \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}} & face class, derived from \hyperlink{class_mesh_lib_1_1_c_face}{Mesh\+Lib\+::\+C\+Face} class \\
+\hline
+{\em \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge}} & halfedge class, derived from \hyperlink{class_mesh_lib_1_1_c_half_edge}{Mesh\+Lib\+::\+C\+Half\+Edge} class \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 47 of file Base\+Mesh.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!t\+Edge@{t\+Edge}}
+\index{t\+Edge@{t\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{t\+Edge}{tEdge}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ typedef {\bf C\+Edge}$\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf t\+Edge}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}{}\label{class_mesh_lib_1_1_c_base_mesh_a966f6321c2cf92b849e77b931a36821b}
+
+
+Definition at line 53 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!t\+Face@{t\+Face}}
+\index{t\+Face@{t\+Face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{t\+Face}{tFace}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ typedef {\bf C\+Face}$\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf t\+Face}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}{}\label{class_mesh_lib_1_1_c_base_mesh_ad231546551e85dffb41c9aa9bcf5b86b}
+
+
+Definition at line 54 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!t\+Half\+Edge@{t\+Half\+Edge}}
+\index{t\+Half\+Edge@{t\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{t\+Half\+Edge}{tHalfEdge}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ typedef {\bf C\+Half\+Edge}$\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf t\+Half\+Edge}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}{}\label{class_mesh_lib_1_1_c_base_mesh_a30024aa977abb5ab248e7c87ba1ec109}
+
+
+Definition at line 52 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!t\+Vertex@{t\+Vertex}}
+\index{t\+Vertex@{t\+Vertex}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{t\+Vertex}{tVertex}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ typedef {\bf C\+Vertex}$\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf t\+Vertex}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}{}\label{class_mesh_lib_1_1_c_base_mesh_adcf412e8267910b50f3145d6416947da}
+
+
+Definition at line 51 of file Base\+Mesh.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!C\+Base\+Mesh@{C\+Base\+Mesh}}
+\index{C\+Base\+Mesh@{C\+Base\+Mesh}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{C\+Base\+Mesh()}{CBaseMesh()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf C\+Base\+Mesh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ac0fb8b8bec22dcfc33d694bae1905e9e}{}\label{class_mesh_lib_1_1_c_base_mesh_ac0fb8b8bec22dcfc33d694bae1905e9e}
+\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh} constructor. 
+
+Definition at line 60 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!````~C\+Base\+Mesh@{$\sim$\+C\+Base\+Mesh}}
+\index{````~C\+Base\+Mesh@{$\sim$\+C\+Base\+Mesh}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Base\+Mesh()}{~CBaseMesh()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::$\sim${\bf C\+Base\+Mesh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a875ca1255924a0ce68566150d4c55e76}{}\label{class_mesh_lib_1_1_c_base_mesh_a875ca1255924a0ce68566150d4c55e76}
+C\+Basemesh destructor
+
+\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh} destructor 
+
+Definition at line 890 of file Base\+Mesh.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!copy@{copy}}
+\index{copy@{copy}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{copy(\+C\+Base\+Mesh \&mesh)}{copy(CBaseMesh &mesh)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::copy (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$ \&}]{mesh}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a65338968dc92c9d326956a9a60d08f35}{}\label{class_mesh_lib_1_1_c_base_mesh_a65338968dc92c9d326956a9a60d08f35}
+Copy operator \index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!corner@{corner}}
+\index{corner@{corner}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{corner(t\+Vertex v, t\+Face f)}{corner(tVertex v, tFace f)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::corner (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v, }
+\item[{{\bf t\+Face}}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a94ac4a6222c7ec036d586b1beb5c81d6}{}\label{class_mesh_lib_1_1_c_base_mesh_a94ac4a6222c7ec036d586b1beb5c81d6}
+Access a halfedge by its target vertex, and attaching face. 
+\begin{DoxyParams}{Parameters}
+{\em v} & target vertex \\
+\hline
+{\em f} & attaching face \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+halfedge, whose target is v, attaching face is f. N\+U\+LL if no such an halfedge exists. 
+\end{DoxyReturn}
+
+
+Definition at line 756 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!create\+Edge@{create\+Edge}}
+\index{create\+Edge@{create\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{create\+Edge(t\+Vertex v1, t\+Vertex v2)}{createEdge(tVertex v1, tVertex v2)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::create\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v1, }
+\item[{{\bf t\+Vertex}}]{v2}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a24b4f0bd948452d506631015deb704df}{}\label{class_mesh_lib_1_1_c_base_mesh_a24b4f0bd948452d506631015deb704df}
+Create an edge 
+\begin{DoxyParams}{Parameters}
+{\em v1} & end vertex of the edge \\
+\hline
+{\em v2} & end vertex of the edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new edge 
+\end{DoxyReturn}
+
+
+Definition at line 1217 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!create\+Face@{create\+Face}}
+\index{create\+Face@{create\+Face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{create\+Face(t\+Vertex v[], int id)}{createFace(tVertex v[], int id)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Face} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::create\+Face (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a5c1a9a5b45a58d766a664595f8c799b1}{}\label{class_mesh_lib_1_1_c_base_mesh_a5c1a9a5b45a58d766a664595f8c799b1}
+Create a face 
+\begin{DoxyParams}{Parameters}
+{\em v} & an array of vertices \\
+\hline
+{\em id} & face id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new face 
+\end{DoxyReturn}
+
+
+Definition at line 1103 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!create\+Face@{create\+Face}}
+\index{create\+Face@{create\+Face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{create\+Face(std\+::vector$<$ t\+Vertex $>$ \&v, int id)}{createFace(std::vector< tVertex > &v, int id)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Face} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::create\+Face (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf t\+Vertex} $>$ \&}]{v, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a2ae791035daa07ac116913aa6866e990}{}\label{class_mesh_lib_1_1_c_base_mesh_a2ae791035daa07ac116913aa6866e990}
+Create a face 
+\begin{DoxyParams}{Parameters}
+{\em v} & an array of vertices \\
+\hline
+{\em id} & face id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new face 
+\end{DoxyReturn}
+
+
+Definition at line 2088 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!create\+Vertex@{create\+Vertex}}
+\index{create\+Vertex@{create\+Vertex}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{create\+Vertex(int id=0)}{createVertex(int id=0)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::create\+Vertex (
+\begin{DoxyParamCaption}
+\item[{int}]{id = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a04ee0f997dd274fdcf5ba6bc7b979569}{}\label{class_mesh_lib_1_1_c_base_mesh_a04ee0f997dd274fdcf5ba6bc7b979569}
+Create a vertex 
+\begin{DoxyParams}{Parameters}
+{\em id} & Vertex id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new vertex 
+\end{DoxyReturn}
+
+
+Definition at line 963 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!delete\+Face@{delete\+Face}}
+\index{delete\+Face@{delete\+Face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{delete\+Face(t\+Face p\+Face)}{deleteFace(tFace pFace)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::delete\+Face (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Face}}]{p\+Face}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a1a037d32457d70216d0885c31a2d889a}{}\label{class_mesh_lib_1_1_c_base_mesh_a1a037d32457d70216d0885c31a2d889a}
+delete one face 
+\begin{DoxyParams}{Parameters}
+{\em p\+Face} & the face to be deleted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1831 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edge\+Face1@{edge\+Face1}}
+\index{edge\+Face1@{edge\+Face1}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edge\+Face1(t\+Edge e)}{edgeFace1(tEdge e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Face} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edge\+Face1 (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_aa00d7192146f94c4853fb1b660a449c6}{}\label{class_mesh_lib_1_1_c_base_mesh_aa00d7192146f94c4853fb1b660a449c6}
+The first face attaching to an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the first face attaching to e. 
+\end{DoxyReturn}
+
+
+Definition at line 510 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edge\+Face2@{edge\+Face2}}
+\index{edge\+Face2@{edge\+Face2}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edge\+Face2(t\+Edge e)}{edgeFace2(tEdge e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Face} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edge\+Face2 (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ab52850e9a6bb778f3372b925d01e2783}{}\label{class_mesh_lib_1_1_c_base_mesh_ab52850e9a6bb778f3372b925d01e2783}
+The second face attaching to an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the second face attaching to e.
+\end{DoxyReturn}
+The second face attaching to an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the first face attaching to e. 
+\end{DoxyReturn}
+
+
+Definition at line 540 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edge\+Halfedge@{edge\+Halfedge}}
+\index{edge\+Halfedge@{edge\+Halfedge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edge\+Halfedge(t\+Edge e, int id)}{edgeHalfedge(tEdge e, int id)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edge\+Halfedge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ab1bc4850fcc8e74cfdf16560ecb9558a}{}\label{class_mesh_lib_1_1_c_base_mesh_ab1bc4850fcc8e74cfdf16560ecb9558a}
+The halfedge attaching to an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+{\em id} & the index of the halfedge, either 0 or 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the halfedge\mbox{[}i\mbox{]} attaching to edge e. 
+\end{DoxyReturn}
+
+
+Definition at line 526 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edge\+Length@{edge\+Length}}
+\index{edge\+Length@{edge\+Length}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edge\+Length(t\+Edge e)}{edgeLength(tEdge e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ double {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edge\+Length (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a2f1e00892d9f3c970937a2c20196d225}{}\label{class_mesh_lib_1_1_c_base_mesh_a2f1e00892d9f3c970937a2c20196d225}
+Edge length 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the length of the edge e
+\end{DoxyReturn}
+Edge length 
+
+Definition at line 946 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edges@{edges}}
+\index{edges@{edges}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edges()}{edges()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf t\+Edge}$>$\& {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ac4b7febcad1cc9a1539d517fb3d3c97a}{}\label{class_mesh_lib_1_1_c_base_mesh_ac4b7febcad1cc9a1539d517fb3d3c97a}
+List of the edges of the mesh. 
+
+Definition at line 394 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edge\+Vertex1@{edge\+Vertex1}}
+\index{edge\+Vertex1@{edge\+Vertex1}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edge\+Vertex1(t\+Edge e)}{edgeVertex1(tEdge e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edge\+Vertex1 (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ae5e25339a32fa919bb4c3600b03435f9}{}\label{class_mesh_lib_1_1_c_base_mesh_ae5e25339a32fa919bb4c3600b03435f9}
+The first vertex of an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the first vertex of e. 
+\end{DoxyReturn}
+
+
+Definition at line 482 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!edge\+Vertex2@{edge\+Vertex2}}
+\index{edge\+Vertex2@{edge\+Vertex2}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{edge\+Vertex2(t\+Edge e)}{edgeVertex2(tEdge e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::edge\+Vertex2 (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a348d1cc713885bf04be5684727dcbf21}{}\label{class_mesh_lib_1_1_c_base_mesh_a348d1cc713885bf04be5684727dcbf21}
+The second vertex of an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the second vertex of e.
+\end{DoxyReturn}
+The second vertex of an edge. 
+\begin{DoxyParams}{Parameters}
+{\em e} & the input edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the first vertex of e. 
+\end{DoxyReturn}
+
+
+Definition at line 496 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!face\+Halfedge@{face\+Halfedge}}
+\index{face\+Halfedge@{face\+Halfedge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{face\+Halfedge(t\+Face f)}{faceHalfedge(tFace f)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::face\+Halfedge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Face}}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a24655b5a0c6cba60c236c84def777e9a}{}\label{class_mesh_lib_1_1_c_base_mesh_a24655b5a0c6cba60c236c84def777e9a}
+The first halfedge attaching to a face f. 
+\begin{DoxyParams}{Parameters}
+{\em f} & the input face. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the first halfedge attaching to f. 
+\end{DoxyReturn}
+
+
+Definition at line 568 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!face\+Id@{face\+Id}}
+\index{face\+Id@{face\+Id}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{face\+Id(t\+Face f)}{faceId(tFace f)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ int {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::face\+Id (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Face}}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a721b0f334a34d5e6e23b99ba186f0606}{}\label{class_mesh_lib_1_1_c_base_mesh_a721b0f334a34d5e6e23b99ba186f0606}
+The face id 
+\begin{DoxyParams}{Parameters}
+{\em f} & the input face \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the face id. 
+\end{DoxyReturn}
+
+
+Definition at line 1204 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!face\+Most\+Ccw\+Half\+Edge@{face\+Most\+Ccw\+Half\+Edge}}
+\index{face\+Most\+Ccw\+Half\+Edge@{face\+Most\+Ccw\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{face\+Most\+Ccw\+Half\+Edge(t\+Face face)}{faceMostCcwHalfEdge(tFace face)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::face\+Most\+Ccw\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Face}}]{face}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ae935733ecd2d03ea094f93e5e174c775}{}\label{class_mesh_lib_1_1_c_base_mesh_ae935733ecd2d03ea094f93e5e174c775}
+The most Ccw Half\+Edge of a face 
+\begin{DoxyParams}{Parameters}
+{\em face} & the input face. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Ccw Half\+Edge of f. 
+\end{DoxyReturn}
+
+
+Definition at line 868 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!face\+Most\+Clw\+Half\+Edge@{face\+Most\+Clw\+Half\+Edge}}
+\index{face\+Most\+Clw\+Half\+Edge@{face\+Most\+Clw\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{face\+Most\+Clw\+Half\+Edge(t\+Face face)}{faceMostClwHalfEdge(tFace face)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::face\+Most\+Clw\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Face}}]{face}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a093a262a9ac1648f4a9071b46858634f}{}\label{class_mesh_lib_1_1_c_base_mesh_a093a262a9ac1648f4a9071b46858634f}
+The most Clw Half\+Edge of a face 
+\begin{DoxyParams}{Parameters}
+{\em face} & the input face. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Clw Half\+Edge of f.
+\end{DoxyReturn}
+The most Clw Half\+Edge in a face 
+\begin{DoxyParams}{Parameters}
+{\em face} & the input face. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Clw Half\+Edge in a face. 
+\end{DoxyReturn}
+
+
+Definition at line 880 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!face\+Next\+Ccw\+Half\+Edge@{face\+Next\+Ccw\+Half\+Edge}}
+\index{face\+Next\+Ccw\+Half\+Edge@{face\+Next\+Ccw\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{face\+Next\+Ccw\+Half\+Edge(t\+Half\+Edge he)}{faceNextCcwHalfEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::face\+Next\+Ccw\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a1ab17a733e28d417106f6e32be8a80cf}{}\label{class_mesh_lib_1_1_c_base_mesh_a1ab17a733e28d417106f6e32be8a80cf}
+The next Ccw Half\+Edge of a halfedge in a face 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Ccw Half\+Edge of he in a face. 
+\end{DoxyReturn}
+
+
+Definition at line 856 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!face\+Next\+Clw\+Half\+Edge@{face\+Next\+Clw\+Half\+Edge}}
+\index{face\+Next\+Clw\+Half\+Edge@{face\+Next\+Clw\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{face\+Next\+Clw\+Half\+Edge(t\+Half\+Edge he)}{faceNextClwHalfEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::face\+Next\+Clw\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_af9fef8808ee51bfa9c3d043bde7b3db4}{}\label{class_mesh_lib_1_1_c_base_mesh_af9fef8808ee51bfa9c3d043bde7b3db4}
+The next Clw Half\+Edge of a halfedge in a face 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Clw Half\+Edge of he in a face. 
+\end{DoxyReturn}
+
+
+Definition at line 845 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!faces@{faces}}
+\index{faces@{faces}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{faces()}{faces()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf t\+Face}$>$\& {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::faces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a8eb590668265fbcfe64f60567580c80f}{}\label{class_mesh_lib_1_1_c_base_mesh_a8eb590668265fbcfe64f60567580c80f}
+List of the faces of the mesh. 
+
+Definition at line 398 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Edge@{halfedge\+Edge}}
+\index{halfedge\+Edge@{halfedge\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Edge(t\+Half\+Edge he)}{halfedgeEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ada3fa889304e08af51bc8734512ab38e}{}\label{class_mesh_lib_1_1_c_base_mesh_ada3fa889304e08af51bc8734512ab38e}
+The edge of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the edge of he. 
+\end{DoxyReturn}
+
+
+Definition at line 622 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Face@{halfedge\+Face}}
+\index{halfedge\+Face@{halfedge\+Face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Face(t\+Half\+Edge he)}{halfedgeFace(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Face} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Face (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ad244041d5d03f443128eec0c589e6a5c}{}\label{class_mesh_lib_1_1_c_base_mesh_ad244041d5d03f443128eec0c589e6a5c}
+The face a halfedge attaching to. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the face he attaches 
+\end{DoxyReturn}
+
+
+Definition at line 554 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Next@{halfedge\+Next}}
+\index{halfedge\+Next@{halfedge\+Next}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Next(t\+Half\+Edge he)}{halfedgeNext(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Next (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a172ab9124d1c0236a66e104fe1cce404}{}\label{class_mesh_lib_1_1_c_base_mesh_a172ab9124d1c0236a66e104fe1cce404}
+The next halfedge of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next halfedge of he. 
+\end{DoxyReturn}
+
+
+Definition at line 583 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Prev@{halfedge\+Prev}}
+\index{halfedge\+Prev@{halfedge\+Prev}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Prev(t\+Half\+Edge he)}{halfedgePrev(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Prev (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a9d89bff17b86a5d8f0dc13f4eb7f5b6f}{}\label{class_mesh_lib_1_1_c_base_mesh_a9d89bff17b86a5d8f0dc13f4eb7f5b6f}
+The previous halfedge of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next halfedge of he. 
+\end{DoxyReturn}
+
+
+Definition at line 596 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Source@{halfedge\+Source}}
+\index{halfedge\+Source@{halfedge\+Source}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Source(t\+Half\+Edge he)}{halfedgeSource(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Source (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_aa3e98fc14c2dae20fd4fada65c5d13a2}{}\label{class_mesh_lib_1_1_c_base_mesh_aa3e98fc14c2dae20fd4fada65c5d13a2}
+The source vertex of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the source vertex of he. 
+\end{DoxyReturn}
+
+
+Definition at line 661 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Sym@{halfedge\+Sym}}
+\index{halfedge\+Sym@{halfedge\+Sym}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Sym(t\+Half\+Edge he)}{halfedgeSym(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Sym (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a4905fc3ff11c836e07395dd424d37ece}{}\label{class_mesh_lib_1_1_c_base_mesh_a4905fc3ff11c836e07395dd424d37ece}
+The dual halfedge of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the dual halfedge of he. 
+\end{DoxyReturn}
+
+
+Definition at line 609 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Target@{halfedge\+Target}}
+\index{halfedge\+Target@{halfedge\+Target}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Target(t\+Half\+Edge he)}{halfedgeTarget(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Target (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a019148ba8fcdc951366bb297f7cf706d}{}\label{class_mesh_lib_1_1_c_base_mesh_a019148ba8fcdc951366bb297f7cf706d}
+The target vertex of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the target vertex of he. 
+\end{DoxyReturn}
+
+
+Definition at line 648 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!halfedge\+Vertex@{halfedge\+Vertex}}
+\index{halfedge\+Vertex@{halfedge\+Vertex}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{halfedge\+Vertex(t\+Half\+Edge he)}{halfedgeVertex(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedge\+Vertex (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ab306584de9fde74de2038c0b0113d0a0}{}\label{class_mesh_lib_1_1_c_base_mesh_ab306584de9fde74de2038c0b0113d0a0}
+The target vertex of a halfedge. 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the target vertex of he. 
+\end{DoxyReturn}
+
+
+Definition at line 635 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!id\+Face@{id\+Face}}
+\index{id\+Face@{id\+Face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{id\+Face(int id)}{idFace(int id)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Face} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::id\+Face (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_aad0fd30815bc0a4b414e9ad7b9d6c81f}{}\label{class_mesh_lib_1_1_c_base_mesh_aad0fd30815bc0a4b414e9ad7b9d6c81f}
+Access a face by its id 
+\begin{DoxyParams}{Parameters}
+{\em id} & the face id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the face, whose ID equals to id. N\+U\+LL, if there is no such a face. 
+\end{DoxyReturn}
+
+
+Definition at line 1191 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!id\+Vertex@{id\+Vertex}}
+\index{id\+Vertex@{id\+Vertex}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{id\+Vertex(int id)}{idVertex(int id)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::id\+Vertex (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_af03a301faaed2e2ea23ddca3b96a8b23}{}\label{class_mesh_lib_1_1_c_base_mesh_af03a301faaed2e2ea23ddca3b96a8b23}
+Access a vertex by its id 
+\begin{DoxyParams}{Parameters}
+{\em id} & the vertex id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the vertex, whose ID equals to id. N\+U\+LL, if there is no such a vertex. 
+\end{DoxyReturn}
+
+
+Definition at line 1165 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!is\+Boundary@{is\+Boundary}}
+\index{is\+Boundary@{is\+Boundary}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{is\+Boundary(t\+Vertex v)}{isBoundary(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ bool {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::is\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a74e917019ff789ac7e4e402de81cbe94}{}\label{class_mesh_lib_1_1_c_base_mesh_a74e917019ff789ac7e4e402de81cbe94}
+whether a vertex is on the boundary 
+\begin{DoxyParams}{Parameters}
+{\em v} & the pointer to the vertex \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 670 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!is\+Boundary@{is\+Boundary}}
+\index{is\+Boundary@{is\+Boundary}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{is\+Boundary(t\+Edge e)}{isBoundary(tEdge e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ bool {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::is\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Edge}}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a9cd94b0e1dd28c2aecce5c15975e0bd8}{}\label{class_mesh_lib_1_1_c_base_mesh_a9cd94b0e1dd28c2aecce5c15975e0bd8}
+whether an edge is on the boundary 
+\begin{DoxyParams}{Parameters}
+{\em e} & the pointer to the edge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 679 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!is\+Boundary@{is\+Boundary}}
+\index{is\+Boundary@{is\+Boundary}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{is\+Boundary(t\+Half\+Edge he)}{isBoundary(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ bool {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::is\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a8d60d481e391e80b3ef710811fe83352}{}\label{class_mesh_lib_1_1_c_base_mesh_a8d60d481e391e80b3ef710811fe83352}
+whether a halfedge is on the boundary 
+\begin{DoxyParams}{Parameters}
+{\em he} & the pointer to the halfedge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 689 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!label\+Boundary@{label\+Boundary}}
+\index{label\+Boundary@{label\+Boundary}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{label\+Boundary(void)}{labelBoundary(void)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::label\+Boundary (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a7f7c5053e7254f0b3a9ed4869848885f}{}\label{class_mesh_lib_1_1_c_base_mesh_a7f7c5053e7254f0b3a9ed4869848885f}
+label boundary vertices, edges, faces
+
+Label boundary edges, vertices 
+
+Definition at line 2009 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!num\+Edges@{num\+Edges}}
+\index{num\+Edges@{num\+Edges}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{num\+Edges()}{numEdges()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ int {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::num\+Edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a59246eb0edbe1ad11f0e6ecb41444135}{}\label{class_mesh_lib_1_1_c_base_mesh_a59246eb0edbe1ad11f0e6ecb41444135}
+number of edges
+
+Number of edges of the mesh 
+
+Definition at line 708 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!num\+Faces@{num\+Faces}}
+\index{num\+Faces@{num\+Faces}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{num\+Faces()}{numFaces()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ int {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::num\+Faces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ac750e49625e3ebbc50a135f77cbbdf87}{}\label{class_mesh_lib_1_1_c_base_mesh_ac750e49625e3ebbc50a135f77cbbdf87}
+number of faces
+
+Number of faces of the mesh 
+
+Definition at line 718 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!num\+Vertices@{num\+Vertices}}
+\index{num\+Vertices@{num\+Vertices}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{num\+Vertices()}{numVertices()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ int {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::num\+Vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a180ba1fbde1e68a4a2201928e6573dc7}{}\label{class_mesh_lib_1_1_c_base_mesh_a180ba1fbde1e68a4a2201928e6573dc7}
+number of vertices
+
+Number of vertices of the mesh 
+
+Definition at line 699 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!read\+\_\+m@{read\+\_\+m}}
+\index{read\+\_\+m@{read\+\_\+m}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{read\+\_\+m(const char $\ast$input)}{read_m(const char *input)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::read\+\_\+m (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ace7e07c6b5f0d07cdfda11d3f73139f4}{}\label{class_mesh_lib_1_1_c_base_mesh_ace7e07c6b5f0d07cdfda11d3f73139f4}
+Read an .m file. 
+\begin{DoxyParams}{Parameters}
+{\em input} & the input obj file name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1332 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!read\+\_\+obj@{read\+\_\+obj}}
+\index{read\+\_\+obj@{read\+\_\+obj}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{read\+\_\+obj(const char $\ast$filename)}{read_obj(const char *filename)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::read\+\_\+obj (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ad711e992ab1cd7371690eba2b6292b35}{}\label{class_mesh_lib_1_1_c_base_mesh_ad711e992ab1cd7371690eba2b6292b35}
+Read an .obj file. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & the input .obj file name\\
+\hline
+\end{DoxyParams}
+Read an .obj file. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & the filename .obj file name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 981 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!read\+\_\+off@{read\+\_\+off}}
+\index{read\+\_\+off@{read\+\_\+off}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{read\+\_\+off(const char $\ast$input)}{read_off(const char *input)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::read\+\_\+off (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a15db6845a5ce5460a92a6afb0fcd1a31}{}\label{class_mesh_lib_1_1_c_base_mesh_a15db6845a5ce5460a92a6afb0fcd1a31}
+Read an .off file 
+\begin{DoxyParams}{Parameters}
+{\em input} & the input .off filename \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1904 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Edge@{vertex\+Edge}}
+\index{vertex\+Edge@{vertex\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Edge(t\+Vertex v0, t\+Vertex v1)}{vertexEdge(tVertex v0, tVertex v1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v0, }
+\item[{{\bf t\+Vertex}}]{v1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ae8a58acc899cab99f651b0845250d311}{}\label{class_mesh_lib_1_1_c_base_mesh_ae8a58acc899cab99f651b0845250d311}
+Access an edge by its two end vertices 
+\begin{DoxyParams}{Parameters}
+{\em v0} & one vertex of the edge \\
+\hline
+{\em v1} & the other vertex of the edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the edge connecting both v0 and v1, N\+U\+LL if no such edge exists. 
+\end{DoxyReturn}
+
+
+Definition at line 1262 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Edges@{vertex\+Edges}}
+\index{vertex\+Edges@{vertex\+Edges}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Edges(t\+Vertex v)}{vertexEdges(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ std\+::list$<$ {\bf C\+Edge} $\ast$ $>$ \& {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Edges (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v0}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a73ddf93eff3bcb04f5657bb858403cc1}{}\label{class_mesh_lib_1_1_c_base_mesh_a73ddf93eff3bcb04f5657bb858403cc1}
+The edge list attaching to the vertex v, such that v is the first vertex of the edge 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reference to the edge list
+\end{DoxyReturn}
+Access the edge list of a vertex, \{e\} such that e-\/$>$vertex1() == v 
+\begin{DoxyParams}{Parameters}
+{\em v} & vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the list of adjacent edges 
+\end{DoxyReturn}
+
+
+Definition at line 1308 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Halfedge@{vertex\+Halfedge}}
+\index{vertex\+Halfedge@{vertex\+Halfedge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Halfedge(t\+Vertex v0, t\+Vertex v1)}{vertexHalfedge(tVertex v0, tVertex v1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Halfedge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v0, }
+\item[{{\bf t\+Vertex}}]{v1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ad43e40c6eef135e91d792ed9f4dfbccf}{}\label{class_mesh_lib_1_1_c_base_mesh_ad43e40c6eef135e91d792ed9f4dfbccf}
+Access a halfedge by its two end vertices 
+\begin{DoxyParams}{Parameters}
+{\em v0} & one vertex of the halfedge \\
+\hline
+{\em v1} & the other vertex of the halfedge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the halfedge connecting both v0 and v1, N\+U\+LL if no such edge exists. 
+\end{DoxyReturn}
+
+
+Definition at line 1287 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Halfedge@{vertex\+Halfedge}}
+\index{vertex\+Halfedge@{vertex\+Halfedge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Halfedge(t\+Vertex v)}{vertexHalfedge(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Halfedge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a46a10c439e6a7c13f0dec5bd62ce1565}{}\label{class_mesh_lib_1_1_c_base_mesh_a46a10c439e6a7c13f0dec5bd62ce1565}
+The halfedge targeting at a vertex. 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the halfedge targeting at v, which is the most ccw in halfedge of v. 
+\end{DoxyReturn}
+
+
+Definition at line 1321 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Id@{vertex\+Id}}
+\index{vertex\+Id@{vertex\+Id}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Id(t\+Vertex v)}{vertexId(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ int {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Id (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a5f2f3d6715095a364f390321868aaa8a}{}\label{class_mesh_lib_1_1_c_base_mesh_a5f2f3d6715095a364f390321868aaa8a}
+The vertex id 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the vertex id. 
+\end{DoxyReturn}
+
+
+Definition at line 1178 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Most\+Ccw\+In\+Half\+Edge@{vertex\+Most\+Ccw\+In\+Half\+Edge}}
+\index{vertex\+Most\+Ccw\+In\+Half\+Edge@{vertex\+Most\+Ccw\+In\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Most\+Ccw\+In\+Half\+Edge(t\+Vertex v)}{vertexMostCcwInHalfEdge(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Most\+Ccw\+In\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a201002431101172f57da7ec748a2770e}{}\label{class_mesh_lib_1_1_c_base_mesh_a201002431101172f57da7ec748a2770e}
+The most Ccw In Half\+Edge of a vertex 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Ccw In Half\+Edge of v.
+\end{DoxyReturn}
+The most Ccw In Half\+Edge of a vertex 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Clw In Half\+Edge of v. 
+\end{DoxyReturn}
+
+
+Definition at line 809 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Most\+Ccw\+Out\+Half\+Edge@{vertex\+Most\+Ccw\+Out\+Half\+Edge}}
+\index{vertex\+Most\+Ccw\+Out\+Half\+Edge@{vertex\+Most\+Ccw\+Out\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Most\+Ccw\+Out\+Half\+Edge(t\+Vertex v)}{vertexMostCcwOutHalfEdge(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Most\+Ccw\+Out\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a90c1bfc4bc7d1467c1d36dbc792d5481}{}\label{class_mesh_lib_1_1_c_base_mesh_a90c1bfc4bc7d1467c1d36dbc792d5481}
+The most Ccw Out Half\+Edge of a vertex 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Ccw Out Half\+Edge of v.
+\end{DoxyReturn}
+The next Ccw Out Half\+Edge 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Ccw Out Half\+Edge, sharing the same source of he. 
+\end{DoxyReturn}
+
+
+Definition at line 743 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Most\+Clw\+In\+Half\+Edge@{vertex\+Most\+Clw\+In\+Half\+Edge}}
+\index{vertex\+Most\+Clw\+In\+Half\+Edge@{vertex\+Most\+Clw\+In\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Most\+Clw\+In\+Half\+Edge(t\+Vertex v)}{vertexMostClwInHalfEdge(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Most\+Clw\+In\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a3966eec3d8d8a301bfaac27e380210fc}{}\label{class_mesh_lib_1_1_c_base_mesh_a3966eec3d8d8a301bfaac27e380210fc}
+The most Clw In Half\+Edge of a vertex 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Clw In Half\+Edge of v. 
+\end{DoxyReturn}
+
+
+Definition at line 797 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Most\+Clw\+Out\+Half\+Edge@{vertex\+Most\+Clw\+Out\+Half\+Edge}}
+\index{vertex\+Most\+Clw\+Out\+Half\+Edge@{vertex\+Most\+Clw\+Out\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Most\+Clw\+Out\+Half\+Edge(t\+Vertex v)}{vertexMostClwOutHalfEdge(tVertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Most\+Clw\+Out\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Vertex}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a170cd5aafa0925c710c0d770789b2f6d}{}\label{class_mesh_lib_1_1_c_base_mesh_a170cd5aafa0925c710c0d770789b2f6d}
+The most Clw Out Half\+Edge of a vertex 
+\begin{DoxyParams}{Parameters}
+{\em v} & the input vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the most Clw Out Half\+Edge of v. 
+\end{DoxyReturn}
+
+
+Definition at line 732 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Next\+Ccw\+In\+Half\+Edge@{vertex\+Next\+Ccw\+In\+Half\+Edge}}
+\index{vertex\+Next\+Ccw\+In\+Half\+Edge@{vertex\+Next\+Ccw\+In\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Next\+Ccw\+In\+Half\+Edge(t\+Half\+Edge he)}{vertexNextCcwInHalfEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Next\+Ccw\+In\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a721933757b5348b4c251d519e95a9a96}{}\label{class_mesh_lib_1_1_c_base_mesh_a721933757b5348b4c251d519e95a9a96}
+The next Ccw In Half\+Edge 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge . \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Ccw In Half\+Edge, sharing the same target of he. 
+\end{DoxyReturn}
+
+
+Definition at line 822 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Next\+Ccw\+Out\+Half\+Edge@{vertex\+Next\+Ccw\+Out\+Half\+Edge}}
+\index{vertex\+Next\+Ccw\+Out\+Half\+Edge@{vertex\+Next\+Ccw\+Out\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Next\+Ccw\+Out\+Half\+Edge(t\+Half\+Edge he)}{vertexNextCcwOutHalfEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Next\+Ccw\+Out\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ac0a1fd4394382d87004048cff63e2efe}{}\label{class_mesh_lib_1_1_c_base_mesh_ac0a1fd4394382d87004048cff63e2efe}
+The next Ccw Out Half\+Edge 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge . \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Ccw Out Half\+Edge, sharing the same source of he. 
+\end{DoxyReturn}
+
+
+Definition at line 773 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Next\+Clw\+In\+Half\+Edge@{vertex\+Next\+Clw\+In\+Half\+Edge}}
+\index{vertex\+Next\+Clw\+In\+Half\+Edge@{vertex\+Next\+Clw\+In\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Next\+Clw\+In\+Half\+Edge(t\+Half\+Edge he)}{vertexNextClwInHalfEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Next\+Clw\+In\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a29d3d0c0a41b3e54e777b9546cbd88f6}{}\label{class_mesh_lib_1_1_c_base_mesh_a29d3d0c0a41b3e54e777b9546cbd88f6}
+The next Clw In Half\+Edge 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge . \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Clw In Half\+Edge, sharing the same target of he. 
+\end{DoxyReturn}
+
+
+Definition at line 834 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertex\+Next\+Clw\+Out\+Half\+Edge@{vertex\+Next\+Clw\+Out\+Half\+Edge}}
+\index{vertex\+Next\+Clw\+Out\+Half\+Edge@{vertex\+Next\+Clw\+Out\+Half\+Edge}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertex\+Next\+Clw\+Out\+Half\+Edge(t\+Half\+Edge he)}{vertexNextClwOutHalfEdge(tHalfEdge he)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge} $\ast$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertex\+Next\+Clw\+Out\+Half\+Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+Half\+Edge}}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_af2f1696c5e66668c8b1f3fe98b4c5d92}{}\label{class_mesh_lib_1_1_c_base_mesh_af2f1696c5e66668c8b1f3fe98b4c5d92}
+The next Clw Out Half\+Edge 
+\begin{DoxyParams}{Parameters}
+{\em he} & the input halfedge . \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next Clw Out Half\+Edge, sharing the same source of he. 
+\end{DoxyReturn}
+
+
+Definition at line 784 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!vertices@{vertices}}
+\index{vertices@{vertices}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{vertices()}{vertices()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf t\+Vertex}$>$\& {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a28d9bd75c518e0e5f4c9fab50008b8aa}{}\label{class_mesh_lib_1_1_c_base_mesh_a28d9bd75c518e0e5f4c9fab50008b8aa}
+List of the vertices of the mesh. 
+
+Definition at line 402 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!write\+\_\+m@{write\+\_\+m}}
+\index{write\+\_\+m@{write\+\_\+m}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{write\+\_\+m(const char $\ast$output)}{write_m(const char *output)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::write\+\_\+m (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{output}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_aac9e4fdd74de34f44e8ac7afad00c322}{}\label{class_mesh_lib_1_1_c_base_mesh_aac9e4fdd74de34f44e8ac7afad00c322}
+Write an .m file. 
+\begin{DoxyParams}{Parameters}
+{\em output} & the output .m file name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1580 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!write\+\_\+obj@{write\+\_\+obj}}
+\index{write\+\_\+obj@{write\+\_\+obj}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{write\+\_\+obj(const char $\ast$output)}{write_obj(const char *output)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::write\+\_\+obj (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{output}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_af885e691fce7e793d5d4185ea286d1cc}{}\label{class_mesh_lib_1_1_c_base_mesh_af885e691fce7e793d5d4185ea286d1cc}
+Write an .obj file. 
+\begin{DoxyParams}{Parameters}
+{\em output} & the output .obj file name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1694 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!write\+\_\+off@{write\+\_\+off}}
+\index{write\+\_\+off@{write\+\_\+off}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{write\+\_\+off(const char $\ast$output)}{write_off(const char *output)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::write\+\_\+off (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{output}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a1ec12eff25a713eb43d2cdef1b452743}{}\label{class_mesh_lib_1_1_c_base_mesh_a1ec12eff25a713eb43d2cdef1b452743}
+Write an .off file. 
+\begin{DoxyParams}{Parameters}
+{\em output} & the output .off file name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1775 of file Base\+Mesh.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+edges@{m\+\_\+edges}}
+\index{m\+\_\+edges@{m\+\_\+edges}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+edges}{m_edges}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf t\+Edge}$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+edges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a5986476cf61a1ea5b5932f33302b6c10}{}\label{class_mesh_lib_1_1_c_base_mesh_a5986476cf61a1ea5b5932f33302b6c10}
+list of edges 
+
+Definition at line 402 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+faces@{m\+\_\+faces}}
+\index{m\+\_\+faces@{m\+\_\+faces}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+faces}{m_faces}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf t\+Face}$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+faces\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a4699846e3f577e064c3b871183d8ba0a}{}\label{class_mesh_lib_1_1_c_base_mesh_a4699846e3f577e064c3b871183d8ba0a}
+list of faces 
+
+Definition at line 414 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+input\+\_\+traits@{m\+\_\+input\+\_\+traits}}
+\index{m\+\_\+input\+\_\+traits@{m\+\_\+input\+\_\+traits}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+input\+\_\+traits}{m_input_traits}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ unsigned long long {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+input\+\_\+traits\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a09dbf8905e5b0dbe3c8353070f83ae81}{}\label{class_mesh_lib_1_1_c_base_mesh_a09dbf8905e5b0dbe3c8353070f83ae81}
+the input traits of the mesh, there are 64 bits in total 
+
+Definition at line 466 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+map\+\_\+face@{m\+\_\+map\+\_\+face}}
+\index{m\+\_\+map\+\_\+face@{m\+\_\+map\+\_\+face}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+map\+\_\+face}{m_map_face}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::map$<$int, {\bf t\+Face}$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+map\+\_\+face\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_afdcd24f68c0ab83a6b172a64753b7482}{}\label{class_mesh_lib_1_1_c_base_mesh_afdcd24f68c0ab83a6b172a64753b7482}
+map between face and its id 
+
+Definition at line 421 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+map\+\_\+vert@{m\+\_\+map\+\_\+vert}}
+\index{m\+\_\+map\+\_\+vert@{m\+\_\+map\+\_\+vert}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+map\+\_\+vert}{m_map_vert}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::map$<$int, {\bf t\+Vertex}$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+map\+\_\+vert\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_ad92d530f9eacd1eb2adef1770fd0ff80}{}\label{class_mesh_lib_1_1_c_base_mesh_ad92d530f9eacd1eb2adef1770fd0ff80}
+map between vetex and its id 
+
+Definition at line 419 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+output\+\_\+traits@{m\+\_\+output\+\_\+traits}}
+\index{m\+\_\+output\+\_\+traits@{m\+\_\+output\+\_\+traits}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+output\+\_\+traits}{m_output_traits}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ unsigned long long {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+output\+\_\+traits\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_af1a7720a0b51675ac91cc8c00d1959a3}{}\label{class_mesh_lib_1_1_c_base_mesh_af1a7720a0b51675ac91cc8c00d1959a3}
+the output triats of the mesh, there are 64 bits in total 
+
+Definition at line 470 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+verts@{m\+\_\+verts}}
+\index{m\+\_\+verts@{m\+\_\+verts}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+verts}{m_verts}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf t\+Vertex}$>$ {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+verts\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a5738a63ce99209aa5085982ecc9ba50a}{}\label{class_mesh_lib_1_1_c_base_mesh_a5738a63ce99209aa5085982ecc9ba50a}
+list of vertices 
+
+Definition at line 412 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+with\+\_\+normal@{m\+\_\+with\+\_\+normal}}
+\index{m\+\_\+with\+\_\+normal@{m\+\_\+with\+\_\+normal}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+with\+\_\+normal}{m_with_normal}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ bool {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+with\+\_\+normal}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a105ddccad80953028cc54cd317dee8a4}{}\label{class_mesh_lib_1_1_c_base_mesh_a105ddccad80953028cc54cd317dee8a4}
+whether the mesh is with normal 
+
+Definition at line 457 of file Base\+Mesh.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}!m\+\_\+with\+\_\+texture@{m\+\_\+with\+\_\+texture}}
+\index{m\+\_\+with\+\_\+texture@{m\+\_\+with\+\_\+texture}!Mesh\+Lib\+::\+C\+Base\+Mesh@{Mesh\+Lib\+::\+C\+Base\+Mesh}}
+\subsubsection[{\texorpdfstring{m\+\_\+with\+\_\+texture}{m_with_texture}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ bool {\bf Mesh\+Lib\+::\+C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+with\+\_\+texture}\hypertarget{class_mesh_lib_1_1_c_base_mesh_a36ba9fb8f3b289de348f1133ee6ab4bb}{}\label{class_mesh_lib_1_1_c_base_mesh_a36ba9fb8f3b289de348f1133ee6ab4bb}
+whether the vertex is with texture coordinates 
+
+Definition at line 455 of file Base\+Mesh.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{_base_mesh_8h}{Base\+Mesh.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,227 @@
+\hypertarget{class_mesh_lib_1_1_c_loop}{}\section{Mesh\+Lib\+:\+:C\+Loop$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_c_loop}\index{Mesh\+Lib\+::\+C\+Loop$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$@{Mesh\+Lib\+::\+C\+Loop$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop} Boundary loop class.  
+
+
+
+
+{\ttfamily \#include $<$boundary.\+h$>$}
+
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Loop$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_lib_1_1_c_loop__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_loop_ab5608d60065d49d97e7ab5173b84c8b6}{C\+Loop} (\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh}$<$ \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}, \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}, \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $>$ $\ast$p\+Mesh, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$pH)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_loop_ab3142314d0e6fefd57fd4a6339fd86cf}{C\+Loop} (\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh}$<$ \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}, \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}, \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $>$ $\ast$p\+Mesh)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_loop_a167b5a15311a3c0bc8a676316894595d}{$\sim$\+C\+Loop} ()
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ $>$ \& \hyperlink{class_mesh_lib_1_1_c_loop_a77fea4b74d23423e5889f2046d997cbf}{halfedges} ()
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_loop_af56b2cace83571be3b745528e8985131}{length} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_loop_a86a97b1d9b30030dd5b04544cb1052c4}{write} (const char $\ast$file)
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_loop_a200d03806ae46c7afed2bca200298487}{read} (const char $\ast$file)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh}$<$ \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}, \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}, \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $>$ $\ast$ \hyperlink{class_mesh_lib_1_1_c_loop_a4656ced7a75ac9a63bc5925bb667ee55}{m\+\_\+p\+Mesh}
+\item 
+double \hyperlink{class_mesh_lib_1_1_c_loop_a3886caa41e199204666ca08dcf90f847}{m\+\_\+length}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_loop_ad8bcb68b8cafda18031803a855b1c47a}{m\+\_\+p\+Halfedge}
+\item 
+std\+::list$<$ \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ $>$ \hyperlink{class_mesh_lib_1_1_c_loop_a52708198f9b27b7aba3f3df30f46bb5e}{m\+\_\+halfedges}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$\\*
+class Mesh\+Lib\+::\+C\+Loop$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}
+
+\hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop} Boundary loop class. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}} & Vertex type \\
+\hline
+{\em \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}} & Edge type \\
+\hline
+{\em \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}} & Face type \\
+\hline
+{\em \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge}} & Half\+Edge type \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 35 of file boundary.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!C\+Loop@{C\+Loop}}
+\index{C\+Loop@{C\+Loop}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{C\+Loop(\+C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ $\ast$p\+Mesh, C\+Half\+Edge $\ast$p\+H)}{CLoop(CBaseMesh< CVertex, CEdge, CFace, CHalfEdge > *pMesh, CHalfEdge *pH)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf C\+Loop} (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$ $\ast$}]{p\+Mesh, }
+\item[{{\bf C\+Half\+Edge} $\ast$}]{pH}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_loop_ab5608d60065d49d97e7ab5173b84c8b6}{}\label{class_mesh_lib_1_1_c_loop_ab5608d60065d49d97e7ab5173b84c8b6}
+Constructor of the \hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop} 
+\begin{DoxyParams}{Parameters}
+{\em p\+Mesh} & pointer to the current mesh \\
+\hline
+{\em pH} & halfedge on the boundary loop\\
+\hline
+\end{DoxyParams}
+\hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop} constructure, trace the boundary loop, starting from the halfedge pH. 
+\begin{DoxyParams}{Parameters}
+{\em p\+Mesh} & pointer to the current mesh \\
+\hline
+{\em pH} & halfedge on the current boundary loop \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 152 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!C\+Loop@{C\+Loop}}
+\index{C\+Loop@{C\+Loop}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{C\+Loop(\+C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ $\ast$p\+Mesh)}{CLoop(CBaseMesh< CVertex, CEdge, CFace, CHalfEdge > *pMesh)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf C\+Loop} (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$ $\ast$}]{p\+Mesh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_loop_ab3142314d0e6fefd57fd4a6339fd86cf}{}\label{class_mesh_lib_1_1_c_loop_ab3142314d0e6fefd57fd4a6339fd86cf}
+Constructor of the \hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop} 
+\begin{DoxyParams}{Parameters}
+{\em p\+Mesh} & pointer to the current mesh \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!````~C\+Loop@{$\sim$\+C\+Loop}}
+\index{````~C\+Loop@{$\sim$\+C\+Loop}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Loop()}{~CLoop()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::$\sim${\bf C\+Loop} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_loop_a167b5a15311a3c0bc8a676316894595d}{}\label{class_mesh_lib_1_1_c_loop_a167b5a15311a3c0bc8a676316894595d}
+Destructor of \hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop}.
+
+\hyperlink{class_mesh_lib_1_1_c_loop}{C\+Loop} destructor, clean up the list of halfedges in the loop 
+
+Definition at line 173 of file boundary.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!halfedges@{halfedges}}
+\index{halfedges@{halfedges}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{halfedges()}{halfedges()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf C\+Half\+Edge}$\ast$$>$\& {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::halfedges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_loop_a77fea4b74d23423e5889f2046d997cbf}{}\label{class_mesh_lib_1_1_c_loop_a77fea4b74d23423e5889f2046d997cbf}
+The list of haledges on the current boundary loop. 
+
+Definition at line 57 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!length@{length}}
+\index{length@{length}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{length()}{length()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ double {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_loop_af56b2cace83571be3b745528e8985131}{}\label{class_mesh_lib_1_1_c_loop_af56b2cace83571be3b745528e8985131}
+The length of the current boundary loop. 
+
+Definition at line 65 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!read@{read}}
+\index{read@{read}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{read(const char $\ast$file)}{read(const char *file)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::read (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_loop_a200d03806ae46c7afed2bca200298487}{}\label{class_mesh_lib_1_1_c_loop_a200d03806ae46c7afed2bca200298487}
+Input from a file
+
+Output the loop to a file 
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & the name of the file \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 290 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!write@{write}}
+\index{write@{write}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{write(const char $\ast$file)}{write(const char *file)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::write (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_mesh_lib_1_1_c_loop_a86a97b1d9b30030dd5b04544cb1052c4}{}\label{class_mesh_lib_1_1_c_loop_a86a97b1d9b30030dd5b04544cb1052c4}
+Output to a file
+
+Output the loop to a file 
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & the name of the file \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 270 of file boundary.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!m\+\_\+halfedges@{m\+\_\+halfedges}}
+\index{m\+\_\+halfedges@{m\+\_\+halfedges}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{m\+\_\+halfedges}{m_halfedges}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ std\+::list$<${\bf C\+Half\+Edge}$\ast$$>$ {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+halfedges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_loop_a52708198f9b27b7aba3f3df30f46bb5e}{}\label{class_mesh_lib_1_1_c_loop_a52708198f9b27b7aba3f3df30f46bb5e}
+List of consecutive halfedges along the boundary loop. 
+
+Definition at line 93 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!m\+\_\+length@{m\+\_\+length}}
+\index{m\+\_\+length@{m\+\_\+length}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{m\+\_\+length}{m_length}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ double {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+length\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_loop_a3886caa41e199204666ca08dcf90f847}{}\label{class_mesh_lib_1_1_c_loop_a3886caa41e199204666ca08dcf90f847}
+The length of the current boundary loop. 
+
+Definition at line 85 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!m\+\_\+p\+Halfedge@{m\+\_\+p\+Halfedge}}
+\index{m\+\_\+p\+Halfedge@{m\+\_\+p\+Halfedge}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Halfedge}{m_pHalfedge}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ {\bf C\+Half\+Edge}$\ast$ {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+p\+Halfedge\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_loop_ad8bcb68b8cafda18031803a855b1c47a}{}\label{class_mesh_lib_1_1_c_loop_ad8bcb68b8cafda18031803a855b1c47a}
+Starting halfedge of the current boundary loop. 
+
+Definition at line 89 of file boundary.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}!m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}}
+\index{m\+\_\+p\+Mesh@{m\+\_\+p\+Mesh}!Mesh\+Lib\+::\+C\+Loop@{Mesh\+Lib\+::\+C\+Loop}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Mesh}{m_pMesh}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$ {\bf C\+Base\+Mesh}$<${\bf C\+Vertex},{\bf C\+Edge},{\bf C\+Face},{\bf C\+Half\+Edge}$>$$\ast$ {\bf Mesh\+Lib\+::\+C\+Loop}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::m\+\_\+p\+Mesh\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_loop_a4656ced7a75ac9a63bc5925bb667ee55}{}\label{class_mesh_lib_1_1_c_loop_a4656ced7a75ac9a63bc5925bb667ee55}
+Pointer to the current mesh. 
+
+Definition at line 82 of file boundary.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{boundary_8h}{boundary.\+h}\end{DoxyCompactItemize}

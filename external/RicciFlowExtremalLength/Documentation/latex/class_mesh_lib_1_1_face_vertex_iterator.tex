@@ -1,0 +1,131 @@
+\hypertarget{class_mesh_lib_1_1_face_vertex_iterator}{}\section{Mesh\+Lib\+:\+:Face\+Vertex\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_face_vertex_iterator}\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}}
+
+
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator}{Face\+Vertex\+Iterator}, transverse all the vertices of a face C\+C\+Wly.  
+
+
+
+
+{\ttfamily \#include $<$iterators.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator_a5bb987960d8c4c1341e498bd271c2a9c}{Face\+Vertex\+Iterator} (\hyperlink{class_mesh_lib_1_1_c_face}{C\+Face} $\ast$f)
+\item 
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator_af7f5cb6d47792007453e5b70444b552e}{$\sim$\+Face\+Vertex\+Iterator} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_face_vertex_iterator_a48fcbdd253bd64204cd9b287570755da}{operator++} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_face_vertex_iterator_a80a8dc853d1c31223437d4ae67cd3b75}{operator++} (int)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} $\ast$ \hyperlink{class_mesh_lib_1_1_face_vertex_iterator_a703cf14713514017d9e0e227f9286b1a}{value} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} $\ast$ \hyperlink{class_mesh_lib_1_1_face_vertex_iterator_a992525a89a87402946b5eac77659cd62}{operator$\ast$} ()
+\item 
+bool \hyperlink{class_mesh_lib_1_1_face_vertex_iterator_abc127d0fbd0347551998a93b13b73560}{end} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$\\*
+class Mesh\+Lib\+::\+Face\+Vertex\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}
+
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator}{Face\+Vertex\+Iterator}, transverse all the vertices of a face C\+C\+Wly. 
+
+Definition at line 704 of file iterators.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!Face\+Vertex\+Iterator@{Face\+Vertex\+Iterator}}
+\index{Face\+Vertex\+Iterator@{Face\+Vertex\+Iterator}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{Face\+Vertex\+Iterator(\+C\+Face $\ast$f)}{FaceVertexIterator(CFace *f)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf Face\+Vertex\+Iterator} (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Face} $\ast$}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_a5bb987960d8c4c1341e498bd271c2a9c}{}\label{class_mesh_lib_1_1_face_vertex_iterator_a5bb987960d8c4c1341e498bd271c2a9c}
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator}{Face\+Vertex\+Iterator} constructor 
+\begin{DoxyParams}{Parameters}
+{\em f} & the current face \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 711 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!````~Face\+Vertex\+Iterator@{$\sim$\+Face\+Vertex\+Iterator}}
+\index{````~Face\+Vertex\+Iterator@{$\sim$\+Face\+Vertex\+Iterator}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Face\+Vertex\+Iterator()}{~FaceVertexIterator()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::$\sim${\bf Face\+Vertex\+Iterator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_af7f5cb6d47792007453e5b70444b552e}{}\label{class_mesh_lib_1_1_face_vertex_iterator_af7f5cb6d47792007453e5b70444b552e}
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator}{Face\+Vertex\+Iterator} destructor 
+
+Definition at line 720 of file iterators.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!end@{end}}
+\index{end@{end}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{end()}{end()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ bool {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_abc127d0fbd0347551998a93b13b73560}{}\label{class_mesh_lib_1_1_face_vertex_iterator_abc127d0fbd0347551998a93b13b73560}
+Indicate whether all the vertices have been accessed. 
+
+Definition at line 761 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{operator$\ast$()}{operator*()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex}$\ast$ {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_a992525a89a87402946b5eac77659cd62}{}\label{class_mesh_lib_1_1_face_vertex_iterator_a992525a89a87402946b5eac77659cd62}
+The vertex, pointed by the current iterator 
+
+Definition at line 757 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{operator++()}{operator++()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::operator++ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_a48fcbdd253bd64204cd9b287570755da}{}\label{class_mesh_lib_1_1_face_vertex_iterator_a48fcbdd253bd64204cd9b287570755da}
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator}{Face\+Vertex\+Iterator} prefix operator ++, goes to the next vertex C\+C\+Wly 
+
+Definition at line 724 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{operator++(int)}{operator++(int)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::operator++ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_a80a8dc853d1c31223437d4ae67cd3b75}{}\label{class_mesh_lib_1_1_face_vertex_iterator_a80a8dc853d1c31223437d4ae67cd3b75}
+\hyperlink{class_mesh_lib_1_1_face_vertex_iterator}{Face\+Vertex\+Iterator} prefix operator ++, goes to the next vertex C\+C\+Wly 
+
+Definition at line 739 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}!value@{value}}
+\index{value@{value}!Mesh\+Lib\+::\+Face\+Vertex\+Iterator@{Mesh\+Lib\+::\+Face\+Vertex\+Iterator}}
+\subsubsection[{\texorpdfstring{value()}{value()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Vertex}$\ast$ {\bf Mesh\+Lib\+::\+Face\+Vertex\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_face_vertex_iterator_a703cf14713514017d9e0e227f9286b1a}{}\label{class_mesh_lib_1_1_face_vertex_iterator_a703cf14713514017d9e0e227f9286b1a}
+The vertex, pointed by the current iterator 
+
+Definition at line 753 of file iterators.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{iterators_8h}{iterators.\+h}\end{DoxyCompactItemize}

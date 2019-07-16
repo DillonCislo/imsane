@@ -1,0 +1,17 @@
+<map id="MeshLib/algorithm/Riemannian/RicciFlow/EuclideanEmbed.h" name="MeshLib/algorithm/Riemannian/RicciFlow/EuclideanEmbed.h">
+<area shape="rect" id="node4" href="$_ricci_flow_mesh_8h.html" title="Mesh for Ricci Flow. " alt="" coords="783,169,913,196"/>
+<area shape="rect" id="node30" href="$_base_embed_8h.html" title="Isometrically embed a mesh with canonical metric onto the canonical domain. " alt="" coords="767,95,879,121"/>
+<area shape="rect" id="node31" href="$_circle_8h.html" title="Planar circle. " alt="" coords="1719,244,1863,285"/>
+<area shape="rect" id="node6" href="$_base_mesh_8h.html" title="Base Mesh Class for all types of Mesh Classes. " alt="" coords="665,512,783,553"/>
+<area shape="rect" id="node19" href="$_vertex_8h.html" title="Base class of vertex. " alt="" coords="1217,423,1335,464"/>
+<area shape="rect" id="node21" href="$_half_edge_8h.html" title="Base class of HalfEdge. " alt="" coords="1498,519,1593,546"/>
+<area shape="rect" id="node22" href="$_edge_8h.html" title="Base class of edge. " alt="" coords="1734,601,1805,628"/>
+<area shape="rect" id="node23" href="$_face_8h.html" title="Base class of face. " alt="" coords="1303,512,1422,553"/>
+<area shape="rect" id="node24" href="$iterators_8h.html" title="../../../core/Mesh\l/iterators.h" alt="" coords="665,423,783,464"/>
+<area shape="rect" id="node25" href="$boundary_8h.html" title="../../../core/Mesh\l/boundary.h" alt="" coords="491,333,610,375"/>
+<area shape="rect" id="node27" href="$parser_8h.html" title="Parse the trait strings of vertex, edge, halfedge , face etc. " alt="" coords="956,512,1081,553"/>
+<area shape="rect" id="node28" href="$traits__io_8h.html" title="../../../core/Parser\l/traits_io.h" alt="" coords="884,244,1009,285"/>
+<area shape="rect" id="node12" href="$_point_8h.html" title="Three dimensional point class. " alt="" coords="1219,601,1355,628"/>
+<area shape="rect" id="node15" href="$_point2_8h.html" title="Two dimensional point class. " alt="" coords="1051,601,1194,628"/>
+<area shape="rect" id="node16" href="$strutil_8h.html" title="std::string utilities " alt="" coords="590,601,709,628"/>
+</map>

@@ -1,0 +1,134 @@
+\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator}{}\section{Mesh\+Lib\+:\+:Vertex\+In\+Halfedge\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ Class Template Reference}
+\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator}\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}}
+
+
+\hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator}{Vertex\+In\+Halfedge\+Iterator}, transverse all the incoming halfedges of a vertex ccwly.  
+
+
+
+
+{\ttfamily \#include $<$iterators.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a97fe9e495df1838bd1d3b65b19a733d2}{Vertex\+In\+Halfedge\+Iterator} (\hyperlink{class_mesh_lib_1_1_c_base_mesh}{C\+Base\+Mesh}$<$ \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex}, \hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge}, \hyperlink{class_mesh_lib_1_1_c_face}{C\+Face}, \hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $>$ $\ast$p\+Mesh, \hyperlink{class_mesh_lib_1_1_c_vertex}{C\+Vertex} $\ast$v)
+\item 
+\hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a8199a01c8990c6188c292e98129e93cd}{$\sim$\+Vertex\+In\+Halfedge\+Iterator} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a1f945b1fc9b3b0b367e535a2f0075d0d}{operator++} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad578fa12f770dda7bc2b2889a8f20061}{operator++} (int)
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad3fdaf0a91faf593c7f78e0cf2fd22ac}{value} ()
+\item 
+bool \hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad391de8757ca6852b62cbba3032d2cc4}{end} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator_aa7f4149e715618aa2499ad8c89f902fa}{operator$\ast$} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class C\+Vertex, class C\+Edge, class C\+Face, class C\+Half\+Edge$>$\\*
+class Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$}
+
+\hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator}{Vertex\+In\+Halfedge\+Iterator}, transverse all the incoming halfedges of a vertex ccwly. 
+
+Definition at line 93 of file iterators.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!Vertex\+In\+Halfedge\+Iterator@{Vertex\+In\+Halfedge\+Iterator}}
+\index{Vertex\+In\+Halfedge\+Iterator@{Vertex\+In\+Halfedge\+Iterator}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{Vertex\+In\+Halfedge\+Iterator(\+C\+Base\+Mesh$<$ C\+Vertex, C\+Edge, C\+Face, C\+Half\+Edge $>$ $\ast$p\+Mesh, C\+Vertex $\ast$v)}{VertexInHalfedgeIterator(CBaseMesh< CVertex, CEdge, CFace, CHalfEdge > *pMesh, CVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::{\bf Vertex\+In\+Halfedge\+Iterator} (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Base\+Mesh}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$ $\ast$}]{p\+Mesh, }
+\item[{{\bf C\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a97fe9e495df1838bd1d3b65b19a733d2}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a97fe9e495df1838bd1d3b65b19a733d2}
+Vertex\+In\+Halfedge\+Iteartor constructor 
+\begin{DoxyParams}{Parameters}
+{\em p\+Mesh} & pointer to the current mesh \\
+\hline
+{\em v} & pointer to the current vertex \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 101 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!````~Vertex\+In\+Halfedge\+Iterator@{$\sim$\+Vertex\+In\+Halfedge\+Iterator}}
+\index{````~Vertex\+In\+Halfedge\+Iterator@{$\sim$\+Vertex\+In\+Halfedge\+Iterator}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Vertex\+In\+Halfedge\+Iterator()}{~VertexInHalfedgeIterator()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::$\sim${\bf Vertex\+In\+Halfedge\+Iterator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a8199a01c8990c6188c292e98129e93cd}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a8199a01c8990c6188c292e98129e93cd}
+\hyperlink{class_mesh_lib_1_1_vertex_in_halfedge_iterator}{Vertex\+In\+Halfedge\+Iterator} destructor 
+
+Definition at line 106 of file iterators.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!end@{end}}
+\index{end@{end}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{end()}{end()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ bool {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad391de8757ca6852b62cbba3032d2cc4}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad391de8757ca6852b62cbba3032d2cc4}
+Indicate whether all the in halfedges of the vertex have been transversed. 
+
+Definition at line 139 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{operator$\ast$()}{operator*()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge}$\ast$ {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_aa7f4149e715618aa2499ad8c89f902fa}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_aa7f4149e715618aa2499ad8c89f902fa}
+The current halfedge the iterator pointing to. 
+
+Definition at line 143 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{operator++()}{operator++()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::operator++ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a1f945b1fc9b3b0b367e535a2f0075d0d}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_a1f945b1fc9b3b0b367e535a2f0075d0d}
+prefix ++ operator, goes to the next ccw vertex in halfedge 
+
+Definition at line 111 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{operator++(int)}{operator++(int)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ void {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::operator++ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad578fa12f770dda7bc2b2889a8f20061}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad578fa12f770dda7bc2b2889a8f20061}
+postfix ++ operator, goes to the next ccw vertex in halfedge 
+
+Definition at line 123 of file iterators.\+h.
+
+\index{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}!value@{value}}
+\index{value@{value}!Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator@{Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}}
+\subsubsection[{\texorpdfstring{value()}{value()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class C\+Vertex , class C\+Edge , class C\+Face , class C\+Half\+Edge $>$ {\bf C\+Half\+Edge}$\ast$ {\bf Mesh\+Lib\+::\+Vertex\+In\+Halfedge\+Iterator}$<$ {\bf C\+Vertex}, {\bf C\+Edge}, {\bf C\+Face}, {\bf C\+Half\+Edge} $>$\+::value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad3fdaf0a91faf593c7f78e0cf2fd22ac}{}\label{class_mesh_lib_1_1_vertex_in_halfedge_iterator_ad3fdaf0a91faf593c7f78e0cf2fd22ac}
+The current halfedge the iterator pointing to. 
+
+Definition at line 135 of file iterators.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{iterators_8h}{iterators.\+h}\end{DoxyCompactItemize}

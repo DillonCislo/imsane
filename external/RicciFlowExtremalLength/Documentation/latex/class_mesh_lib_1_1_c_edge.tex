@@ -1,0 +1,186 @@
+\hypertarget{class_mesh_lib_1_1_c_edge}{}\section{Mesh\+Lib\+:\+:C\+Edge Class Reference}
+\label{class_mesh_lib_1_1_c_edge}\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+
+
+\hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} class, which is the base class of all kinds of edge classes.  
+
+
+
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+
+
+Collaboration diagram for Mesh\+Lib\+:\+:C\+Edge\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_lib_1_1_c_edge__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_edge_a513a0dc0e44f2592d516926c90763b67}{C\+Edge} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_edge_a06f2cccf7d71658e397d83205f4a2c29}{$\sim$\+C\+Edge} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$\& \hyperlink{class_mesh_lib_1_1_c_edge_a779a45a145714d9b177afb097ddfd5e6}{halfedge} (int id)
+\item 
+bool \hyperlink{class_mesh_lib_1_1_c_edge_a5fb31e9605d9f59fd89f74039bf4f9d9}{boundary} ()
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$\& \hyperlink{class_mesh_lib_1_1_c_edge_a5090261064156147ada856dea6e364f0}{other} (\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$he)
+\item 
+std\+::string \& \hyperlink{class_mesh_lib_1_1_c_edge_a295387b2b8521e365312dbc2be90ec9a}{string} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_edge_a18e3af9e9a7dc8e6f60a2483bb19ad24}{\+\_\+from\+\_\+string} ()
+\item 
+void \hyperlink{class_mesh_lib_1_1_c_edge_a420d6973d64a53c21ef4dc15c557b36f}{\+\_\+to\+\_\+string} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mesh_lib_1_1_c_half_edge}{C\+Half\+Edge} $\ast$ \hyperlink{class_mesh_lib_1_1_c_edge_a1d597f8d90c6c322ffbc5a454e7efb94}{m\+\_\+halfedge} \mbox{[}2\mbox{]}
+\item 
+std\+::string \hyperlink{class_mesh_lib_1_1_c_edge_a810f0a280e3a97d449386cc5cb6cce3b}{m\+\_\+string}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} class, which is the base class of all kinds of edge classes. 
+
+Definition at line 26 of file Edge.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!C\+Edge@{C\+Edge}}
+\index{C\+Edge@{C\+Edge}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{C\+Edge()}{CEdge()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Edge\+::\+C\+Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a513a0dc0e44f2592d516926c90763b67}{}\label{class_mesh_lib_1_1_c_edge_a513a0dc0e44f2592d516926c90763b67}
+\hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} constructor, set both halfedge pointers to be N\+U\+LL. 
+
+Definition at line 32 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!````~C\+Edge@{$\sim$\+C\+Edge}}
+\index{````~C\+Edge@{$\sim$\+C\+Edge}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{$\sim$\+C\+Edge()}{~CEdge()}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+Lib\+::\+C\+Edge\+::$\sim$\+C\+Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a06f2cccf7d71658e397d83205f4a2c29}{}\label{class_mesh_lib_1_1_c_edge_a06f2cccf7d71658e397d83205f4a2c29}
+\hyperlink{class_mesh_lib_1_1_c_edge}{C\+Edge} destructor. 
+
+Definition at line 36 of file Edge.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}}
+\index{\+\_\+from\+\_\+string@{\+\_\+from\+\_\+string}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+from\+\_\+string()}{_from_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Edge\+::\+\_\+from\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a18e3af9e9a7dc8e6f60a2483bb19ad24}{}\label{class_mesh_lib_1_1_c_edge_a18e3af9e9a7dc8e6f60a2483bb19ad24}
+Read the traits from the string. 
+
+Definition at line 61 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}}
+\index{\+\_\+to\+\_\+string@{\+\_\+to\+\_\+string}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+to\+\_\+string()}{_to_string()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+Lib\+::\+C\+Edge\+::\+\_\+to\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a420d6973d64a53c21ef4dc15c557b36f}{}\label{class_mesh_lib_1_1_c_edge_a420d6973d64a53c21ef4dc15c557b36f}
+Save the traits to the string. 
+
+Definition at line 65 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!boundary@{boundary}}
+\index{boundary@{boundary}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{boundary()}{boundary()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mesh\+Lib\+::\+C\+Edge\+::boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a5fb31e9605d9f59fd89f74039bf4f9d9}{}\label{class_mesh_lib_1_1_c_edge_a5fb31e9605d9f59fd89f74039bf4f9d9}
+whether the edge is on the boundary. 
+
+Definition at line 47 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!halfedge@{halfedge}}
+\index{halfedge@{halfedge}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{halfedge(int id)}{halfedge(int id)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ \& Mesh\+Lib\+::\+C\+Edge\+::halfedge (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a779a45a145714d9b177afb097ddfd5e6}{}\label{class_mesh_lib_1_1_c_edge_a779a45a145714d9b177afb097ddfd5e6}
+The halfedge attached to the current edge 
+\begin{DoxyParams}{Parameters}
+{\em id} & either 0 or 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the halfedge\mbox{[}id\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!other@{other}}
+\index{other@{other}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{other(\+C\+Half\+Edge $\ast$he)}{other(CHalfEdge *he)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ \& Mesh\+Lib\+::\+C\+Edge\+::other (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+Half\+Edge} $\ast$}]{he}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a5090261064156147ada856dea6e364f0}{}\label{class_mesh_lib_1_1_c_edge_a5090261064156147ada856dea6e364f0}
+The dual halfedge to the input halfedge 
+\begin{DoxyParams}{Parameters}
+{\em he} & halfedge attached to the current edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the other halfedge attached to the current edge 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!string@{string}}
+\index{string@{string}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{string()}{string()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string\& Mesh\+Lib\+::\+C\+Edge\+::string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_mesh_lib_1_1_c_edge_a295387b2b8521e365312dbc2be90ec9a}{}\label{class_mesh_lib_1_1_c_edge_a295387b2b8521e365312dbc2be90ec9a}
+The string of the current edge. 
+
+Definition at line 57 of file Edge.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!m\+\_\+halfedge@{m\+\_\+halfedge}}
+\index{m\+\_\+halfedge@{m\+\_\+halfedge}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{m\+\_\+halfedge}{m_halfedge}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Half\+Edge}$\ast$ Mesh\+Lib\+::\+C\+Edge\+::m\+\_\+halfedge\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_edge_a1d597f8d90c6c322ffbc5a454e7efb94}{}\label{class_mesh_lib_1_1_c_edge_a1d597f8d90c6c322ffbc5a454e7efb94}
+Pointers to the two halfedges attached to the current edge. 
+
+Definition at line 65 of file Edge.\+h.
+
+\index{Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}!m\+\_\+string@{m\+\_\+string}}
+\index{m\+\_\+string@{m\+\_\+string}!Mesh\+Lib\+::\+C\+Edge@{Mesh\+Lib\+::\+C\+Edge}}
+\subsubsection[{\texorpdfstring{m\+\_\+string}{m_string}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Mesh\+Lib\+::\+C\+Edge\+::m\+\_\+string\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_mesh_lib_1_1_c_edge_a810f0a280e3a97d449386cc5cb6cce3b}{}\label{class_mesh_lib_1_1_c_edge_a810f0a280e3a97d449386cc5cb6cce3b}
+The string associated to the current edge. 
+
+Definition at line 74 of file Edge.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mesh\+Lib/core/\+Mesh/\hyperlink{_edge_8h}{Edge.\+h}\end{DoxyCompactItemize}
