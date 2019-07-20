@@ -5,40 +5,42 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     % terms: surface tension, pressure, and attachment energy which fixes
     % the boundary to high gradients in probabilities from ilastik
     % training.
-    % 
-    % properties: 
+    %
+    % properties:
     %           defaultOptions : struct
-    %           pointCloud : 
+    %           pointCloud :
     %           options : struct
-    % 
+    %
     % options:  channel : channel of the stack to use (RFP, etc)
     %           ssfactor : sub-sampling factor used in the ilastik
     %           classifier.
     %           fileName: Name of the ilastik prediction file. Typically
     %               ending with Probabilities.h5 in Ilastik v1.1
     %           foreGroundChannel: the labeled used in ilastik as
-    %               foreground default is 1. (for two classes, 1 would then 
-    %               be the background).
+    %               foreground default is 1. (for two classes, 1 would then
+    %               be the second channel of the ilastik training).
+    %               Note that this is zero indexed, so 0 would be the first
+    %               channel.
     %           zdim: cylinder axis in matlab coords, 2 = x
     
     %---------------------------------------------------------------------
     % license
     %---------------------------------------------------------------------
-
+    
     % Copyright 2014 Idse Heemskerk, Sebastian Streichan, Noah Mitchell
     %
     % This file is part of ImSAnE.
-    % 
+    %
     % ImSAnE is free software: you can redistribute it and/or modify
     % it under the terms of the GNU General Public License as published by
     % the Free Software Foundation, either version 3 of the License, or
     % (at your option) any later version.
-    % 
+    %
     % ImSAnE is distributed in the hope that it will be useful,
     % but WITHOUT ANY WARRANTY; without even the implied warranty of
     % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     % GNU General Public License for more details.
-    % 
+    %
     % You should have received a copy of the GNU General Public License
     % along with ImSAnE.  If not, see <http://www.gnu.org/licenses/>.
     %
@@ -66,26 +68,28 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'mslsDir', './msls_output/', ...
             'ofn_ls', 'msls_apical_', ...
             'ofn_ply', 'mesh_apical_ms_', ...
-            'ms_scriptDir', '/mnt/data/code/gut_python/', ...
-            'timepoint', 0, ...
-            'zdim',2, ...
-            'pre_nu', -5, ...
-            'pre_smoothing', 1, ...
-            'ofn_smoothply', 'mesh_apical_',...
-            'mlxprogram', ...
+            'ms_scriptDir', '/mnt/data/code/gut_python/', ... 
+            'timepoint', 0, ... % which timepoint in the data to consider
+            'zdim',2, ... % Which dimension is the z dimension
+            'pre_nu', -5, ... % number of dilation/erosion passes for positive/negative values
+            'pre_smoothing', 1, ... % number of smoothing passes before running MS
+            'ofn_smoothply', 'mesh_apical_',... % the output file name (not including path directory)
+            'mlxprogram', ... % the name of the mlx program to use to smooth the results
             './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
-            'init_ls_fn', 'none', ...
-            'run_full_dataset', false, ...
-            'radius_guess', -1, ...
-            'dset_name', 'exported_data');      
+            'init_ls_fn', 'none', ... % the name of the initial level set to load, if any
+            'run_full_dataset', false, ... % run MS on a time series, not just one file
+            'radius_guess', -1, ... % radius of the initial guess sphere
+            'dset_name', 'exported_data', ... % the name of the dataset to load from h5
+            'save', false, ... % whether to save intermediate results
+            'center_guess', 'empty_string'); % xyz of the initial guess sphere ;
     end
     
     %---------------------------------------------------------------------
     % public methods
-    %---------------------------------------------------------------------    
-
+    %---------------------------------------------------------------------
+    
     methods
-         
+        
         % ------------------------------------------------------
         % constructor
         % ------------------------------------------------------
@@ -96,13 +100,13 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % radialEdgeDetector()
             
             this = this@surfaceDetection.surfaceDetector();
-        end 
+        end
         
         % ------------------------------------------------------
         % surface detection
         % ------------------------------------------------------
         
-        function detectSurface(this, initial_guess_fn)
+        function detectSurface(this, ~)
             % Detect surface in the stack with preset options.
             %
             % detectSurface(ply_guess)
@@ -117,15 +121,15 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 num2str(opts.channel), ...
                 ', ssfactor=' num2str(opts.ssfactor)...
                 ', fileName =' num2str(opts.fileName)...
-                ', fileGroundChannel =' num2str(opts.foreGroundChannel)...
+                ', foreGroundChannel =' num2str(opts.foreGroundChannel)...
                 ', zDim =' num2str(opts.zdim),'\n']);
             
             if isempty(opts.fileName)
                 error('Please provide a regular prediction from ilastik in h5 format.');
             end
-
+            
             %---------------------------------
-            % Segmentation of a prediction map from ilastik. 
+            % Segmentation of a prediction map from ilastik.
             %---------------------------------
             
             % load the exported data out of the ilastik prediction
@@ -142,14 +146,14 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             foreGround = opts.foreGroundChannel;
             
-            % ilastik internally swaps axes. 1: class, 2: y, 3: x 4 : z 
+            % ilastik internally swaps axes. 1: class, 2: y, 3: x 4 : z
             pred = permute(file,[3,2,4,1]);
             pred = pred(:,:,:,foreGround);
             pred = uint8(255*pred);
-           
+            
             % size of prediction
             idxPerm = circshift(1:3, [1 -opts.zdim]);
-
+            
             ySize = size(pred, idxPerm(1));
             xSize = size(pred, idxPerm(2));
             zSize = size(pred, idxPerm(3));
@@ -172,7 +176,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             post_nu = opts.post_nu ;
             post_smoothing = opts.post_smoothing ;
             exit_thres = opts.exit_thres ;
-            ofn_ply = opts.ofn_ply ; 
+            ofn_ply = opts.ofn_ply ;
             ofn_ls = opts.ofn_ls ;
             channel = opts.channel ;
             ms_scriptDir = opts.ms_scriptDir ;
@@ -186,10 +190,12 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % Radius of initial guess if init_ls_fn does not exist or is
             % not supplied
             radius_guess = opts.radius_guess ;
+            save = opts.save ;
+            center_guess = opts.center_guess ;
             
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
-                 mkdir(mslsDir)
+                mkdir(mslsDir)
             end
             
             % Convert the current image to a level set using morphological snakes
@@ -198,14 +204,14 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             scriptpath = fullfile(ms_scriptDir, 'run_morphsnakes.py') ;
             command = ['python ' scriptpath];
             % Check if we are running MS on a dataset or a single file
-            if run_full_dataset 
+            if run_full_dataset
                 if ~strcmp(run_full_dataset, 'none') ...
                         && ~strcmp(run_full_dataset, '')
                     use_dataset_command = true ;
                 else
                     use_dataset_command = false ;
                 end
-            else 
+            else
                 use_dataset_command = false ;
             end
             
@@ -235,13 +241,19 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             command = [command ' -smooth ' num2str(smoothing) ];
             command = [command ' -postsmooth ' num2str(post_smoothing) ];
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
+            if save
+                command = [command ' -save'] ;
+            end
+            if ~strcmp(center, 'empty_string')
+                command = [command ' -center_guess ' center_guess ];
+            end
             
             if radius_guess > 0
                 command = [command ' -rad0 ' num2str(radius_guess)] ;
             end
             
             % Check if previous time point's level set exists to use as a seed
-            % First look for supplied fn from detectOptions. 
+            % First look for supplied fn from detectOptions.
             % If not supplied (ie init_ls_fn is none or empty string, then
             % seek previous timepoint output from MS algorithm.
             if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
@@ -258,7 +270,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     ' -n ' num2str(niter) ] ;
             else
                 % The guess for the initial levelset does NOT exist, so use
-                % a sphere for the guess. 
+                % a sphere for the guess.
                 disp('Using default sphere for init_ls')
                 command = [command ' -n ' num2str(niter0)];
             end
@@ -268,7 +280,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 % Either copy the command to the clipboard
                 clipboard('copy', command);
                 % or else run it on the system
-                system(command) 
+                system(command)
             else
                 disp(['output PLY already exists: ', msls_mesh_outfn])
             end
@@ -276,7 +288,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % Clean up mesh file for this timepoint using MeshLab --------
             if use_dataset_command
                 % find all ms_...ply files in mslsDir, and smooth them all
-                files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply']))
+                files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply'])) ;
                 for i=1:length(files_to_smooth)
                     msls_mesh_outfn = files_to_smooth(i).name ;
                     PCfile = fullfile( mslsDir, msls_mesh_outfn );
@@ -284,80 +296,84 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     extension_outfn = split_fn{2} ;
                     mesh_outfn = [ofn_smoothply, extension_outfn] ;
                     outputMesh = fullfile(mslsDir, mesh_outfn);
-
-		    if ~exist( outputMesh, 'file')
-		        command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
-		            	   ' -s ' mlxprogram ' -om vn'];
-		        % Either copy the command to the clipboard
-		        clipboard('copy', command);
-		        % or else run it on the system
-		        disp(['running ' command])
-		        system(command) 
-		    else
-		        disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])
-		    end
-
+                    
+                    if ~exist( outputMesh, 'file')
+                        command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
+                            ' -s ' mlxprogram ' -om vn'];
+                        % Either copy the command to the clipboard
+                        clipboard('copy', command);
+                        % or else run it on the system
+                        disp(['running ' command])
+                        system(command)
+                    else
+                        disp(['t=', num2str(timepoint) ': smoothed mesh file found...'])
+                    end
+                    
                 end
             else
-		msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
-		PCfile = fullfile( mslsDir, msls_mesh_outfn );
-		mesh_outfn = [ofn_smoothply, num2str(timepoint, '%06d'), '.ply'];
-		outputMesh = fullfile(mslsDir, mesh_outfn);
-
-		if ~exist( outputMesh, 'file')
-		    command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
-		        	   ' -s ' mlxprogram ' -om vn'];
-		    % Either copy the command to the clipboard
-		    clipboard('copy', command);
-		    % or else run it on the system
-		    disp(['running ' command])
-		    system(command) 
-		else
-		    disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])
-		end
+                msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
+                PCfile = fullfile( mslsDir, msls_mesh_outfn );
+                mesh_outfn = [ofn_smoothply, num2str(timepoint, '%06d'), '.ply'];
+                outputMesh = fullfile(mslsDir, mesh_outfn);
+                
+                if ~exist( outputMesh, 'file')
+                    command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
+                        ' -s ' mlxprogram ' -om vn'];
+                    % Either copy the command to the clipboard
+                    clipboard('copy', command);
+                    % or else run it on the system
+                    disp(['running ' command])
+                    system(command)
+                else
+                    disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])
+                end
             end
-
+            
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            disp(['reading PLY ', outputMesh])
-            tmp = read_ply_mod(outputMesh);
-            vv = tmp.v ;
-            points = struct('x', vv(:, 1), 'y', vv(:, 2), 'z', vv(:, 3));
-            
-            % don't forget to rescale the data;
-            x = cat(1,points.x);
-            y = cat(1,points.y);
-            z = cat(1,points.z);     
-            pointCloud = [x,y,z];            
-            
-            %--------------------------------------------------
-            % scale point cloud to full size and set alignment
-            %--------------------------------------------------
-            
-            largePC = zeros(size(pointCloud));
-            for i = 1:3
-                largePC(:,i) = (pointCloud(:,i)-1)*opts.ssfactor + 1;
-            end
-            
-            largePC = sortrows(largePC, 3);
-            
-            debugMsg(2, 'setting ROI alignment based on zDim\n');
-            
-            ROI = surfaceDetection.RegionOfInterest(eye(4), eye(4));
-            if opts.zdim == 2 % i.e zp == x bc x is the second index
-                ROI.setAxes([0 1 0], [0 0 1], [1 0 0]);
-            elseif opts.zdim == 1    
-                ROI.setAxes([0 0 1], [1 0 0], [0 1 0]);
-            end
-            % we also want to set the ranges of the ROI, i.e. some bounding 
-            % box that contains the pointcloud which will be used by the
-            % fitter to determine its initial domain
-            xpRange = [1, xSize*opts.ssfactor];
-            ypRange = [1, ySize*opts.ssfactor];
-            zpRange = [1, zSize*opts.ssfactor];
-            ROI.setRanges(xpRange,ypRange,zpRange);
-            this.pointCloud = surfaceDetection.PointCloud(largePC,ROI);
-            this.pointCloud.determineROI(15);
+            if exist(outputMesh, 'file')
+                disp(['reading PLY ', outputMesh])
+                tmp = read_ply_mod(outputMesh);
+                vv = tmp.v ;
+                points = struct('x', vv(:, 1), 'y', vv(:, 2), 'z', vv(:, 3));
 
+                % don't forget to rescale the data;
+                x = cat(1,points.x);
+                y = cat(1,points.y);
+                z = cat(1,points.z);
+                pointCloud = [x,y,z];
+
+                %--------------------------------------------------
+                % scale point cloud to full size and set alignment
+                %--------------------------------------------------
+
+                largePC = zeros(size(pointCloud));
+                for i = 1:3
+                    largePC(:,i) = (pointCloud(:,i)-1)*opts.ssfactor + 1;
+                end
+
+                largePC = sortrows(largePC, 3);
+
+                debugMsg(2, 'setting ROI alignment based on zDim\n');
+
+                ROI = surfaceDetection.RegionOfInterest(eye(4), eye(4));
+                if opts.zdim == 2 % i.e zp == x bc x is the second index
+                    ROI.setAxes([0 1 0], [0 0 1], [1 0 0]);
+                elseif opts.zdim == 1
+                    ROI.setAxes([0 0 1], [1 0 0], [0 1 0]);
+                end
+                % we also want to set the ranges of the ROI, i.e. some bounding
+                % box that contains the pointcloud which will be used by the
+                % fitter to determine its initial domain
+                xpRange = [1, xSize*opts.ssfactor];
+                ypRange = [1, ySize*opts.ssfactor];
+                zpRange = [1, zSize*opts.ssfactor];
+                ROI.setRanges(xpRange,ypRange,zpRange);
+                this.pointCloud = surfaceDetection.PointCloud(largePC,ROI);
+                this.pointCloud.determineROI(15);
+            else
+                error(['Output mesh from detector not found! Sought: ' outputMesh])
+            end
+            
         end
         
         % ------------------------------------------------------
@@ -371,7 +387,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % prepareIlastik(stack)
             
             % Accoring to the specified options sub-sample the stack and
-            % save it for analysis with ilastik. 
+            % save it for analysis with ilastik.
             
             opts = this.options;
             
@@ -381,11 +397,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             if exist(fileName,'file')
                 delete(fileName)
-            end    
-                  
+            end
+            
             dsetName = '/inputData';
             
-            for c = 1 : length(im)                
+            for c = 1 : length(im)
                 image(:,:,:,c) = im{c}(1:opts.ssfactor:end,1:opts.ssfactor:end,1:opts.ssfactor:end);
             end
             if ndims(image)==4
@@ -402,7 +418,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % Check point cloud against original image
         % ------------------------------------------------------
         function inspectQuality(this, inspectOpts, stack)
-            %   inspect quality of fit in single slice in dimension specified 
+            %   inspect quality of fit in single slice in dimension specified
             %   by options and display image.
             %
             %   inspectQuality(inspectOpts, stack)
@@ -417,7 +433,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 debugMsg(2, ['WARNING: sub-sampled point cloud taken from different'...
                     ' plane, may look a little off\n']);
             end
-
+            
             inspectQuality@surfaceDetection.surfaceDetector(this, inspectOpts, stack);
         end
         
