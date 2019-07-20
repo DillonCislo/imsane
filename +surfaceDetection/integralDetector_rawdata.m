@@ -237,6 +237,12 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
             command = [command ' -dset_name ' dset_name ] ;
             command = [command ' -dtype h5 -clip ' num2str(clip) ] ;
+            if save
+                command = [command ' -save'] ;
+            end
+            if ~strcmp(center_guess, 'empty_string')
+                command = [command ' -center_guess ' center_guess ];
+            end
             
             if radius_guess > 0
                 command = [command ' -rad0 ' num2str(radius_guess)] ;

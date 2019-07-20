@@ -244,7 +244,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             if save
                 command = [command ' -save'] ;
             end
-            if ~strcmp(center, 'empty_string')
+            if ~strcmp(center_guess, 'empty_string')
                 command = [command ' -center_guess ' center_guess ];
             end
             
