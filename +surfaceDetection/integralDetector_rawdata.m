@@ -16,9 +16,6 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
     %           classifier.
     %           fileName: Name of the ilastik prediction file. Typically
     %               ending with Probabilities.h5 in Ilastik v1.1
-    %           foreGroundChannel: the labeled used in ilastik as
-    %               foreground default is 1. (for two classes, 1 would then 
-    %               be the background).
     %           zdim: cylinder axis in matlab coords, 2 = x
     
     %---------------------------------------------------------------------

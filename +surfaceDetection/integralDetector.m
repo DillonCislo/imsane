@@ -17,9 +17,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     %           fileName: Name of the ilastik prediction file. Typically
     %               ending with Probabilities.h5 in Ilastik v1.1
     %           foreGroundChannel: the labeled used in ilastik as
-    %               foreground default is 1. (for two classes, 1 would then
-    %               be the second channel of the ilastik training).
-    %               Note that this is zero indexed, so 0 would be the first
+    %               foreground default is 2. (1 would then
+    %               be the first channel of the ilastik training).
+    %               Note that this is 1-indexed, so 1 would be the first
     %               channel.
     %           zdim: cylinder axis in matlab coords, 2 = x
     
@@ -192,7 +192,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             radius_guess = opts.radius_guess ;
             save = opts.save ;
             center_guess = opts.center_guess ;
-            
+                        
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
                 mkdir(mslsDir)
@@ -241,6 +241,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             command = [command ' -smooth ' num2str(smoothing) ];
             command = [command ' -postsmooth ' num2str(post_smoothing) ];
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
+            command = [commadn ' -channel ' num2str(foreGroundChannel - 1) ] ;
             if save
                 command = [command ' -save'] ;
             end
