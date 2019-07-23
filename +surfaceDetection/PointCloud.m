@@ -107,13 +107,104 @@ classdef PointCloud < handle_light
         % point cloud alignment
         % ------------------------------------------------------
         
-        function relativeAlign = determineROI(this, margin)
+%         function relativeAlign = determineROI(this, margin)
+%             % DETERMINEROI Set ROI with from point cloud
+%             %
+%             % relativeROI = determinROI(margin)
+%             %
+%             % margin: margin of bounding box around the point cloud
+%             %
+%             % alignment based on the principle axes and the centroid 
+%             % boundingbox (xpRange, ..) on points in this frame
+%             %
+%             % ROI has the alignment properties:
+%             %   - xp yp zp: the new coordinate axes in the old frame these are 
+%             %   the principal axes unless the eigenvalues are near degenerate
+%             %   - originp : the new origin provided by the centroid
+%             %   - R, T: rotation and translation the new coordinates
+%             %   - theta, phi, psi : the angles that define xp, yp, zp
+%             %
+%             % relativeAlign is the ROI being set relative to the current
+%             % this is useful when updating multiple pointclouds
+%             %
+%             % See also surfaceDetection.PointCloud.determineRanges
+%             
+%             % calculate moments for alignment
+%             [originp, M] = this.getMoments();
+% 
+%             x = [1 0 0]';
+%             z = [0 0 1]';
+% 
+%             % major axis is z-axis, the others are arbitrary
+%             [V, D]= eig(M);
+%             D = diag(D);
+% 
+%             % sort eigenvalues by size
+%             [~,idx] = sort(D, 'descend');
+% 
+%             % if largest ev not much larger than smallest, do nothing
+%             if ( D(idx(1)) - D(idx(3)) )/( D(idx(1)) + D(idx(3)) ) < 0.1
+%                 disp('all components are similar, returning identity');
+%                 % don't return yet. In this case we need to also update the
+%                 % roi!
+%                 
+%                 relativeAlign = surfaceDetection.RegionOfInterest(eye(4), eye(4));
+%                 relativeAlign.setAxes(this.ROI.xp,this.ROI.yp,this.ROI.zp);
+%                 relativeAlign.setOrigin(originp);
+%             
+%                 % the current alignment should be composed with the relative
+%                 % alignment found here
+%             
+%                 this.setROI(relativeAlign);
+%             
+%                 this.determineRanges(margin);
+%                 return;
+%             % else make the principle axis the z-axis
+%             else
+%                 zp = V(:, idx(1));
+%             end
+%             zp = real(zp);
+%             % if the remaining eigenvalues are not very different, keep x and y in the
+%             % same planes
+%             if ( D(idx(2)) - D(idx(3)) )/( D(idx(2)) + D(idx(3)) ) < 0.1
+%                 debugMsg(2, 'smaller eigenvalues are similar, keeping x and y in plane\n');
+%                 yp = cross(zp, x);
+%                 yp = yp/norm(yp);
+%                 xp = cross(yp, zp);
+%             % else make the second axis thee y axis
+%             else
+%                 yp = V(:, idx(2));
+%                 xp = cross(yp, zp);
+%             end
+%             
+%             relativeAlign = surfaceDetection.RegionOfInterest(eye(4), eye(4));
+%             relativeAlign.setAxes(xp',yp',zp');
+%             relativeAlign.setOrigin(originp);
+%             
+%             % the current alignment should be composed with the relative
+%             % alignment found here
+%             
+%             this.setROI(relativeAlign);
+%             this.determineRanges(margin);
+%         end
+
+
+          % ------------------------------------------------------
+        % point cloud alignment
+        % ------------------------------------------------------
+        
+        function determineROI(this, margin, varargin)
             % DETERMINEROI Set ROI with from point cloud
             %
-            % relativeROI = determinROI(margin)
+            % determinROI(margin)
             %
             % margin: margin of bounding box around the point cloud
-            %
+            % varargin : min_thres and/or zp 
+            %       - min_thres (float): the smallest eigenvalue 
+            %         difference to discriminate between x and y directions 
+            %       - zp (vector 1x3) : the reference axis
+            %         (typically the AP axis or the long axis of the object) 
+            % 
             % alignment based on the principle axes and the centroid 
             % boundingbox (xpRange, ..) on points in this frame
             %
@@ -124,59 +215,103 @@ classdef PointCloud < handle_light
             %   - R, T: rotation and translation the new coordinates
             %   - theta, phi, psi : the angles that define xp, yp, zp
             %
-            % relativeAlign is the ROI being set relative to the current
-            % this is useful when updating multiple pointclouds
-            %
             % See also surfaceDetection.PointCloud.determineRanges
             
             % calculate moments for alignment
+                      
             [originp, M] = this.getMoments();
-
-            x = [1 0 0]';
-            z = [0 0 1]';
-
-            % major axis is z-axis, the others are arbitrary
-            [V, D]= eig(M);
-            D = diag(D);
-
-            % sort eigenvalues by size
-            [~,idx] = sort(D, 'descend');
-
-            % if largest ev not much larger than smallest, do nothing
-            if ( D(idx(1)) - D(idx(3)) )/( D(idx(1)) + D(idx(3)) ) < 0.1
-                disp('all components are similar, returning identity');
-                % don't return yet. In this case we need to also update the
-                % roi!
-                
-                relativeAlign = surfaceDetection.RegionOfInterest(eye(4), eye(4));
-                relativeAlign.setAxes(this.ROI.xp,this.ROI.yp,this.ROI.zp);
-                relativeAlign.setOrigin(originp);
             
-                % the current alignment should be composed with the relative
-                % alignment found here
             
-                this.setROI(relativeAlign);
-            
-                this.determineRanges(margin);
-                return;
-            % else make the principle axis the z-axis
+            % Check if we supply zp. If not compute ROI from points
+            if nargin < 3
+                % We need to compute zp and have not provided a minimum
+                % threshold. If no additional arguments are given, use
+                % defaults.
+                compute_xyzp = true ;
+                min_thres = 0.1 ;
+                disp('Setting minimum threshold to 0.1')
             else
-                zp = V(:, idx(1));
+                % If there are 4 arguments, then the last one is min_thres
+                if nargin > 3
+                    if ~isempty(varargin{1}) 
+                        compute_xyzp = false ;
+                        zp = varargin{1}' ;
+                        min_thres = varargin{2} ;
+                    end
+                else
+                    % There are only 3 arguments. The last one might be zp
+                    % or min_thres. If zp is fed, it is a vector of length
+                    % length(zp) > 1. Else we have fed in min_thres.
+                    if length(varargin{1}) > 1
+                        compute_xyzp = false ;
+                        zp = varargin{1}' ;
+                        min_thres = 0.1 ;
+                        disp('Setting minimum threshold to 0.1')
+                    else
+                        compute_xyzp = true ;
+                        min_thres = varargin{1} ;
+                    end
+                end
             end
-            zp = real(zp);
-            % if the remaining eigenvalues are not very different, keep x and y in the
-            % same planes
-            if ( D(idx(2)) - D(idx(3)) )/( D(idx(2)) + D(idx(3)) ) < 0.1
-                debugMsg(2, 'smaller eigenvalues are similar, keeping x and y in plane\n');
-                yp = cross(zp, x);
+            
+            if compute_xyzp
+                x = [1 0 0]';
+                z = [0 0 1]';
+
+                % major axis is z-axis, the others are arbitrary
+                [V, D]= eig(M);
+                D = diag(D);
+
+                % sort eigenvalues by size
+                [~,idx] = sort(D, 'descend');
+
+                % if largest ev not much larger than smallest, do nothing
+                if ( D(idx(1)) - D(idx(3)) )/( D(idx(1)) + D(idx(3)) ) < min_thres
+                    disp('all components are similar, returning identity');
+                    % don't return yet. In this case we need to also update the
+                    % roi!
+
+                    relativeAlign = surfaceDetection.RegionOfInterest(eye(4), eye(4));
+                    relativeAlign.setAxes(this.ROI.xp,this.ROI.yp,this.ROI.zp);
+                    relativeAlign.setOrigin(originp);
+
+                    % the current alignment should be composed with the relative
+                    % alignment found here
+
+                    this.setROI(relativeAlign);
+
+                    this.determineRanges(margin);
+                    return;
+                % else make the principle axis the z-axis
+                else
+                    zp = V(:, idx(1));
+                end
+                zp = real(zp);
+                % if the remaining eigenvalues are not very different, keep x and y in the
+                % same planes
+                if ( D(idx(2)) - D(idx(3)) )/( D(idx(2)) + D(idx(3)) ) < min_thres
+                    debugMsg(2, 'smaller eigenvalues are similar, keeping x and y in plane\n');
+                    yp = cross(zp, x);
+                    yp = yp/norm(yp);
+                    xp = cross(yp, zp);
+                % else make the second axis thee y axis
+                else
+                    yp = V(:, idx(2));
+                    xp = cross(yp, zp);
+                end
+            else
+                % We have supplied zp as an argument
+                x = [1,0,0]';
+                % NOTE: zp has already been assigned from varargins.
+                % zp is the axis we want to use as reference axis. 
+                zp = zp/norm(zp);
+                yp = cross(zp,x);
                 yp = yp/norm(yp);
-                xp = cross(yp, zp);
-            % else make the second axis thee y axis
-            else
-                yp = V(:, idx(2));
-                xp = cross(yp, zp);
+                xp = cross(yp,zp);
+                xp = xp/norm(xp);
+                % xp.currentROI.setAxes(xp,yp,zp);
             end
-            
+                        
             relativeAlign = surfaceDetection.RegionOfInterest(eye(4), eye(4));
             relativeAlign.setAxes(xp',yp',zp');
             relativeAlign.setOrigin(originp);
@@ -185,8 +320,10 @@ classdef PointCloud < handle_light
             % alignment found here
             
             this.setROI(relativeAlign);
+            
             this.determineRanges(margin);
         end
+        
         
         function determineRanges(this, margin)
             % DETERMINERANGES Boundingbox (xpRange, ..) based on point cloud

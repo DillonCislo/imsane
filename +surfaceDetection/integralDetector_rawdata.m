@@ -48,35 +48,39 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
     
     properties (Constant)
         % default detector options
-        defaultOptions = struct('channel', 1, 'ssfactor', 4,...
-            'niter', 40, ...
-            'niter0', 90, ...
-            'lambda1', 1, ...
-            'lambda2', 2, ...
-            'nu', 0.3, ...
-            'smoothing', 1,...
-            'post_nu', 3, ... % number of dilation/erosion passes before running MS
-            'post_smoothing', 2,... % number of smoothing passes after running MS
-            'exit_thres', 1e-6, ... # the largest fractional change of the level set between iterations below which we exit
-            'fileName',[], ... % the h5 filename to load to run morphsnakes 
-            'mslsDir', './msls_output/', ... % the output directory for the PLYs and implicit level sets
-            'ofn_ls', 'msls_apical_', ... % the filename base for the implicit level sets
-            'ofn_ply', 'mesh_apical_ms_', ... % the filename base for the output PLYs
-            'ms_scriptDir', '/mnt/data/code/gut_python/', ... % 
-            'timepoint', 0, ...  % which timepoint in the data to consider
-            'zdim',2, ... % Which dimension is the z dimension 
+        defaultOptions = struct('channel', 1, ...
+            'ssfactor', 4,... % subsampling factor: downsampling of raw data
+            'niter', 40, ... % how many iterations before exit if no convergence
+            'niter0', 90, ... % how many iterations before exit if no convergence for first timepoint
+            'lambda1', 1, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
+            'lambda2', 2, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
+            'nu', 0.3, ... % float: how many pressure (dilation/erosion) steps per iteration
+            'smoothing', 1,... % float: how many smoothing steps per iteration (can be <1)
+            'post_nu', 3, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
+            'post_smoothing', 2,... % how many iterations of smoothing after convergence
+            'exit_thres', 1e-6, ... % convergence threshold: maximum difference between subsequent level sets upon which to exit algorithm ('close enough')
+            'foreGroundChannel',2, ... % the index of the first dimension of the 4d input data (if 4d)
+            'fileName',[], ... % the filename of h5 to train on
+            'mslsDir', './msls_output/', ...  % the directory for all output data/images
+            'ofn_ls', 'msls_apical_', ...  % the output filename for level sets
+            'ofn_ply', 'mesh_apical_ms_', ... % the output filename for PLY files
+            'ms_scriptDir', '/mnt/data/code/morphsnakes_wrapper/', ... % the directory containing run_morphsnakes.py
+            'timepoint', 0, ... % which timepoint in the data to consider
+            'zdim',2, ... % Which dimension is the z dimension
             'pre_nu', -5, ... % number of dilation/erosion passes for positive/negative values
             'pre_smoothing', 1, ... % number of smoothing passes before running MS
-            'ofn_smoothply', 'mesh_apical_',...  % the output file name (not including path directory)
-            'mlxprogram', ...  % the name of the mlx program to use to smooth the results
-            './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',... 
+            'ofn_smoothply', 'mesh_apical_',... % the output file name (not including path directory)
+            'mlxprogram', ... % the name of the mlx program to use to smooth the results
+            './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
             'init_ls_fn', 'none', ... % the name of the initial level set to load, if any
-            'run_full_dataset', false, ...  % run MS on a time series, not just one file
-            'radius_guess', -1, ...  % radius of the initial guess sphere
-            'dset_name', 'inputData', ... % the name of the dataset to load from h5
-            'clip', -1, ...  % whether to clip the intensity of the raw data
+            'run_full_dataset', false, ... % run MS on a time series, not just one file
+            'radius_guess', -1, ... % radius of the initial guess sphere
+            'dset_name', 'exported_data', ... % the name of the dataset to load from h5
+            'clip', -1, ...  % if positive, value to clip the intensity of the raw data
             'save', false, ... % whether to save intermediate results
-            'center_guess', 'empty_string'); % xyz of the initial guess sphere 
+            'center_guess', 'empty_string', ... % xyz of the initial guess sphere ;
+            'plot_mesh3d', false);  % if save is true, plot intermediate results in 3d 
+        
     end
     
     %---------------------------------------------------------------------
@@ -183,6 +187,7 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             dset_name = opts.dset_name ;
             save = opts.save ;
             center_guess = opts.center_guess ;
+            plot_mesh3d = opts.plot_mesh3d ;
             
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -234,6 +239,9 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
             command = [command ' -dset_name ' dset_name ] ;
             command = [command ' -dtype h5 -clip ' num2str(clip) ] ;
+            if plot_mesh3d
+                command = [command ' -plot_mesh3d' ] ;
+            end
             if save
                 command = [command ' -save'] ;
             end
@@ -293,7 +301,7 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
                     disp(['running ' command])
                     system(command) 
                 else
-                    error(['mlx program not found: ' PCfile])
+                    error(['unsmoothed PLY not found: ' PCfile])
                 end
             else
                 disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])

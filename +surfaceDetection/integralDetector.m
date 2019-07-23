@@ -53,22 +53,23 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     
     properties (Constant)
         % default detector options
-        defaultOptions = struct('channel', 1, 'ssfactor', 4,...
-            'niter', 40, ...
-            'niter0', 90, ...
-            'lambda1', 1, ...
-            'lambda2', 2, ...
-            'nu', 0.3, ...
-            'smoothing', 1,...
-            'post_nu', 3, ...
-            'post_smoothing', 2,...
-            'exit_thres', 1e-6, ...
-            'foreGroundChannel',2, ...
-            'fileName',[], ...
-            'mslsDir', './msls_output/', ...
-            'ofn_ls', 'msls_apical_', ...
-            'ofn_ply', 'mesh_apical_ms_', ...
-            'ms_scriptDir', '/mnt/data/code/gut_python/', ... 
+        defaultOptions = struct('channel', 1, ...
+            'ssfactor', 4,... % subsampling factor: downsampling of raw data
+            'niter', 40, ... % how many iterations before exit if no convergence
+            'niter0', 90, ... % how many iterations before exit if no convergence for first timepoint
+            'lambda1', 1, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
+            'lambda2', 2, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
+            'nu', 0.3, ... % float: how many pressure (dilation/erosion) steps per iteration
+            'smoothing', 1,... % float: how many smoothing steps per iteration (can be <1)
+            'post_nu', 3, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
+            'post_smoothing', 2,... % how many iterations of smoothing after convergence
+            'exit_thres', 1e-6, ... % convergence threshold: maximum difference between subsequent level sets upon which to exit algorithm ('close enough')
+            'foreGroundChannel',2, ... % the index of the first dimension of the 4d input data (if 4d)
+            'fileName',[], ... % the filename of h5 to train on
+            'mslsDir', './msls_output/', ...  % the directory for all output data/images
+            'ofn_ls', 'msls_apical_', ...  % the output filename for level sets
+            'ofn_ply', 'mesh_apical_ms_', ... % the output filename for PLY files
+            'ms_scriptDir', '/mnt/data/code/morphsnakes_wrapper/', ... % the directory containing run_morphsnakes.py
             'timepoint', 0, ... % which timepoint in the data to consider
             'zdim',2, ... % Which dimension is the z dimension
             'pre_nu', -5, ... % number of dilation/erosion passes for positive/negative values
@@ -81,7 +82,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'radius_guess', -1, ... % radius of the initial guess sphere
             'dset_name', 'exported_data', ... % the name of the dataset to load from h5
             'save', false, ... % whether to save intermediate results
-            'center_guess', 'empty_string'); % xyz of the initial guess sphere ;
+            'center_guess', 'empty_string', ... % xyz of the initial guess sphere ;
+            'plot_mesh3d', false, ...  % if save is true, plot intermediate results in 3d 
+            'dtype', 'h5') ; % h5 or npy: use hdf5 or numpy file format for input and output ls
     end
     
     %---------------------------------------------------------------------
@@ -192,6 +195,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             radius_guess = opts.radius_guess ;
             save = opts.save ;
             center_guess = opts.center_guess ;
+            plot_mesh3d = opts.plot_mesh3d ;
+            dtype = opts.dtype ; 
                         
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -228,7 +233,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 prob_infn = [opts.fileName, '_Probabilities.h5'] ;
                 command = [command ' -i ' prob_infn ] ;
                 msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d'), '.ply'];
-                ls_outfn = [ofn_ls, num2str(timepoint, '%06d'), '.npy'];
+                ls_outfn = [ofn_ls, num2str(timepoint, '%06d'), '.', dtype];
             end
             outputLs = fullfile(mslsDir, ls_outfn) ;
             outputMesh = fullfile(mslsDir, msls_mesh_outfn) ;
@@ -241,7 +246,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             command = [command ' -smooth ' num2str(smoothing) ];
             command = [command ' -postsmooth ' num2str(post_smoothing) ];
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
-            command = [commadn ' -channel ' num2str(foreGroundChannel - 1) ] ;
+            command = [command ' -channel ' num2str(foreGround - 1) ] ;
+            command = [command ' -dtype ' dtype ] ; 
+            if plot_mesh3d
+                command = [command ' -plot_mesh3d' ] ;
+            end
             if save
                 command = [command ' -save'] ;
             end
@@ -257,12 +266,15 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % First look for supplied fn from detectOptions.
             % If not supplied (ie init_ls_fn is none or empty string, then
             % seek previous timepoint output from MS algorithm.
+            
+            disp(init_ls_fn)
             if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
                 % User has NOT supplied fn from detectOptions
-                init_ls_fn = [mslsDir 'msls_apical_', ...
-                    num2str(timepoint - 1, '%06d' ) '.npy'] ;
+                init_ls_fn = ['msls_apical_', ...
+                    num2str(timepoint - 1, '%06d' ) '.' dtype] ;
             end
             
+            disp(init_ls_fn)
             if exist(fullfile(mslsDir, init_ls_fn), 'file')
                 % It does exist. Use it as a seed (initial level set)
                 disp('running using initial level set')
