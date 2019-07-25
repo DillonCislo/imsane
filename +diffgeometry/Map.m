@@ -210,8 +210,8 @@ classdef Map < handle_light
                                 ' size (yxz, ceil((size-ss0+1)/subsampling)) ' num2str(domainSize)]);
                         end
                     catch
-                        error(['Map.m: domainSize = ', domainSize, ' but ' ...
-                              'size(definition{i}) = ', size(definition{i})])
+                        error(['Map.m: domainSize = ', num2str(domainSize), ' but ' ...
+                              'size(definition{i}) = ', num2str(size(definition{i}))])
                     end
                 end
                 
