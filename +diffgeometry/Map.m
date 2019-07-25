@@ -203,10 +203,15 @@ classdef Map < handle_light
                     
                     domainSize(1:2) = domainSize([2 1]); % matlab sucks yx -> xy
                     
-                    if any(domainSize ~= size(definition{i})) 
-                        error(['numerical map definition size ' num2str(size(definition{i}))...
-                            ' should match domain ' this.domain.name...
-                            ' size (yxz, ceil((size-ss0+1)/subsampling)) ' num2str(domainSize)]);
+                    try
+                        if any(domainSize ~= size(definition{i})) 
+                            error(['numerical map definition size ' num2str(size(definition{i}))...
+                                ' should match domain ' this.domain.name...
+                                ' size (yxz, ceil((size-ss0+1)/subsampling)) ' num2str(domainSize)]);
+                        end
+                    catch
+                        error(['Map.m: domainSize = ', domainSize, ' but ' ...
+                              'size(definition{i}) = ', size(definition{i})])
                     end
                 end
                 
@@ -424,9 +429,6 @@ classdef Map < handle_light
                 debugMsg(2, 'numeric\n');
                 
                 imp = mp.apply; 
-%                 if numel(imp) == 3
-%                     figure, imshow(imp{3},[])
-%                 end
                 compDef = this.apply(imp);
 
             % analytic composition 
