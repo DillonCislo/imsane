@@ -1,6 +1,6 @@
 import h5py
 import argparse
-
+import numpy as np
 
 """Unpack a N-Dim hdf5 file into an (N-1)-Dim HDF5 file.
 
@@ -36,28 +36,34 @@ if args.data_filename in ['empty_string', 'none', '']:
 f = h5py.File(args.data_filename, 'r')
 dset = f[args.dataset_name][:]
 f.close()
+print('np.shape(dset) = ', np.shape(dset))
 
 # Unpack the dataset
-slc = [slice(None)] * len(dset.shape)
+slc = [slice(None)] * len(np.shape(dset))
 slc[args.unpacking_dimension] = 0
+lengthdset = len(np.shape(dset))
 
-for ii in range(len(dset[slc])):
+for ii in range(np.shape(dset)[args.unpacking_dimension]):
+    print('ii = ' + str(ii))
     # First make a list for slicing all the axes
-    slc = [slice(None)] * len(dset.shape)
+    slc = [slice(None)] * lengthdset
     slc[args.unpacking_dimension] = ii
+
     # Take this 'frame' from the stack
-    frame = dset[slc]
+    # Could use numpy's take, but this copies things
+    # frame = dset.take(indices=ii, axis=args.unpacking_dimension)
+    frame = dset[tuple(slc)]
 
     # Save this (N-1)D frame to disk
     if 'wildcard' in args.output_filename:
-        indexstr = print(ii.zfill(args.indexsz))
+        indexstr = '{0:0d}'.format(ii).rjust(args.indexsz, '0')
         outfn = args.output_filename.replace('wildcard', indexstr)
     else:
         outfn = args.output_filename
         print('WARNING: Potential overwrite problem: writing to ' + outfn)
 
-    f = h5py.File(args.outfn, 'w')
-    dset = f.create_dataset(args.output_dataset_name, data=frame, chunks=True)
+    f = h5py.File(outfn, 'w')
+    outdset = f.create_dataset(args.output_dataset_name, data=frame, chunks=True)
     f.close()
 
 
