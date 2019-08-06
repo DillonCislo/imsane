@@ -91,6 +91,7 @@ classdef cylinderMeshWrapper < surfaceFitting.meshWrapper
             this.fitOptions.translation     = eye(4);
             this.fitOptions.fixResolution   = 0;
             this.fitOptions.resolution      = [];
+            this.fitOptions.phase           = 0;
             
             % initialize fittedParam
             this.fittedParam = struct('mesh', [], 'submeshes', [],...
@@ -146,6 +147,8 @@ classdef cylinderMeshWrapper < surfaceFitting.meshWrapper
                 
                 points = this.fittedParam.mesh.v;
                 
+                phase = this.fitOptions.phase;
+                
                 if all([sum(sum((this.fitOptions.rotation-eye(4)).^2)),...
                         sum(sum((this.fitOptions.translation-eye(4)).^2))]==0) || ...
                         this.fitOptions.fixAxis == 0
@@ -169,12 +172,16 @@ classdef cylinderMeshWrapper < surfaceFitting.meshWrapper
                 alignedPoints = (R*T*pointsHomogenous')';
                 alignedPoints = alignedPoints(:,1:3);
                 
-    
+                % add a phase to rotate the pullback
                 z   = alignedPoints(:,3); %  u
-                phi = atan2(alignedPoints(:,2),alignedPoints(:,1))+pi; % v
+                phi = atan2(alignedPoints(:,2),alignedPoints(:,1))+phase; % v
                 r   = sqrt( (alignedPoints(:,1)).^2+(alignedPoints(:,2)).^2 );
                 
+                % Add pi/2 because of MATLAB x<->y bullshit
+                phi = wrapTo2Pi(phi+pi/2) ;
+                
                 if strcmp(chartName, 'cylinder2')
+                    % todo: use wrapToPi() or wrapTo2Pi()
                     phi = mod(phi + (phi<pi)*pi + (phi>pi)*pi,2*pi);
                 end
                 
