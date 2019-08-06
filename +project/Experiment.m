@@ -277,7 +277,29 @@ classdef Experiment < handle_light
             end
         end
         
+        %==========ADDITION BY Pieter Derksen 8/5/2019=================
+        
         %------------------------------------------------------
+        % Set the current time without loading the data
+        %------------------------------------------------------
+        
+        function setTime(this, t)
+            % Set the current time
+            %
+            % setTime(t)
+            %
+            % sets the current time to t
+            if ~ismember(t, this.fileMeta.timePoints)
+                error(['The specified time point ' num2str(t)... 
+                    ' is not in the list of available time points.']);
+            end
+            this.currentTime = t;
+            this.expMeta.fitTime = t;
+        end
+        
+        %------------------------------------------------------
+        
+        %======= END ADDITION BY Pieter Derksen ======================
         
         function loadStack(this, varargin)
             % Load stack from disc into project.
