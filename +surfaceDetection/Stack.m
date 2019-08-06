@@ -57,13 +57,33 @@ classdef Stack < handle_light
         imageSize;      % size of the image [x y z] (actual data is [y x z])
     end
     
+    properties (Constant = true)
+        
+        % defines the possible stack types as FiniteSet (e.g. grayscale_16bit)
+        imageSpaces = struct(...
+            'binary', diffgeometry.FiniteSet('binary', {[0 1]}, 1),... 
+            'grayscale_16bit', diffgeometry.FiniteSet('grayscale_16bit',...
+                                                {[0 2^(16)-1]}, 1),...
+            'grayscale_8bit', diffgeometry.FiniteSet('grayscale_8bit',...
+                                                        {[0 255]}, 1),...
+            'RGB_8bit', diffgeometry.FiniteSet('RGB_8bit',...
+                                {[0 255], [0 255], [0 255]}, [1 1 1]),...
+            'RGB_16bit', diffgeometry.FiniteSet('RGB_16bit',...
+                    {[0 2^(16)-1], [0 2^(16)-1], [0 2^(16)-1]}, [1 1 1]),...
+            'twoColor_8bit', diffgeometry.FiniteSet('twoColor_8bit',...
+                                {[0 255], [0 255]}, [1 1]),...
+            'twoColor_16bit', diffgeometry.FiniteSet('twoColor_16bit',...
+                                {[0 2^(16)-1], [0 2^(16)-1]}, [1 1])...
+            );
+    end
+    
 	%---------------------------------------------------------------------
     % protected methods
     %---------------------------------------------------------------------
     
     methods (Access = protected, Static)
        
-        function imageSpace = detectStackType(stack)
+        function [type nChannels] = detectStackType(stack)
             % DETECTSTACKTYPE Make a best guess of the stack type
             %
             % [type nChannels] = detectStackType(stack)
@@ -96,25 +116,24 @@ classdef Stack < handle_light
                 stackClass = class(stack{1});
             end
             
-            channelPrefix = [num2str(nChannels) 'channel'];
+            % assign type
+            if nChannels == 1
+                channelPrefix = 'grayscale';
+            elseif nChannels == 2
+                channelPrefix = 'twoColor';
+            elseif nChannels == 3
+                channelPrefix = 'RGB';
+            else
+                error('more than 3 channels?');
+            end
             
             if strcmp(stackClass, 'uint8')
                 type = [channelPrefix '_8bit'];
-                maxval = 2^5-1;
             elseif strcmp(stackClass, 'uint16');
                 type = [channelPrefix '_16bit'];
-                maxval = 2^(16)-1;
             else
                 error('unknown stack type');
             end
-            
-            boundary = {};
-            stepsize = [];
-            for i = 1:nChannels
-                boundary = [boundary, [0 maxval]];
-                stepsize = [stepsize 1];
-            end
-            imageSpace = diffgeometry.FiniteSet(type, boundary, stepsize);
         end 
     end
     
@@ -133,7 +152,7 @@ classdef Stack < handle_light
             %
             % Stack(stack)
             % Stack(stack, resolution)
-            % Stack(stack, resolution, description)
+            % Stack(stack, resolution, description, type)
             %
             % stack:        4D stack with the 4 dimension color (or 3D for
             %               greyscale) or a cell array, e.g. {R,G,B}
@@ -146,12 +165,21 @@ classdef Stack < handle_light
             if isempty(stack)
                 return;
             end
-            imageSpace = this.detectStackType(stack);
-            nChannels = imageSpace.dimension;
+
+            % if stack type was passed use it, else detect it
+            if nargin < 4
+                [type nChannels] = this.detectStackType(stack);
+            else
+                type = varargin{3};
+                if ~isfield(this.imageSpaces, type);
+                    error(['unknown stack type ' type ' specified']);
+                end
+            end
+            imageSpace = this.imageSpaces.(type);
             
             % set default channel to color mapping for color image
             if nChannels > 1
-                this.channelColor = 1:nChannels;
+                this.channelColor = [1 2 3];
             end
             
             % if an array with multiple channels was passed, convert to
@@ -197,120 +225,24 @@ classdef Stack < handle_light
         end 
         
         % ------------------------------------------------------
-        % stack cropping, reduction, scaling
+        % reduce this stack holder by generating a new one
         % ------------------------------------------------------
         
-        function redStack = reduceStack(this, ssfactor, average)
+        function redStack = reduceStack(this, ssfactor)
             % REDUCESTACK Generate down sampled Stack 
             %
             % redStack = reduceStack(ssfactor)
-            % redStack = reduceStack(ssfactor, average)
             %
             % ssfactor: subsampling factor
-            % average:  boolean, average over bins instead of just
-            %           subsampling
-            
-            if nargin == 2
-                average = false;
-            end
             
             image   = this.image.apply();
-            data = image{1}; 
+            newData = image{1}; 
             for i = 2 : length(image)
-                data(:,:,:,i) = image{i};
+                newData(:,:,:,i) = image{i};
             end
-            
-            if average
-                
-                ss = 4;
-                ysize = size(data,1);
-                xsize = size(data,2);
-                zsize = size(data,3);
-                
-                newData = double(0*data(1:ss:ysize,1:ss:xsize,1:ss:zsize,:));
-                weight = zeros(size(newData));
-                for k = 1:ss
-                    for j = 1:ss
-                        for i = 1:ss
-                            yidx = i:ss:ysize;
-                            xidx = j:ss:xsize;
-                            zidx = k:ss:zsize;
-                            I = numel(yidx);
-                            J = numel(xidx);
-                            K = numel(zidx);
-                            newData(1:I,1:J,1:K,:) = newData(1:I,1:J,1:K,:)...
-                                        + double(data(yidx, xidx, zidx,:));
-                            weight(1:I,1:J,1:K,:) = weight(1:I,1:J,1:K,:) + ones([I J K size(weight,4)]);
-                        end
-                    end
-                end
-                newData = newData./weight;
-                newData = cast(newData, class(data));
-            else
-                newData = data(1:ssfactor:end,1:ssfactor:end,1:ssfactor:end,:);
-            end
-            
+            newData = newData(1:ssfactor:end,1:ssfactor:end,1:ssfactor:end,:);
             redStack = surfaceDetection.Stack(newData,this.resolution/4, ...
                 [this.description,' subsampled by factor ', num2str(ssfactor)]);
-        end
-
-        function bbox = getMaskBoundingBox(this)
-            % CROPSTACK Generate a cropped stack 
-            %
-            % use generateProjectionMask or setProjectionMask 
-            % to set the mask
-            %
-            % bbox = getMaskBoundingBox()
-            %
-            % bbox : bounding box [xmin xmax ymin ymax zmin zmax]
-            
-            stats = {};
-            bb = {};
-            for d = 1:3
-                stats{d} = regionprops(this.projectionMask{d}, 'BoundingBox');
-                bb{d} = floor([stats{d}.BoundingBox(1:2), stats{d}.BoundingBox(3:4) +  stats{d}.BoundingBox(1:2)]);
-            end
-            
-            xmin = max(1, min(bb{1}(2), bb{3}(1)));
-            ymin = max(1, min(bb{2}(2), bb{3}(2)));
-
-            xmax = max(bb{1}(4), bb{3}(3));
-            ymax = max(bb{2}(4), bb{3}(4));
-
-            zmin = max(1, min(bb{2}(1), bb{1}(1)));
-            zmax = max(1, min(bb{2}(3), bb{1}(3)));
-            
-            bbox = [xmin xmax ymin ymax zmin zmax];
-        end
-            
-        function croppedStack = cropStack(this, bbox)
-            % CROPSTACK Generate a cropped stack 
-            %
-            % use generateProjectionMask or setProjectionMask 
-            % to set the cropping region
-            %
-            % croppedStack = cropStack()
-            % croppedStack = cropStack(bbox)
-            %
-            % bbox : bounding box [xmin xmax ymin ymax zmin zmax]
-            
-            if nargin == 1
-                bb = this.getMaskBoundingBox();
-            else
-                bb= bbox;
-            end
-            
-            stackCell = this.image.apply;
-            bb
-            size(stackCell{1})
-            cropped = stackCell{1}(bb(3):bb(4), bb(1):bb(2), bb(5):bb(6));
-
-            for c = 2:length(stackCell)
-                cropped(:,:,:,c) = stackCell{c}(bb(3):bb(4), bb(1):bb(2), bb(5):bb(6));
-            end
-            
-            croppedStack = surfaceDetection.Stack(cropped,this.resolution, ...
-                [this.description,' cropped']);
         end
         
         % ------------------------------------------------------
@@ -447,8 +379,6 @@ classdef Stack < handle_light
             % RESCALETOUNITASPECT Rescale the stack to unit aspect ratio
             %
             % newStack = rescaleToUnitAspect() 
-            % 
-            % assume x and y resolution the same, only scales z
             
             if this.aspect == 1
                 newStack = this;
@@ -466,46 +396,23 @@ classdef Stack < handle_light
                 
                 debugMsg(2,['Channel ' num2str(i) '\n']);
                 
-% OLD WAY:
-%                 curr = stacks{i};
-%                 % permute;
-%                 curr = permute(curr,ii);
-%                 newnslices = round(size(curr,3)*this.aspect);
-%                 scaled = zeros([size(curr,1) size(curr,2) newnslices], class(curr));
-%                 for j=1:size(curr,1)
-%                     debugMsg(1, '.');
-%                     if rem(j,80) == 0
-%                         debugMsg(1, '\n');
-%                     end
-%                     scaled(j,:,:) = imresize(squeeze(curr(j,:,:)),...
-%                                                 [size(curr,2) newnslices]);
-%                 end
-%                 debugMsg(1,'\n');
-%                 % permute back;
-%                 scaled = ipermute(scaled,ii);
-
-                tic
-                
-                % stack and stack differential
-                stack = single(this.image.apply{i});
-                dstack = stack(:,:,2:end) - stack(:,:,1:end-1);
-                dstack = cat(3, dstack, 0*dstack(:,:,end));
-
-                % refined zvalues
-                nSlices = this.imageSize(3);
-                zvalref = 1:1/this.aspect:nSlices;
-                base = floor(zvalref);
-                rel = zvalref - base;
-
-                % rescale
-                scaled = zeros([size(stack,1), size(stack,2), numel(zvalref)], class(this.image.apply{1}));
-                for j = 1:numel(rel)
-                    scaled(:,:,j) = stack(:,:,base(j)) + dstack(:,:,base(j))*rel(j);
+                curr = stacks{i};
+                % permute;
+                curr = permute(curr,ii);
+                newnslices = round(size(curr,3)*this.aspect);
+                scaled = zeros([size(curr,1) size(curr,2) newnslices], class(curr));
+                for j=1:size(curr,1)
+                    debugMsg(1, '.');
+                    if rem(j,80) == 0
+                        debugMsg(1, '\n');
+                    end
+                    scaled(j,:,:) = imresize(squeeze(curr(j,:,:)),...
+                                                [size(curr,2) newnslices]);
                 end
-                
-                stacks{i} = cast(scaled,class(this.image.apply{1}));
-                
-                toc
+                debugMsg(1,'\n');
+                % permute back;
+                scaled = ipermute(scaled,ii);
+                stacks{i} = scaled;
             end
             
             xres = this.resolution(1);
@@ -547,13 +454,10 @@ classdef Stack < handle_light
             if ~isnumeric(dim)
                 if strcmp(dim, 'x')
                     dim = 1;
-                    dm = 2;
                 elseif strcmp(dim, 'y')
                     dim = 2;
-                    dm = 1;
                 else
                     dim = 3;
-                    dm = 3;
                 end
             end
             
@@ -568,8 +472,7 @@ classdef Stack < handle_light
             sliceComponents = this.image.apply(sliceDom);
                         
             % projection mask along this direction (used in wing)
-            
-            mask = this.projectionMask{dm};
+            mask = this.projectionMask{dim};
             if isempty(mask)
                 mask = true(size(squeeze(sliceComponents{1})));
             end
@@ -612,10 +515,10 @@ classdef Stack < handle_light
             
             MIP = {};
             % imageSize is xyz, MIP also
-            MIP{1} = zeros([this.imageSize(1) this.imageSize(3) ncolors]); 
-            MIP{2} = zeros([this.imageSize(2) this.imageSize(3) ncolors]);
+            MIP{2} = zeros([this.imageSize(1) this.imageSize(3) ncolors]); 
+            MIP{1} = zeros([this.imageSize(2) this.imageSize(3) ncolors]);
             MIP{3} = zeros([this.imageSize(2) this.imageSize(1) ncolors]);
-
+            
             % create maximal intensity projections along all directions
             for d = dimensions
                 for c = 1:this.image.image.dimension
@@ -627,23 +530,7 @@ classdef Stack < handle_light
             % create masks on the MIPs
             for d = 1:3
                 if any(dimensions==d)
-                    
-                    xsize = size(MIP{d},2);
-                    ysize = size(MIP{d},1);
-                    
-                    figure, imshow(MIP{d},[]);
-                    rect = getrect;
-                    xmin = max(1, rect(1));
-                    ymin = max(1, rect(2));
-                    xmax = min(xsize, rect(1)+rect(3));
-                    ymax = min(ysize, rect(2)+rect(4));
-                    [xmin xmax ymin ymax]
-                    
-                    this.projectionMask{d} = false([ysize xsize]);
-                    this.projectionMask{d}(ymin:ymax,xmin:xmax) = true;
-                    
-                    % OLD:
-%                     this.projectionMask{d} = roipoly(MIP{d});
+                    this.projectionMask{d} = roipoly(MIP{d});
                     close;
                 else
                     this.projectionMask{d} = [];
@@ -682,7 +569,8 @@ classdef Stack < handle_light
             
             this.projectionMask = projectionMask;
         end
-
+            
+        
         function mask = getMask(this)
             % GETMASK Create 3D mask from projection masks
             %
