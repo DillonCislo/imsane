@@ -79,8 +79,8 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             'clip', -1, ...  % if positive, value to clip the intensity of the raw data
             'save', false, ... % whether to save intermediate results
             'center_guess', 'empty_string', ... % xyz of the initial guess sphere ;
-            'plot_mesh3d', false);  % if save is true, plot intermediate results in 3d 
-        
+            'plot_mesh3d', false, ... % if save is true, plot intermediate results in 3d 
+            'mask', 'none');  % filename for mask to apply before running MS
     end
     
     %---------------------------------------------------------------------
@@ -105,7 +105,7 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
         % surface detection
         % ------------------------------------------------------
         
-        function detectSurface(this, initial_guess_fn)
+        function detectSurface(this)
             % Detect surface in the stack with preset options.
             %
             % detectSurface(ply_guess)
@@ -188,6 +188,7 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             save = opts.save ;
             center_guess = opts.center_guess ;
             plot_mesh3d = opts.plot_mesh3d ;
+            mask = opts.mask ;
             
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -249,6 +250,12 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
                 command = [command ' -center_guess ' center_guess ];
             end
             
+            % get mask if supplied
+            if ~strcmp(mask, 'none') && ~strcmp(mask, 'empty_string')
+                command = [ command ' -mask ' mask ] ;
+            end
+            
+            
             if radius_guess > 0
                 command = [command ' -rad0 ' num2str(radius_guess)] ;
             end
@@ -308,6 +315,10 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             end
 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            if ~exist(outputMesh, 'file')
+                error(['Meshlab did not create the file: ' outputMesh])
+            end
+            
             disp(['reading PLY ', outputMesh])
             tmp = read_ply_mod(outputMesh);
             vv = tmp.v ;

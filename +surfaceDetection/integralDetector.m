@@ -75,7 +75,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'pre_nu', -5, ... % number of dilation/erosion passes for positive/negative values
             'pre_smoothing', 1, ... % number of smoothing passes before running MS
             'ofn_smoothply', 'mesh_apical_',... % the output file name (not including path directory)
-            'mlxprogram', ... % the name of the mlx program to use to smooth the results
+            'mlxprogram', ... % the name of the mlx program to use to smooth the results. Note that if mesh_from_pointcloud==true, should take obj as input and mesh as output.
             './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
             'init_ls_fn', 'none', ... % the name of the initial level set to load, if any
             'run_full_dataset', false, ... % run MS on a time series, not just one file
@@ -84,7 +84,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'save', false, ... % whether to save intermediate results
             'center_guess', 'empty_string', ... % xyz of the initial guess sphere ;
             'plot_mesh3d', false, ...  % if save is true, plot intermediate results in 3d 
-            'dtype', 'h5') ; % h5 or npy: use hdf5 or numpy file format for input and output ls
+            'dtype', 'h5', ... % h5 or npy: use hdf5 or numpy file format for input and output ls
+            'mask', 'none', ... % filename for mask to apply before running MS
+            'mesh_from_pointcloud', false) ; % use a pointcloud from the marching cubes algorithm rather than a mesh to create smoothed mesh
     end
     
     %---------------------------------------------------------------------
@@ -109,7 +111,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % surface detection
         % ------------------------------------------------------
         
-        function detectSurface(this, ~)
+        function detectSurface(this)
             % Detect surface in the stack with preset options.
             %
             % detectSurface(ply_guess)
@@ -137,6 +139,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             % load the exported data out of the ilastik prediction
             fileName = [opts.fileName,'_Probabilities.h5'];
+            disp(['Reading h5 file: ' fileName])
             h5fileInfo = h5info(fileName);
             if strcmp(h5fileInfo.Datasets.Name,'exported_data')
                 file = h5read(fileName,'/exported_data');
@@ -197,6 +200,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             center_guess = opts.center_guess ;
             plot_mesh3d = opts.plot_mesh3d ;
             dtype = opts.dtype ; 
+            mask = opts.mask ;
+            use_pointcloud = opts.use_pointcloud ;
                         
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -251,11 +256,17 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             if plot_mesh3d
                 command = [command ' -plot_mesh3d' ] ;
             end
+           
             if save
                 command = [command ' -save'] ;
             end
+            
             if ~strcmp(center_guess, 'empty_string')
                 command = [command ' -center_guess ' center_guess ];
+            end
+            
+            if ~strcmp(mask, 'none') && ~strcmp(mask, 'empty_string')
+                command = [ command ' -mask ' mask ] ;
             end
             
             if radius_guess > 0
@@ -299,36 +310,127 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             end
             
             % Clean up mesh file for this timepoint using MeshLab --------
+
+            % Here use the boundary mesh from marching cubes to make a
+            % smooth mesh
+
             if use_dataset_command
                 % find all ms_...ply files in mslsDir, and smooth them all
                 files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply'])) ;
+                lsfns_to_smooth = dir(fullfile(mslsDir, [ls_outfn '*' dtype])) ;
+                
+                if length(lsfns_to_smooth) ~= length(files_to_smooth)
+                    error('The number of output levelsets does not equal the number of output unsmoothed PLYs. These must match.')
+                end
                 for i=1:length(files_to_smooth)
                     msls_mesh_outfn = files_to_smooth(i).name ;
                     PCfile = fullfile( mslsDir, msls_mesh_outfn );
+                    % Note that LS file is outputLs ;
                     split_fn = strsplit(msls_mesh_outfn, ofn_ply) ;
                     extension_outfn = split_fn{2} ;
+                    base_outfn_for_pointcloud = ofn_ply ;
                     mesh_outfn = [ofn_smoothply, extension_outfn] ;
                     outputMesh = fullfile(mslsDir, mesh_outfn);
-                    
+
                     if ~exist( outputMesh, 'file')
-                        command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
-                            ' -s ' mlxprogram ' -om vn'];
-                        % Either copy the command to the clipboard
-                        clipboard('copy', command);
-                        % or else run it on the system
-                        disp(['running ' command])
-                        system(command)
+                        if use_pointcloud
+                            % Use the pointcloud from the level set rather than the
+                            % boundary mesh from marching cubes
+                            %----------------------------------------------------------------------
+                            % Extract the implicit level set as a 3D binary array
+                            %----------------------------------------------------------------------
+
+                            % The file name of the current time point
+                            ls_outfn_ii = lsfns_to_smooth(i).name ;
+                            % The 3D binay array
+                            bwLS = h5read( ls_outfn_ii, '/implicit_levelset' );
+
+                            % Extract the (x,y,z)-locations of the level set boundary (in pixel
+                            % space)
+                            bwBdyIDx = bwperim( bwLS );
+
+                            clear bwBdy
+                            [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
+                                find(bwBdyIDx) );
+
+                            %----------------------------------------------------------------------
+                            % Create output mesh
+                            %----------------------------------------------------------------------
+
+                            % Write the points to a .obj file as a point cloud for ouput to Meshlab
+                            clear OBJ
+                            OBJ.vertices = bwBdy;
+                            OBJ.objects(1).type='f';
+                            OBJ.objects(1).data.vertices=[];
+                            
+                            pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
+                            disp(['Writing point cloud ' pointcloud_fn]);
+                            write_wobj(OBJ, pointcloud_fn );
+
+                            % Run the meshlab script
+                            system( ['meshlabserver -i ' pointCloudFileName, ...
+                                ' -o ' outputMesh, ...
+                                ' -s ' mlxprogram ' -om vn']);
+                        else
+                            if use_pointcloud
+                                % Use the pointcloud from the level set rather than the
+                                % boundary mesh from marching cubes
+                                %----------------------------------------------------------------------
+                                % Extract the implicit level set as a 3D binary array
+                                %----------------------------------------------------------------------
+
+                                % The file name of the current time point is ls_outfn 
+                                % The 3D binay array
+                                bwLS = h5read( outputLs, '/implicit_levelset' );
+
+                                % Extract the (x,y,z)-locations of the level set boundary (in pixel
+                                % space)
+                                bwBdyIDx = bwperim( bwLS );
+
+                                clear bwBdy
+                                [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
+                                    find(bwBdyIDx) );
+
+                                %----------------------------------------------------------------------
+                                % Create output mesh
+                                %----------------------------------------------------------------------
+
+                                % Write the points to a .obj file as a point cloud for ouput to Meshlab
+                                clear OBJ
+                                OBJ.vertices = bwBdy;
+                                OBJ.objects(1).type='f';
+                                OBJ.objects(1).data.vertices=[];
+
+                                pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
+                                disp(['Writing point cloud ' pointcloud_fn]);
+                                write_wobj(OBJ, pointcloud_fn );
+
+                                % Run the meshlab script
+                                system( ['meshlabserver -i ' pointCloudFileName, ...
+                                    ' -o ' outputMesh, ...
+                                    ' -s ' mlxprogram ' -om vn']);
+                            else
+                                % Use the marching cubes mesh surface to smooth
+                                command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
+                                    ' -s ' mlxprogram ' -om vn'];
+                                % Either copy the command to the clipboard
+                                clipboard('copy', command);
+                                % or else run it on the system
+                                disp(['running ' command])
+                                system(command)
+                            end
+                        end
                     else
                         disp(['t=', num2str(timepoint) ': smoothed mesh file found...'])
                     end
-                    
+
                 end
             else
                 msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
                 PCfile = fullfile( mslsDir, msls_mesh_outfn );
                 mesh_outfn = [ofn_smoothply, num2str(timepoint, '%06d'), '.ply'];
                 outputMesh = fullfile(mslsDir, mesh_outfn);
-                
+
                 if ~exist( outputMesh, 'file')
                     command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
                         ' -s ' mlxprogram ' -om vn'];
