@@ -111,7 +111,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % surface detection
         % ------------------------------------------------------
         
-        function detectSurface(this)
+        function detectSurface(this, ~)
             % Detect surface in the stack with preset options.
             %
             % detectSurface(ply_guess)
