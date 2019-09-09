@@ -201,7 +201,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             plot_mesh3d = opts.plot_mesh3d ;
             dtype = opts.dtype ; 
             mask = opts.mask ;
-            use_pointcloud = opts.use_pointcloud ;
+            use_pointcloud = opts.mesh_from_pointcloud ;
                         
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
