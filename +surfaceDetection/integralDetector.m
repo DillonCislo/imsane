@@ -55,8 +55,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % default detector options
         defaultOptions = struct('channel', 1, ...
             'ssfactor', 4,... % subsampling factor: downsampling of raw data
-            'niter', 40, ... % how many iterations before exit if no convergence
-            'niter0', 90, ... % how many iterations before exit if no convergence for first timepoint
+            'niter', 100, ... % how many iterations before exit if no convergence
+            'niter0', 100, ... % how many iterations before exit if no convergence for first timepoint
             'lambda1', 1, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
             'lambda2', 2, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
             'nu', 0.3, ... % float: how many pressure (dilation/erosion) steps per iteration
@@ -86,7 +86,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'plot_mesh3d', false, ...  % if save is true, plot intermediate results in 3d 
             'dtype', 'h5', ... % h5 or npy: use hdf5 or numpy file format for input and output ls
             'mask', 'none', ... % filename for mask to apply before running MS
-            'mesh_from_pointcloud', false) ; % use a pointcloud from the marching cubes algorithm rather than a mesh to create smoothed mesh
+            'mesh_from_pointcloud', false, ... % use a pointcloud from the marching cubes algorithm rather than a mesh to create smoothed mesh
+            'prob_searchstr', '_Probabilities.h5' ) ; % if dataset mode, what string to seek for loading all probabilities in data directory (glob datadir/*searchstr)
     end
     
     %---------------------------------------------------------------------
@@ -138,7 +139,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             %---------------------------------
             
             % load the exported data out of the ilastik prediction
-            fileName = [opts.fileName,'_Probabilities.h5'];
+            fileName = [opts.fileName, '_Probabilities.h5']
             disp(['Reading h5 file: ' fileName])
             h5fileInfo = h5info(fileName);
             if strcmp(h5fileInfo.Datasets.Name,'exported_data')
@@ -202,6 +203,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             dtype = opts.dtype ; 
             mask = opts.mask ;
             use_pointcloud = opts.mesh_from_pointcloud ;
+            dataset_prob_searchstr = opts.prob_searchstr ;
                         
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -230,6 +232,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 % with _Probabilities.h5 files to run on.
                 command = [command ' -dataset'] ;
                 command = [command ' -i ' run_full_dataset ] ;
+                command = [command ' -prob ' dataset_prob_searchstr ];
                 msls_mesh_outfn = ofn_ply;
                 ls_outfn = ofn_ls;
             else
@@ -240,6 +243,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d'), '.ply'];
                 ls_outfn = [ofn_ls, num2str(timepoint, '%06d'), '.', dtype];
             end
+            
             outputLs = fullfile(mslsDir, ls_outfn) ;
             outputMesh = fullfile(mslsDir, msls_mesh_outfn) ;
             command = [command ' -o ' mslsDir ] ;
@@ -281,7 +285,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             disp(init_ls_fn)
             if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
                 % User has NOT supplied fn from detectOptions
-                init_ls_fn = ['msls_apical_', ...
+                init_ls_fn = [ofn_ls, ...
                     num2str(timepoint - 1, '%06d' ) '.' dtype] ;
             end
             
@@ -319,7 +323,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply'])) ;
                 lsfns_to_smooth = dir(fullfile(mslsDir, [ls_outfn '*' dtype])) ;
                 
-                if length(lsfns_to_smooth) ~= length(files_to_smooth)
+                if abs(length(lsfns_to_smooth) - length(files_to_smooth))>1 
                     error('The number of output levelsets does not equal the number of output unsmoothed PLYs. These must match.')
                 end
                 for i=1:length(files_to_smooth)
@@ -331,7 +335,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     base_outfn_for_pointcloud = ofn_ply ;
                     mesh_outfn = [ofn_smoothply, extension_outfn] ;
                     outputMesh = fullfile(mslsDir, mesh_outfn);
-
+                    
+                    disp(['outputMesh = ', outputMesh])
+                    %bad = so_bad
                     if ~exist( outputMesh, 'file')
                         if use_pointcloud
                             % Use the pointcloud from the level set rather than the
@@ -520,9 +526,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 image(:,:,:,c) = im{c}(1:opts.ssfactor:end,1:opts.ssfactor:end,1:opts.ssfactor:end);
             end
             if ndims(image)==4
+                disp(['Writing file: ' fileName])
                 h5create(fileName,dsetName,[size(image,2) size(image,1), size(image,3) size(image,4)]);
                 h5write(fileName,dsetName,permute(image,[2 1 3 4]));
             else
+                disp(['Writing file: ' fileName])
                 h5create(fileName,dsetName,[size(image,2) size(image,1), size(image,3)]);
                 h5write(fileName,dsetName,permute(image,[2 1 3]));
             end
