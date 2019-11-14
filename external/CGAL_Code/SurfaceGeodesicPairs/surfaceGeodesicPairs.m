@@ -5,7 +5,34 @@ function [geodesicPaths, pointLocations] = surfaceGeodesicPairs( face, ...
 %assumed to be elements of face interiors, i.e. not vertices or elements of
 %triangulation edges.  Geodesic paths are returned as a series of 3D
 %points.
-%   Detailed explanation goes here
+%   
+% First, input pointCoordinates are matched to the mesh, either at a 
+% vertex, an edge, or on a face. On a face, the output geodesic will be a
+% straight line. geodesicPaths will be a series of 3d coordinates that 
+%
+% Parameters
+% ----------
+% face : M x 3 int array
+%   mesh face connectivity list
+% vertex : N x 3 float array
+%   3d vertex coordinates of the mesh
+% pointPairs : Q x 2 int array
+%   the indices of the points in pointCoordinates (not in vertex!) to
+%   connect via face-spanning geodesics
+% pointCoordinates : P x 3 float array
+%   3d coordinates sampled by pointPairs for determining what physical
+%   point locations to connect via face-spanning geodesics. Could be the
+%   same as vertex. 
+% 
+% Returns 
+% -------
+% geodesicPaths : R x 3 float array
+%   start point, next point is an intersection of an edge, next is another
+%   edge intersection, etc, until we terminate.% 
+% pointLocations : 
+%  
+%
+% DJCislo
 
 %--------------------------------------------------------------------------
 % Input Processing
