@@ -175,11 +175,7 @@ classdef (Abstract) surfaceDetector < handle_light
             end
 
             % display image    
-            slice = stack.getSlice(options.dimension, options.value);
-            if size(slice,3) > 3
-                slice = slice(:,:,1:3);
-            end
-            imshow(slice); 
+            imshow(stack.getSlice(options.dimension, options.value)); 
             
             % overlay point cloud. 
             if isfield(options, 'pointCloud')
@@ -187,7 +183,11 @@ classdef (Abstract) surfaceDetector < handle_light
                 lspec = ['*' options.pointCloud];
                 PC = this.pointCloud.unalignedPoints;
                 
-                PCplane = PC(round(PC(:,ind(1))) == options.value, :);
+                if isfield(options, 'thickness')
+                    PCplane = PC(abs(PC(:,ind(1)) - options.value) < options.thickness, :) ;
+                else
+                    PCplane = PC(round(PC(:,ind(1))) == options.value, :);
+                end
                 hold on 
                 plot(PCplane(:,ind(2)), PCplane(:,ind(3)), lspec, 'MarkerSize', 2)    
                 hold off
