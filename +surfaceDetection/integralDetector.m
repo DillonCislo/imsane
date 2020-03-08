@@ -4,7 +4,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     % initial guess. A Chan-Vese energy functional is minimized, with three
     % terms: surface tension, pressure, and attachment energy which fixes
     % the boundary to high gradients in probabilities from ilastik
-    % training.
+    % training. Note: bitdepth of output h5 is matched to input image
+    % bitdepth.
     %
     % properties:
     %           defaultOptions : struct
@@ -87,7 +88,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'dtype', 'h5', ... % h5 or npy: use hdf5 or numpy file format for input and output ls
             'mask', 'none', ... % filename for mask to apply before running MS
             'mesh_from_pointcloud', false, ... % use a pointcloud from the marching cubes algorithm rather than a mesh to create smoothed mesh
-            'prob_searchstr', '_Probabilities.h5' ) ; % if dataset mode, what string to seek for loading all probabilities in data directory (glob datadir/*searchstr)
+            'prob_searchstr', '_Probabilities.h5', ... % if dataset mode, what string to seek for loading all probabilities in data directory (glob datadir/*searchstr)
+            'imsaneaxisorder', 'xyzc', ... % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
+            'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
+            'ilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
+            'include_boundary_faces', true) ; % keep faces along the boundaries of the data volume if true
     end
     
     %---------------------------------------------------------------------
@@ -154,23 +159,29 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             foreGround = opts.foreGroundChannel;
             
             % ilastik internally swaps axes. 1: class, 2: y, 3: x 4 : z
-            pred = permute(file,[3,2,4,1]);
+            if strcmp(opts.imsaneaxisorder, 'xyzc')
+                pred = file ;
+            elseif strcmp(opts.imsaneaxisorder, 'yxzc')
+                pred = permute(file,[2,1,3,4]);
+            elseif strcmp(opts.imsaneaxisorder, 'cxyz')
+                pred = permute(file,[2,3,4,1]);
+            elseif strcmp(opts.imsaneaxisorder, 'cyxz')
+                pred = permute(file,[3,2,4,1]);
+            else
+                error('Have not coded for this imsaneaxisorder. Do so here')
+            end
             pred = pred(:,:,:,foreGround);
+            size(pred)
+            
             pred = uint8(255*pred);
-            
-            % size of prediction
-            idxPerm = circshift(1:3, [1 -opts.zdim]);
-            
-            ySize = size(pred, idxPerm(1));
-            xSize = size(pred, idxPerm(2));
-            zSize = size(pred, idxPerm(3));
-            
-            zmin = 1;
-            zmax = size(pred, idxPerm(3));
-            
+            xSize = size(pred, 1);
+            ySize = size(pred, 2);
+            zSize = size(pred, 3);
+                        
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Identify the surface using the loaded probabilities here
             % Convert the current image to a level set using morphological snakes
+            ssfactor = opts.ssfactor ;
             niter = opts.niter ;
             niter0 = opts.niter0 ;
             mslsDir = opts.mslsDir ;
@@ -204,7 +215,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             mask = opts.mask ;
             use_pointcloud = opts.mesh_from_pointcloud ;
             dataset_prob_searchstr = opts.prob_searchstr ;
-                        
+            ilastikaxisorder = opts.ilastikaxisorder ;
+            
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
                 mkdir(mslsDir)
@@ -256,7 +268,12 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             command = [command ' -postsmooth ' num2str(post_smoothing) ];
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
             command = [command ' -channel ' num2str(foreGround - 1) ] ;
-            command = [command ' -dtype ' dtype ] ; 
+            command = [command ' -dtype ' dtype ] ;
+            command = [command ' -permute ' ilastikaxisorder ] ;
+            command = [command ' -ss ' num2str(ssfactor) ] ;
+            if opts.include_boundary_faces
+                command = [command ' -include_boundary_faces'] ;
+            end
             if plot_mesh3d
                 command = [command ' -plot_mesh3d' ] ;
             end
@@ -374,57 +391,19 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                             write_wobj(OBJ, pointcloud_fn );
 
                             % Run the meshlab script
-                            system( ['meshlabserver -i ' pointCloudFileName, ...
-                                ' -o ' outputMesh, ...
-                                ' -s ' mlxprogram ' -om vn']);
+                            command = ['meshlabserver -i ' pointCloudFileName, ...
+                                ' -o ' outputMesh, ' -s ' mlxprogram ' -om vn'] ;
+                            disp(['running ' command])
+                            system( command );
                         else
-                            if use_pointcloud
-                                % Use the pointcloud from the level set rather than the
-                                % boundary mesh from marching cubes
-                                %----------------------------------------------------------------------
-                                % Extract the implicit level set as a 3D binary array
-                                %----------------------------------------------------------------------
-
-                                % The file name of the current time point is ls_outfn 
-                                % The 3D binay array
-                                bwLS = h5read( outputLs, '/implicit_levelset' );
-
-                                % Extract the (x,y,z)-locations of the level set boundary (in pixel
-                                % space)
-                                bwBdyIDx = bwperim( bwLS );
-
-                                clear bwBdy
-                                [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
-                                    find(bwBdyIDx) );
-
-                                %----------------------------------------------------------------------
-                                % Create output mesh
-                                %----------------------------------------------------------------------
-
-                                % Write the points to a .obj file as a point cloud for ouput to Meshlab
-                                clear OBJ
-                                OBJ.vertices = bwBdy;
-                                OBJ.objects(1).type='f';
-                                OBJ.objects(1).data.vertices=[];
-
-                                pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
-                                disp(['Writing point cloud ' pointcloud_fn]);
-                                write_wobj(OBJ, pointcloud_fn );
-
-                                % Run the meshlab script
-                                system( ['meshlabserver -i ' pointCloudFileName, ...
-                                    ' -o ' outputMesh, ...
-                                    ' -s ' mlxprogram ' -om vn']);
-                            else
-                                % Use the marching cubes mesh surface to smooth
-                                command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
-                                    ' -s ' mlxprogram ' -om vn'];
-                                % Either copy the command to the clipboard
-                                clipboard('copy', command);
-                                % or else run it on the system
-                                disp(['running ' command])
-                                system(command)
-                            end
+                            % Use the marching cubes mesh surface to smooth
+                            command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
+                                ' -s ' mlxprogram ' -om vn'];
+                            % Either copy the command to the clipboard
+                            clipboard('copy', command);
+                            % or else run it on the system
+                            disp(['running ' command])
+                            system(command)
                         end
                     else
                         disp(['t=', num2str(timepoint) ': smoothed mesh file found...'])
@@ -449,7 +428,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])
                 end
             end
-            
+                        
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             if exist(outputMesh, 'file')
                 disp(['reading PLY ', outputMesh])
@@ -466,7 +445,6 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 %--------------------------------------------------
                 % scale point cloud to full size and set alignment
                 %--------------------------------------------------
-
                 largePC = zeros(size(pointCloud));
                 for i = 1:3
                     largePC(:,i) = (pointCloud(:,i)-1)*opts.ssfactor + 1;
@@ -522,17 +500,56 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             dsetName = '/inputData';
             
+            % Determine the axis order for ilastik training data
+            if strcmp(opts.preilastikaxisorder, 'xyzc') 
+                axperm = [1 2 3 4] ;
+            elseif strcmp(opts.preilastikaxisorder, 'yxzc')
+                axperm = [2 1 3 4] ;
+            elseif strcmp(opts.preilastikaxisorder, 'zxyc')
+                axperm = [3 1 2 4] ;
+                error('here')
+            else
+                error('Have not coded for this axis permutation yet')
+            end
+            
+            % Subsample the image to save for ilastik training
             for c = 1 : length(im)
                 image(:,:,:,c) = im{c}(1:opts.ssfactor:end,1:opts.ssfactor:end,1:opts.ssfactor:end);
             end
+            
+            % Now save the subsampled images to h5 using the axis order
+            % specified by axperm
             if ndims(image)==4
                 disp(['Writing file: ' fileName])
-                h5create(fileName,dsetName,[size(image,2) size(image,1), size(image,3) size(image,4)]);
-                h5write(fileName,dsetName,permute(image,[2 1 3 4]));
+                if isa(image, 'uint8')
+                    h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)), ...
+                        size(image,axperm(3)) size(image,axperm(4))], ...
+                        'datatype', 'uint8',...
+                        'Chunksize', [size(image,axperm(1)) size(image,axperm(2)),...
+                        size(image,axperm(3)) size(image,axperm(4))]);
+                elseif isa(image, 'uint16')
+                    h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)),...
+                        size(image,axperm(3)) size(image,axperm(4))]);
+                else
+                    error('Did not recognize bitdepth of image. Add capability here')
+                end
+                h5write(fileName,dsetName,permute(image, axperm));
             else
+                % truncate the axis permutation to include just 3 dims
+                axperm = axperm(1:3) ;
                 disp(['Writing file: ' fileName])
-                h5create(fileName,dsetName,[size(image,2) size(image,1), size(image,3)]);
-                h5write(fileName,dsetName,permute(image,[2 1 3]));
+                
+                if isa(image, 'uint8')
+                    h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)),...
+                        size(image,axperm(3))], ...
+                        'datatype', 'uint8',...
+                        'Chunksize', [size(image,axperm(1)) size(image,axperm(2)), size(image,axperm(3)) ]) ; 
+                elseif isa(image, 'uint16')
+                    h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)), size(image,axperm(3))])
+                else
+                    error('Did not recognize bitdepth of image. Add capability here')
+                end
+                h5write(fileName,dsetName,permute(image, axperm));
             end
             
         end

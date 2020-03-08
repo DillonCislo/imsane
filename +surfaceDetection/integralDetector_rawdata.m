@@ -80,7 +80,10 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             'save', false, ... % whether to save intermediate results
             'center_guess', 'empty_string', ... % xyz of the initial guess sphere ;
             'plot_mesh3d', false, ... % if save is true, plot intermediate results in 3d 
-            'mask', 'none');  % filename for mask to apply before running MS
+            'mask', 'none',... % filename for mask to apply before running MS
+            'mesh_from_pointcloud', false, ... % Create a mesh from pointcloud
+            'imsaneaxisorder', 'xyzc') % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
+            
     end
     
     %---------------------------------------------------------------------
@@ -189,6 +192,7 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             center_guess = opts.center_guess ;
             plot_mesh3d = opts.plot_mesh3d ;
             mask = opts.mask ;
+            use_pointcloud = opts.mesh_from_pointcloud ;
             
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -240,6 +244,8 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
             command = [command ' -dset_name ' dset_name ] ;
             command = [command ' -dtype h5 -clip ' num2str(clip) ] ;
+            command = [command ' -permute xyz' ] ;
+            command = [command ' -ss ' num2str(ssfactor)] ;
             if plot_mesh3d
                 command = [command ' -plot_mesh3d' ] ;
             end
