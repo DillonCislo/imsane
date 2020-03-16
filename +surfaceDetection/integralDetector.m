@@ -306,12 +306,24 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     num2str(timepoint - 1, '%06d' ) '.' dtype] ;
             end
             
-            disp(init_ls_fn)
+            disp([ 'initial level set fn = ', init_ls_fn])
             if exist(fullfile(mslsDir, init_ls_fn), 'file')
                 % It does exist. Use it as a seed (initial level set)
                 disp('running using initial level set')
                 command = [command ' -init_ls ', ...
                     fullfile(mslsDir, init_ls_fn), ...
+                    ' -n ' num2str(niter) ] ;
+            elseif exist(fullfile(mslsDir, [ init_ls_fn '.h5']), 'file')
+                % It does exist. Use it as a seed (initial level set)
+                disp('running using initial level set')
+                command = [command ' -init_ls ', ...
+                    fullfile(mslsDir, [ init_ls_fn '.h5']), ...
+                    ' -n ' num2str(niter) ] ;
+            elseif exist(fullfile(mslsDir, [ init_ls_fn '.npy']), 'file')
+                % It does exist. Use it as a seed (initial level set)
+                disp('running using initial level set')
+                command = [command ' -init_ls ', ...
+                    fullfile(mslsDir, [ init_ls_fn '.npy']), ...
                     ' -n ' num2str(niter) ] ;
             else
                 % The guess for the initial levelset does NOT exist, so use
@@ -507,7 +519,10 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 axperm = [2 1 3 4] ;
             elseif strcmp(opts.preilastikaxisorder, 'zxyc')
                 axperm = [3 1 2 4] ;
-                error('here')
+            elseif strcmp(opts.preilastikaxisorder, 'czxy')
+                axperm = [4 3 1 2] ;
+            elseif strcmp(opts.preilastikaxisorder, 'czyx')
+                axperm = [4 3 2 1] ;
             else
                 error('Have not coded for this axis permutation yet')
             end

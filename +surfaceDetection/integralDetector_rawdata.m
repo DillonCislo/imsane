@@ -245,7 +245,7 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             command = [command ' -dset_name ' dset_name ] ;
             command = [command ' -dtype h5 -clip ' num2str(clip) ] ;
             command = [command ' -permute xyz' ] ;
-            command = [command ' -ss ' num2str(ssfactor)] ;
+            command = [command ' -ss ' num2str(opts.ssfactor)] ;
             if plot_mesh3d
                 command = [command ' -plot_mesh3d' ] ;
             end
