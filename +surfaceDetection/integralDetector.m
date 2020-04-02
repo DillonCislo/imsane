@@ -89,10 +89,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'mask', 'none', ... % filename for mask to apply before running MS
             'mesh_from_pointcloud', false, ... % use a pointcloud from the marching cubes algorithm rather than a mesh to create smoothed mesh
             'prob_searchstr', '_Probabilities.h5', ... % if dataset mode, what string to seek for loading all probabilities in data directory (glob datadir/*searchstr)
-            'imsaneaxisorder', 'xyzc', ... % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
+            'physicalaxisorder', 'yxzc', ... % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
             'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'ilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
-            'include_boundary_faces', true) ; % keep faces along the boundaries of the data volume if true
+            'include_boundary_faces', true,... % keep faces along the boundaries of the data volume if true
+            'smooth_with_meshlab', true) ; % smooth the mesh after marching cubes mesh creation using mlxprogram
     end
     
     %---------------------------------------------------------------------
@@ -144,7 +145,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             %---------------------------------
             
             % load the exported data out of the ilastik prediction
-            fileName = [opts.fileName, '_Probabilities.h5']
+            fileName = [opts.fileName, '_Probabilities.h5'] ;
             disp(['Reading h5 file: ' fileName])
             h5fileInfo = h5info(fileName);
             if strcmp(h5fileInfo.Datasets.Name,'exported_data')
@@ -158,26 +159,42 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             foreGround = opts.foreGroundChannel;
             
-            % ilastik internally swaps axes. 1: class, 2: y, 3: x 4 : z
-            if strcmp(opts.imsaneaxisorder, 'xyzc')
+            disp('Loaded probabilities as array of size: ')
+            size(file)
+            
+            % ilastik internally swaps axes. 1:x, 2:y, 3:z, 4:class
+            % strategy: put into xyzc format, then pop last index
+            if strcmp(opts.ilastikaxisorder, 'xyzc')
                 pred = file ;
-            elseif strcmp(opts.imsaneaxisorder, 'yxzc')
+            elseif strcmp(opts.ilastikaxisorder, 'yxzc')
+                % to convert yxzc to xyzc, put x=2 y=1 z=3 c=4
                 pred = permute(file,[2,1,3,4]);
-            elseif strcmp(opts.imsaneaxisorder, 'cxyz')
+            elseif strcmp(opts.ilastikaxisorder, 'zyxc')
+                % to convert yxzc to xyzc, put x=3 y=2 z=1 c=4
+                pred = permute(file,[3,2,1,4]);
+            elseif strcmp(opts.ilastikaxisorder, 'yzcx')
+                % to convert yxzc to xyzc, put x=4 y=1 z=2 c=3
+                pred = permute(file,[4,1,2,3]);
+            elseif strcmp(opts.ilastikaxisorder, 'cxyz')
+                % to convert yxzc to xyzc, put x=2 y=3 z=4 c=1
                 pred = permute(file,[2,3,4,1]);
-            elseif strcmp(opts.imsaneaxisorder, 'cyxz')
+            elseif strcmp(opts.ilastikaxisorder, 'cyxz')
                 pred = permute(file,[3,2,4,1]);
             else
-                error('Have not coded for this imsaneaxisorder. Do so here')
+                error('Have not coded for this axisorder. Do so here')
             end
-            pred = pred(:,:,:,foreGround);
-            size(pred)
+            pred = squeeze(pred(:, :, :, foreGround)) ;
+            % disp(['axis order of mesh to be: ' opts.physicalaxisorder])
+            disp(['axis order of probabilities: ' opts.ilastikaxisorder])
+            disp(['size of probability foreGround: ' num2str(size(pred))])
             
-            pred = uint8(255*pred);
+            % Note that python will flip axis LR, but we will flip back
+            % so keep order here
             xSize = size(pred, 1);
             ySize = size(pred, 2);
             zSize = size(pred, 3);
-                        
+            clearvars pred
+            
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Identify the surface using the loaded probabilities here
             % Convert the current image to a level set using morphological snakes
@@ -216,6 +233,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             use_pointcloud = opts.mesh_from_pointcloud ;
             dataset_prob_searchstr = opts.prob_searchstr ;
             ilastikaxisorder = opts.ilastikaxisorder ;
+            % since python flips axes wrt MATLAB, flip them here
+            morphsnakesaxisorder = fliplr(ilastikaxisorder) ;
             
             % Create the output dir if it doesn't exist
             if ~exist(mslsDir, 'dir')
@@ -269,7 +288,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
             command = [command ' -channel ' num2str(foreGround - 1) ] ;
             command = [command ' -dtype ' dtype ] ;
-            command = [command ' -permute ' ilastikaxisorder ] ;
+            command = [command ' -permute ' morphsnakesaxisorder ] ;
             command = [command ' -ss ' num2str(ssfactor) ] ;
             if opts.include_boundary_faces
                 command = [command ' -include_boundary_faces'] ;
@@ -299,7 +318,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % If not supplied (ie init_ls_fn is none or empty string, then
             % seek previous timepoint output from MS algorithm.
             
-            disp(init_ls_fn)
+            disp(['init_ls_fn = ', init_ls_fn])
             if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
                 % User has NOT supplied fn from detectOptions
                 init_ls_fn = [ofn_ls, ...
@@ -332,7 +351,15 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 command = [command ' -n ' num2str(niter0)];
             end
             
+            % Flip axis order LR of output mesh to return to MATLAB
+            % orientation? NO, not helpful to do "-permute_mesh 'zyx'"
+            % since already did morphsnakesaxisorder = fliplr() earlier
+            % command = [command ' -adjust_for_MATLAB_indexing'] ;
+            
             disp(['prepared command = ', command])
+            exist(outputMesh, 'file')
+            disp(outputMesh)
+            % error('here')
             if ~exist(outputMesh, 'file')
                 % Either copy the command to the clipboard
                 clipboard('copy', command);
@@ -346,7 +373,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
 
             % Here use the boundary mesh from marching cubes to make a
             % smooth mesh
-
+            % Check if we need to smooth the full dataset of meshes
             if use_dataset_command
                 % find all ms_...ply files in mslsDir, and smooth them all
                 files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply'])) ;
@@ -419,6 +446,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                         end
                     else
                         disp(['t=', num2str(timepoint) ': smoothed mesh file found...'])
+                        disp([' --> file to smooth was ' files_to_smooth(i).name])
                     end
 
                 end
@@ -523,8 +551,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 axperm = [4 3 1 2] ;
             elseif strcmp(opts.preilastikaxisorder, 'czyx')
                 axperm = [4 3 2 1] ;
+            elseif strcmp(opts.preilastikaxisorder, 'cxyz')
+                axperm = [4 1 2 3] ;
             else
-                error('Have not coded for this axis permutation yet')
+                error(['Have not coded for this axis permutation yet: ', ...
+                    opts.preilastikaxisorder])
             end
             
             % Subsample the image to save for ilastik training

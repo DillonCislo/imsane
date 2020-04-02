@@ -9,11 +9,14 @@ function mesh = read_ply_mod(filename)
 %
 %   IMPORTANT: works only for triangular meshes.
 %
-%   Copyright (c) 2003 Gabriel Peyré
+%   Copyright (c) 2003 Gabriel Peyre
 % 
 %   Modified 2015 by Idse Heemskerk to return mesh with vertex normal 
+%   Modified 2020 by Noah Mitchell to make normals optional (if not in
+%       saved file, then not loaded).
+%   Modified 2020 by Noah Mitchell for performance
 
-[d,c] = plyread(filename);
+[d,~] = plyread(filename);
 
 vi = d.face.vertex_indices;
 nf = length(vi);
@@ -23,9 +26,13 @@ for i=1:nf
 end
 
 vertex = [d.vertex.x, d.vertex.y, d.vertex.z];
-vn = [d.vertex.nx, d.vertex.ny, d.vertex.nz];
-
-mesh = struct('v', vertex, 'f', face, 'vn', vn);
+try
+    vn = [d.vertex.nx, d.vertex.ny, d.vertex.nz];
+    mesh = struct('v', vertex, 'f', face, 'vn', vn);
+catch
+    disp('No normals in this mesh. Returning faces and vertices only')
+    mesh = struct('v', vertex, 'f', face);
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [Elements,varargout] = plyread(Path,Str)
@@ -99,7 +106,7 @@ while 1
          if Count >= 2
             Format = lower(Token{2});
             
-            if Count == 3 & ~strcmp(Token{3},'1.0')
+            if Count == 3 && ~strcmp(Token{3},'1.0')
                fclose(fid);
                error('Only PLY format version 1.0 supported.');
             end
@@ -134,7 +141,7 @@ while 1
             error(['Bad element definition: ',Buf]);
          end         
       case 'property'	% element property
-         if ~isempty(CurElement) & Count >= 3            
+         if ~isempty(CurElement) && Count >= 3            
             NumProperties = NumProperties + 1;
             eval(['tmp=isfield(Elements.',CurElement,',Token{Count});'],...
                'fclose(fid);error([''Error reading property: '',Buf])');
