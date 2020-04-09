@@ -28,7 +28,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     % license
     %---------------------------------------------------------------------
     
-    % Copyright 2014 Idse Heemskerk, Sebastian Streichan, Noah Mitchell
+    % Copyright 2019-2020 Noah Mitchell
     %
     % This file is part of ImSAnE.
     %
@@ -68,14 +68,14 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'foreGroundChannel',2, ... % the index of the first dimension of the 4d input data (if 4d)
             'fileName',[], ... % the filename of h5 to train on
             'mslsDir', './msls_output/', ...  % the directory for all output data/images
-            'ofn_ls', 'msls_apical_', ...  % the output filename for level sets
-            'ofn_ply', 'mesh_apical_ms_', ... % the output filename for PLY files
+            'ofn_ls', 'msls_apical_stab_', ...  % the output filename for level sets
+            'ofn_ply', 'mesh_apical_stab_ms_', ... % the output filename for PLY files
             'ms_scriptDir', '/mnt/data/code/morphsnakes_wrapper/', ... % the directory containing run_morphsnakes.py
             'timepoint', 0, ... % which timepoint in the data to consider
             'zdim',2, ... % Which dimension is the z dimension
             'pre_nu', -5, ... % number of dilation/erosion passes for positive/negative values
             'pre_smoothing', 1, ... % number of smoothing passes before running MS
-            'ofn_smoothply', 'mesh_apical_',... % the output file name (not including path directory)
+            'ofn_smoothply', 'mesh_apical_stab',... % the output file name (not including path directory)
             'mlxprogram', ... % the name of the mlx program to use to smooth the results. Note that if mesh_from_pointcloud==true, should take obj as input and mesh as output.
             './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
             'init_ls_fn', 'none', ... % the name of the initial level set to load, if any
@@ -575,7 +575,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                         size(image,axperm(3)) size(image,axperm(4))]);
                 elseif isa(image, 'uint16')
                     h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)),...
-                        size(image,axperm(3)) size(image,axperm(4))]);
+                        size(image,axperm(3)) size(image,axperm(4))], ...
+                        'Datatype', 'uint16');
                 else
                     error('Did not recognize bitdepth of image. Add capability here')
                 end
@@ -591,7 +592,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                         'datatype', 'uint8',...
                         'Chunksize', [size(image,axperm(1)) size(image,axperm(2)), size(image,axperm(3)) ]) ; 
                 elseif isa(image, 'uint16')
-                    h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)), size(image,axperm(3))])
+                    h5create(fileName,dsetName,...
+                        [size(image,axperm(1)) size(image,axperm(2)), size(image,axperm(3))], ...
+                        'Datatype', 'uint16')
                 else
                     error('Did not recognize bitdepth of image. Add capability here')
                 end
