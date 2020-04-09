@@ -396,12 +396,14 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             end
             
             disp(['Writing downsampled dataset to disk: ' fileName])
-            if ndims(image)==4
-                h5create(fileName,dsetName,size(image));
+            if isa(image, 'uint8')
+                h5create(fileName,dsetName,size(image), 'Datatype', 'uint8');
+                h5write(fileName,dsetName,image);
+            elseif isa(image, 'uint16')
+                h5create(fileName,dsetName,size(image), 'Datatype', 'uint16');
                 h5write(fileName,dsetName,image);
             else
-                h5create(fileName,dsetName,size(image));
-                h5write(fileName,dsetName,image);
+                error('have not considered this datatype yet. Do so here')
             end
             
         end
