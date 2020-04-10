@@ -245,7 +245,24 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             %    '_Probabilities.h5']);
             
             scriptpath = fullfile(ms_scriptDir, 'run_morphsnakes.py') ;
-            command = ['python ' scriptpath];
+            
+            try 
+                tmp = pyenv ;
+                pyversion = char(tmp.Version) ;
+                py23 = pyversion(1) ;
+                if strcmp(py23, '3')
+                    disp('Using python3 since pyenv returns Version 3.X')
+                    command = ['python3 ' scriptpath];
+                elseif strcmp(py23, '2') 
+                    disp('Using python2 since pyenv returns Version 2.X')
+                    command = ['python ' scriptpath];
+                else
+                    error('Unrecognized python version')
+                end
+            catch
+                command = ['python ' scriptpath];
+            end
+            
             % Check if we are running MS on a dataset or a single file
             if run_full_dataset
                 if ~strcmp(run_full_dataset, 'none') ...
