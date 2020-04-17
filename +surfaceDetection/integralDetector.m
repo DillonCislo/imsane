@@ -93,7 +93,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'ilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'include_boundary_faces', true,... % keep faces along the boundaries of the data volume if true
-            'smooth_with_meshlab', true) ; % smooth the mesh after marching cubes mesh creation using mlxprogram
+            'smooth_with_matlab', -1) ; % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
     end
     
     %---------------------------------------------------------------------
@@ -233,6 +233,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             use_pointcloud = opts.mesh_from_pointcloud ;
             dataset_prob_searchstr = opts.prob_searchstr ;
             ilastikaxisorder = opts.ilastikaxisorder ;
+            smooth_with_matlab = opts.smooth_with_matlab ;
             % since python flips axes wrt MATLAB, flip them here
             morphsnakesaxisorder = fliplr(ilastikaxisorder) ;
             
@@ -374,13 +375,14 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % command = [command ' -adjust_for_MATLAB_indexing'] ;
             
             disp(['prepared command = ', command])
-            exist(outputMesh, 'file')
+            disp(['does outputMesh exist: ', num2str(exist(outputMesh, 'file'))])
             disp(outputMesh)
             % error('here')
             if ~exist(outputMesh, 'file')
                 % Either copy the command to the clipboard
                 clipboard('copy', command);
                 % or else run it on the system
+                error('here')
                 system(command)
             else
                 disp(['output PLY already exists: ', msls_mesh_outfn])
@@ -401,7 +403,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 end
                 for i=1:length(files_to_smooth)
                     msls_mesh_outfn = files_to_smooth(i).name ;
-                    PCfile = fullfile( mslsDir, msls_mesh_outfn );
+                    infile = fullfile( mslsDir, msls_mesh_outfn );
                     % Note that LS file is outputLs ;
                     split_fn = strsplit(msls_mesh_outfn, ofn_ply) ;
                     extension_outfn = split_fn{2} ;
@@ -412,54 +414,82 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     disp(['outputMesh = ', outputMesh])
                     %bad = so_bad
                     if ~exist( outputMesh, 'file')
-                        if use_pointcloud
-                            % Use the pointcloud from the level set rather than the
-                            % boundary mesh from marching cubes
-                            %----------------------------------------------------------------------
-                            % Extract the implicit level set as a 3D binary array
-                            %----------------------------------------------------------------------
+                        % Smooth with either meshlab or matlab
+                        if smooth_with_matlab < 0
+                            % USE MESHLAB, not matlab
+                            if use_pointcloud
+                                % Use the pointcloud from the level set rather than the
+                                % boundary mesh from marching cubes
+                                %----------------------------------------------------------------------
+                                % Extract the implicit level set as a 3D binary array
+                                %----------------------------------------------------------------------
 
-                            % The file name of the current time point
-                            ls_outfn_ii = lsfns_to_smooth(i).name ;
-                            % The 3D binay array
-                            bwLS = h5read( ls_outfn_ii, '/implicit_levelset' );
+                                % The file name of the current time point
+                                ls_outfn_ii = lsfns_to_smooth(i).name ;
+                                % The 3D binay array
+                                bwLS = h5read( ls_outfn_ii, '/implicit_levelset' );
 
-                            % Extract the (x,y,z)-locations of the level set boundary (in pixel
-                            % space)
-                            bwBdyIDx = bwperim( bwLS );
+                                % Extract the (x,y,z)-locations of the level set boundary (in pixel
+                                % space)
+                                bwBdyIDx = bwperim( bwLS );
 
-                            clear bwBdy
-                            [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
-                                find(bwBdyIDx) );
+                                clear bwBdy
+                                [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
+                                    find(bwBdyIDx) );
 
-                            %----------------------------------------------------------------------
-                            % Create output mesh
-                            %----------------------------------------------------------------------
+                                %----------------------------------------------------------------------
+                                % Create output mesh
+                                %----------------------------------------------------------------------
 
-                            % Write the points to a .obj file as a point cloud for ouput to Meshlab
-                            clear OBJ
-                            OBJ.vertices = bwBdy;
-                            OBJ.objects(1).type='f';
-                            OBJ.objects(1).data.vertices=[];
-                            
-                            pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
-                            disp(['Writing point cloud ' pointcloud_fn]);
-                            write_wobj(OBJ, pointcloud_fn );
+                                % Write the points to a .obj file as a point cloud for ouput to Meshlab
+                                clear OBJ
+                                OBJ.vertices = bwBdy;
+                                OBJ.objects(1).type='f';
+                                OBJ.objects(1).data.vertices=[];
 
-                            % Run the meshlab script
-                            command = ['meshlabserver -i ' pointCloudFileName, ...
-                                ' -o ' outputMesh, ' -s ' mlxprogram ' -om vn'] ;
-                            disp(['running ' command])
-                            system( command );
-                        else
-                            % Use the marching cubes mesh surface to smooth
-                            command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
-                                ' -s ' mlxprogram ' -om vn'];
-                            % Either copy the command to the clipboard
-                            clipboard('copy', command);
-                            % or else run it on the system
-                            disp(['running ' command])
-                            system(command)
+                                pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
+                                disp(['Writing point cloud ' pointcloud_fn]);
+                                write_wobj(OBJ, pointcloud_fn );
+
+                                % Run the meshlab script
+                                command = ['meshlabserver -i ' pointCloudFileName, ...
+                                    ' -o ' outputMesh, ' -s ' mlxprogram ' -om vn'] ;
+                                disp(['running ' command])
+                                system( command );
+                            else
+                                % Use the marching cubes mesh surface to smooth
+                                command = ['meshlabserver -i ' infile ' -o ' outputMesh, ...
+                                    ' -s ' mlxprogram ' -om vn'];
+                                % Either copy the command to the clipboard
+                                clipboard('copy', command);
+                                % or else run it on the system
+                                disp(['running ' command])
+                                system(command)
+                            end
+                        elseif smooth_with_matlab == 0
+                            disp('No smoothing, with either matlab or meshlab')
+                            mesh = read_ply_mod(infile) ;
+                            disp('Compute normals...')
+                            mesh.v = newV ;
+                            mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                            plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
+                        elseif smooth_with_matlab > 0 
+                            % Smooth with MATLAB
+                            disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
+                            mesh = read_ply_mod(infile) ;
+
+                            % Check that this behaves the way we want
+                            % mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                            % size(mesh.vn)
+                            % size(mesh.v)
+                            % assert(size(mesh.vn, 1) == size(mesh.v, 1))
+
+                            newV = laplacian_smooth(mesh.v, mesh.f, 'cotan', [], smooth_with_matlab) ;
+                            disp('Compute normals...')
+                            mesh.v = newV ;
+                            mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                            disp(['Saving smoothed mesh to ' outputMesh])
+                            plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
                         end
                     else
                         disp(['t=', num2str(timepoint) ': smoothed mesh file found...'])
@@ -468,22 +498,40 @@ classdef integralDetector < surfaceDetection.surfaceDetector
 
                 end
             else
-                msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
-                PCfile = fullfile( mslsDir, msls_mesh_outfn );
                 mesh_outfn = [ofn_smoothply, num2str(timepoint, '%06d'), '.ply'];
-                outputMesh = fullfile(mslsDir, mesh_outfn);
-
+                outputMesh = fullfile(mslsDir, mesh_outfn) ;
                 if ~exist( outputMesh, 'file')
-                    command = ['meshlabserver -i ' PCfile ' -o ' outputMesh, ...
-                        ' -s ' mlxprogram ' -om vn'];
-                    % Either copy the command to the clipboard
-                    clipboard('copy', command);
-                    % or else run it on the system
-                    disp(['running ' command])
-                    system(command)
+                    msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
+                    infile = fullfile( mslsDir, msls_mesh_outfn );
+                    if smooth_with_matlab < 1e-13
+                        % Build meshlab command to smooth meshes
+                        command = ['meshlabserver -i ' infile ' -o ' outputMesh, ...
+                            ' -s ' mlxprogram ' -om vn'];
+                        % Either copy the command to the clipboard
+                        clipboard('copy', command);
+                        % or else run it on the system
+                        disp(['running ' command])
+                        system(command)
+                    else
+                        disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
+                        mesh = read_ply_mod(infile) ;
+                        
+                        % Check that this behaves the way we want
+                        % mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                        % size(mesh.vn)
+                        % size(mesh.v)
+                        % assert(size(mesh.vn, 1) == size(mesh.v, 1))
+                        
+                        newV = laplacian_smooth(mesh.v, mesh.f, 'cotan', [], smooth_with_matlab) ;
+                        disp('Compute normals...')
+                        mesh.v = newV ;
+                        mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                        disp(['Saving smoothed mesh to ' outputMesh])
+                        plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
+                    end
                 else
-                    disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])
-                end
+                    disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])    
+                end    
             end
                         
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
