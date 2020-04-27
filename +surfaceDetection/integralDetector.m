@@ -382,7 +382,6 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 % Either copy the command to the clipboard
                 clipboard('copy', command);
                 % or else run it on the system
-                error('here')
                 system(command)
             else
                 disp(['output PLY already exists: ', msls_mesh_outfn])
