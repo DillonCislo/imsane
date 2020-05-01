@@ -469,7 +469,6 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                             disp('No smoothing, with either matlab or meshlab')
                             mesh = read_ply_mod(infile) ;
                             disp('Compute normals...')
-                            mesh.v = newV ;
                             mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
                             plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
                         elseif smooth_with_matlab > 0 
@@ -502,7 +501,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 if ~exist( outputMesh, 'file')
                     msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
                     infile = fullfile( mslsDir, msls_mesh_outfn );
-                    if smooth_with_matlab < 1e-13
+                    if smooth_with_matlab < 0
                         % Build meshlab command to smooth meshes
                         command = ['meshlabserver -i ' infile ' -o ' outputMesh, ...
                             ' -s ' mlxprogram ' -om vn'];
@@ -511,7 +510,13 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                         % or else run it on the system
                         disp(['running ' command])
                         system(command)
-                    else
+                    elseif smooth_with_matlab == 0
+                        disp('No smoothing, with either matlab or meshlab')
+                        mesh = read_ply_mod(infile) ;
+                        disp('Compute normals...')
+                        mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                        plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)      
+                    elseif smooth_with_matlab > 0 
                         disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
                         mesh = read_ply_mod(infile) ;
                         
