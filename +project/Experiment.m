@@ -471,6 +471,8 @@ classdef Experiment < handle_light
 
             if isempty(nChannelsUsed)
                 error('nChannelsUsed is empty');
+            else
+                debugMsg(1, ['Reading ' num2str(nChannelsUsed) ' channels'])
             end
             if any(this.expMeta.channelsUsed > nChannels)
                 error('channelsUsed specifies channel larger than number of channels');
@@ -521,6 +523,8 @@ classdef Experiment < handle_light
 
                     dataCidx = find(this.expMeta.channelsUsed == cidx);
                     if ~isempty(dataCidx)
+                        % bfGetPlane gives ALL Channels, and we stuff all
+                        % cidx into data at once. 
                         data(:,:, zidx, dataCidx) = bfGetPlane(r, i);
                     end
                 end
