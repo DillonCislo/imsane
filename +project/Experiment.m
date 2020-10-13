@@ -472,7 +472,7 @@ classdef Experiment < handle_light
             if isempty(nChannelsUsed)
                 error('nChannelsUsed is empty');
             else
-                debugMsg(1, ['Reading ' num2str(nChannelsUsed) ' channels'])
+                debugMsg(1, ['Reading ' num2str(nChannelsUsed) ' channels \n'])
             end
             if any(this.expMeta.channelsUsed > nChannels)
                 error('channelsUsed specifies channel larger than number of channels');

@@ -179,7 +179,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 % to convert yxzc to xyzc, put x=2 y=3 z=4 c=1
                 pred = permute(file,[2,3,4,1]);
             elseif strcmp(opts.ilastikaxisorder, 'cyxz')
+                % to convert yxzc to xyzc, put x=2 y=3 z=4 c=1
                 pred = permute(file,[3,2,4,1]);
+            elseif strcmp(opts.ilastikaxisorder, 'czyx')
+                % to convert yxzc to xyzc, put x=1>4 y=2>3 z=3>2 c=4>1
+                pred = permute(file,[4,3,2,1]);
             else
                 error('Have not coded for this axisorder. Do so here')
             end
@@ -393,6 +397,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % smooth mesh
             % Check if we need to smooth the full dataset of meshes
             if use_dataset_command
+                disp('Using dataset command for morphsnakes...')
                 % find all ms_...ply files in mslsDir, and smooth them all
                 files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply'])) ;
                 lsfns_to_smooth = dir(fullfile(mslsDir, [ls_outfn '*' dtype])) ;
@@ -496,6 +501,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
 
                 end
             else
+                disp('Using individual timepoint command for morphsnakes')
                 mesh_outfn = [ofn_smoothply, num2str(timepoint, '%06d'), '.ply'];
                 outputMesh = fullfile(mslsDir, mesh_outfn) ;
                 if ~exist( outputMesh, 'file')
@@ -512,10 +518,10 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                         system(command)
                     elseif smooth_with_matlab == 0
                         disp('No smoothing, with either matlab or meshlab')
-                        mesh = read_ply_mod(infile) ;
-                        disp('Compute normals...')
-                        mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                        plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)      
+                         mesh = read_ply_mod(infile) ;
+                         disp('Compute normals...')
+                         mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                         plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)      
                     elseif smooth_with_matlab > 0 
                         disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
                         mesh = read_ply_mod(infile) ;
