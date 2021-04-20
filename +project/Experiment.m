@@ -316,6 +316,7 @@ classdef Experiment < handle_light
             hasbf = exist('bioformats_package.jar','file') ||...
                     exist('loci_tools.jar','file');
             if hasbf
+                disp('Experiment.loadStackBioformats() executing')
                 this.loadStackBioformats(varargin{:});
                 return;
             end
@@ -383,6 +384,11 @@ classdef Experiment < handle_light
                     debugMsg(1,'\n');
                 end
             end
+
+            % announce min and max
+            disp('Experiment.loadStack() finished loading data volume')
+            disp(['min = ' num2str(min(data(:)))])
+            disp(['max = ' num2str(max(data(:)))])
 
             debugMsg(1,'\n');
             dt = toc(ticID);
@@ -465,7 +471,9 @@ classdef Experiment < handle_light
             this.fileMeta.nChannels = nChannels;
 
             % if only reading stack size, stop here-----------------------
-            if justMeta, return; end;
+            if justMeta
+                return; 
+            end
             
             nChannelsUsed = numel(this.expMeta.channelsUsed);
 
@@ -513,7 +521,7 @@ classdef Experiment < handle_light
 
                 % see above: if there is only one timepoint all the planes
                 % should be read, if there are multiple timepoints, only
-                % the correct time shouldbe read
+                % the correct time should be read
                 if nTimePts == 1 || (nTimePts > 1 && this.currentTime == tidx-1)
                     
                     debugMsg(1,'.');
@@ -524,8 +532,10 @@ classdef Experiment < handle_light
                     dataCidx = find(this.expMeta.channelsUsed == cidx);
                     if ~isempty(dataCidx)
                         % bfGetPlane gives ALL Channels, and we stuff all
-                        % cidx into data at once. 
+                        % cidx into data at once.
                         data(:,:, zidx, dataCidx) = bfGetPlane(r, i);
+                    else
+                        disp('skipping channel and z plane')
                     end
                 end
             end
@@ -534,6 +544,12 @@ classdef Experiment < handle_light
             dt = toc(ticID);
             debugMsg(1,['dt = ' num2str(dt) '\n']);
 
+
+            % announce min and max
+            disp('Experiment.loadStack() finished loading data volume')
+            disp(['min = ' num2str(min(data(:)))])
+            disp(['max = ' num2str(max(data(:)))])
+            
             % store data in stack object
             this.stack = surfaceDetection.Stack(data, this.fileMeta.stackResolution);
             this.stack.setChannelColor(this.expMeta.channelColor);
@@ -756,7 +772,13 @@ classdef Experiment < handle_light
                 this.detectOptions
                 this.optionIndex
                 this.detectOptions(this.optionIndex);
-                this.detectOptions(this.optionIndex) = varargin{1};
+                try
+                    this.detectOptions(this.optionIndex) = varargin{1};
+                catch
+                    disp(this.optionIndex)
+                    disp(varargin{1})
+                    error('detectOptions must match form specified in integralDetector')
+                end
                 this.resetDetector();
             else
                 % initialize detectOptions array to defaul value of

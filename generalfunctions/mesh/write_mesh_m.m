@@ -1,6 +1,17 @@
 function write_mesh_m( fullfilename, tr, varargin )
-%WRITE_MESH_M Summary of this function goes here
-%   Detailed explanation goes here
+%WRITE_MESH_M(fullfilename, tr, varargin)
+%   Write mesh to PLY file
+%
+% Parameters
+% ----------
+% fullfilename
+% tr
+% varargin
+% 
+% See also
+% --------
+% plywrite
+%
 
 V3D = tr.Points;
 F = tr.ConnectivityList;

@@ -295,9 +295,13 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             if use_dataset_command
                 % User has elected to run as a dataset, so pass a directory
                 % with _Probabilities.h5 files to run on.
+                if ~strcmp(run_full_dataset(end), filesep) 
+                    run_full_dataset = [run_full_dataset filesep] ;     
+                end  
                 command = [command ' -dataset'] ;
                 command = [command ' -i ' run_full_dataset ] ;
                 command = [command ' -prob ' dataset_prob_searchstr ];
+                command = [command ' -n0 ' num2str(niter0)];  
                 msls_mesh_outfn = ofn_ply;
                 ls_outfn = ofn_ls;
             else
@@ -341,7 +345,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             if ~strcmp(mask, 'none') && ~strcmp(mask, 'empty_string')
                 command = [ command ' -mask ' mask ] ;
             end
-            
+            % volumetric 
+            if false 
+                command = [ command ' -volumetric '] ; 
+            end 
+
             if radius_guess > 0
                 command = [command ' -rad0 ' num2str(radius_guess)] ;
             end
@@ -352,6 +360,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % seek previous timepoint output from MS algorithm.
             
             disp(['init_ls_fn = ', init_ls_fn])
+            disp(['ofn_ls = ', ofn_ls])
             if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
                 % User has NOT supplied fn from detectOptions
                 init_ls_fn = [ofn_ls, ...
@@ -360,19 +369,24 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             disp([ 'initial level set fn = ', init_ls_fn])
             if exist(init_ls_fn, 'file')
-                % It does exist. Use it as a seed (initial level set)
+                % It does exist, and the given name is the RELATIVE path.    
+                % Use it as a seed (initial level set) 
                 disp('running using initial level set')
                 command = [command ' -init_ls ', ...
                     init_ls_fn, ...
                     ' -n ' num2str(niter) ] ;
             elseif exist(fullfile(mslsDir, init_ls_fn), 'file')
-                % It does exist. Use it as a seed (initial level set)
+                % It does exist, and given name is the relative path
+                % without the extension. 
+                % Use it as a seed (initial level set)
                 disp('running using initial level set')
                 command = [command ' -init_ls ', ...
                     fullfile(mslsDir, init_ls_fn), ...
                     ' -n ' num2str(niter) ] ;
             elseif exist(fullfile(mslsDir, [ init_ls_fn '.h5']), 'file')
-                % It does exist. Use it as a seed (initial level set)
+                % It does exist, and given name is the FULL path 
+                % without the extension.
+                % Use it as a seed (initial level set)
                 disp('running using initial level set')
                 command = [command ' -init_ls ', ...
                     fullfile(mslsDir, [ init_ls_fn '.h5']), ...
