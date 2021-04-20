@@ -93,8 +93,10 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'ilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'include_boundary_faces', true,... % keep faces along the boundaries of the data volume if true
-            'smooth_with_matlab', -1) ; % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
+            'smooth_with_matlab', -1, ... % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
+            'pythonVersion', ''); % version of python to call = '2' or '3', as string
     end
+
     
     %---------------------------------------------------------------------
     % public methods
@@ -251,21 +253,31 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             scriptpath = fullfile(ms_scriptDir, 'run_morphsnakes.py') ;
             
-            try 
-                tmp = pyenv ;
-                pyversion = char(tmp.Version) ;
-                py23 = pyversion(1) ;
-                if strcmp(py23, '3')
-                    disp('Using python3 since pyenv returns Version 3.X')
+            if isempty(opts.pythonVersion)
+                try 
+                    tmp = pyenv ;
+                    pyversion = char(tmp.Version) ;
+                    py23 = pyversion(1) ;
+                    if strcmp(py23, '3')
+                        disp('Using python3 since pyenv returns Version 3.X')
+                        command = ['python3 ' scriptpath];
+                    elseif strcmp(py23, '2') 
+                        disp('Using python2 since pyenv returns Version 2.X')
+                        command = ['python ' scriptpath];
+                    else
+                        error('Unrecognized python version')
+                    end
+                catch
                     command = ['python3 ' scriptpath];
-                elseif strcmp(py23, '2') 
-                    disp('Using python2 since pyenv returns Version 2.X')
-                    command = ['python ' scriptpath];
-                else
-                    error('Unrecognized python version')
                 end
-            catch
+            elseif strcmp(opts.pythonVersion, '3')
+                disp('Using python3 since pythonVersion specified')
+                command = ['python3 ' scriptpath];
+            elseif strcmp(opts.pythonVersion, '2')
+                disp('Using python2 since pythonVersion specified')
                 command = ['python ' scriptpath];
+            else
+                error('python version not recognized (2/3)')
             end
             
             % Check if we are running MS on a dataset or a single file
@@ -304,7 +316,6 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             command = [command ' -ofn_ply ' msls_mesh_outfn ' -ofn_ls ' ls_outfn];
             command = [command ' -l1 ' num2str(lambda1) ' -l2 ' num2str(lambda2) ] ;
             command = [command ' -nu ' num2str(nu) ' -postnu ' num2str(post_nu) ];
-            command = [command ' -channel ' num2str(channel) ] ;
             command = [command ' -smooth ' num2str(smoothing) ];
             command = [command ' -postsmooth ' num2str(post_smoothing) ];
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
@@ -323,7 +334,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 command = [command ' -save'] ;
             end
             
-            if ~strcmp(center_guess, 'empty_string')
+            if ~strcmp(center_guess, 'empty_string') && ~isempty(center_guess)
                 command = [command ' -center_guess ' center_guess ];
             end
             
@@ -348,7 +359,13 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             end
             
             disp([ 'initial level set fn = ', init_ls_fn])
-            if exist(fullfile(mslsDir, init_ls_fn), 'file')
+            if exist(init_ls_fn, 'file')
+                % It does exist. Use it as a seed (initial level set)
+                disp('running using initial level set')
+                command = [command ' -init_ls ', ...
+                    init_ls_fn, ...
+                    ' -n ' num2str(niter) ] ;
+            elseif exist(fullfile(mslsDir, init_ls_fn), 'file')
                 % It does exist. Use it as a seed (initial level set)
                 disp('running using initial level set')
                 command = [command ' -init_ls ', ...
@@ -369,7 +386,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             else
                 % The guess for the initial levelset does NOT exist, so use
                 % a sphere for the guess.
-                disp('Using default sphere for init_ls')
+                disp(['Using default sphere for init_ls -- no such file on disk: ' fullfile(mslsDir, [ init_ls_fn '.h5'])])
                 command = [command ' -n ' num2str(niter0)];
             end
             
