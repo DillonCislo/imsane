@@ -4,6 +4,12 @@
  *
  * 	Performs an isotropic remeshing of a region of a polygon mesh.  Depends on CGAL
  *
+ *  Example Usage 
+ *  -------------
+ *  [Fnew, Vnew, Fnnew, Vnnew] = ...
+ *     isotropic_remeshing(faces, vertices, targetEdgeLen, numIterations)
+ * 
+ *
  * 	by Dillon Cislo
  * 	02/19/2019
  *
