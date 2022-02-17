@@ -55,9 +55,9 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             'lambda1', 1, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
             'lambda2', 2, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
             'nu', 0.3, ... % float: how many pressure (dilation/erosion) steps per iteration
-            'smoothing', 1,... % float: how many smoothing steps per iteration (can be <1)
-            'post_nu', 3, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
-            'post_smoothing', 2,... % how many iterations of smoothing after convergence
+            'tension', 1,... % float: how many surface tension smoothing steps per iteration (can be <1)
+            'post_pressure', 3, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
+            'post_tension', 2,... % how many iterations of smoothing after convergence
             'exit_thres', 1e-6, ... % convergence threshold: maximum difference between subsequent level sets upon which to exit algorithm ('close enough')
             'foreGroundChannel',2, ... % the index of the first dimension of the 4d input data (if 4d)
             'fileName',[], ... % the filename of h5 to train on
@@ -67,8 +67,8 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             'ms_scriptDir', '/mnt/data/code/morphsnakes_wrapper/', ... % the directory containing run_morphsnakes.py
             'timepoint', 0, ... % which timepoint in the data to consider
             'zdim',2, ... % Which dimension is the z dimension
-            'pre_nu', -5, ... % number of dilation/erosion passes for positive/negative values
-            'pre_smoothing', 1, ... % number of smoothing passes before running MS
+            'pre_pressure', -5, ... % number of dilation/erosion passes for positive/negative values
+            'pre_tension', 1, ... % number of surface tension smoothing passes before running MS
             'ofn_smoothply', 'mesh_apical_',... % the output file name (not including path directory)
             'mlxprogram', ... % the name of the mlx program to use to smooth the results
             './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
@@ -165,12 +165,12 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             mslsDir = opts.mslsDir ;
             lambda1 = opts.lambda1 ;
             lambda2 = opts.lambda2 ;
-            nu = opts.nu ;
-            smoothing = opts.smoothing ;
-            pre_nu = opts.pre_nu ;
-            pre_smoothing = opts.pre_smoothing ;
-            post_nu = opts.post_nu ;
-            post_smoothing = opts.post_smoothing ;
+            pressure = opts.pressure ;
+            tension = opts.tension ;
+            pre_pressure = opts.pre_pressure ;
+            pre_tension = opts.pre_tension ;
+            post_pressure = opts.post_pressure ;
+            post_tension = opts.post_tension ;
             exit_thres = opts.exit_thres ;
             ofn_ply = opts.ofn_ply ; 
             ofn_ls = opts.ofn_ls ;
@@ -234,13 +234,13 @@ classdef integralDetector_rawdata < surfaceDetection.surfaceDetector
             outputLs = fullfile(mslsDir, ls_outfn) ;
             outputMesh = fullfile(mslsDir, msls_mesh_outfn) ;
             command = [command ' -o ' mslsDir ] ;
-            command = [command ' -prenu ' num2str(pre_nu) ' -presmooth ' num2str(pre_smoothing)] ;
+            command = [command ' -prenu ' num2str(pre_pressure) ' -presmooth ' num2str(pre_tension)] ;
             command = [command ' -ofn_ply ' msls_mesh_outfn ' -ofn_ls ' ls_outfn];
             command = [command ' -l1 ' num2str(lambda1) ' -l2 ' num2str(lambda2) ] ;
-            command = [command ' -nu ' num2str(nu) ' -postnu ' num2str(post_nu) ];
+            command = [command ' -nu ' num2str(pressure) ' -postnu ' num2str(post_pressure) ];
             command = [command ' -channel ' num2str(channel) ] ;
-            command = [command ' -smooth ' num2str(smoothing) ];
-            command = [command ' -postsmooth ' num2str(post_smoothing) ];
+            command = [command ' -smooth ' num2str(tension) ];
+            command = [command ' -postsmooth ' num2str(post_tension) ];
             command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
             command = [command ' -dset_name ' dset_name ] ;
             command = [command ' -dtype h5 -clip ' num2str(clip) ] ;
