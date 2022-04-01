@@ -1,4 +1,4 @@
-classdef integralDetector < surfaceDetection.surfaceDetector
+classdef morphsnakesDetector < surfaceDetection.surfaceDetector
     % Segmentation based on prediction maps from ilastik that maximize the
     % enclosed probability within a contiguous volume of pixels, given an
     % initial guess. A Chan-Vese energy functional is minimized, with three
@@ -6,7 +6,6 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     % the boundary to high gradients in probabilities from ilastik
     % training. Note: bitdepth of output h5 is matched to input image
     % bitdepth.
-    % This function uses activecontour() in MATLAB, not morphsnakes.
     %
     % properties:
     %           defaultOptions : struct
@@ -59,8 +58,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'ssfactor', 4,... % subsampling factor: downsampling of raw data
             'niter', 100, ... % how many iterations before exit if no convergence
             'niter0', 100, ... % how many iterations before exit if no convergence for first timepoint
-            'pre_pressure', -5, ... % number of dilation/erosion passes for positive/negative values
-            'pre_tension', 1, ... % number of smoothing passes before running MS
+            'lambda1', 1, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
+            'lambda2', 2, ...  % lambda1/lambda2 decides weight of inclusion/exclusion of interior/exterior
             'pressure', 0.3, ... % float: how many pressure (dilation/erosion) steps per iteration
             'tension', 1,... % float: how many smoothing/surface tension steps per iteration (can be <1)
             'post_pressure', 3, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
@@ -74,6 +73,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'ms_scriptDir', '/mnt/data/code/morphsnakes_wrapper/', ... % the directory containing run_morphsnakes.py
             'timepoint', 0, ... % which timepoint in the data to consider
             'zdim',2, ... % Which dimension is the z dimension
+            'pre_pressure', -5, ... % number of dilation/erosion passes for positive/negative values
+            'pre_tension', 1, ... % number of smoothing passes before running MS
             'ofn_smoothply', 'mesh_',... % the output file name (not including path directory)
             'mlxprogram', ... % the name of the mlx program to use to smooth the results. Note that if mesh_from_pointcloud==true, should take obj as input and mesh as output.
             './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
@@ -92,7 +93,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'ilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'include_boundary_faces', true,... % keep faces along the boundaries of the data volume if true
-            'smooth_with_matlab', -1); % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
+            'smooth_with_matlab', -1, ... % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
+            'pythonVersion', ''); % version of python to call = '2' or '3', as string
     end
 
     
@@ -106,7 +108,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % constructor
         % ------------------------------------------------------
         
-        function this = integralDetector()
+        function this = morphsnakesDetector()
             % Constructor
             %
             % radialEdgeDetector()
@@ -212,8 +214,14 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             niter = opts.niter ;
             niter0 = opts.niter0 ;
             mslsDir = opts.mslsDir ;
+            lambda1 = opts.lambda1 ;
+            lambda2 = opts.lambda2 ;
             pressure = opts.pressure ;
             tension = opts.tension ;
+            pre_pressure = opts.pre_pressure ;
+            pre_tension = opts.pre_tension ;
+            post_pressure = opts.post_pressure ;
+            post_tension = opts.post_tension ;
             exit_thres = opts.exit_thres ;
             ofn_ply = opts.ofn_ply ;
             ofn_ls = opts.ofn_ls ;
@@ -245,9 +253,112 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             if ~exist(mslsDir, 'dir')
                 mkdir(mslsDir)
             end
-                    
+            
+            % Convert the current image to a level set using morphological snakes
+            %    '_Probabilities.h5']);
+            
+            scriptpath = fullfile(ms_scriptDir, 'run_morphsnakes.py') ;
+            
+            if isempty(opts.pythonVersion)
+                try 
+                    tmp = pyenv ;
+                    pyversion = char(tmp.Version) ;
+                    py23 = pyversion(1) ;
+                    if strcmp(py23, '3')
+                        disp('Using python3 since pyenv returns Version 3.X')
+                        command = ['python3 ' scriptpath];
+                    elseif strcmp(py23, '2') 
+                        disp('Using python2 since pyenv returns Version 2.X')
+                        command = ['python ' scriptpath];
+                    else
+                        error('Unrecognized python version')
+                    end
+                catch
+                    command = ['python3 ' scriptpath];
+                end
+            elseif strcmp(opts.pythonVersion, '3')
+                disp('Using python3 since pythonVersion specified')
+                command = ['python3 ' scriptpath];
+            elseif strcmp(opts.pythonVersion, '2')
+                disp('Using python2 since pythonVersion specified')
+                command = ['python ' scriptpath];
+            else
+                error('python version not recognized (2/3)')
+            end
+            
+            % Check if we are running MS on a dataset or a single file
+            if run_full_dataset
+                if ~strcmp(run_full_dataset, 'none') ...
+                        && ~strcmp(run_full_dataset, '')
+                    use_dataset_command = true ;
+                else
+                    use_dataset_command = false ;
+                end
+            else
+                use_dataset_command = false ;
+            end
+            
+            if use_dataset_command
+                % User has elected to run as a dataset, so pass a directory
+                % with _Probabilities.h5 files to run on.
+                if ~strcmp(run_full_dataset(end), filesep) 
+                    run_full_dataset = [run_full_dataset filesep] ;     
+                end  
+                command = [command ' -dataset'] ;
+                command = [command ' -i ' run_full_dataset ] ;
+                command = [command ' -prob ' dataset_prob_searchstr ];
+                command = [command ' -n0 ' num2str(niter0)];  
+                msls_mesh_outfn = ofn_ply;
+                ls_outfn = ofn_ls;
+            else
+                % We are running MS on a single file. Give the filename of
+                % the ilatik output run on filename.h5
+                prob_infn = [opts.fileName, '_Probabilities.h5'] ;
+                command = [command ' -i ' prob_infn ] ;
+                msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d'), '.ply'];
+                ls_outfn = [ofn_ls, num2str(timepoint, '%06d'), '.', dtype];
+            end
+            
             outputLs = fullfile(mslsDir, ls_outfn) ;
             outputMesh = fullfile(mslsDir, msls_mesh_outfn) ;
+            command = [command ' -o ' mslsDir ] ;
+            command = [command ' -prenu ' num2str(pre_pressure) ' -presmooth ' num2str(pre_tension)] ;
+            command = [command ' -ofn_ply ' msls_mesh_outfn ' -ofn_ls ' ls_outfn];
+            command = [command ' -l1 ' num2str(lambda1) ' -l2 ' num2str(lambda2) ] ;
+            command = [command ' -nu ' num2str(pressure) ' -postnu ' num2str(post_pressure) ];
+            command = [command ' -smooth ' num2str(tension) ];
+            command = [command ' -postsmooth ' num2str(post_tension) ];
+            command = [command ' -exit ' num2str(exit_thres, '%0.9f') ];
+            command = [command ' -channel ' num2str(foreGround - 1) ] ;
+            command = [command ' -dtype ' dtype ] ;
+            command = [command ' -permute ' morphsnakesaxisorder ] ;
+            command = [command ' -ss ' num2str(ssfactor) ] ;
+            if opts.include_boundary_faces
+                command = [command ' -include_boundary_faces'] ;
+            end
+            if plot_mesh3d
+                command = [command ' -plot_mesh3d' ] ;
+            end
+           
+            if save
+                command = [command ' -save'] ;
+            end
+            
+            if ~strcmp(center_guess, 'empty_string') && ~isempty(center_guess)
+                command = [command ' -center_guess ' center_guess ];
+            end
+            
+            if ~strcmp(mask, 'none') && ~strcmp(mask, 'empty_string')
+                command = [ command ' -mask ' mask ] ;
+            end
+            % volumetric 
+            if false 
+                command = [ command ' -volumetric '] ; 
+            end 
+
+            if radius_guess > 0
+                command = [command ' -rad0 ' num2str(radius_guess)] ;
+            end
             
             % Check if previous time point's level set exists to use as a seed
             % First look for supplied fn from detectOptions.
@@ -267,23 +378,36 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 % It does exist, and the given name is the RELATIVE path.    
                 % Use it as a seed (initial level set) 
                 disp('running using initial level set')
-                init_ls = load(init_ls_fn) ;
+                command = [command ' -init_ls ', ...
+                    init_ls_fn, ...
+                    ' -n ' num2str(niter) ] ;
             elseif exist(fullfile(mslsDir, init_ls_fn), 'file')
                 % It does exist, and given name is the relative path
                 % without the extension. 
                 % Use it as a seed (initial level set)
                 disp('running using initial level set')
-                init_ls = load(fullfile(mslsDir, init_ls_fn)) ;
+                command = [command ' -init_ls ', ...
+                    fullfile(mslsDir, init_ls_fn), ...
+                    ' -n ' num2str(niter) ] ;
             elseif exist(fullfile(mslsDir, [ init_ls_fn '.h5']), 'file')
                 % It does exist, and given name is the FULL path 
                 % without the extension.
+                % Use it as a seed (initial level set)
                 disp('running using initial level set')
-                init_ls = load(fullfile(mslsDir, init_ls_fn)) ;                
+                command = [command ' -init_ls ', ...
+                    fullfile(mslsDir, [ init_ls_fn '.h5']), ...
+                    ' -n ' num2str(niter) ] ;
+            elseif exist(fullfile(mslsDir, [ init_ls_fn '.npy']), 'file')
+                % It does exist. Use it as a seed (initial level set)
+                disp('running using initial level set')
+                command = [command ' -init_ls ', ...
+                    fullfile(mslsDir, [ init_ls_fn '.npy']), ...
+                    ' -n ' num2str(niter) ] ;
             else
                 % The guess for the initial levelset does NOT exist, so use
                 % a sphere for the guess.
                 disp(['Using default sphere for init_ls -- no such file on disk: ' fullfile(mslsDir, [ init_ls_fn '.h5'])])
-                init_ls = [] ;
+                command = [command ' -n ' num2str(niter0)];
             end
             
             % Flip axis order LR of output mesh to return to MATLAB
@@ -291,36 +415,20 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             % since already did morphsnakesaxisorder = fliplr() earlier
             % command = [command ' -adjust_for_MATLAB_indexing'] ;
             
+            disp(['prepared command = ', command])
             disp(['does outputMesh exist: ', num2str(exist(outputMesh, 'file'))])
             disp(outputMesh)
             % error('here')
             if ~exist(outputMesh, 'file')
-
-                if use_dataset_command
-                    % User has elected to run as a dataset, so pass a directory
-                    % with _Probabilities.h5 files to run on.
-                    error('handle here')
-                    msls_mesh_outfn = ofn_ply;
-                    ls_outfn = ofn_ls;
-                else
-                    % We are running MS on a single file. Give the filename of
-                    % the ilatik output run on filename.h5
-                    prob_infn = [opts.fileName, '_Probabilities.h5'] ;
-                    msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d'), '.ply'];
-                    ls_outfn = [ofn_ls, num2str(timepoint, '%06d'), '.', dtype];
-
-                    BW = activecontour(data, init_ls, niter,...
-                        'SmoothFactor', tension, 'ContractionBias', pressure) ;
-                    
-                    % Convert BW to mesh
-                    mesh = isosurface(BW, 0.5) ;
-                end
-
+                % Either copy the command to the clipboard
+                clipboard('copy', command);
+                % or else run it on the system
+                system(command)
             else
                 disp(['output PLY already exists: ', msls_mesh_outfn])
             end
             
-            %% Clean up mesh file for this timepoint using MeshLab --------
+            % Clean up mesh file for this timepoint using MeshLab --------
 
             % Here use the boundary mesh from marching cubes to make a
             % smooth mesh
