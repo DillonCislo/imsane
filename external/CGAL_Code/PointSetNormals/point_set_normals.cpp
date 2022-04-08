@@ -162,10 +162,12 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
 		case JET_NORMALS :
 
-			CGAL::jet_estimate_normals<Concurrency_tag>
+			/*
+            CGAL::jet_estimate_normals<Concurrency_tag>
 				( points, nn,
 				  CGAL::parameters::point_map(Point_map()).
 				  normal_map(Vector_map()) );
+             */
 			break;
 
 		case PCA_NORMALS :

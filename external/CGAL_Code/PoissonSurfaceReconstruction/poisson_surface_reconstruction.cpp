@@ -16,10 +16,12 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Polyhedron_3.h>
 #include <CGAL/poisson_surface_reconstruction.h>
+#include <CGAL/IO/Polyhedron_iostream.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel 	Kernel;
 typedef Kernel::Point_3 					Point;
@@ -49,12 +51,12 @@ void mexFunction( int nlhs, mxArray *plhs[],
 	// -------------------------------------------------------------------------------------
 	
 	// Check for proper number of arguments
-	if ( nrhs != 2 ) {
-		mexErrMsgIdAndText( "MATLAB:poisson_surface_reconstruction:nargin",
-				"POISSON_SURFACE_RECONSTRUCTION requires two input arguments" );
-	} else if ( nlhs != 2 ) {
-		mexErrMsgIdAndText( "MATLAB:poisson_surface_reconstruction:nargout",
-				"POISSON_SURFACE_RECONSTRUCTION requires two output arguments" );
+	if ( nrhs != 3 ) {
+		mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:nargin",
+				"POISSON_SURFACE_RECONSTRUCTION requires 3 input arguments" );
+	} else if ( nlhs != 0 ) {
+		mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:nargout",
+				"POISSON_SURFACE_RECONSTRUCTION requires zero output arguments" );
 	}
 
 	// The input point cloud list
@@ -64,7 +66,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
 	// Check the dimensionality of the point cloud
 	if ( dim != 3 ) {
-		mexErrMsgIdAndText( "MATLAB:poisson_surface_reconstruction:point_dim",
+		mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:point_dim",
 				"Point coordinates must be 3D" );
 	}
 
@@ -75,15 +77,37 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
 	// Check the dimensionality of the point normals
 	if ( dimNormals != 3 ) {
-		mexErrMsgIdAndText( "MATLAB:poisson_surface_reconstruction:normal_dim",
+		mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:normal_dim",
 				"Normal vectors must be 3D" );
 	}
 
 	// Check that the number of elements in each list is consistent
 	if ( numPoints != numNormals ) {
-		mexErrMsgIdAndText( "MATLAB:poisson_surface_reconstruction:invalid_point_cloud",
+		mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:invalid_point_cloud",
 				"Point cloud is inconsistently sized." );
 	}
+
+  // Read in the name of the output file -------------------------------------------------
+  
+  if ( mxIsChar(prhs[2]) != 1 ) {
+    mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:inputNotString",
+        "Output file name must be a string." );
+  }
+
+  if ( mxGetM(prhs[2]) != 1 ) {
+    mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:inputNotVector",
+        "Output file name must be a row vector." );
+  }
+
+  // Get the length of the input string
+  std::size_t buflen = (mxGetM(prhs[2]) * mxGetN(prhs[2])) + 1;
+
+  char *fileName = mxArrayToString(prhs[2]);
+
+  if ( fileName == NULL ) {
+    mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:conversionFailed",
+        "Could not convert file name to string." );
+  }
 
 	// Load points and normal vectors into pair structure ----------------------------------
 	
@@ -112,8 +136,18 @@ void mexFunction( int nlhs, mxArray *plhs[],
 		  output_mesh, average_spacing );
 
 	if (!mesh_success) {
-		mesErrMsgTxt( "Mesh could not be constructed properly" );
+		mexErrMsgIdAndTxt( "MATLAB:poisson_surface_reconstruction:badMesh",
+        "Mesh could not be constructed properly." );
 	}
 
 	// -------------------------------------------------------------------------------------
 	// OUTPUT PROCESSING
+  // -------------------------------------------------------------------------------------
+  
+  // Write mesh to file
+  std::ofstream out( fileName );
+  out << output_mesh;
+
+  return;
+
+};

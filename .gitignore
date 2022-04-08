@@ -3,3 +3,4 @@
 *.ply
 *.jar
 .DS_Store
+*.mexa64

@@ -366,13 +366,13 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   if ( cornersSupplied ) {
     for( int i = 0; i < 4; i++ ) {
-      corners.push_back( (vertex_descriptor) cornersIn[i] );
+      corners.push_back( (vertex_descriptor) (cornersIn[i]-1) );
     }
   }
 
   if ( xPtsSupplied ) {
     for( int i = 0; i < 2; i++ ) {
-      xPts.push_back( (vertex_descriptor) xPtsIn[i] );
+      xPts.push_back( (vertex_descriptor) (xPtsIn[i]-1) );
     }
   }
 
