@@ -109,10 +109,10 @@ classdef (Abstract) surfaceDetector < handle_light
             if ~isfield(options,'range')   
                 options.range = 1:stack.zpSize;
             end
-            if ~isfield(options,'outName');
+            if ~isfield(options,'outName')
                 options.outName = 'qualityPointCloud.tif';
             end
-            if ~isfield(options,'export');  
+            if ~isfield(options,'export')
                 options.export = 'true'; 
             end
             if ~isfield(options,'closeFig')

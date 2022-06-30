@@ -55,44 +55,45 @@ classdef integralDetector < surfaceDetection.surfaceDetector
     
     properties (Constant)
         % default detector options
-        defaultOptions = struct('channel', 1, ...
+        defaultOptions = struct('channel', 1, ...  % which channel to use for integration in Chan-Vese energy functional (if there are only two channels in training, then this does NOT matter)
             'ssfactor', 4,... % subsampling factor: downsampling of raw data
             'niter', 100, ... % how many iterations before exit if no convergence
             'niter0', 100, ... % how many iterations before exit if no convergence for first timepoint
             'pre_pressure', -5, ... % number of dilation/erosion passes for positive/negative values
-            'pre_tension', 1, ... % number of smoothing passes before running MS
-            'pressure', 0.3, ... % float: how many pressure (dilation/erosion) steps per iteration
-            'tension', 1,... % float: how many smoothing/surface tension steps per iteration (can be <1)
-            'post_pressure', 3, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
-            'post_tension', 2,... % how many iterations of smoothing after convergence
+            'pressure', 0., ... % float: how many pressure (dilation/erosion) steps per iteration
+            'tension', 0,... % float: how many smoothing/surface tension steps per iteration (can be <1)
+            'post_pressure', 0, ... % how many iterations to dilate (if positive) or erode (if negative) after convergence
             'exit_thres', 1e-6, ... % convergence threshold: maximum difference between subsequent level sets upon which to exit algorithm ('close enough')
             'foreGroundChannel',2, ... % the index of the first dimension of the 4d input data (if 4d)
             'fileName',[], ... % the filename of h5 to train on
-            'mslsDir', './msls_output/', ...  % the directory for all output data/images
-            'ofn_ls', 'msls_', ...  % the output filename for level sets
-            'ofn_ply', 'mesh_ms_', ... % the output filename for PLY files
-            'ms_scriptDir', '/mnt/data/code/morphsnakes_wrapper/', ... % the directory containing run_morphsnakes.py
+            'meshDir', './mesh_output/', ...  % the directory for all output data/images
+            'dataDir', './', ...  % the directory for all h5 training data/images
+            'ofn_ls', 'ls_%06d.mat', ...  % the output filename for level sets
+            'ofn_ply', 'mesh_ls_%06d.ply', ... % the output filename for PLY files
             'timepoint', 0, ... % which timepoint in the data to consider
             'zdim',2, ... % Which dimension is the z dimension
-            'ofn_smoothply', 'mesh_',... % the output file name (not including path directory)
-            'mlxprogram', ... % the name of the mlx program to use to smooth the results. Note that if mesh_from_pointcloud==true, should take obj as input and mesh as output.
-            './surface_rm_resample20k_reconstruct_LS3_1p2pc_ssfactor4.mlx',...
+            'ofn_smoothply', 'mesh_%06d.ply',... % the output file name (not including path directory)
             'init_ls_fn', 'none', ... % the name of the initial level set to load, if any
             'run_full_dataset', false, ... % run MS on a time series, not just one file
-            'radius_guess', -1, ... % radius of the initial guess sphere
+            'radius_guess', 10, ... % radius of the initial guess sphere
             'dset_name', 'exported_data', ... % the name of the dataset to load from h5
-            'save', false, ... % whether to save intermediate results
             'center_guess', 'empty_string', ... % xyz of the initial guess sphere ;
             'plot_mesh3d', false, ...  % if save is true, plot intermediate results in 3d 
-            'dtype', 'h5', ... % h5 or npy: use hdf5 or numpy file format for input and output ls
             'mask', 'none', ... % filename for mask to apply before running MS
             'mesh_from_pointcloud', false, ... % use a pointcloud from the marching cubes algorithm rather than a mesh to create smoothed mesh
             'prob_searchstr', '_Probabilities.h5', ... % if dataset mode, what string to seek for loading all probabilities in data directory (glob datadir/*searchstr)
-            'physicalaxisorder', 'yxzc', ... % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
+            'physicalaxisorder', 'xyzc', ... % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
             'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
-            'ilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
+            'ilastikaxisorder', 'cxyz', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'include_boundary_faces', true,... % keep faces along the boundaries of the data volume if true
-            'smooth_with_matlab', -1); % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
+            'smooth_with_matlab', 0.01, ... % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
+            'target_edgelength', 6, ...             % float, if using Matlab smoothing, target edge length for mesh resampling
+            'enforceSingleComponent', false, ...  % enforce that the resulting mesh is a single component
+            'enforceQuality', false, ...    % enforce sphere-like topology of output mesh
+            'enforceTopology', false, ...       % Enforce that the output mesh must have targetEulerCharacteristic
+            'targetEulerCharacteristic', 2, ... % if enforceTopology, what EulerCharacteristic must the output mesh have
+            'maxIterRelaxMeshSpikes', 1, ...  % if smooth_with_matlab=true, #iterations to relax cone-like features in the mesh
+            'overwrite', false) ;           % overwrite results on disk if they already exist
     end
 
     
@@ -125,9 +126,35 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             %
             % Parameters
             % ----------
-            % initial_guess : str path to npy file of initial gues as binary implicit surface
+            % none -- simply uses this.options
             
             opts = this.options ;
+            
+            % unpack opts
+            meshDir = opts.meshDir ;
+            dataDir = opts.dataDir ;
+            pressure = opts.pressure ;
+            tension = opts.tension ;
+            pre_pressure = opts.pre_pressure ;
+            post_pressure = opts.post_pressure ;
+            tar_length = opts.target_edgelength ;
+            enforceSingleComponent = opts.enforceSingleComponent ;
+            enforceQuality = opts.enforceQuality ;
+            maxIterRelaxMeshSpikes = opts.maxIterRelaxMeshSpikes ;
+            ofn_ls = opts.ofn_ls ;
+            ofn_ply = opts.ofn_ply ;
+            ofn_smoothply = opts.ofn_smoothply ;
+            init_ls_fn = opts.init_ls_fn ;
+            tp = opts.timepoint ;
+            radius_guess = opts.radius_guess ;
+            center_guess = opts.center_guess ;
+            niter = opts.niter ; 
+            niter0 = opts.niter0 ;
+            ssfactor = opts.ssfactor ;
+            smooth_with_matlab = opts.smooth_with_matlab ;
+            overwrite = opts.overwrite ; 
+            enforceTopology = opts.enforceTopology ;
+            targetEulerCharacteristic = opts.targetEulerCharacteristic ;
             
             debugMsg(1, ['integralDetector.detectSurface() : channel='...
                 num2str(opts.channel), ...
@@ -136,17 +163,14 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 ', foreGroundChannel =' num2str(opts.foreGroundChannel)...
                 ', zDim =' num2str(opts.zdim),'\n']);
             
-            if isempty(opts.fileName)
-                error('Please provide a regular prediction from ilastik in h5 format.');
+            %% load the exported data out of the ilastik prediction
+            fn_tmp = sprintf(opts.fileName, tp) ;
+            if strcmpi(fn_tmp(end-2:end), '.h5')
+                fn_tmp = fn_tmp(1:end-4) ;
             end
-            
-            %---------------------------------
-            % Segmentation of a prediction map from ilastik.
-            %---------------------------------
-            
-            % load the exported data out of the ilastik prediction
-            fileName = [opts.fileName, '_Probabilities.h5'] ;
-            disp(['Reading h5 file: ' fileName])
+            fileName = fullfile(dataDir, ...
+                [fn_tmp, '_Probabilities.h5']) ;
+            disp(['Searching for init h5 file: ' fileName])
             h5fileInfo = h5info(fileName);
             if strcmp(h5fileInfo.Datasets.Name,'exported_data')
                 file = h5read(fileName,'/exported_data');
@@ -156,12 +180,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 error(['Please provide a regular prediction from ilastik, either in', ...
                     'the format of version 1.1 or 0.5 (ie with exported_data as a dataset)']);
             end
-            
-            foreGround = opts.foreGroundChannel;
-            
-            disp('Loaded probabilities as array of size: ')
-            size(file)
-            
+
             % ilastik internally swaps axes. 1:x, 2:y, 3:z, 4:class
             % strategy: put into xyzc format, then pop last index
             if strcmp(opts.ilastikaxisorder, 'xyzc')
@@ -193,251 +212,342 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             else
                 error('Have not coded for this axisorder. Do so here')
             end
-            pred = squeeze(pred(:, :, :, foreGround)) ;
-            % disp(['axis order of mesh to be: ' opts.physicalaxisorder])
-            disp(['axis order of probabilities: ' opts.ilastikaxisorder])
-            disp(['size of probability foreGround: ' num2str(size(pred))])
             
-            % Note that python will flip axis LR, but we will flip back
-            % so keep order here
-            xSize = size(pred, 1);
-            ySize = size(pred, 2);
-            zSize = size(pred, 3);
-            clearvars pred
-            
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            % Identify the surface using the loaded probabilities here
-            % Convert the current image to a level set using morphological snakes
-            ssfactor = opts.ssfactor ;
-            niter = opts.niter ;
-            niter0 = opts.niter0 ;
-            mslsDir = opts.mslsDir ;
-            pressure = opts.pressure ;
-            tension = opts.tension ;
-            exit_thres = opts.exit_thres ;
-            ofn_ply = opts.ofn_ply ;
-            ofn_ls = opts.ofn_ls ;
-            channel = opts.channel ;
-            ms_scriptDir = opts.ms_scriptDir ;
-            % tpstamp = fileMeta.timePoints(first_tp);
-            timepoint = opts.timepoint ;
-            ofn_smoothply = opts.ofn_smoothply ;
-            mlxprogram = opts.mlxprogram;
-            init_ls_fn = opts.init_ls_fn ;
-            % Run MS on a series of timepoints in a parent directory
-            run_full_dataset = opts.run_full_dataset ;
-            % Radius of initial guess if init_ls_fn does not exist or is
-            % not supplied
-            radius_guess = opts.radius_guess ;
-            save = opts.save ;
-            center_guess = opts.center_guess ;
-            plot_mesh3d = opts.plot_mesh3d ;
-            dtype = opts.dtype ; 
-            mask = opts.mask ;
-            use_pointcloud = opts.mesh_from_pointcloud ;
-            dataset_prob_searchstr = opts.prob_searchstr ;
-            ilastikaxisorder = opts.ilastikaxisorder ;
-            smooth_with_matlab = opts.smooth_with_matlab ;
-            % since python flips axes wrt MATLAB, flip them here
-            morphsnakesaxisorder = fliplr(ilastikaxisorder) ;
-            
-            % Create the output dir if it doesn't exist
-            if ~exist(mslsDir, 'dir')
-                mkdir(mslsDir)
-            end
-                    
-            outputLs = fullfile(mslsDir, ls_outfn) ;
-            outputMesh = fullfile(mslsDir, msls_mesh_outfn) ;
-            
-            % Check if previous time point's level set exists to use as a seed
-            % First look for supplied fn from detectOptions.
-            % If not supplied (ie init_ls_fn is none or empty string, then
-            % seek previous timepoint output from MS algorithm.
-            
-            disp(['init_ls_fn = ', init_ls_fn])
-            disp(['ofn_ls = ', ofn_ls])
-            if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
-                % User has NOT supplied fn from detectOptions
-                init_ls_fn = [ofn_ls, ...
-                    num2str(timepoint - 1, '%06d' ) '.' dtype] ;
+            try
+                assert(all(size(pred(:,:,:,1)) > 3))
+            catch
+                msg = ['One of the spatial dimensions has been labeled as ' ...
+                    'a color channel! Change ilastikaxisorder=' ...
+                    opts.ilastikaxisorder ' from file size=[' num2str(size(file)) ...
+                    '] which translated to [' num2str(size(pred)) ']'] ;
+                error(msg) 
             end
             
-            disp([ 'initial level set fn = ', init_ls_fn])
-            if exist(init_ls_fn, 'file')
-                % It does exist, and the given name is the RELATIVE path.    
-                % Use it as a seed (initial level set) 
-                disp('running using initial level set')
-                init_ls = load(init_ls_fn) ;
-            elseif exist(fullfile(mslsDir, init_ls_fn), 'file')
-                % It does exist, and given name is the relative path
-                % without the extension. 
-                % Use it as a seed (initial level set)
-                disp('running using initial level set')
-                init_ls = load(fullfile(mslsDir, init_ls_fn)) ;
-            elseif exist(fullfile(mslsDir, [ init_ls_fn '.h5']), 'file')
-                % It does exist, and given name is the FULL path 
-                % without the extension.
-                disp('running using initial level set')
-                init_ls = load(fullfile(mslsDir, init_ls_fn)) ;                
-            else
-                % The guess for the initial levelset does NOT exist, so use
-                % a sphere for the guess.
-                disp(['Using default sphere for init_ls -- no such file on disk: ' fullfile(mslsDir, [ init_ls_fn '.h5'])])
-                init_ls = [] ;
-            end
-            
-            % Flip axis order LR of output mesh to return to MATLAB
-            % orientation? NO, not helpful to do "-permute_mesh 'zyx'"
-            % since already did morphsnakesaxisorder = fliplr() earlier
-            % command = [command ' -adjust_for_MATLAB_indexing'] ;
-            
+            %% Define the mesh we seek
+            outputLSfn = fullfile(meshDir, sprintf(ofn_ls, tp)) ;
+            outputMesh = fullfile(meshDir, sprintf(ofn_ply, tp)) ;
+
             disp(['does outputMesh exist: ', num2str(exist(outputMesh, 'file'))])
             disp(outputMesh)
-            % error('here')
+           
             if ~exist(outputMesh, 'file')
+                if isempty(opts.fileName)
+                    error('Please provide a regular prediction from ilastik in h5 format.');
+                end
 
-                if use_dataset_command
-                    % User has elected to run as a dataset, so pass a directory
-                    % with _Probabilities.h5 files to run on.
-                    error('handle here')
-                    msls_mesh_outfn = ofn_ply;
-                    ls_outfn = ofn_ls;
+                %---------------------------------
+                % Segmentation of a prediction map from ilastik.
+                %---------------------------------
+
+                % Check if previous time point's level set exists to use as a seed
+                % First look for supplied fn from detectOptions.
+                % If not supplied (ie init_ls_fn is none or empty string, then
+                % seek previous timepoint output from MS algorithm.
+
+                disp(['init_ls_fn = ', init_ls_fn])
+                disp(['ofn_ls = ', ofn_ls])
+                if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
+                    % User has NOT supplied fn from detectOptions
+                    init_ls_fn = sprintf(ofn_ls, (tp - 1) ) ;
+                end
+
+                % Obtain guess or instructions for where to (1) start the 
+                % initial guess level set sphere, and (2) to view the
+                % result
+                if isempty(center_guess) || strcmpi(center_guess, 'empty_string')
+                    centers = size(pred) * 0.5 ;
+                    centers = centers(1:3) ;
                 else
-                    % We are running MS on a single file. Give the filename of
-                    % the ilatik output run on filename.h5
-                    prob_infn = [opts.fileName, '_Probabilities.h5'] ;
-                    msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d'), '.ply'];
-                    ls_outfn = [ofn_ls, num2str(timepoint, '%06d'), '.', dtype];
-
-                    BW = activecontour(data, init_ls, niter,...
-                        'SmoothFactor', tension, 'ContractionBias', pressure) ;
-                    
-                    % Convert BW to mesh
-                    mesh = isosurface(BW, 0.5) ;
+                    centers = str2num(center_guess) ;
                 end
 
-            else
-                disp(['output PLY already exists: ', msls_mesh_outfn])
-            end
-            
-            %% Clean up mesh file for this timepoint using MeshLab --------
-
-            % Here use the boundary mesh from marching cubes to make a
-            % smooth mesh
-            % Check if we need to smooth the full dataset of meshes
-            if use_dataset_command
-                disp('Using dataset command for morphsnakes...')
-                % find all ms_...ply files in mslsDir, and smooth them all
-                files_to_smooth = dir(fullfile(mslsDir, [ofn_ply '*.ply'])) ;
-                lsfns_to_smooth = dir(fullfile(mslsDir, [ls_outfn '*' dtype])) ;
-                
-                if abs(length(lsfns_to_smooth) - length(files_to_smooth))>1 
-                    error('The number of output levelsets does not equal the number of output unsmoothed PLYs. These must match.')
-                end
-                for i=1:length(files_to_smooth)
-                    msls_mesh_outfn = files_to_smooth(i).name ;
-                    infile = fullfile( mslsDir, msls_mesh_outfn );
-                    % Note that LS file is outputLs ;
-                    split_fn = strsplit(msls_mesh_outfn, ofn_ply) ;
-                    extension_outfn = split_fn{2} ;
-                    base_outfn_for_pointcloud = ofn_ply ;
-                    mesh_outfn = [ofn_smoothply, extension_outfn] ;
-                    outputMesh = fullfile(mslsDir, mesh_outfn);
-                    
-                    disp(['outputMesh = ', outputMesh])
-                    %bad = so_bad
-                    if ~exist( outputMesh, 'file')
-                        % Smooth with either meshlab or matlab
-                        if smooth_with_matlab < 0
-                            % USE MESHLAB, not matlab
-                            if use_pointcloud
-                                % Use the pointcloud from the level set rather than the
-                                % boundary mesh from marching cubes
-                                %----------------------------------------------------------------------
-                                % Extract the implicit level set as a 3D binary array
-                                %----------------------------------------------------------------------
-
-                                % The file name of the current time point
-                                ls_outfn_ii = lsfns_to_smooth(i).name ;
-                                % The 3D binay array
-                                bwLS = h5read( ls_outfn_ii, '/implicit_levelset' );
-
-                                % Extract the (x,y,z)-locations of the level set boundary (in pixel
-                                % space)
-                                bwBdyIDx = bwperim( bwLS );
-
-                                clear bwBdy
-                                [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
-                                    find(bwBdyIDx) );
-
-                                %----------------------------------------------------------------------
-                                % Create output mesh
-                                %----------------------------------------------------------------------
-
-                                % Write the points to a .obj file as a point cloud for ouput to Meshlab
-                                clear OBJ
-                                OBJ.vertices = bwBdy;
-                                OBJ.objects(1).type='f';
-                                OBJ.objects(1).data.vertices=[];
-
-                                pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
-                                disp(['Writing point cloud ' pointcloud_fn]);
-                                write_wobj(OBJ, pointcloud_fn );
-
-                                % Run the meshlab script
-                                command = ['meshlabserver -i ' pointCloudFileName, ...
-                                    ' -o ' outputMesh, ' -s ' mlxprogram ' -om vn'] ;
-                                disp(['running ' command])
-                                system( command );
-                            else
-                                % Use the marching cubes mesh surface to smooth
-                                command = ['meshlabserver -i ' infile ' -o ' outputMesh, ...
-                                    ' -s ' mlxprogram ' -om vn'];
-                                % Either copy the command to the clipboard
-                                clipboard('copy', command);
-                                % or else run it on the system
-                                disp(['running ' command])
-                                system(command)
-                            end
-                        elseif smooth_with_matlab == 0
-                            disp('No smoothing, with either matlab or meshlab')
-                            mesh = read_ply_mod(infile) ;
-                            disp('Compute normals...')
-                            mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                            plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
-                        elseif smooth_with_matlab > 0 
-                            % Smooth with MATLAB
-                            disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
-                            mesh = read_ply_mod(infile) ;
-
-                            % Check that this behaves the way we want
-                            % mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                            % size(mesh.vn)
-                            % size(mesh.v)
-                            % assert(size(mesh.vn, 1) == size(mesh.v, 1))
-
-                            newV = laplacian_smooth(mesh.v, mesh.f, 'cotan', [], smooth_with_matlab) ;
-                            disp('Compute normals...')
-                            mesh.v = newV ;
-                            mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                            disp(['Saving smoothed mesh to ' outputMesh])
-                            plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
-                        end
+                if ~exist(outputLSfn, 'file') || overwrite
+                    disp([ 'initial level set fn = ', init_ls_fn])
+                    if exist(init_ls_fn, 'file') || exist([init_ls_fn '.mat'], 'file') 
+                        % It does exist, and the given name is the RELATIVE path.    
+                        % Use it as a seed (initial level set) 
+                        disp('running using initial level set')
+                        init_ls = load(init_ls_fn, 'BW') ;
+                        init_ls = init_ls.BW ;
+                        niter_ii = niter ;
+                    elseif exist(fullfile(meshDir, init_ls_fn), 'file') || ...
+                            exist(fullfile(meshDir,[init_ls_fn '.mat']), 'file') 
+                        % It does exist, and given name is the relative path
+                        % without the extension. 
+                        % Use it as a seed (initial level set)
+                        disp('running using initial level set')
+                        init_ls = load(fullfile(meshDir, init_ls_fn), 'BW') ;
+                        init_ls = init_ls.BW ;
+                        niter_ii = niter ; 
                     else
-                        disp(['t=', num2str(timepoint) ': smoothed mesh file found...'])
-                        disp([' --> file to smooth was ' files_to_smooth(i).name])
+                        % The guess for the initial levelset does NOT exist, so use
+                        % a sphere for the guess.
+                        disp(['Using default sphere of radius ' num2str(radius_guess) ...
+                            ' for init_ls -- no such file on disk: ' ...
+                            fullfile(meshDir, init_ls_fn )])
+                        init_ls = zeros(size(squeeze(pred(:, :, :, opts.foreGroundChannel)))) ;
+                        SE = strel("sphere", radius_guess) ;
+                        SE = SE.Neighborhood ;
+                        se0 = size(SE, 1) ;
+                        rad = ceil(se0*0.5) ;
+                        assert( all(size(SE) == se0)) ;
+                        dd = centers - rad ;
+                        xmin = max(1, dd(1)) ;
+                        ymin = max(1, dd(2)) ;
+                        zmin = max(1, dd(3)) ;
+                        % xmax = min(size(init_ls, 1), dd(1)+se0);
+                        % ymax = min(size(init_ls, 2), dd(2)+se0) ;
+                        % zmax = min(size(init_ls, 3), dd(3)+se0) ;
+
+                        % distance from edge of data volume to edge of strel:
+                        sz0 = size(init_ls) ;
+
+                        % check if SE is entirely contained within init_ls
+                        if all(dd > 0)
+                            % minima are within the boundary
+                            init_ls(xmin:xmin+se0-1, ymin:ymin+se0-1, ...
+                                zmin:zmin+se0-1) = SE ;
+                            init_ls = init_ls(1:sz0(1), 1:sz0(2), 1:sz0(3)) ;
+                        elseif all(dd + se0 < 0)
+                            % the maxima are all contained within the volume
+                            init_ls(xmin:xmin+se0+dd(1)-1, ...
+                                ymin:ymin+se0+dd(2)-1, ...
+                                zmin:zmin+se0+dd(3)-1) = ...
+                                SE(-dd(1):se0, -dd(2):se0, -dd(3):se0) ;
+                            init_ls = init_ls(1:sz0(1), 1:sz0(2), 1:sz0(3)) ;
+                        else
+                            % the maxima are all contained within the volume
+                            chopx = dd(1) < 0 ;
+                            chopy = dd(2) < 0 ;
+                            chopz = dd(3) < 0 ;
+                            init_ls(xmin:xmin+se0+(dd(1)*chopx)-1, ...
+                                ymin:ymin+se0+dd(2)*chopy-1, ...
+                                zmin:zmin+se0+dd(3)*chopz-1) = ...
+                                    SE(-dd(1)*chopx+1:se0, ...
+                                    -dd(2)*chopy+1:se0, ...
+                                    -dd(3)*chopz+1:se0) ;
+                            init_ls = init_ls(1:sz0(1), 1:sz0(2), 1:sz0(3)) ;
+                        end
+
+                        try
+                            assert(any(init_ls(:)))
+                        catch
+                            error('The initial guess is outside the data volume')
+                        end
+
+                        niter_ii = niter0 ;
                     end
 
+                    % Flip axis order LR of output mesh to return to MATLAB
+                    % orientation? NO, not helpful to do "-permute_mesh 'zyx'"
+                    % since already did morphsnakesaxisorder = fliplr() earlier
+                    % command = [command ' -adjust_for_MATLAB_indexing'] ;
+
+
+                    %% Extract contour/isosurface of levelset
+
+                    % Pre-processing
+                    if pre_pressure < 0
+                        disp(['eroding input LS by pre_pressure=' num2str(pre_pressure)])
+                        SE = strel('sphere', abs(pre_pressure)) ;
+                        init_ls = imerode(init_ls, SE) ;
+                    elseif pre_pressure > 0                
+                        disp(['dilating input LS by pre_pressure=' num2str(abs(pre_pressure)) ])
+                        SE = strel('sphere', abs(pre_pressure)) ;
+                        init_ls = imdilate(init_ls, SE) ;
+                    end
+
+                    data = pred(:, :, :, opts.foreGroundChannel) ;
+                    % data_clipped = data - 0.1 ;
+                    % data_clipped(data_clipped < 0) = 0. ;
+
+                    disp(['niter is ', num2str(niter_ii)]);                
+                    BW = activecontour(data, init_ls, niter_ii, 'Chan-Vese', ...
+                        'SmoothFactor', tension, 'ContractionBias', -pressure) ;
+
+                    % Post processing
+                    if post_pressure < 0
+                        disp('eroding result by post_pressure...')
+                        SE = strel('sphere', abs(post_pressure)) ;
+                        BW = imerode(BW, SE) ;
+                    elseif post_pressure > 0          
+                        disp('dilating result by post_pressure...')      
+                        SE = strel('sphere', abs(post_pressure)) ;
+                        BW = imdilate(BW, SE) ;
+                    end
+
+                    % preview current results
+                    debugLevel = getpref('ImSAnE', 'msgLevel');
+                    if debugLevel > 0
+                        clf
+                        if centers(3) < size(BW, 3) && centers(3) > 0.5 
+                            subplot(1, 3, 1)
+                            bwPage = squeeze(BW(round(centers(1)), :, :)) ;
+                            datPage = squeeze(data(round(centers(1)), :, :)) ;
+                            rgb = cat(3, bwPage, datPage, datPage) ;
+                            imshow(rgb)
+                            subplot(1, 3, 2)
+                            bwPage = squeeze(BW(:, round(centers(2)), :)) ;
+                            datPage = squeeze(data(:, round(centers(2)), :)) ;
+                            rgb = cat(3, bwPage, datPage, datPage) ;
+                            imshow(rgb)
+                            subplot(1, 3, 3)
+                            bwPage = squeeze(BW(:, :,round(centers(3)))) ;
+                            datPage = squeeze(data(:,:,round(centers(3)))) ;
+                            rgb = cat(3, bwPage, datPage, datPage) ;
+                            imshow(rgb)
+                            sgtitle('level set found...')
+
+                            pause(1)
+
+                            sgtitle('level set found...')
+                            for qq =1:max(size(BW))
+                                page = min(qq, size(BW,1)) ;
+                                subplot(1, 3, 1)
+                                bwPage = squeeze(BW(page, :, :)) ;
+                                datPage = squeeze(data(page, :, :)) ;
+                                rgb = cat(3, bwPage, datPage, datPage) ;
+                                imshow(rgb)
+                                page = min(qq, size(BW,2)) ;
+                                subplot(1, 3, 2)
+                                bwPage = squeeze(BW(:, page, :)) ;
+                                datPage = squeeze(data(:, page, :)) ;
+                                rgb = cat(3, bwPage, datPage, datPage) ;
+                                imshow(rgb)
+                                page = min(qq, size(BW,3)) ;
+                                subplot(1, 3, 3)
+                                bwPage = squeeze(BW(:, :,page)) ;
+                                datPage = squeeze(data(:,:,page)) ;
+                                rgb = cat(3, bwPage, datPage, datPage) ;
+                                imshow(rgb)
+                                pause(0.00001)
+                            end
+                        else
+                            xframe = round(size(BW, 1) * 0.5) ;
+                            yframe = round(size(BW, 2) * 0.5) ;
+                            zframe = round(size(BW, 3) * 0.5) ;
+                            subplot(1, 3, 1)
+                            bwPage = squeeze(BW(xframe,:,:)) ;
+                            datPage = squeeze(data(xframe,:,:)) ;
+                            rgb = cat(3, bwPage, datPage, datPage) ;
+                            imshow(rgb)
+                            subplot(1, 3, 2)
+                            bwPage = squeeze(BW(:, yframe, :)) ;
+                            datPage = squeeze(data(:, yframe, :)) ;
+                            rgb = cat(3, bwPage, datPage, datPage) ;
+                            imshow(rgb)
+                            subplot(1, 3, 3)
+                            bwPage = squeeze(BW(:, :,zframe)) ;
+                            datPage = squeeze(data(:,:,zframe)) ;
+                            rgb = cat(3, bwPage, datPage, datPage) ;
+                            imshow(rgb)
+                            sgtitle('level set found...')
+
+                        end
+                        % pause to draw the figure and show it in foreground
+                        pause(1e-5)
+                    end
+
+                    % Remove all but biggest component
+                    if enforceSingleComponent
+                        CC = bwconncomp(BW, 6);
+                        numPixels = cellfun(@numel,CC.PixelIdxList);
+                        [~,idx] = max(numPixels);
+                        BW = false(size(BW));
+                        BW(CC.PixelIdxList{idx}) = true;
+
+                        % bwareaopen(BW, PP, 6) ; % choose connectivity to be six so that face junctions are required
+                    end
+                else
+                    load(outputLSfn, 'BW')
                 end
+
+                % Extract mesh from BW
+                if opts.include_boundary_faces 
+                    % Pad the walls with zeros
+                    BW2 = zeros(size(BW) + 2) ;
+                    BW2(2:end-1, 2:end-1, 2:end-1) = BW ;
+
+                    % Convert BW to mesh
+                    mesh = isosurface(BW2, 0.5) ;
+                    mesh.vertices = mesh.vertices - 1 ;
+                else
+                    mesh = isosurface(BW, 0.5) ;
+                end
+                
+                mesh.vertices = mesh.vertices * ssfactor ;
+                % Swap X<->Y axes since MATLAB did this in isosurface/contour
+                mesh.vertices = mesh.vertices(:, [2, 1, 3]) ;
+
+                % Check it
+                debugLevel = getpref('ImSAnE', 'msgLevel');
+                if debugLevel > 2
+                    trisurf(triangulation(mesh.faces, mesh.vertices), 'edgecolor', 'none')
+                end
+                
+                % Write init_ls for next timepoint to disk
+                save(outputLSfn, 'BW')
+
+                % Write mesh to disk
+                disp(['Writing PLY mesh to disk: ' outputMesh])
+                plywrite(outputMesh, mesh.faces, mesh.vertices)
             else
-                disp('Using individual timepoint command for morphsnakes')
-                mesh_outfn = [ofn_smoothply, num2str(timepoint, '%06d'), '.ply'];
-                outputMesh = fullfile(mslsDir, mesh_outfn) ;
-                if ~exist( outputMesh, 'file')
-                    msls_mesh_outfn = [ofn_ply, num2str(timepoint, '%06d' ), '.ply'];
-                    infile = fullfile( mslsDir, msls_mesh_outfn );
-                    if smooth_with_matlab < 0
-                        % Build meshlab command to smooth meshes
+                disp(['output PLY already exists: ', outputMesh])
+            end
+
+            %% Clean up mesh file for this timepoint using MeshLab/MATLAB 
+
+            % Here use the boundary mesh from marching cubes or MATLAB's 
+            % isosurface() to make a smooth mesh
+            rawMesh = outputMesh ; 
+            outputMesh = fullfile(meshDir, sprintf(ofn_smoothply, tp));
+
+            disp(['outputMesh = ', outputMesh])
+            %bad = so_bad
+            if ~exist( outputMesh, 'file') || overwrite
+                % Smooth with either meshlab or matlab
+                if smooth_with_matlab < 0
+                    % USE MESHLAB, not matlab
+                    if use_pointcloud
+                        % Use the pointcloud from the level set rather than the
+                        % boundary mesh from marching cubes
+                        %----------------------------------------------------------------------
+                        % Extract the implicit level set as a 3D binary array
+                        %----------------------------------------------------------------------
+
+                        % The file name of the current time point
+                        % The 3D binay array
+                        bwLS = h5read( outfnLS, '/implicit_levelset' );
+
+                        % Extract the (x,y,z)-locations of the level set boundary (in pixel
+                        % space)
+                        bwBdyIDx = bwperim( bwLS );
+
+                        clear bwBdy
+                        [ bwBdy(:,1), bwBdy(:,2), bwBdy(:,3) ] = ind2sub( size(bwLS), ...
+                            find(bwBdyIDx) );
+
+                        %----------------------------------------------------------------------
+                        % Create output mesh
+                        %----------------------------------------------------------------------
+
+                        % Write the points to a .obj file as a point cloud for ouput to Meshlab
+                        clear OBJ
+                        OBJ.vertices = bwBdy;
+                        OBJ.objects(1).type='f';
+                        OBJ.objects(1).data.vertices=[];
+
+                        pointcloud_fn = [base_outfn_for_pointcloud '.obj'] ;
+                        disp(['Writing point cloud ' pointcloud_fn]);
+                        write_wobj(OBJ, pointcloud_fn );
+
+                        % Run the meshlab script
+                        command = ['meshlabserver -i ' pointCloudFileName, ...
+                            ' -o ' outputMesh, ' -s ' mlxprogram ' -om vn'] ;
+                        disp(['running ' command])
+                        system( command );
+                    else
+                        % Use the marching cubes mesh surface to smooth
                         command = ['meshlabserver -i ' infile ' -o ' outputMesh, ...
                             ' -s ' mlxprogram ' -om vn'];
                         % Either copy the command to the clipboard
@@ -445,34 +555,56 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                         % or else run it on the system
                         disp(['running ' command])
                         system(command)
-                    elseif smooth_with_matlab == 0
-                        disp('No smoothing, with either matlab or meshlab')
-                         mesh = read_ply_mod(infile) ;
-                         disp('Compute normals...')
-                         mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                         plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)      
-                    elseif smooth_with_matlab > 0 
-                        disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
-                        mesh = read_ply_mod(infile) ;
-                        
-                        % Check that this behaves the way we want
-                        % mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                        % size(mesh.vn)
-                        % size(mesh.v)
-                        % assert(size(mesh.vn, 1) == size(mesh.v, 1))
-                        
-                        newV = laplacian_smooth(mesh.v, mesh.f, 'cotan', [], smooth_with_matlab) ;
-                        disp('Compute normals...')
-                        mesh.v = newV ;
-                        mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
-                        disp(['Saving smoothed mesh to ' outputMesh])
-                        plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
                     end
-                else
-                    disp(['t=', num2str(timepoint) ': smoothed mesh file found, loading...'])    
-                end    
+                elseif smooth_with_matlab == 0
+                    disp('No smoothing, with either matlab or meshlab')
+                    mesh = read_ply_mod(infile) ;
+                    disp('Compute normals...')
+                    mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                    plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
+                elseif smooth_with_matlab > 0 
+                    % Smooth with MATLAB
+                    disp(['Smoothing with MATLAB using lambda = given value of ' num2str(smooth_with_matlab)])
+                    mesh = read_ply_mod(rawMesh) ;
+
+                    % Check that this behaves the way we want
+                    % mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                    % size(mesh.vn)
+                    % size(mesh.v)
+                    % assert(size(mesh.vn, 1) == size(mesh.v, 1))
+
+                    if enforceSingleComponent
+                        [ F, V, oldVertexIDx, C ] = ...
+                            remove_isolated_mesh_components(mesh.f, mesh.v) ;
+                    else
+                        F = mesh.f ;
+                        V = mesh.v ;
+                    end
+
+                    num_iter = 5;                
+                    protect_constraints = false;
+                    sm_opts = struct('lambda', smooth_with_matlab, ...
+                        'tar_length', tar_length, ...
+                        'num_iter', num_iter, ...
+                        'protect_constraints', protect_constraints, ...
+                        'enforceQuality', enforceQuality, ...
+                        'maxIterRelaxMeshSpikes', maxIterRelaxMeshSpikes, ...
+                        'enforceTopology', enforceTopology, ... 
+                        'targetEulerCharacteristic', targetEulerCharacteristic ) ;
+                    [V, F] = remesh_smooth_iterate(V,F, sm_opts) ;
+
+                    % newV = laplacian_smooth(mesh.v, mesh.f, 'cotan', [], smooth_with_matlab) ;
+                    disp('Compute normals...')
+                    mesh.v = V ;
+                    mesh.f = F ;
+                    mesh.vn = per_vertex_normals(mesh.v, mesh.f, 'Weighting', 'angle') ;
+                    disp(['Saving smoothed mesh to ' outputMesh])
+                    plywrite_with_normals(outputMesh, mesh.f, mesh.v, mesh.vn)
+                end
+            else
+                disp(['t=', num2str(tp) ': smoothed mesh file found on disk...'])
             end
-                        
+            
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             if exist(outputMesh, 'file')
                 disp(['reading PLY ', outputMesh])
@@ -480,7 +612,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 vv = tmp.v ;
                 points = struct('x', vv(:, 1), 'y', vv(:, 2), 'z', vv(:, 3));
 
-                % don't forget to rescale the data;
+                % Unlike in other detectors, here we have already rescaled
+                % the data
                 x = cat(1,points.x);
                 y = cat(1,points.y);
                 z = cat(1,points.z);
@@ -491,7 +624,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 %--------------------------------------------------
                 largePC = zeros(size(pointCloud));
                 for i = 1:3
-                    largePC(:,i) = (pointCloud(:,i)-1)*opts.ssfactor + 1;
+                    largePC(:,i) = (pointCloud(:,i)-1) + 1;
                 end
 
                 largePC = sortrows(largePC, 3);
@@ -507,6 +640,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 % we also want to set the ranges of the ROI, i.e. some bounding
                 % box that contains the pointcloud which will be used by the
                 % fitter to determine its initial domain
+                xSize = size(pred, 1);
+                ySize = size(pred, 2);
+                zSize = size(pred, 3);
                 xpRange = [1, xSize*opts.ssfactor];
                 ypRange = [1, ySize*opts.ssfactor];
                 zpRange = [1, zSize*opts.ssfactor];
@@ -516,7 +652,6 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             else
                 error(['Output mesh from detector not found! Sought: ' outputMesh])
             end
-            
         end
         
         % ------------------------------------------------------
@@ -524,7 +659,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % ------------------------------------------------------
         
         function prepareIlastik(this,stack)
-            % Prepaere stack for Ilastik segmetnation. This outputs an h5
+            % Prepare stack for Ilastik segmetnation. This outputs an h5
             % file of subsampled intensity data on which to train.
             %
             % prepareIlastik(stack)
@@ -536,7 +671,11 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             im = stack.image.apply();
             
-            fileName = [opts.fileName,'.h5'];
+            if ~strcmpi(opts.fileName(end-2:end), '.h5')
+                fileName = [opts.fileName,'.h5'];
+            else
+                fileName = opts.fileName ;
+            end
             
             if exist(fileName,'file')
                 delete(fileName)
@@ -613,20 +752,13 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         function inspectQuality(this, inspectOpts, stack)
             %   inspect quality of fit in single slice in dimension specified
             %   by options and display image.
+            %   NOTE: Unlike in other detectors, here the mesh is already
+            %   scaled by ssfactor, so no need to override inspectQuality 
+            %   to deal with subsampled point cloud.
             %
             %   inspectQuality(inspectOpts, stack)
             %
-            %   override inspectQuality to deal with subsampled point cloud
-            
-            ssfac = this.options.ssfactor;
-            
-            if ssfac ~= 1 && rem(inspectOpts.value-1, ssfac) ~= 0
-                inspectOpts.value = round(inspectOpts.value/ssfac)*ssfac + 1;
-                disp([]);
-                debugMsg(2, ['WARNING: sub-sampled point cloud taken from different'...
-                    ' plane, may look a little off\n']);
-            end
-            
+                        
             inspectQuality@surfaceDetection.surfaceDetector(this, inspectOpts, stack);
         end
         

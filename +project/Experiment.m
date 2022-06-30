@@ -733,7 +733,7 @@ classdef Experiment < handle_light
                 this.detector.detectSurface(this.stack);
             end
             
-            PCROI = this.detector.pointCloud.ROI;
+            PCROI = this.detector.pointCloud.ROI ;
             
             % set/update the ROI (alignment) at the experiment level
             if isempty(this.ROI)
@@ -777,7 +777,7 @@ classdef Experiment < handle_light
                 catch
                     disp(this.optionIndex)
                     disp(varargin{1})
-                    error('detectOptions must match form specified in integralDetector')
+                    error('detectOptions must match form specified in detector')
                 end
                 this.resetDetector();
             else
