@@ -159,11 +159,14 @@ void mexFunction( int nlhs, mxArray *plhs[],
 	// MESH PROCESSING
 	// -------------------------------------------------------------------------------------
 	
-	// Split border edges
-	std::vector<edge_descriptor> border;
-	PMP::border_halfedges( mesh.faces(), mesh,
-			boost::make_function_output_iterator(halfedge2edge(mesh,border)) );
-	PMP::split_long_edges( border, target_edge_length, mesh );
+	// Split border edges if they are a protected constraint
+	if (protectConstraints)
+	{
+		std::vector<edge_descriptor> border;
+		PMP::border_halfedges( mesh.faces(), mesh,
+				boost::make_function_output_iterator(halfedge2edge(mesh,border)) );
+		PMP::split_long_edges( border, target_edge_length, mesh );
+	}
 
 	// Perform isotropic remeshing
 	PMP::isotropic_remeshing(

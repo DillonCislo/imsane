@@ -1,4 +1,4 @@
-%% ImSAnE Implementation of ectoderm extraction
+%% ImSAnE Implementation of ectoderm extraction -- for Enrique Blanco
 %
 % We detect the midsurface of the folding ectoderm in the fly abdomen.
 %
@@ -9,10 +9,15 @@
 % Additionally, while aspects of TubULAR have been incorporated into this
 % workflow, the topology is disk-like, so we cannot simply rely on TubULAR.
 % Instead, we use integralDetector (like in an ImSAnE analog of the
-% TubULAR workflow) and then fit the surface with FoLD SurfER.
+% TubULAR workflow) and then fit the surface with FoLD SurfER (Folding
+% Surface & Lagrangian Deformation Extraction Resource, work in progress).
 %
 % This workflow was prepared by NPMitchell (npmitchell@kitp.ucsb.edu) and
 % adapted from ImSAnE templates by Sebastian Streichan and Idse Heemskirk.
+
+%% Set up ImSAnE paths
+% Navigate to /path/to/imsane/setup.m
+% Run setup.m
 
 %% Initialize the project
 %
@@ -78,7 +83,7 @@ expMeta.channelColor = [2 1];
 expMeta.dynamicSurface = true;
 expMeta.jitterCorrection = false;
 expMeta.detectorType = 'surfaceDetection.integralDetector';
-expMeta.fitterType = 'surfaceFitting.tpsFitter';
+expMeta.fitterType = 'surfaceFitting.foldSurferFitter';
 
 xp.setFileMeta(fileMeta);
 xp.setExpMeta(expMeta);
@@ -127,8 +132,11 @@ detectOptions.tension = 1 ;
 detectOptions.ssfactor = 2; 
 detectOptions.enforceQuality = true ;
 
+% Axis order of the data on disk
+detectOptions.ilastikaxisorder = 'xyzc' ;
+
 % Set some other params
-detectOptions.include_boundary_faces = false ;  % we want a topological disk, not a sphere
+detectOptions.include_boundary_faces = [0,0,0,0,1,0] ;  % we want a topological disk, not a sphere
 
 %% Create subsampled h5 trainings in iLastik
 for tidx = [5, 10, 15, 20, 1:numel(xp.fileMeta.timePoints)]
@@ -160,7 +168,12 @@ end
 for tidx = 1:numel(xp.fileMeta.timePoints)
     tp = xp.fileMeta.timePoints(tidx) ;
     detectOptions.timepoint = tp ;
-    detectOptions.niter = 20 ;
+    detectOptions.niter = 200 ;
+    detectOptions.niter0 = 2000 ;                                      
+    detectOptions.niter = 100 ;     
+    detectOptions.pre_pressure = -5 ;   
+    detectOptions.post_pressure = 1 ;    
+    detectOptions.tension = 0.01 ;     
     detectOptions.enforceQuality = false ;
     fn = sprintf(xp.fileMeta.filenameFormat, tp) ;
     detectOptions.fileName = strrep(fn, '.tif', '') ;
@@ -168,7 +181,36 @@ for tidx = 1:numel(xp.fileMeta.timePoints)
     xp.detectSurface();
 end
 
-%%
+%% View all meshes (optional)
+resolution = min(fileMeta.stackResolution) ;
+% output directory for images as pngs
+snapdir =fullfile(detectOptions.meshDir, 'snaps') ;
+if ~exist(snapdir, 'dir')
+    mkdir(snapdir)
+end
+for qq = 1:length(xp.fileMeta.timePoints)
+    tp = xp.fileMeta.timePoints(qq) ;
+    meshfn = fullfile(detectOptions.meshDir, sprintf('mesh_%06d.ply', tp)) ;
+    mesh = read_ply_mod(meshfn) ;
+    clf
+    trisurf(triangulation(mesh.f, resolution*mesh.v), 'edgecolor', 'none')
+    axis equal
+    caxis([0, 20])
+    zlim([0, 25]); 
+    if qq == 1
+        xlims = xlim ; ylims = ylim ;
+    end
+    xlim(xlims); ylim(ylims) ;
+    grid off
+    xlabel(['lateral position [' char(181) 'm]'])
+    ylabel(['ap position [' char(181) 'm]'])
+    zlabel(['dv position [' char(181) 'm]'])
+    sgtitle(['t=' num2str(tp)])
+    saveas(gcf, fullfile(snapdir, sprintf('mesh_%06d.png', tp)))
+    pause(0.001)
+end
+
+%% (optional)
 % We can also inspect a point cloud cross section over the data with
 % detector.inspectQuality. In the pointCloud option, 'c' specifies the 
 % color cyan.
@@ -178,12 +220,12 @@ xp.stack.image.apply()
 inspectOptions= struct('dimension', 'x', 'value', 32, 'pointCloud', 'c');
 xp.detector.inspectQuality(inspectOptions, xp.stack);
 
-%% 
+%% (optional)
 % Or we can look at the point cloud in 3d, with some subsampling factor.
 ssfactor = 50;
 xp.detector.pointCloud.inspect(ssfactor);
 
-%% Fit the surface for the disc proper cells
+%% Fit the surface to a rectangular domain minimizing Dirichlet energy
 %
 % By detecting the largest intensity jump along z for each x,y in the
 % E-cad channel and filtering out local outliers we have found the apical
@@ -197,179 +239,113 @@ xp.detector.pointCloud.inspect(ssfactor);
 %               default [50 50], full size takes long.
 % * smoothing:    TPS smoothing parameter (default 1000).
 
-fitOptions = struct('smoothing', 500, 'gridSize', [100 100]);
-xp.setFitOptions(fitOptions);
-xp.fitSurface();
+for tidx = 10:length(xp.fileMeta.timePoints)
+    tp = xp.fileMeta.timePoints(tidx) ;
+    disp(['Fitting surface for t=' num2str(tp)])
+    
+    % Skip this step if not inspecting the result    
+    xp.loadTime(tp)
+    IV = xp.stack.image.apply()
+    
+    % Now fit the surface (map to plane)
+    fitOptions = struct('smoothing', 500, 'gridSize', [100 100]);
+    meshFn = fullfile(detectOptions.meshDir, ...
+        sprintf('mesh_%06d.ply', tp)) ;
+    mesh = read_ply_mod(meshFn) ;
+    xp.setFitOptions(fitOptions);
+    %%
+    options = struct() ;
+    options.IV = IV ;
+    try
+    xp.fitSurface(mesh, options);
 
-%%
-% We can visualize the result on a cross section with
-% fitter.inspectQuality.
+    % Save image to disk
+    mkdir( fullfile(detectOptions.meshDir, 'pullbackImages'))
+    imfn = fullfile(detectOptions.meshDir, 'pullbackImages', sprintf('max_%06d.png', tp)) ;
+    % imwrite(max(xp.fitter.fittedParam.im, [], 4), imfn)
+    imwrite(xp.fitter.fittedParam.im, imfn)
+    catch
+    end
+end
 
-xp.fitter.inspectQuality(inspectOptions, xp.detector, xp.stack);
+%% NOW follow motion in pullback plane
+error('have not written this part. Idea: run PIV in pullback to construct approx pathlines, then can track geometry of tissue as it deforms')
 
-%%
-% The detector picks up the edge of the E-cad signal but the best read out
-% goes solidly through it so we want to move the surface down a little. For
-% this we use zEvolve, with a shift specified in pixels.
+%% STILL NEED TO WORK ON THIS PART
+if false 
+    %%
+    % We can visualize the result on a cross section with
+    % fitter.inspectQuality.
 
-shift = 12;
-xp.zEvolve(shift);
+    xp.fitter.inspectQuality(inspectOptions, xp.detector, xp.stack);
 
-xp.fitter.inspectQuality(inspectOptions, xp.detector, xp.stack);
+    %%
+    % The detector picks up the edge of the E-cad signal but the best read out
+    % goes solidly through it so we want to move the surface down a little. For
+    % this we use zEvolve, with a shift specified in pixels.
 
-%%
-% We now generate the Surface Of Interest. The charts to be generated are 
-% specified in xp.fitter.charts. In this case there is only one, called
-% 'xy'. 
+    shift = 12;
+    xp.normallyEvolve(shift);
+    xp.fitter.inspectQuality(inspectOptions, xp.detector, xp.stack);
 
-xp.generateSOI();
+    %%
+    % We now generate the Surface Of Interest. The charts to be generated are 
+    % specified in xp.fitter.charts. In this case there is only one, called
+    % 'uv'.
+    xp.generateSOI();
 
-%% Pull back the data to the surface
-% 
-% We pull back the data to the SOI using pullbackStack.
+    %% Pull back the data to the surface
+    % 
+    % We pull back the data to the SOI using pullbackStack.
 
-xp.SOI.pullbackStack(xp.stack, xp.currentROI, xp.currentTime);
+    xp.SOI.pullbackStack(xp.stack, xp.currentROI, xp.currentTime);
 
-%%
-% To look at the pullback, we call the data field of the SOI at the right
-% time, and get a particular patch from that with getPatch. A patch is a 
-% part of a surface. In this case, there is only one called xy_index.
-% Then we get the data in some patch in a particular coordinate system with
-% getTransform. In this case there is only one coordinate system: xy.
-% What we get is an object not only holding the image data but also
-% metadata and methods to manipulate it. The actual data is obtained by
-% calling the method apply. This returns a cell array with entries for each
-% channel.
+    %%
+    % To look at the pullback, we call the data field of the SOI at the right
+    % time, and get a particular patch from that with getPatch. A patch is a 
+    % part of a surface. In this case, there is only one called xy_index.
+    % Then we get the data in some patch in a particular coordinate system with
+    % getTransform. In this case there is only one coordinate system: xy.
+    % What we get is an object not only holding the image data but also
+    % metadata and methods to manipulate it. The actual data is obtained by
+    % calling the method apply. This returns a cell array with entries for each
+    % channel.
 
-% xp.tIdx converts the time into an index in a list of time points
-tidx = xp.tIdx(0);
+    % the first channel is Ecad
+    channel = 1;
 
-% the first channel is Ecad
-channel = 1;
+    discProperPatch = xp.SOI.data(tidx).getPatch('xy_index');
+    discProperImage = discProperPatch.getTransform('xy').apply{channel};
+    figure, imshow(discProperImage, [], 'InitialMagnification', 50);
 
-discProperPatch = xp.SOI.data(tidx).getPatch('xy_index');
-discProperImage = discProperPatch.getTransform('xy').apply{channel};
-figure, imshow(discProperImage, [], 'InitialMagnification', 50);
+    %% Save the result
+    %
+    % Finally we save the SOI using SOI.save. We set the following options:
+    %
+    % * dir:            The directory to save the SOI to.
+    % * imwriteOptions: Pullbacks are saved to image files using imwrite, we
+    % can pass options to change file format, compression etc. For example we
+    % could change this option to
+    % imwriteOptions = {'jp2', 'Mode', 'lossless'}; 
+    % * make8bit:       Often absolute intensities don't matter and 8 bit offers
+    % a large enough dynamic range. This options rescales the lookup table and
+    % converts to 8 bit before saving.
 
-%% Save the result
-%
-% Finally we save the SOI using SOI.save. We set the following options:
-%
-% * dir:            The directory to save the SOI to.
-% * imwriteOptions: Pullbacks are saved to image files using imwrite, we
-% can pass options to change file format, compression etc. For example we
-% could change this option to
-% imwriteOptions = {'jp2', 'Mode', 'lossless'}; 
-% * make8bit:       Often absolute intensities don't matter and 8 bit offers
-% a large enough dynamic range. This options rescales the lookup table and
-% converts to 8 bit before saving.
+    imwriteOptions = {'tif', 'Compression', 'deflate'};
+    savedir = fullfile(scriptPath, 'discProperApicalSOI');
 
-imwriteOptions = {'tif', 'Compression', 'deflate'};
-savedir = fullfile(scriptPath, 'discProperApicalSOI');
+    options = struct(   'dir',              savedir,...
+                        'imwriteOptions',   {imwriteOptions},...
+                        'make8bit',         true);
+    xp.SOI.save(options)
 
-options = struct(   'dir',              savedir,...
-                    'imwriteOptions',   {imwriteOptions},...
-                    'make8bit',         true);
-xp.SOI.save(options)
-
-%%
-% All metadata is saved in SOI.xml. Pullbacks, geometry and any other data
-% defined on the surface are saved to image files in subdirectories 
-% reflecting the structure of patches and coordinates explained earlier in 
-% this tutorial. We can reload a surface of interest with
-% SOI.load(directory)
+    %%
+    % All metadata is saved in SOI.xml. Pullbacks, geometry and any other data
+    % defined on the surface are saved to image files in subdirectories 
+    % reflecting the structure of patches and coordinates explained earlier in 
+    % this tutorial. We can reload a surface of interest with
+    % SOI.load(directory)
 
 
-%% Get the peripodial cells
-%
-% We also want to find the peripodial surface. Since these are lying on top
-% of the disc proper cells except in the folds, the strategy is to detect
-% the folds as regions of high curvature in the disc proper surface, mask
-% out the folds from the detected point cloud and then fit a new surface
-% without folds that when moved up captures the peripodial cells.
-
-% first store columar SOI before we overwrite it with peripodial
-columnarSOI = xp.SOI;
-
-%%
-% We start by computing the mean curvature (see supplementary text).
-% This requires computing the metric first. We smoothen
-% with a Gaussian filter on the scale of cells (about 10 pixels).
-
-xp.SOI.NCalcInducedMetric('xy');
-xp.SOI.NCalcCurvature('xy');
-
-H = xp.SOI.getField('curvature').getPatch('xy_index').trace().apply{1};
-
-sigma = 10;
-H = mat2gray(imfilter(H, fspecial('gaussian', 3*sigma, sigma)));
-imshow(H, [], 'InitialMagnification', 20)
-
-%%
-% By thresholding the mean curvature we create a mask that excludes high 
-% mean curvature to get rid of the folds.
-
-highCurv =  H < 0.4;
-curvMask = ~highCurv;
-curvMask = imerode(curvMask, strel('disk', 45));
-
-xp.detector.setManualMask(curvMask);
-xp.detector.applyMasks();
-
-%%
-% Looking at the fold-masked point cloud in a cross section we see that the
-% mask works well.
-
-xp.detector.inspectQuality(inspectOptions, xp.stack);
-
-%%
-% Fitting to this masked point cloud with we set smoothing higher because
-% we are fitting a smoother surface (the peripodial cells don't fold).
-
-fitOptions = struct('smoothing', 2000, 'gridSize', [100 100]);
-xp.setFitOptions(fitOptions);
-xp.fitSurface();
-
-%%
-% As before we shift the surface, this time up.
-
-shift = -2;
-xp.zEvolve(shift);
-
-%%
-inspectOptions= struct('dimension', 'x', 'value', 620, 'pointCloud', 'c');
-xp.fitter.inspectQuality(inspectOptions, xp.detector, xp.stack);
-hold on
-plot(columnarSOI.embedding.patches{1}.apply{3}(:,inspectOptions.value),'r','LineWidth',2)
-hold off
-
-%%
-% We generate the SOI again, pull back the data and look at it.
-
-xp.generateSOI();
-xp.SOI.pullbackStack(xp.stack, xp.currentROI, xp.currentTime);
-
-perip = xp.SOI.data(1).patches{1}.getTransform('xy').apply{1};
-figure, imshow(perip, [], 'InitialMagnification', 50);           
-
-%%
-pbcolor = cat(3, mat2gray(columnarSOI.data.patches{1}.apply{2}),mat2gray(columnarSOI.data.patches{1}.apply{1}),0*mat2gray(columnarSOI.data.patches{1}.apply{1}));
-imshow(pbcolor,[])
-imwrite(pbcolor, '/Users/idse/columnar.tif');
-
-%%
-pbcolor = cat(3, mat2gray(xp.SOI.data.patches{1}.apply{2}),mat2gray(xp.SOI.data.patches{1}.apply{1}),0*mat2gray(xp.SOI.data.patches{1}.apply{1}));
-imshow(pbcolor,[])
-imwrite(pbcolor, '/Users/idse/peripodial.tif');
-
-%%
-% Finally we save it to a different directory from before, because it is a
-% different surface.
-
-savedir = fullfile(scriptPath, 'peripodialSOI');
-options = struct(   'dir',              savedir,...
-                    'imwriteOptions',   {imwriteOptions},...
-                    'make8bit',         true);
-xp.SOI.save(options)
-
+end
 

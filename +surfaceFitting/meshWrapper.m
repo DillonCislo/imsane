@@ -103,7 +103,7 @@ classdef meshWrapper < surfaceFitting.surfaceFitter
             %       vn:   Nx3 vertex normals
             %       f:    Mx3 faces (triangles)
             %
-            % fitOptions can be set through through the generic function
+            % fitOptions can be set through the generic function
             % setFitOptions, the meshWrapper defines the following:
             %
             % VorSeeds:         seeds (vertex index) for the geodesic 
@@ -114,7 +114,6 @@ classdef meshWrapper < surfaceFitting.surfaceFitter
             % makeTMaps:        boolean, should transition maps be made?
             %
             % see also surfaceFitting.surfaceFitter.setFitOptions
-
             v = mesh.v;
             f = mesh.f;
             vn = mesh.vn;
@@ -510,9 +509,7 @@ classdef meshWrapper < surfaceFitting.surfaceFitter
             % normallyEvolve(shift)
             %
             % shift : pixel distance along the normal
-            
-            disp('bla');
-            
+                        
             v = this.fittedParam.mesh.v;
             vn = this.fittedParam.mesh.vn;
             

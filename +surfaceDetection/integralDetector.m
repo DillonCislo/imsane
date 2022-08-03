@@ -85,7 +85,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             'physicalaxisorder', 'xyzc', ... % axis order relative to mesh axis order by which to process the point cloud prediction. To keep as mesh coords, use xyzc
             'preilastikaxisorder', 'xyzc', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
             'ilastikaxisorder', 'cxyz', ... % axis order as output by ilastik probabilities h5. To keep as saved coords use xyzc
-            'include_boundary_faces', true,... % keep faces along the boundaries of the data volume if true
+            'include_boundary_faces', true,... % bool or length(6) bool array, keep faces along the boundaries of the data volume if true. If len(6) array, keep [xLow, xHigh, yLow, yHigh, zLow, zHigh] faces.
             'smooth_with_matlab', 0.01, ... % if <0, use meshlab. If >0, smooth the mesh after marching cubes mesh creation using matlab instead of mlxprogram, with diffusion parameter lambda = this value. If =0, no smoothing.
             'target_edgelength', 6, ...             % float, if using Matlab smoothing, target edge length for mesh resampling
             'enforceSingleComponent', false, ...  % enforce that the resulting mesh is a single component
@@ -224,6 +224,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             end
             
             %% Define the mesh we seek
+            if ~exist(meshDir, 'dir')
+                mkdir(meshDir)
+            end
             outputLSfn = fullfile(meshDir, sprintf(ofn_ls, tp)) ;
             outputMesh = fullfile(meshDir, sprintf(ofn_ply, tp)) ;
 
@@ -463,14 +466,56 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                 end
 
                 % Extract mesh from BW
-                if opts.include_boundary_faces 
-                    % Pad the walls with zeros
-                    BW2 = zeros(size(BW) + 2) ;
-                    BW2(2:end-1, 2:end-1, 2:end-1) = BW ;
+                if any(opts.include_boundary_faces)
+                    
+                    if length(opts.include_boundary_faces) == 1
+                        % Pad the walls with zeros
+                        BW2 = zeros(size(BW) + 2) ;
+                        BW2(2:end-1, 2:end-1, 2:end-1) = BW ;
 
-                    % Convert BW to mesh
-                    mesh = isosurface(BW2, 0.5) ;
-                    mesh.vertices = mesh.vertices - 1 ;
+                        % Convert BW to mesh
+                        mesh = isosurface(BW2, 0.5) ;
+                        mesh.vertices = mesh.vertices - 1 ;
+                    elseif length(opts.include_boundary_faces) == 6
+                        disp('keeping only boundary faces along select dimensions: interpret as Xlow, Xhigh, Ylow, Yhigh, Zlow, Zhigh')
+                        sz1 = size(BW, 1) ;
+                        sz2 = size(BW, 2) ;
+                        sz3 = size(BW, 3) ;
+                        offxyz = [0,0,0] ;
+                        if opts.include_boundary_faces(1)
+                            sz1 = sz1 + 1 ;
+                            offxyz(1) = 1 ;
+                        end
+                        if opts.include_boundary_faces(2)
+                            sz1 = sz1 + 1 ;
+                        end
+                        if opts.include_boundary_faces(3)
+                            sz2 = sz2 + 1 ;
+                            offxyz(2) = 1 ;
+                        end
+                        if opts.include_boundary_faces(4)
+                            sz2 = sz2 + 1 ;
+                        end
+                        if opts.include_boundary_faces(5)
+                            sz3 = sz3 + 1 ;
+                            offxyz(3) = 1 ;
+                        end
+                        if opts.include_boundary_faces(6)
+                            sz3 = sz3 + 1 ;
+                        end
+                        
+                        % Pad the walls with zeros
+                        BW2 = zeros([sz1,sz2,sz3]) ;
+                        BW2(1+offxyz(1):offxyz(1)+size(BW, 1), ...
+                            1+offxyz(2):offxyz(2)+size(BW, 2), ...
+                            1+offxyz(3):offxyz(3)+size(BW, 3)) = BW ;
+
+                        % Convert BW to mesh
+                        mesh = isosurface(BW2, 0.5) ;
+                        mesh.vertices = mesh.vertices - offxyz ;
+                    else
+                        error('Must pass either one boolean or six as detectOptions.include_boundary_faces')
+                    end
                 else
                     mesh = isosurface(BW, 0.5) ;
                 end

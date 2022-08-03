@@ -402,14 +402,15 @@ classdef Stack < handle_light
                 newnslices = round(size(curr,3)*this.aspect);
                 scaled = zeros([size(curr,1) size(curr,2) newnslices], class(curr));
                 for j=1:size(curr,1)
-                    debugMsg(1, '.');
+                    debugMsg(3, '.');
                     if rem(j,80) == 0
-                        debugMsg(1, '\n');
+                        debugMsg(3, '\n');
+                        debugMsg(2, '.') ;
                     end
                     scaled(j,:,:) = imresize(squeeze(curr(j,:,:)),...
                                                 [size(curr,2) newnslices]);
                 end
-                debugMsg(1,'\n');
+                debugMsg(3,'\n');
                 % permute back;
                 scaled = ipermute(scaled,ii);
                 stacks{i} = scaled;

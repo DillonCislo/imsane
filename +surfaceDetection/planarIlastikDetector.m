@@ -130,6 +130,7 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             
             % ilastik internally swaps axes. 1: class, 2: y, 3: x 4 : z 
             pred = permute(file,[3,2,4,1]);
+           
             pred = pred(:,:,:,foreGround);
             pred = uint8(255*pred);
            
@@ -191,7 +192,7 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
                                     max(squeeze(apical(y-ymin+1,:,:)).*Z', [], 2);
             end
                  
-            [X,Y] = meshgrid(1:size(surfaceMatrix,1),1:size(surfaceMatrix,2));
+            [Y,X] = meshgrid(1:size(surfaceMatrix,1),1:size(surfaceMatrix,2));
             
             ind = find(surfaceMatrix(:)>0);
             %

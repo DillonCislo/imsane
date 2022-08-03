@@ -53,6 +53,7 @@ classdef (Abstract) surfaceFitter < handle_light
             'normEvolveSS', []);        
    
         fittedParam % parameters as result of fitting
+        
     end
     
     properties (Abstract, SetAccess = protected)

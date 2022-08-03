@@ -280,6 +280,7 @@ classdef Experiment < handle_light
             % point using bioformats library. 
             % 
             % see also loadTime
+            error('here in Experiment')
             
             % use bioformats if posssible
             hasbf = exist('bioformats_package.jar','file') ||...
@@ -352,6 +353,11 @@ classdef Experiment < handle_light
                     debugMsg(1,'\n');
                 end
             end
+
+            % announce min and max
+            disp('Experiment.loadStack() finished loading data volume')
+            disp(['min = ' num2str(min(data(:)))])
+            disp(['max = ' num2str(max(data(:)))])
 
             debugMsg(1,'\n');
             dt = toc(ticID);
@@ -450,7 +456,7 @@ classdef Experiment < handle_light
                 error('channelsUsed specifies channel larger than number of channels');
             end
             
-            debugMsg(1, ['Loading stack for time: ' num2str(this.currentTime) '\n']);
+            debugMsg(1, ['Loading BioFormats stack for time: ' num2str(this.currentTime) '\n']);
                       
             % this is a stupid workaround
             % basically, even though you save each time point in a separate
@@ -499,6 +505,11 @@ classdef Experiment < handle_light
                     end
                 end
             end
+
+            % announce min and max
+            disp('Experiment.loadStackBioFormats() finished loading data volume')
+            disp(['min = ' num2str(min(data(:)))])
+            disp(['max = ' num2str(max(data(:)))])
 
             debugMsg(1,'\n');
             dt = toc(ticID);

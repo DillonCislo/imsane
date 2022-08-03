@@ -275,6 +275,10 @@ classdef Experiment < handle_light
                 this.resetDetector();
                 this.resetFitter();
             end
+            
+            if strcmp(this.expMeta.fitterType, 'surfaceFitting.tubularFitter')
+                this.fitter.tubi.setTime(t) ;
+            end
         end
         
         %==========ADDITION BY Pieter Derksen 8/5/2019=================
@@ -295,6 +299,10 @@ classdef Experiment < handle_light
             end
             this.currentTime = t;
             this.expMeta.fitTime = t;
+            
+            if strcmp(this.expMeta.fitterType, 'surfaceFitting.tubularFitter')
+                this.fitter.tubi.setTime(t) ;
+            end
         end
         
         %------------------------------------------------------
@@ -844,19 +852,29 @@ classdef Experiment < handle_light
             end
 
             % call fitter.fitSurface
-            if nargin == 1
-                disp('No mesh supplied, obtaining detector pointCloud...')
-                if ~isempty(this.detector.pointCloud)
-                    this.fitter.fitSurface(this.detector.pointCloud);
-                    this.fitter.setFitDomain(this.stack.image.domain);
-                else
-                    error('pass point cloud or run detector first');
-                end
+            if strcmp(this.expMeta.fitterType, 'surfaceFitting.tubularFitter')
+                disp('Loading mesh from TubULAR output on disk...')
+                this.fitter.fitSurface() ;
+                this.fitter.setFitDomain(this.stack.image.domain) ;
             else
-                disp('Using supplied mesh to perform fit...')
-                this.fitter.fitSurface(varargin{1});
-                this.fitter.setFitDomain(this.stack.image.domain);
-            end 
+                if nargin == 1
+                    if ~isempty(this.detector.pointCloud)
+                        disp('No mesh supplied, obtaining detector pointCloud...')
+                        this.fitter.fitSurface(this.detector.pointCloud);
+                        this.fitter.setFitDomain(this.stack.image.domain);
+                    else
+                        error('pass point cloud or run detector first');
+                    end
+                elseif length(varargin) == 1
+                    disp('Using supplied mesh to perform fit...')
+                    this.fitter.fitSurface(varargin{1});
+                    this.fitter.setFitDomain(this.stack.image.domain);
+                elseif length(varargin) == 2
+                    disp('Using supplied mesh to perform fit...')
+                    this.fitter.fitSurface(varargin{1},varargin{2});
+                    this.fitter.setFitDomain(this.stack.image.domain);
+                end 
+            end
             
             % if shift is non-zero, also b evolve
             shift = this.fitter.fitOptions.shift;
@@ -1072,13 +1090,32 @@ classdef Experiment < handle_light
 
         %------------------------------------------------------
         
-        function resetFitter(this)
+        function resetFitter(this, tubularOptions)
             % resets the fitter 
             %
             % resetFitter()
             % 
             % create a new object with the same options and alignment
 
+            if nargin < 2
+                tubularOptions = struct() ;
+                tubularOptions.meshDir = 'mesh_output' ;% Directory where meshes reside
+                tubularOptions.flipy = false ;          % Set to true if data volume axes are inverted in chirality wrt physical lab coordinates
+                tubularOptions.timeInterval = 1 ;       % Spacing between adjacent timepoints in units of timeUnits 
+                tubularOptions.timeUnits = 'min' ;      % units of time, so that adjacent timepoints are timeUnits * timeInterval apart
+                tubularOptions.spaceUnits = '$\mu$m' ;  % Units of space in LaTeX, for ex '$mu$m' for micron
+                tubularOptions.nU = 100 ;               % How many points along the longitudinal axis to sample surface
+                tubularOptions.nV = 100 ;               % How many points along the circumferential axis to sample surface
+                tubularOptions.t0 = this.fileMeta.timePoints(1) ; % reference timepoint used to define surface-Lagrangian and Lagrangian measurements
+                tubularOptions.normalShift = 10 ;       % Additional dilation acting on surface for texture mapping
+                tubularOptions.a_fixed = 1.0 ;          % Fixed aspect ratio of pullback images. Setting to 1.0 is most conformal mapping option.
+                tubularOptions.adjustlow = 1.00 ;       % floor for intensity adjustment
+                tubularOptions.adjusthigh = 99.9 ;      % ceil for intensity adjustment (clip)
+                tubularOptions.phiMethod = 'curves3d' ; % Method for following surface in surface-Lagrangian mapping [(s,phi) coordinates]
+                tubularOptions.lambda_mesh = 0.00 ;     % Smoothing applied to the mesh before DEC measurements
+                tubularOptions.lambda = 0.0 ;           % Smoothing applied to computed values on the surface
+                tubularOptions.lambda_err = 0.0 ;       % Additional smoothing parameter, optional
+            end
             
             if isempty(this.fileMeta.stackSize) || isempty(this.expMeta.fitterType)
                 error('Set fileMeta.stackSize and expMeta.fitterType before resetFitter()');
@@ -1086,7 +1123,14 @@ classdef Experiment < handle_light
             
             debugMsg(1, 'Experiment.resetFitter():\n');
 
-            this.fitter = eval([this.expMeta.fitterType '()']);
+            if strcmp(this.expMeta.fitterType, 'surfaceFitting.tubularFitter')
+                xpMeta = struct('fileMeta', this.fileMeta, ...
+                    'expMeta', this.expMeta, ...
+                    'detectOptions', this.detector.options) ;
+                this.fitter = surfaceFitting.tubularFitter(xpMeta, tubularOptions) ;
+            else
+                this.fitter = eval([this.expMeta.fitterType '()']);
+            end
             
             % if not empty, set the options
             if ~isempty(this.fitOptions)
