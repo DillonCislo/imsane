@@ -203,10 +203,10 @@ classdef foldSurferFitter < surfaceFitting.surfaceFitter
             Options.layerSpacing = 0.5 ;
             im = texture_patch_to_image(FF, mesh.u, FF, ...
                 v3d(:, [2, 1, 3]), options.IV, Options) ;
-            tmp = max(im(:, :, :, 8:12), [], 4) ;
-            imshow(tmp) ;
+            % tmp = max(im(:, :, :, 8:12), [], 4) ;
+            % imshow(tmp) ;
             
-            this.fittedParam.im = tmp ;
+            this.fittedParam.im = im ;
         end
         
         

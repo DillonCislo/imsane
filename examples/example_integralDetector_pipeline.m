@@ -138,7 +138,7 @@ detectOptions.ilastikaxisorder = 'xyzc' ;
 % Set some other params
 detectOptions.include_boundary_faces = [0,0,0,0,1,0] ;  % we want a topological disk, not a sphere
 
-%% Create subsampled h5 trainings in iLastik
+%% Create subsampled h5 for training in iLastik
 for tidx = [5, 10, 15, 20, 1:numel(xp.fileMeta.timePoints)]
     tp = xp.fileMeta.timePoints(tidx) ;
     fn = sprintf(xp.fileMeta.filenameFormat, tp) ;
@@ -158,6 +158,10 @@ for tidx = [5, 10, 15, 20, 1:numel(xp.fileMeta.timePoints)]
     end
 end
 
+%% NOW TRAIN ON THE OUTPUTED h5 FILES IN ILASTIK TO FIND THE BASAL SURFACE
+% OF THE TISSUE'S SEPTATE JUNCTIONS
+
+
 %% Ensure that the output directory for meshes exists
 if ~exist(detectOptions.meshDir, 'dir')
     disp(['Creating meshDir: ' detectOptions.meshDir])
@@ -173,7 +177,7 @@ for tidx = 1:numel(xp.fileMeta.timePoints)
     detectOptions.niter = 100 ;     
     detectOptions.pre_pressure = -5 ;   
     detectOptions.post_pressure = 1 ;    
-    detectOptions.tension = 0.01 ;     
+    detectOptions.tension = 0.01  ;     
     detectOptions.enforceQuality = false ;
     fn = sprintf(xp.fileMeta.filenameFormat, tp) ;
     detectOptions.fileName = strrep(fn, '.tif', '') ;
@@ -225,7 +229,7 @@ xp.detector.inspectQuality(inspectOptions, xp.stack);
 ssfactor = 50;
 xp.detector.pointCloud.inspect(ssfactor);
 
-%% Fit the surface to a rectangular domain minimizing Dirichlet energy
+%% Parameterize the surface to a rectangular 2D domain minimizing Dirichlet energy
 %
 % By detecting the largest intensity jump along z for each x,y in the
 % E-cad channel and filtering out local outliers we have found the apical
@@ -245,7 +249,7 @@ for tidx = 10:length(xp.fileMeta.timePoints)
     
     % Skip this step if not inspecting the result    
     xp.loadTime(tp)
-    IV = xp.stack.image.apply()
+    IV = xp.stack.image.apply() ;
     
     % Now fit the surface (map to plane)
     fitOptions = struct('smoothing', 500, 'gridSize', [100 100]);
@@ -261,9 +265,11 @@ for tidx = 10:length(xp.fileMeta.timePoints)
 
     % Save image to disk
     mkdir( fullfile(detectOptions.meshDir, 'pullbackImages'))
-    imfn = fullfile(detectOptions.meshDir, 'pullbackImages', sprintf('max_%06d.png', tp)) ;
+    imfn = fullfile(detectOptions.meshDir, 'pullbackImages', sprintf('max_%06d.tif', tp)) ;
     % imwrite(max(xp.fitter.fittedParam.im, [], 4), imfn)
-    imwrite(xp.fitter.fittedParam.im, imfn)
+    % imwrite(xp.fitter.fittedParam.im, imfn)
+    % pause
+    writeTiff5D(uint16((2^16-1)*xp.fitter.fittedParam.im), imfn, 16)
     catch
     end
 end
