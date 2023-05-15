@@ -1,4 +1,4 @@
-classdef planarIlastikDetector < surfaceDetection.surfaceDetector
+classdef planarIlastikDetector < surfaceDetection.planarDetector
     % Segmentation based on prediction maps from ilastik. 
     % 
     % 
@@ -47,6 +47,12 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
     % properties
     %---------------------------------------------------------------------
     
+    properties (SetAccess = protected)
+        
+        maxdIdx % maximal derivative in z
+        
+    end
+    
     properties (Constant)
         % default detector options
         defaultOptions = struct('channel', 1, 'sigma', 2, 'ssfactor', 4,...
@@ -71,7 +77,9 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             %
             % radialEdgeDetector()
             
-            this = this@surfaceDetection.surfaceDetector();
+            %this = this@surfaceDetection.surfaceDetector();
+            this = this@surfaceDetection.planarDetector();
+            
         end 
         
         % ------------------------------------------------------
@@ -107,8 +115,22 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             if isempty(opts.fileName)
                 error('Please provide a regular prediction from ilastik in h5 format.');
             end
-
             
+            %--------------------------------------------------------------
+            % Create summed/max intensity fields
+            %--------------------------------------------------------------
+            imageGrids = stack.image.apply();
+            % tdata = zeros(size(imageGrids{1}), class(imageGrids{1}));
+            
+            w = stack.Ilim{1}(2) ./ [ stack.Ilim{:} ];
+            w = w(2:2:end);
+            
+            tdata = w(opts.channel) .* imageGrids{opts.channel};
+            
+            this.summedI = sum( tdata, abs(opts.zDir) );
+            this.maxI = max( tdata, [], abs(opts.zDir) );
+            
+
             %---------------------------------
             % Segmentation of a prediction map from ilastik. 
             %---------------------------------
@@ -130,7 +152,6 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             
             % ilastik internally swaps axes. 1: class, 2: y, 3: x 4 : z 
             pred = permute(file,[3,2,4,1]);
-           
             pred = pred(:,:,:,foreGround);
             pred = uint8(255*pred);
            
@@ -180,25 +201,28 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             maxima = max(dIdx, [],3);
             maxima3d = repmat(maxima, [1, 1, zmax - zmin + 1]);
             apical = (dIdx == maxima3d & dIdx > 0.01);
+            
+            this.maxdIdx = maxima;
 
             % to turn this into a mesh, take the maximal z coordinate for fixed x,y
             % slice by slice to avoid using too much memory
             [~,Z] = meshgrid(xmin:xmax, zmin:zmax);
             
-            surfaceMatrix = zeros([ySize xSize]);
+            this.surfaceMatrix = zeros([ySize xSize]);
 
             for y = ymin:ymax
-               surfaceMatrix(y,xmin:xmax) = ...
+               this.surfaceMatrix(y,xmin:xmax) = ...
                                     max(squeeze(apical(y-ymin+1,:,:)).*Z', [], 2);
             end
                  
-            [Y,X] = meshgrid(1:size(surfaceMatrix,1),1:size(surfaceMatrix,2));
+            [X,Y] = meshgrid(1:size(this.surfaceMatrix,2), ...
+                1:size(this.surfaceMatrix,1));
             
-            ind = find(surfaceMatrix(:)>0);
+            ind = find(this.surfaceMatrix(:)>0);
             %
             int = 0*ind;
             for k = 1 : length(ind)
-                int(k) = pred(Y(ind(k)),X(ind(k)),surfaceMatrix(ind(k)));
+                int(k) = pred(Y(ind(k)),X(ind(k)),this.surfaceMatrix(ind(k)));
             end
             ind = ind(int>opts.thresh*255);
             
@@ -246,7 +270,7 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             % don't forget to rescale the data;
             x = X(ind);
             y = Y(ind);
-            z = surfaceMatrix(ind);    
+            z = this.surfaceMatrix(ind);    
             
             pointCloud = [x,y,z];
             
@@ -279,6 +303,23 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             this.pointCloud = surfaceDetection.PointCloud(largePC,ROI);
  %           this.pointCloud.determineROI(15);
             %this.pointCloud = surfaceDetection.PointCloud(largePC);
+            
+            % Create a surface matrix that matches the size of the raw
+            % image
+            [ Xq, Yq ] = meshgrid( 1:size(imageGrids{1},2), ...
+                1:size(imageGrids{1},1) );
+            
+            X = opts.ssfactor .* (X-1) + 1;
+            Y = opts.ssfactor .* (Y-1) + 1;
+            this.surfaceMatrix = opts.ssfactor .* (this.surfaceMatrix-1) + 1;
+            
+            this.surfaceMatrix = interp2(  X, Y, ...
+                this.surfaceMatrix, Xq, Yq, 'cubic', 0 );
+            
+            % apply masks to clean up the point cloud
+            this.applyMasks();
+            
+
 
         end
         
@@ -303,22 +344,30 @@ classdef planarIlastikDetector < surfaceDetection.surfaceDetector
             
             fileName = [opts.fileName,'.h5'];
             
-            if exist(fileName,'file');
+            if exist(fileName,'file')
                 delete(fileName)
             end    
                   
             dsetName = '/inputData';
             
-            
-            for c = 1 : length(im)
-                image(:,:,:,c) = im{c}(1:opts.ssfactor:end,1:opts.ssfactor:end,1:opts.ssfactor:end);
+            imageOut = zeros( [ size(im{1}(1:opts.ssfactor:end, ...
+                1:opts.ssfactor:end,1:opts.ssfactor:end)) length(im) ] );
+            for c = 1:length(im)
+                imageOut(:,:,:,c) = im{c}(1:opts.ssfactor:end, ...
+                    1:opts.ssfactor:end, 1:opts.ssfactor:end);
             end
-            if ndims(image)==4
-                h5create(fileName,dsetName,[size(image,2) size(image,1), size(image,3) size(image,4)]);
-                h5write(fileName,dsetName,permute(image,[2 1 3 4]));
+            
+            imsize = size(imageOut);
+            if ndims(imageOut) == 4
+                
+                h5create(fileName, dsetName, imsize([2 1 3 4]));
+                h5write(fileName, dsetName, permute(imageOut, [2 1 3 4]));
+                
             else
-                h5create(fileName,dsetName,[size(image,2) size(image,1), size(image,3)]);
-                h5write(fileName,dsetName,permute(image,[2 1 3]));
+                
+                h5create(fileName, dsetName, imsize([2 1 3]));
+                h5write(fileName, dsetName, permute(imageOut,[2 1 3]));
+                
             end
             
         end

@@ -129,7 +129,7 @@ classdef Stack < handle_light
             
             if strcmp(stackClass, 'uint8')
                 type = [channelPrefix '_8bit'];
-            elseif strcmp(stackClass, 'uint16');
+            elseif strcmp(stackClass, 'uint16')
                 type = [channelPrefix '_16bit'];
             else
                 error('unknown stack type');
@@ -392,28 +392,42 @@ classdef Stack < handle_light
             resolution = resolution([2,1,3]);
             [~,ii]     = sort(resolution);
             
+            imSize = size(stacks{1});
+            newImSize = round( imSize .* (resolution ./ min(resolution)) );
+            
             for i = 1:numel(stacks)
                 
                 debugMsg(2,['Channel ' num2str(i) '\n']);
                 
+                % NEW WAY: Resize stack simultaneously --------------------
+                % Is 'imresize3' in a special toolbox?
+                
                 curr = stacks{i};
-                % permute;
-                curr = permute(curr,ii);
-                newnslices = round(size(curr,3)*this.aspect);
-                scaled = zeros([size(curr,1) size(curr,2) newnslices], class(curr));
-                for j=1:size(curr,1)
-                    debugMsg(3, '.');
-                    if rem(j,80) == 0
-                        debugMsg(3, '\n');
-                        debugMsg(2, '.') ;
-                    end
-                    scaled(j,:,:) = imresize(squeeze(curr(j,:,:)),...
-                                                [size(curr,2) newnslices]);
-                end
-                debugMsg(3,'\n');
-                % permute back;
-                scaled = ipermute(scaled,ii);
+                scaled = imresize3(curr, newImSize);
                 stacks{i} = scaled;
+                
+                % OLD WAY: Resize stack slice-by-slice --------------------
+                % Assumes isotropic resolution in X and Y
+                
+                % curr = stacks{i}; % Original stack for current channel
+                % curr = permute(curr,ii); % Stack re-ordered high-to-low by resolution
+                % newnslices = round(size(curr,3)*this.aspect); % New number of slices
+                % scaled = zeros([size(curr,1) size(curr,2) newnslices], class(curr));
+                % for j=1:size(curr,1)
+                %     % debugMsg(3, '.');
+                %     % if rem(j,80) == 0
+                %     %     debugMsg(3, '\n');
+                %     %     debugMsg(2, '.') ;
+                %     % end
+                %     scaled(j,:,:) = imresize(squeeze(curr(j,:,:)),...
+                %                                 [size(curr,2) newnslices]);
+                % end
+                % % debugMsg(3,'\n');
+                %
+                % % permute back to original axis order
+                % scaled = ipermute(scaled,ii);
+                % stacks{i} = scaled;
+                
             end
             
             xres = this.resolution(1);

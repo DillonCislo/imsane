@@ -155,6 +155,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             overwrite = opts.overwrite ; 
             enforceTopology = opts.enforceTopology ;
             targetEulerCharacteristic = opts.targetEulerCharacteristic ;
+            run_full_dataset = opts.run_full_dataset;
             
             debugMsg(1, ['integralDetector.detectSurface() : channel='...
                 num2str(opts.channel), ...
@@ -249,7 +250,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
 
                 disp(['init_ls_fn = ', init_ls_fn])
                 disp(['ofn_ls = ', ofn_ls])
-                if strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')
+                if (strcmp(init_ls_fn, 'none') || strcmp(init_ls_fn, '')) && ...
+                        run_full_dataset
                     % User has NOT supplied fn from detectOptions
                     init_ls_fn = sprintf(ofn_ls, (tp - 1) ) ;
                 end
@@ -703,7 +705,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
         % prepare data for ilastik segmentation
         % ------------------------------------------------------
         
-        function prepareIlastik(this,stack)
+        function prepareIlastik(this,stack,convertToUINT8)
             % Prepare stack for Ilastik segmetnation. This outputs an h5
             % file of subsampled intensity data on which to train.
             %
@@ -711,6 +713,8 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             
             % Accoring to the specified options sub-sample the stack and
             % save it for analysis with ilastik.
+
+            if (nargin < 3), convertToUINT8 = false; end
             
             opts = this.options;
             
@@ -750,10 +754,15 @@ classdef integralDetector < surfaceDetection.surfaceDetector
             for c = 1 : length(im)
                 image(:,:,:,c) = im{c}(1:opts.ssfactor:end,1:opts.ssfactor:end,1:opts.ssfactor:end);
             end
+
+            if convertToUINT8
+                image = im2uint8(image);
+            end
             
             % Now save the subsampled images to h5 using the axis order
             % specified by axperm
             if ndims(image)==4
+
                 disp(['Writing file: ' fileName])
                 if isa(image, 'uint8')
                     h5create(fileName,dsetName,[size(image,axperm(1)) size(image,axperm(2)), ...
@@ -769,7 +778,9 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     error('Did not recognize bitdepth of image. Add capability here')
                 end
                 h5write(fileName,dsetName,permute(image, axperm));
+
             else
+
                 % truncate the axis permutation to include just 3 dims
                 axperm = axperm(1:3) ;
                 disp(['Writing file: ' fileName])
@@ -787,6 +798,7 @@ classdef integralDetector < surfaceDetection.surfaceDetector
                     error('Did not recognize bitdepth of image. Add capability here')
                 end
                 h5write(fileName,dsetName,permute(image, axperm));
+                
             end
             
         end
