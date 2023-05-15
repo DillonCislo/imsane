@@ -1,4 +1,4 @@
-function uv = conformalParametrization(mesh, constrVidx, constrV)
+function [uv, W, A, Lc, constraints, up] = conformalParametrization(mesh, constrVidx, constrV)
     % compute conformal parametrization
     %
     % SCP minimizes a functional u'*L_C*u + lambda*(u'*B*u-1)
@@ -129,4 +129,8 @@ function uv = conformalParametrization(mesh, constrVidx, constrV)
         uv = real([V(1:Nverts), V(Nverts+1:2*Nverts)]);  
         
     end
+    
+    if ~exist('constraints', 'var'), constraints = []; end
+    if ~exist('up', 'var'), constraints = []; end
+    
 end
