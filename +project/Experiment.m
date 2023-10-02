@@ -256,20 +256,23 @@ classdef Experiment < handle_light
         % 3D phase: load data, fit surface
         %------------------------------------------------------
         
-        function loadTime(this, t)
+        function loadTime(this, t, useBioformats)
             % set the current time and load stack
             %
             % loadTime(t)
             %
             % sets the current time to t, loads the stack 
             % and creates the detector and fitter for that time
+	    if (nargin < 3), useBioformats = true; end
+	    justMeta = false;
+
             if ~ismember(t, this.fileMeta.timePoints)
                 error(['The specified time point ' num2str(t)... 
                     ' is not in the list of available time points.']);
             end
             this.currentTime = t;
             this.expMeta.fitTime = t;
-            this.loadStack();
+            this.loadStack(justMeta, useBioformats);
             
             if this.expMeta.dynamicSurface
                 this.resetDetector();
@@ -319,11 +322,23 @@ classdef Experiment < handle_light
             % point using bioformats library. 
             % 
             % see also loadTime
+
+	    if (nargin < 2)
+		justMeta = false;
+	    else 
+	        justMeta = varargin{1};
+	    end
+
+            if (nargin < 3)
+	        useBioformats = true;
+	    else
+	        useBioformats = varargin{2};
+	    end
             
             % use bioformats if posssible
-            hasbf = exist('bioformats_package.jar','file') ||...
-                    exist('loci_tools.jar','file');
-            if hasbf
+            hasbf = exist('bioformats_package.jar','file') || ...
+                exist('loci_tools.jar','file');
+            if (hasbf && useBioformats) 
                 disp('Experiment.loadStackBioformats() executing')
                 this.loadStackBioformats(varargin{:});
                 return;
@@ -336,7 +351,7 @@ classdef Experiment < handle_light
             tmp = tmp(1);
             isRGB = strcmp(tmp.ColorType,'truecolor');
             
-            if nargin==2
+            if justMeta
                 
                 xSize = tmp.Width;
                 ySize = tmp.Height;
@@ -350,6 +365,7 @@ classdef Experiment < handle_light
                 this.fileMeta.stackSize = [xSize ySize zSize];
                     
                 return
+
             end
 
             xSize = this.fileMeta.stackSize(1);
@@ -422,8 +438,8 @@ classdef Experiment < handle_light
             % point using bioformats library. 
             % 
             % see also loadTime
-            
-            if nargin==2
+
+            if (nargin >= 2)
                 justMeta = varargin{1};
             else
                 justMeta = 0;
