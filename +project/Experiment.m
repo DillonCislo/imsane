@@ -322,18 +322,18 @@ classdef Experiment < handle_light
             % point using bioformats library. 
             % 
             % see also loadTime
-
-	    if (nargin < 2)
-		justMeta = false;
-	    else 
-	        justMeta = varargin{1};
-	    end
-
+            
+            if (nargin < 2)
+                justMeta = false;
+            else
+                justMeta = varargin{1};
+            end
+            
             if (nargin < 3)
-	        useBioformats = true;
-	    else
-	        useBioformats = varargin{2};
-	    end
+                useBioformats = true;
+            else
+                useBioformats = varargin{2};
+            end
             
             % use bioformats if posssible
             hasbf = exist('bioformats_package.jar','file') || ...
@@ -346,15 +346,14 @@ classdef Experiment < handle_light
             
             fileName = sprintf(this.fileMeta.filenameFormat, this.currentTime);
             fullFileName = fullfile(this.fileMeta.dataDir, fileName);
-            tmp = imfinfo(fullFileName);
-            nImages = numel(tmp);
-            tmp = tmp(1);
-            isRGB = strcmp(tmp.ColorType,'truecolor');
+            imInfo = imfinfo(fullFileName);
+            nImages = numel(imInfo);
+            isRGB = strcmp(imInfo(1).ColorType,'truecolor');
             
             if justMeta
                 
-                xSize = tmp.Width;
-                ySize = tmp.Height;
+                xSize = imInfo(1).Width;
+                ySize = imInfo(1).Height;
                 if isRGB
                     zSize = nImages;
                     assert(this.fileMeta.nChannels==3,...
@@ -362,6 +361,7 @@ classdef Experiment < handle_light
                 else
                     zSize = nImages / this.fileMeta.nChannels;
                 end
+                
                 this.fileMeta.stackSize = [xSize ySize zSize];
                     
                 return
@@ -373,7 +373,7 @@ classdef Experiment < handle_light
             zSize = this.fileMeta.stackSize(3);
             nChannels = this.fileMeta.nChannels;
             
-            if strcmp(tmp.ColorType,'grayscale')
+            if strcmp(imInfo(1).ColorType,'grayscale')
                 assert(nImages == zSize*nChannels,...
                      'fileMeta.nChannels is not consistent with data');
             elseif isRGB
@@ -388,25 +388,48 @@ classdef Experiment < handle_light
             ticID = tic;
             data = zeros([ySize xSize zSize nChannelsUsed], 'uint16');
             
-            for i = 1:nImages
+            % Loads all planes/channels sequentially using 'imread'
+            if isRGB
                 
-                im = imread(fullFileName, i);
-                
-                if isRGB
-                    data(:,:, i, :) = im(:,:,this.expMeta.channelsUsed);	
-                else
-                    zidx = 1 + floor((i-1) / nChannels);
-                    cidx = 1 + mod(i-1, nChannels);
-                    if sum(this.expMeta.channelsUsed == cidx)
-                        data(:,:, zidx, this.expMeta.channelsUsed == cidx) = im;
-                    end
+                for i = 1:nImages
+                    
+                    im = imread(fullFileName, i, 'Info', imInfo);
+                    data(:, :, i, :) = im(:, :, tubi.xp.expMeta.channelsUsed);
+                    
+                    debugMsg(1, '.');
+                    if (rem(i,80) == 0),  debugMsg(1,'\n'); end
+                    
                 end
                 
-                % progress indicator
-                debugMsg(1,'.');
-                if rem(i,80) == 0
-                    debugMsg(1,'\n');
+            else
+                
+                % TIFF files are stored in an interleaved format (i.e,
+                % (:,:,1,1), (:,:,1,2), ... , (:,:,1,c), (:,:,2,1), ... ,
+                % (:,:,2,c), ...). The legacy code also assumes this
+                % independently of image format. We can expand this out so
+                % as not to load unnecessary frames.
+                
+                % The interleaved indexing of the full stored image stack
+                iidx = 1:nImages;
+                zidx = repmat(1:zSize, nChannels, 1); zidx = zidx(:);
+                cidx = repmat((1:nChannels).', 1, zSize); cidx = cidx(:);
+                
+                % Re-format color index to reflect only the ordered, used
+                % channels.
+                [~, cidx] = ismember(cidx, tubi.xp.expMeta.channelsUsed);
+                rmIDx = cidx == 0;
+                iidx(rmIDx) = []; zidx(rmIDx) = []; cidx(rmIDx) = [];
+                
+                for i = 1:numel(iidx)
+                    
+                    data(:, :, zidx(i), cidx(i)) = ...
+                        imread(fullFileName, iidx(i), 'Info', imInfo);
+                    
+                    debugMsg(1, '.');
+                    if (rem(i,80) == 0),  debugMsg(1,'\n'); end
+                    
                 end
+                
             end
 
             % announce min and max
@@ -419,7 +442,6 @@ classdef Experiment < handle_light
             debugMsg(1,['dt = ' num2str(dt) '\n']);
 
             % store data in stack object
-            
             this.stack = surfaceDetection.Stack(data, this.fileMeta.stackResolution);
             this.stack.setChannelColor(this.expMeta.channelColor);
             this.stack.setDescription(this.expMeta.description);
